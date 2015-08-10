@@ -1,0 +1,35 @@
+drop view if exists PROMOTION_PLAYER_VIEW#
+drop view if exists PROMOTION_VIEW#
+drop view if exists PROMOTION_PLAYER_REWARD_VIEW#
+
+drop table if exists DAILY_AWARD_CONFIGURATION_ARCHIVE#
+create table DAILY_AWARD_CONFIGURATION_ARCHIVE (
+	ID int auto_increment primary key,
+	PROMO_ID int,
+	MAIN_IMAGE varchar (255),
+	MAIN_IMAGE_LINK varchar (255),
+	SECONDARY_IMAGE varchar (255),
+	SECONDARY_IMAGE_LINK varchar (255),
+	NEWS_IMAGE varchar (255),
+	NEWS_IMAGE_LINK varchar (255),
+	NEWS_HEADER varchar (255),
+	NEWS_TEXT varchar (1024)
+) engine=InnoDB#
+alter table DAILY_AWARD_CONFIGURATION_ARCHIVE add foreign key FK_PROMOTION_ID (PROMO_ID) references PROMOTION_ARCHIVE(PROMO_ID)#
+alter table DAILY_AWARD_CONFIGURATION_ARCHIVE add unique index IDX_PROMOTION_ID (PROMO_ID)#
+
+delete from PROMOTION_PLAYER_ARCHIVE#
+delete from PROMOTION_ARCHIVE#
+alter table PROMOTION_ARCHIVE add column ALL_PLAYERS tinyint(1) not null default 0 after NAME#
+
+alter table PROMOTION_PLAYER_ARCHIVE drop column NUMBER_OF_REWARDS#
+alter table PROMOTION_PLAYER_ARCHIVE drop column LAST_REWARDED_DATE#
+
+drop table if exists PROMOTION_PLAYER_REWARD_ARCHIVE#
+create table PROMOTION_PLAYER_REWARD_ARCHIVE (
+	PROMO_ID int(11) NOT NULL,
+	PLAYER_ID bigint(20) NOT NULL,
+  	REWARDED_DATE datetime NOT NULL,
+	PRIMARY KEY (PROMO_ID,PLAYER_ID,REWARDED_DATE)
+) engine=InnoDB#
+alter table PROMOTION_PLAYER_REWARD_ARCHIVE add foreign key FK_PROMOTION_ID (PROMO_ID) references PROMOTION_ARCHIVE(PROMO_ID)#

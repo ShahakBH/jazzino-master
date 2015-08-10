@@ -1,0 +1,189 @@
+#!/bin/bash
+#
+# lighstreamer      This shell script takes care of starting and stopping Lightstreamer
+#
+# chkconfig: - 80 20
+#
+### BEGIN INIT INFO
+# Provides: lightstreamer
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: Release implementation for Lightstreamer
+# Short-Description: start and stop Lightstreamer
+### END INIT INFO
+#
+
+DAEMON_HOME=/opt/lightstreamer/bin/unix-like
+DAEMON_SCRIPT="LS.sh"
+NAME="$(basename $0)"
+DAEMON_LOG="/var/log/lightstreamer.log"
+DAEMON_USER="lightstreamer"
+# The JVM needs a decent period to ensure the JMX port is dropped
+RESTART_DELAY=4
+
+# generic daemon script, requires DAEMON vars to be set up in the header
+
+unset ISBOOT
+if [ "${NAME:0:1}" = "S" -o "${NAME:0:1}" = "K" ]; then
+    NAME="${NAME:3}"
+    ISBOOT="1"
+fi
+
+# For SELinux we need to use 'runuser' not 'su'
+if [ -x "/sbin/runuser" ]; then
+    SU="/sbin/runuser"
+else
+    SU="su"
+fi
+
+# Path to the tomcat launch script
+
+DAEMON_PROG="$NAME"
+DAEMON_USER="${DAEMON_USER:-root}"
+
+# Define the log file
+DAEMON_LOG="${DAEMON_LOG:-${DAEMON_HOME}/service.out}"
+RETVAL="0"
+
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function checkpid() {
+    local i
+    for i in $* ; do
+        if [ -d "/proc/${i}" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_failure() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"FAILED"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 1
+}
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_success() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"OK"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 0
+}
+
+
+
+# See how we were called.
+function start() {
+    echo -n "Starting ${DAEMON_PROG}: "
+    if [ -f "/var/lock/subsys/${NAME}" ] ; then
+        if [ -f "/var/run/${NAME}.pid" ]; then
+            read kpid < /var/run/${NAME}.pid
+            if checkpid $kpid 2>&1; then
+                echo "$NAME process already running"
+                return -1
+            else
+                echo "lock file found but no process running for"
+                echo "pid $kpid, continuing"
+            fi
+        fi
+    fi
+    export DAEMON_PID="/var/run/${NAME}.pid"
+    touch $DAEMON_PID
+    chown ${DAEMON_USER}:${DAEMON_USER} $DAEMON_PID
+    cd $DAEMON_HOME
+    $SU $DAEMON_USER -c "sh $DAEMON_SCRIPT run"  >> $DAEMON_LOG 2>&1 &
+    PID="$!"
+    RETVAL="$?"
+    if [ "$RETVAL" -eq 0 ]; then
+        echo $PID > /var/run/${NAME}.pid
+        echo_success
+        touch /var/lock/subsys/${NAME}
+    else
+        echo_failure
+    fi
+    return $RETVAL
+}
+
+function status() {
+    RETVAL="1"
+    if [ -f "/var/run/${NAME}.pid" ]; then
+        read kpid < /var/run/${NAME}.pid
+        if checkpid $kpid 2>&1; then
+            echo "$0 is already running (${kpid})"
+            RETVAL="0"
+        else
+            echo "lock file found but no process running for pid $kpid"
+        fi
+    else
+        pid=$(pgrep "${DAEMON_SCRIPT}")
+        if [ -n "$pid" ]; then
+            echo "$0 running (${pid}) but no PID file exists"
+            RETVAL="0"
+        else
+            echo "$0 is stopped"
+        fi
+    fi
+    return $RETVAL
+}
+
+function stop() {
+    local STOP_VERBOSE="false"
+    echo -n "Stopping $DAEMON_PROG: "
+    if [ -f "/var/lock/subsys/${NAME}" ]; then
+        cd $DAEMON_HOME
+        $SU $DAEMON_USER -c "sh $DAEMON_SCRIPT stop"  >> $DAEMON_LOG 2>&1
+        RETVAL=$?
+        if [ "$RETVAL" -eq "0" ]; then
+            echo_success
+            rm -f /var/lock/subsys/$NAME /var/run/$NAME.pid
+        else
+            echo_failure
+        fi
+    fi
+}
+
+function stop_and_wait() {
+    stop
+}
+
+# See how we were called.
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop_and_wait
+        sleep $RESTART_DELAY
+        start
+        ;;
+    condrestart)
+        if [ -f "/var/run/${NAME}.pid" ]; then
+            stop_and_wait
+            sleep $RESTART_DELAY
+            start
+        fi
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage: $DAEMON_PROG {start|stop|restart|status}"
+        exit 1
+esac
+
+exit $RETVAL

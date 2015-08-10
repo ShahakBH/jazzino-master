@@ -1,0 +1,4 @@
+hosts:
+    rsandys-centos.london.yazino.com:
+        roles:
+            - all

@@ -1,0 +1,52 @@
+{
+    "games": {
+        "BLACKJACK": {
+            "friendlyName": "Blackjack",
+            "link": {
+                "url": "itms-apps://itunes.com/apps/BlackjackByYazino",
+                "text": "Visit on the App Store"
+            },
+            "icon": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/BLACKJACK/more_games_blackjack.png"
+            },
+            "image": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/BLACKJACK/more_games_screens_BJ.jpg"
+            },
+            "blurb": {
+                "text": "JOIN THE #1 BLACKJACK GAME AND PLAY LIVE AGAINST MILLIONS OF PLAYERS.\n\nThe world's most popular casino game is now massively multiplayer on your iPhone, iPad and iPod Touch."
+            }
+        },
+        "SLOTS": {
+            "friendlyName": "Wheel Deal",
+            "link": {
+                "url": "itms-apps://itunes.com/apps/WheelDealByYazino",
+                "text": "View on the App Store"
+            },
+            "icon": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/SLOTS/more_games_wheel_deal.png"
+            },
+            "image": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/SLOTS/more_games_screens_WD.jpg"
+            },
+            "blurb": {
+                "text": "LIVE MULTIPLAYER SLOTS GAME WITH A WHEEL DIFFERENCE.\n\nWheel Deal is the first real-time, multiplayer slots game with the added thrill of a game show style bonus round."
+            }
+        },
+        "HIGH_STAKES": {
+            "friendlyName": "High Stakes",
+            "link": {
+                "url": "itms-apps://itunes.com/apps/HighStakesSlotsByYazino",
+                "text": "View on the App Store"
+            },
+            "icon": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/HIGH_STAKES/more_games_highstakes.png"
+            },
+            "image": {
+                "url": "http://www.yazino.com/strata.content/mobile/ios/images/HIGH_STAKES/more_games_screens_HS.jpg"
+            },
+            "blurb": {
+                "text": "SPIN THE REELS AND PLAY LIVE IN OUR EXCITING MULTIPLAYER SLOTS GAME!\n\nReach the top spot and rack up the chips with up to eight friends for free using a single login for mobile and web."
+            }
+        }
+    }
+}

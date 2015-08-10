@@ -1,0 +1,77 @@
+server_port=5666
+allowed_hosts=127.0.0.1,<%= @hosts.join(",") %>
+nrpe_user=nrpe
+nrpe_group=nrpe
+dont_blame_nrpe=1
+debug=0
+command_timeout=60
+
+### GENERIC SERVICES ###
+command[check_init_service]=sudo <%= @plugin_dir %>/yazino/check_init_service $ARG1$
+command[check_services]=<%= @plugin_dir %>/yazino/check_services -p $ARG1$
+command[check_icmp]=<%= @plugin_dir %>/check_icmp $ARG1$
+
+### MISC SYSTEM METRICS ###
+#command[check_users]=<%= @plugin_dir %>/check_users -w 5 -c 10
+command[check_users]=<%= @plugin_dir %>/check_users $ARG1$
+command[check_load]=sudo <%= @plugin_dir %>/check_load $ARG1$
+command[check_swap]=<%= @plugin_dir %>/check_swap $ARG1$
+command[check_cpu_stats]=<%= @plugin_dir %>/yazino/check_cpu_stats.sh $ARG1$
+command[check_mem]=<%= @plugin_dir %>/yazino/custom_check_mem $ARG1$
+
+### YUM UPDATES ###
+command[check_yum]=<%= @plugin_dir %>/yazino/check_yum
+
+### DISK ###
+command[check_disk]=<%= @plugin_dir %>/check_disk $ARG1$
+command[check_ide_smart]=<%= @plugin_dir %>/check_ide_smart $ARG1$
+command[check_iostat]=<%= @plugin_dir %>/yazino/check_iostat $ARG1$
+command[check_raid_arrays]=<%= @plugin_dir %>/yazino/check_raid $ARG1$
+
+### PROCESSES ###
+command[check_all_procs]=<%= @plugin_dir %>/yazino/custom_check_procs
+command[check_procs]=<%= @plugin_dir %>/check_procs $ARG1$
+
+### OPEN FILES ###
+command[check_open_files]=<%= @plugin_dir %>/yazino/check_open_files.pl $ARG1$
+
+### YAZINO CHECKS ###
+command[check_available_games]=<%= @plugin_dir %>/yazino/check_available_games.sh $ARG1$
+command[check_network_stats]=<%= @plugin_dir %>/yazino/check_network_stats.sh $ARG1$
+command[check_network_bandwidth]=sudo <%= @plugin_dir %>/yazino/check_network_bandwidth.pl $ARG1$
+command[check_response_time]=<%= @plugin_dir %>/yazino/check_response_time $ARG1$
+command[check_java_logs]=<%= @plugin_dir %>/yazino/check_java_logs $ARG1$
+
+### RABBIT SERVERS ###
+command[check_rabbit_tcp]=<%= @plugin_dir %>/yazino/check_rabbit_tcp.sh
+command[check_rabbitmq_messages]=<%= @plugin_dir %>/yazino/check_rabbitmq_messages.sh -r"adtracking|audit|event|invit|stats" -e"campaign|notifications" $ARG1$
+command[check_rabbitmq_yaps_messages]=<%= @plugin_dir %>/yazino/check_rabbitmq_messages.sh -r"yaps" $ARG1$
+command[check_rabbitmq_campaign_messages]=<%= @plugin_dir %>/yazino/check_rabbitmq_messages.sh -r"campaign|notifications" $ARG1$
+command[check_rabbit_messages]=<%= @plugin_dir %>/yazino/check_rabbitmq_messages.sh -r"adtracking|audit|event|invit|stats" -e"campaign|notifications" $ARG1$
+
+command[check_rabbit_queues]=<%= @plugin_dir %>/yazino/check_rabbit_queues.sh $ARG1$
+command[check_rabbit_memory]=<%= @plugin_dir %>/yazino/check_rabbit_memory.sh $ARG1$
+
+command[check_lightstreamer]=<%= @plugin_dir %>/yazino/check_lightstreamer.rb $ARG1$
+
+### GIGASPACES SERVERS ###
+command[check_jmx]=/opt/java/bin/java -jar <%= @plugin_dir %>/yazino/check_jmx.jar $ARG1$
+command[check_gc]=<%= @plugin_dir %>/yazino/check_gc $ARG1$
+command[check_jetty_threads]=<%= @plugin_dir %>/yazino/check_jetty_threads $ARG1$
+command[check_gs_objects]=<%= @plugin_dir %>/yazino/check_gs_objects.rb $ARG1$
+
+### DATABASE SERVERS ###
+command[check_bad_bo_queries]=<%= @plugin_dir %>/yazino/check_bad_bo_queries
+command[check_mysql_health]=<%= @plugin_dir %>/yazino/check_mysql_health $ARG1$
+
+### MEMSET CHECKS ###
+command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,15,10 -c 15,15,15
+command[check_disk_root]=/usr/lib/nagios/plugins/check_disk -w 10% -c 5% -p /
+command[check_disk_home]=/usr/lib/nagios/plugins/check_disk -w 5% -c 3% -p /home
+command[check_raid]=/usr/lib/nagios/plugins/check_mdstat.pl
+command[check_disk_temp]=/usr/lib/nagios/plugins/check_hddtemp.pl -w 55 -c 60
+command[check_heartbeat]=/usr/lib/nagios/plugins/check_heartbeat.pl
+command[check_fw_dos]=/usr/lib/nagios/plugins/check_fwdos.pl -w 1 -c 1
+command[check_conntrack]=/usr/lib/nagios/plugins/check_conntrack.pl -w 15 -c 30
+command[check_megaraid_sas]=/usr/lib/nagios/plugins/check_megaraid_sas -m20 -o20
+command[check_aacraid]=/usr/lib/nagios/plugins/check_aacraid.py

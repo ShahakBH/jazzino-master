@@ -1,0 +1,32 @@
+<html>
+<head>
+#if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+<script>
+    function init() {
+
+      var yazinoWindow = window.parent;
+      yazinoWindow.hidePaymentsOverlay();
+
+      setTimeout(
+            function() {
+                    if(! yazinoWindow["paypalWindow"] || yazinoWindow["paypalWindow"].closed) {
+                        alert("Please Enable Popups to allow paypal payments.");
+                    }
+            }
+            , 1000);
+
+      var redirectUrl ="$redirectUrl";
+      yazinoWindow.paypalWindow = window.open(redirectUrl, "_paypal", "toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes,width=950,height=700");
+      yazinoWindow.paypalWindow.focus();
+   }
+</script>
+</head>
+<body onload="init()">
+          Please go to the Paypal window to complete the transaction
+</body>
+</html>

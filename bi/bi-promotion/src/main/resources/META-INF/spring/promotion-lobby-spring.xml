@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc.xml"/>
+    <import resource="classpath:/META-INF/spring/ehcache-spring.xml"/>
+    <import resource="classpath*:/META-INF/spring/player-profile-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-player.xml"/>
+    <import resource="classpath:META-INF/spring/campaign-context.xml"/>
+    <import resource="classpath:META-INF/spring/promotions-reward.xml"/>
+
+    <context:component-scan base-package="strata.server.lobby.promotion.consumer"/>
+    <context:component-scan base-package="strata.server.lobby.promotion.facebook"/>
+    <context:component-scan base-package="strata.server.lobby.api.facebook"/>
+    <context:component-scan base-package="strata.server.lobby.promotion.persistence"/>
+    <context:component-scan base-package="strata.server.lobby.promotion.service"/>
+    <context:component-scan base-package="com.yazino.bi.payment"/>
+    <context:component-scan base-package="strata.server.payment"/>
+
+    <!-- SPRING AUTOWIRE ISSUE REGARDING  activeBuyChipPromotionPaymentMethods, SO CAN'T USE COMPONENT SCAN -->
+
+    <bean class="com.yazino.game.api.time.SystemTimeSource"/>
+
+    <bean id="profanityFilter"
+          class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="promotionFunctions" class="strata.server.lobby.promotion.tools.PromotionFunctions"/>
+
+    <import resource="classpath*:/META-INF/spring/grid-services.xml"/>
+
+
+
+    <bean id="defaultDailyPromotion" class="strata.server.lobby.api.promotion.DailyAwardPromotion"
+          p:promotionType="DAILY_AWARD"
+          p:name="Default Daily Award">
+        <property name="configuration">
+            <bean class="strata.server.lobby.api.promotion.PromotionConfiguration">
+                <property name="configuration">
+                    <util:map>
+                        <entry key="main.image" value="images/gloss/dailyPopupMainImage.png"/>
+                        <entry key="main.image.link" value=""/>
+                        <entry key="secondary.image" value="images/gloss/dailyPopupSecondaryImage.png"/>
+                        <entry key="secondary.image.link" value=""/>
+                        <entry key="news.image" value="images/gloss/dailyPopupBackgroundNewsBox.png"/>
+                        <entry key="news.image.link" value=""/>
+                        <entry key="ios.image" value="images/gloss/dailyPopupMainImage.png"/>
+                        <entry key="android.image" value="images/gloss/dailyPopupMainImage.png"/>
+                        <!-- will change before go-live -->
+                        <entry key="news.text"
+                               value="Check back here for upcoming news, releases and special events from Yazino"/>
+                        <entry key="news.header" value="NEWS"/>
+                        <entry key="reward.chips" value="2500"/>
+                    </util:map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- HTTP Service Exporters -->
+    <bean name="promotionMaintenanceServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          p:service-ref="remotingPromotionMaintenanceService"
+          p:serviceInterface="strata.server.lobby.api.promotion.PromotionMaintenanceService"/>
+    <bean name="dailyAwardPromotionServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          p:service-ref="progressiveDailyAwardService"
+          p:serviceInterface="strata.server.lobby.api.promotion.DailyAwardPromotionService"/>
+    <bean name="buyChipsPromotionServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          p:service-ref="remotingBuyChipsPromotionService"
+          p:serviceInterface="strata.server.lobby.api.promotion.BuyChipsPromotionService"/>
+    <bean name="giftingPromotionServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          p:service-ref="remotingGiftingPromotionService"
+          p:serviceInterface="strata.server.lobby.api.promotion.GiftingPromotionService"/>
+    <bean name="dailyAwardPromotionTestingServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+          p:service-ref="progressiveDailyAwardTestingService"
+          p:serviceInterface="strata.server.lobby.api.promotion.DailyAwardPromotionTestingService"/>
+
+    <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="maxConnPerRoute" value="500"/>
+        <property name="maxConnTotal" value="600"/>
+    </bean>
+
+    <bean id="httpInvokerRequestExecutor"
+          class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor">
+        <property name="readTimeout" value="10000"/>
+        <property name="httpClient">
+            <bean factory-bean="httpClientBuilder" factory-method="build"/>
+        </property>
+    </bean>
+
+    <bean id="amazonSESClientConfiguration"
+          class="com.yazino.email.amazon.AmazonSESConfiguration">
+        <property name="connectionTimeout" value="10000"/>
+        <property name="socketTimeout" value="5000"/>
+    </bean>
+
+    <bean id="amazonSESClientFactory"
+          class="com.yazino.email.amazon.AmazonSESClientFactory"/>
+
+    <bean id="emailService"
+          class="com.yazino.email.amazon.AmazonSESEmailService">
+            <constructor-arg value="${strata.aws.ses.access-key}"/>
+            <constructor-arg value="${strata.aws.ses.secret-key}"/>
+            <constructor-arg ref="amazonSESClientFactory"/>
+            <constructor-arg ref="amazonSESClientConfiguration"/>
+    </bean>
+
+
+</beans>

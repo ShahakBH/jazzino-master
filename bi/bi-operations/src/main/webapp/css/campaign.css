@@ -1,0 +1,166 @@
+/* column container */
+.colmask {
+    clear: both;
+    float: left;
+    width: 100%; /* width of whole page */
+    overflow: hidden; /* chops off any overhanging divs */
+}
+
+/* 2 Column (double page) settings */
+.doublepage {
+    background: #eee; /* right column background colour */
+}
+
+.doublepage .colleft {
+    right: 50%; /* right column width */
+    background: #fff; /* left column background colour */
+}
+
+.doublepage .col1 {
+    width: 46%; /* left column content width (column width minus left and right padding) */
+    left: 52%; /* right column width plus left column left padding */
+}
+
+.doublepage .col2 {
+    width: 46%; /* right column content width (column width minus left and right padding) */
+    left: 56%; /* (right column width) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* common column settings */
+.colright, .colmid, .colleft {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.col1, .col2, .col3 {
+    float: left;
+    position: relative;
+    padding: 0 0 1em 0;
+    overflow: hidden;
+}
+
+.col1 div, .col2 div:first-of-type {
+    float: left;
+}
+
+.col2 .row2  div {
+    float: none;
+    display: inline;
+    overflow: hidden;
+}
+
+.hiddenDiv  div {
+    display: none;
+}
+
+.col2 .row2 label {
+    float: none;
+    display: inline;
+}
+
+.col1 label, .col2 label {
+    display: block;
+    float: left;
+    padding-top: 2px;
+    padding-right: 10px;
+    width: 144px;
+    text-align: right;
+    margin-bottom: 8px;
+    clear: left;
+}
+
+
+.col1 input[type=radio] + label {
+    float: none;
+    width: auto;
+    display: inline;
+}
+
+.col1 input[type=checkbox] + label, .col2 input[type=checkbox] + label {
+    float: none;
+    width: auto;
+    display: inline;
+}
+
+.col1 div.actions {
+    float: none;
+    clear: left;
+    margin-left: 150px;
+}
+
+.col1 textarea {
+    width: 350px;
+    height: 100px;
+    vertical-align: top;
+}
+
+.col1 input[type=text], .col2 input[type=text] {
+    width: 350px;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    border: 1px solid #333;
+    background-color: #161616;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    font-size: 12px;
+}
+
+TABLE.chipsPercentage {
+    float: left;
+    width: 500px;
+    border: 1px solid rgba(34, 34, 34, 0.97);
+    border-collapse: collapse;
+    margin: 20px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+
+TABLE.chipsPercentage td {
+    font-size: 1em;
+    padding: 3px 7px 2px 7px;
+}
+
+TABLE.chipsPercentage td:first-child {
+    font-size: 1.5em;
+    padding: 3px 7px 2px 7px;
+}
+
+TABLE.chipsPercentage tr {
+    font-size: 1em;
+    padding: 3px 7px 2px 7px;
+    border-bottom: 1px solid #fefefe;
+}
+
+TABLE.chipsPercentage tr:last-child {
+    border-bottom: none;
+}
+
+.filter-type {
+    border-bottom: 1px dotted #666;
+}
+
+.packages {
+    float: left;
+    overflow: hidden;
+}
+
+.defaultPackagesList {
+    width: 220px;
+    height: 200px;
+    margin-bottom: 15px;
+    overflow-y: scroll;
+    border: none;
+    visibility: hidden;
+}
+
+#filter {
+    display: none
+}
+
+#filter:checked + .defaultPackagesList {
+    visibility: visible;
+}

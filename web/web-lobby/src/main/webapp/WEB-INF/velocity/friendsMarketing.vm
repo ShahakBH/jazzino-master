@@ -1,0 +1,57 @@
+<script type="text/javascript">
+
+	jQuery(document).ready(function() {
+
+		changemask(2500);
+
+	});
+
+	function changemask(time) {
+		$("#grey-window-body").everyTime(time, function(i) {
+			var id = i % 4;
+			$(this).removeClass();
+			$(this).addClass('mask' + id);
+			$('#static-mass-photo-mask' + (id - 1)).fadeOut(1000);
+			$('#static-mass-photo-mask' + (id + 3)).fadeOut(1000);
+			$('#static-mass-photo-mask' + id).fadeIn(1000)
+		});
+	}
+	;
+
+</script>
+<span id="static-friends">
+	<div id="static-friends-area">
+		<div id="grey-window">
+			<div id="grey-window-head"><h3 class="font-grey-window-head">Yazino Friends</h3></div>
+			<div id="grey-window-center">
+				<div id="grey-window-body" class="mask0">
+					<div class="techno-float">
+						<div id="static-mass-photo-img" title="Yazino friends, My Friends on Yazino">
+							<div id="static-mass-photo-mask0" title="Yazino friends, My Friends on Yazino"></div>
+							<div id="static-mass-photo-mask1" title="Yazino friends, My Friends on Yazino"></div>
+							<div id="static-mass-photo-mask2" title="Yazino friends, My Friends on Yazino"></div>
+							<div id="static-mass-photo-mask3" title="Yazino friends, My Friends on Yazino"></div>
+						</div>
+						<div id="static-right-col">
+							<div class="paragraph1"><p class="font-static-right-col-1"><span class="bold uppercase">CHIP IN TOGETHER</span>
+								and win <span class="red bold">$5000 chip bonus</span> for each friend that chips in</p>
+							</div>
+							<div class="paragraph2 font-static-right-col-1 bold uppercase">
+								<h3 class="red-mask1">join</h3>
+
+								<h3 class="red-mask2">INVITE YOUR FRIENDS</h3>
+
+								<h3 class="red-mask3">COMPETE AGAINST THEM</h3>
+							</div>
+							<div class="paragraph3 font-static-right-col-2">
+								<p>Show them you're the best!</p>
+								<p>You can also chat with them while playing at your favorite <strong>casino game</strong></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="grey-window-bottom"></div>
+		</div>
+	</div>
+</span>

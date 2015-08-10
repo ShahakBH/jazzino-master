@@ -1,0 +1,10 @@
+<title>#springMessageText("meta.${viewName}.title" "Yazino - Let's Play!")</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="keywords" content="#springMessageText("meta.${viewName}.keywords" "Yazino")">
+<meta name="description" content="#springMessageText("meta.${viewName}.description" "Yazino")">
+<meta name="google-site-verification" content="tNVPBxlnekGZ4IRetVr2Wpm4URkU3niBnpNU-XG-7ts">
+<meta name="y_key" content="19a0874d65d65752">
+<link rel="icon" type="image/png" href="${assetUrl}/images/favicon.png">
+<link rel="SHORTCUT ICON" href="${assetUrl}/images/favicon.ico">
+<link rel="image_src" href="$!assetUrl/images/gloss/yazino-logo.png">

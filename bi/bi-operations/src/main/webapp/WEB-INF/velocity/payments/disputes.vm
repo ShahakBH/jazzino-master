@@ -1,0 +1,93 @@
+#set($pageSize = 20)
+#set($currentPage = ($pendingSettlements.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/payments/pending")
+
+<div class="payments disputeManager">
+
+    #if ($message)
+        <div class="message">
+            $message
+        </div>
+    #end
+
+    <div class="resolveDialogue">
+        <form method="POST">
+            <label for="internalTransactionId">Transaction ID</label> <span class="transactionId"></span><br>
+            <input id="internalTransactionId" name="internalTransactionId" type="hidden" value="">
+            <label for="resolution">Resolution</label>
+            <select id="resolution" name="resolution">
+                <option value="CHIPS_CREDITED">Re-credit Chips</option>
+                <option value="REFUNDED_PLAYER_ERROR">Refund due to Player Error</option>
+                <option value="REFUNDED_FRAUD">Refund due to Fraud</option>
+                <option value="REFUNDED_OTHER">Refund for Other Reason</option>
+                <option value="REFUSED">Refused</option>
+            </select><br>
+
+            <label for="note">Notes</label><br>
+            <textarea id="note" name="note"></textarea><br>
+
+            <div class="controls">
+                <button class="cancel">Cancel</button>
+                <button class="submit">Resolve</button>
+            </div>
+        </form>
+    </div>
+
+    <table class="resultList">
+        <thead>
+        <tr>
+            <th>Dispute Date</th>
+            <th>Internal ID</th>
+            <th>External ID</th>
+            <th>Player ID</th>
+            <th>Name</th>
+            <th>Registration Country</th>
+            <th>Method</th>
+            <th>Chips</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        <tr class="paging">
+            <td colspan="11">#pagingOnUrl( $disputes.startPosition $pageSize $disputes.totalSize $baseUrl '' )</td>
+        </tr>
+        </thead>
+        <tbody>
+            #if ($disputes.totalSize == 0)
+            <tr>
+                <td colspan="11">
+                    There are no open disputes.
+                </td>
+            </tr>
+            #end
+            #foreach ($dispute in $disputes.data)
+            <tr>
+                <td>$dateTool.format('dd.MM.yyyy HH:mm:ss',$dispute.timestamp.toDate())</td>
+                <td>
+                    <a href="${request.contextPath}/report/paymentTransaction/$dispute.internalTransactionId">$dispute.internalTransactionId</a>
+                </td>
+                <td>$dispute.externalTransactionId</td>
+                <td>
+                    <a href="${request.contextPath}/player/$dispute.playerId">$!numberTool.format('#.##', $!dispute.playerId)</a>
+                </td>
+                <td>$dispute.playerName</td>
+                <td>$!dispute.playerCountry</td>
+                <td>$dispute.cashierName</td>
+                <td>$!numberTool.format('###,###.##', $dispute.chips)</td>
+                <td>$dispute.currency.currencyCode <strong>$!numberTool.format('###,###.00', $dispute.price)</strong>
+                </td>
+                <td>$dispute.description</td>
+                <td>
+                    <a class="resolveDispute" data-transaction-id="$dispute.internalTransactionId">Resolve&nbsp;Dispute</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+        <tfoot>
+        <tr class="paging">
+            <td colspan="11">#pagingOnUrl( $disputes.startPosition $pageSize $disputes.totalSize $baseUrl '' )</td>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>

@@ -1,0 +1,14 @@
+<script>
+  var _kmq, _gaq;
+  if (YAZINO && YAZINO.businessIntelligence) {
+      YAZINO.businessIntelligence.setup.googleAnalytics('$!gaKey', window, '_gaq');
+      YAZINO.businessIntelligence.setup.googleAnalyticsTracker2('$!gaKey2');
+      #if($lobbySession && $lobbySession.playerId)
+         YAZINO.businessIntelligence.track.playerId('$!lobbySession.playerId');
+      #end
+  }else{
+      if (console && console.error) {
+        console.error('Business Intelligence should exist in *ALL* Yazino contexts, but doesn\'t seem to exist in this context.');
+      }
+  }
+</script>

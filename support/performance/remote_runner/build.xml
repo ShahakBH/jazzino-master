@@ -1,0 +1,38 @@
+<project name="MyProject" default="jar" basedir=".">
+
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="lib"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+            <classpath>
+                <fileset dir="../grinder/lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="lib"/>
+        <jar destfile="lib/remote_runner.jar" basedir="build/classes">
+        </jar>
+    </target>
+
+    <target name="execute" depends="compile">
+        <java classname="com.yazino.grinder.RunGrinder" classpath="build/classes">
+            <arg value="${host}"/>
+            <arg value="${port}"/>
+            <arg value="${sleepInSeconds}"/>
+            <classpath>
+                <fileset dir="../grinder/lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+</project>

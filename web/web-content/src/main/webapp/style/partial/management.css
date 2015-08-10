@@ -1,0 +1,202 @@
+/*******************************************/
+/*******   managementTeam page     *********/
+/*******************************************/
+#management-team-head h3.gray-red-header {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 18px;
+    color: #e71f1f;
+    padding: 20px 0 0 39px;
+}
+
+#management-team-head h3 span {
+    color: #a0a0a0;
+}
+
+#management-team-head #management-team {
+    width: 926px;
+    height: 157px;
+    margin: 26px auto 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+#management-team-head #management-team #management-list-wrapper {
+    position: absolute;
+    background: url(../../images/manager-team-background.png) no-repeat;
+    width: 100%;
+    height: 17px;
+    z-index: 2;
+}
+
+#management-team-head #management-team #management-list {
+    /*position: absolute;*/
+    display: inline-block;
+    padding: 0 0 0 10px;
+    /*width: 100%;
+   height: 100%;*/
+    z-index: 1;
+}
+
+#management-team-head #management-team #management-list li {
+    width: 113px;
+    height: 157px;
+    text-align: center;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+#management-team-head #management-team #management-list li:hover {
+    /*background: url(../../images/management-list-li-hover.png) no-repeat;*/
+}
+
+#management-team-head #management-team #management-list li.active {
+    background: url(../../images/management-list-li-hover.png) no-repeat;
+}
+
+#management-team-head #management-team #management-list li.active div.arrow {
+    position: absolute;
+    width: 28px;
+    height: 14px;
+    background: url(../../images/hower-arrow.png) top left no-repeat;
+    left: 15px;
+    z-index: 3;
+}
+
+/*
+div.arrow {
+  position: absolute;
+  width: 28px;
+  height: 14px;
+  background: url(../../images/hower-arrow.png) top left no-repeat;
+  left: 505px;
+  z-index: 3;
+}*/
+#management-team-head #management-team #management-list li img {
+    margin: 0 auto;
+}
+
+#management-team-head #management-team #management-list li div.management-info {
+    padding: 20px 0 0 0;
+}
+
+#management-team-head #management-team #management-list li div.management-info p.name {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+    color: #686868;
+    letter-spacing: -0.01em;
+    text-align: left;
+    display: block;
+    padding: 0 0 0 8px;
+}
+
+#management-team-head #management-team #management-list li.active div.management-info p.name,
+#management-team-head #management-team #management-list li:hover div.management-info p.name {
+    color: #e71f1f;
+}
+
+#management-team-head #management-team a {
+    min-height: 155px;
+    display: block;
+}
+
+#management-team-head #management-team #management-list li div.management-info p.prof {
+    font-size: 11px;
+    line-height: 12px;
+    color: #989898;
+    text-align: left;
+    display: block;
+    padding: 0 0 0 8px;
+}
+
+#management-team-area {
+    padding: 48px 0 0 35px;
+    padding-bottom: 100px;
+    min-height: 425px;
+}
+
+#management-team-area h3 {
+    font-size: 18px;
+    line-height: 18px;
+    color: #e71f1f;
+}
+
+#management-team-area h4 {
+    font-size: 12px;
+    line-height: 18px;
+    color: #989898;
+}
+
+#management-team-area p {
+    font-size: 12px;
+    line-height: 19px;
+    color: #717171;
+    margin-top: 30px;
+    width: 504px;
+}
+
+#management-team-area #photo {
+    float: right;
+    padding: 12px 68px 0 0;
+}
+
+#management-team-area #photo img {
+    padding: 0 0 18px 0;
+}
+
+#management-team-area #photo #games-icons {
+    padding: 5px 0 0 0;
+}
+
+.top-bar .iphone {
+    float: right;
+    width: 75px;
+    height: 79px;
+    background: url("../../images/top-bar-separator.png") no-repeat scroll left top;
+    text-align: center;
+}
+
+.top-bar .iphone a {
+    display: block;
+    width: 68px;
+    margin-left: 6px;
+}
+
+.top-bar .iphone img {
+    display: block;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    margin: 0 auto;
+}
+
+.game-blackjack, .game-high-stakes, .game-roulette, .game-slots, .game-texas-holdem {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.game-blackjack {
+    background: url("../../images/top-bar/game-BLACKJACK.png") top left no-repeat;
+}
+
+.game-high-stakes {
+    background: url("../../images/top-bar/game-HIGH_STAKES.png") top left no-repeat;
+}
+
+.game-roulette {
+    background: url("../../images/top-bar/game-ROULETTE.png") top left no-repeat;
+}
+
+.game-slots {
+    background: url("../../images/top-bar/game-SLOTS.png") top left no-repeat;
+}
+
+.game-texas-holdem {
+    background: url("../../images/top-bar/game-TEXAS_HOLDEM.png") top left no-repeat;
+}
+
+.clr {
+    clear: both;
+}

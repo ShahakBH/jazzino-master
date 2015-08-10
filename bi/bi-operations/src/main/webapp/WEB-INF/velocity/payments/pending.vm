@@ -1,0 +1,72 @@
+#set($pageSize = 20)
+#set($currentPage = ($pendingSettlements.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/payments/pending")
+
+<div class="payments">
+
+#if ($message)
+<div class="message">
+    $message
+</div>
+#end
+
+<table class="resultList">
+    <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Internal ID</th>
+            <th>External ID</th>
+            <th>Player ID</th>
+            <th>Name</th>
+            <th>Registration Country</th>
+            <th>Method</th>
+            <th>Chips</th>
+            <th>Price</th>
+            <th>Base Price</th>
+            <th>Actions</th>
+        </tr>
+        <tr class="paging">
+            <td colspan="11">#pagingOnUrl( $pendingSettlements.startPosition $pageSize $pendingSettlements.totalSize $baseUrl '' )</td>
+        </tr>
+    </thead>
+    <tbody>
+        #if ($pendingSettlements.totalSize == 0)
+        <tr>
+            <td colspan="11">
+                There are no pending settlements.
+            </td>
+        </tr>
+        #end
+        #foreach ($settlement in $pendingSettlements.data)
+        <tr>
+            <td>$dateTool.format('dd.MM.yyyy HH:mm:ss',$settlement.timestamp.toDate())</td>
+            <td><a href="${request.contextPath}/report/paymentTransaction/$settlement.internalTransactionId">$settlement.internalTransactionId</a></td>
+            <td>$settlement.externalTransactionId</td>
+            <td><a href="${request.contextPath}/player/$settlement.playerId">$!numberTool.format('#.##', $!settlement.playerId)</a></td>
+            <td>$settlement.playerName</td>
+            <td>$!settlement.playerCountry</td>
+            <td>$settlement.cashierName</td>
+            <td>$!numberTool.format('###,###.##', $settlement.chips)</td>
+            <td>$settlement.currency.currencyCode <strong>$!numberTool.format('###,###.00', $settlement.price)</strong></td>
+            <td>
+                #if ($settlement.basePrice)
+                $!settlement.baseCurrency.currencyCode <strong>$!numberTool.format('###,###.00', $!settlement.basePrice)</strong>
+                #else
+                $settlement.currency.currencyCode <strong>$!numberTool.format('###,###.00', $settlement.price)</strong>
+                #end
+            </td>
+            <td>
+                <a href="${request.contextPath}/payments/cancelForPlayer/$settlement.playerId" class="confirmAction"
+                   data-message="Block player $settlement.playerId and cancel all pending payments from this player?">Cancel &amp; Block</a>
+            </td>
+        </tr>
+        #end
+    </tbody>
+    <tfoot>
+        <tr class="paging">
+            <td colspan="11">#pagingOnUrl( $pendingSettlements.startPosition $pageSize $pendingSettlements.totalSize $baseUrl '' )</td>
+        </tr>
+    </tfoot>
+</table>
+
+</div>

@@ -1,0 +1,53 @@
+<assembly>
+	<id>gigaspace-war-assembly</id>
+	<formats>
+		<format>war</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<useProjectArtifact>false</useProjectArtifact>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}</directory>
+			<outputDirectory>/WEB-INF/classes</outputDirectory>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</fileSet>
+		<!-- There is probably a property for the source root -->
+		<fileSet>
+			<directory>src/main/webapp/WEB-INF/</directory>
+			<outputDirectory>/WEB-INF</outputDirectory>			
+		</fileSet>
+		<fileSet>
+			<directory>src/main/webapp/</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>*.*</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/webapp/META-INF/</directory>
+			<outputDirectory>/META-INF</outputDirectory>
+			<excludes><exclude>**/*.MF</exclude></excludes>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+		<!-- Once the code is refactored these dependencies will need to be split,
+		     The spaces classes should stay here and the rest of the classes go under lib
+		     The reason we are all under shared lib is that the project uses host api
+		     and hibernate is under host api and hibernate depends on just about everything.-->
+		<dependencySet>
+			<scope>runtime</scope>
+			<outputDirectory>WEB-INF/lib</outputDirectory>
+			<useProjectArtifact>false</useProjectArtifact>
+			<excludes>
+				<exclude>com.gigaspaces:*</exclude>
+				<exclude>cglib:*</exclude>
+				<exclude>org.apache.geronimo.specs:geronimo-jta_1.0.1B_spec</exclude>
+				<exclude>javax.transaction:*</exclude>
+				<exclude>org.springframework:*</exclude>
+			</excludes>
+		</dependencySet>
+
+	</dependencySets>
+</assembly>

@@ -1,0 +1,9 @@
+<div id="dailyChipAward" style="display: none;">
+    <div class="banner main">
+        <p class="balance"></p>
+        <div class="dailyBonusDisplay"></div>
+    </div>
+    <div class="banner second">
+    </div>
+    #parse("/partials/closeButton.vm")
+</div>

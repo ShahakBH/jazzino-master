@@ -1,0 +1,18 @@
+#set($pageTitle = "Create Campaigns")
+<h1>Enter Campaign to be created</h1>
+
+#if("$!errorMessages" != "")
+<div class="error">$errorMessages</div>
+#end
+
+#if("$!successMessages" != "")
+<div class="success">$successMessages</div>
+#end
+
+<form class="formattedReport" method="POST" data-action="#springUrl('/campaigns/add')">
+
+    #parse('campaigns/partials/campaignComponents.vm')
+
+</form>
+
+

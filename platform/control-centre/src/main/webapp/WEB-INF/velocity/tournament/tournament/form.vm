@@ -1,0 +1,60 @@
+<form method="post" action="${request.contextPath}/tournament/tournament/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($tournament.id)
+            #springFormHiddenInput( 'tournament.id' '' )
+        #end
+
+        #springFormHiddenInput( 'tournament.status' '' )
+        #springFormHiddenInput( 'tournament.partnerId' '' )
+
+        <label for="name">Name:</label>
+        #springFormInput( 'tournament.name' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'tournament.name' )
+        #springShowErrors( '' 'error' )
+
+        <label for="variationId">Variation:</label>
+        #if ($readonly || $variation.id)
+            <input name="variationId" type="hidden" value="$tournament.variationId">
+            <input id="variationId" name="variationIdDisplay" type="text" readonly="readonly"
+                   value="$variations.get($tournament.variationId.underlying)">
+        #else
+            #springFormSingleSelect( 'tournament.variationId' $variations "$!formoptions required=${quote}required${quote}" )
+            #springBind( 'tournament.variationId' )
+            #springShowErrors( '' 'error' )
+        #end
+
+        <label for="signupStart">Sign-up Start:</label>
+        #springFormDateTimeLocalInput( 'tournament.signupStart' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'tournament.signupStart' )
+        #springShowErrors( '' 'error' )
+
+        <label for="signupEnd">Sign-up End:</label>
+        #springFormDateTimeLocalInput( 'tournament.signupEnd' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'tournament.signupEnd' )
+        #springShowErrors( '' 'error' )
+
+        <label for="start">Start:</label>
+        #springFormDateTimeLocalInput( 'tournament.start' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'tournament.start' )
+        #springShowErrors( '' 'error' )
+
+        <label for="description">Description:</label>
+        #springFormInput( 'tournament.description' "$!formoptions" )
+        #springBind( 'tournament.description' )
+        #springShowErrors( '' 'error' )
+
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>

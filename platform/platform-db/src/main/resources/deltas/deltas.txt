@@ -1,0 +1,525 @@
+1 - initial version
+2 -
+3 -
+4 - community initial version with players in the space
+5 - Diagnostic request table.
+6 - Addition of transaction_type to transaction_log
+7 - player ID back to decimal, special sequence table
+8 - Change all tables to use 'Blue' table colour, which is the new game. Old game is 'Red'
+9 - replace account id with playerid
+10 -
+11 - Adding Points Account to Player.
+12 - Removing Survey transaction type
+13 - changing audit_table_player column to player_id, it is no longer account id; audit_closed_game_player
+14 -
+15 - Paypal deposit tx type
+16 - Player transactions view rationalised to get details from reference for all transaction types
+17 - Sequence seeding for $SEQUENCE table
+18 - innodb for player relationships
+19 - Changed indexing on TRANSACTION_LOG
+20 - Change chips awarded for invitations
+21 - profanity filter
+22 - Correction to audit_label entries for transaction_log
+23 - 4dp precision on Account balances.
+24 - Index on transaction_log audit_label.
+25 -
+26 -
+27 - Adding game voiding.
+28 - Recording username in voided game.
+29 - new leaderboard structure
+30 - Removed table starting balance.
+31 - Alter gamestatus xml to account for class changes
+32 -
+33 - Add published field to GAME_VARIATION_TEMPLATE_PROPERTY
+34 - player relationship IDs to bigint to allow matching in space
+35 - player leaderboards built for correct relationship type
+36 - Added fields to PARTNER table for topup, initial balance etc
+37 -
+38 - Increase table info current game to Long Text
+39 - Increase audit table info current game to Long Text
+40 - Tables for tournaments and audit transactions
+41 - Betting/playing timeout change for blackjack
+42 - Add tournament name to tournament table
+43 - Add transaction types for tournament entry & service fees
+44 - Tournament Variation Properties flattened into the Variation.
+45 - Added credit limit to the account table
+46 - Update existing accounts for tables to have a credit limit of 1,000,000
+47 - Added ID for the tournament pot account to the tournament table
+48 - Added status field on tournament players
+49 - Added leaderboard position field on tournament players
+50 - Added combined transaction types for tournament fees charged to players
+51 - Added next event timestamp to tournaments
+52 - Add texs Hold'em GAME_TYPE
+53 - error table status
+54 - client ID, for tournament flags
+55 - tournament payouts and rounds.
+56 - Added tournmanet transaction type for initial chip deposit
+57 - Min balance for rounds
+58 - Changed precision of payout percentage.
+59 - Table drops requested by Gojko.
+60 - InnoDB for round, payout tables.
+61 - recreated table_status_and_balance view for backoffice
+62 - Added description & current round to tournament.
+63 - tournament tables
+64 - Removed tournamnet end time.
+65 - Tournament leaderboard.
+66 - Tournament leaderboard update proc.
+67 - Fixed tournament leaderboard view.
+68 - Added tournament expiry delay.
+69 - Added Tournament Payout transaction type
+70 - added prize, name to tournament player and added total pot to settled tournaments
+71 - Changed tournament leaderboard proc to check tournament player status.
+72 - Added fields to tournament to cache active player count / total player count.
+73 - Added open column to account.
+74 = Added SHOW_IN_LOBBY to TABLE_INFO
+75 - Added elimitation timestamp for tournament player and using it the store proc to update leaderboard
+76 - Added lobby_user table
+77 - Added index for lobby_user.password_hash
+78 - Added email verification identifier to lobby_user
+79 -
+80 - Added PLAY_FOR_FUN partner
+81 - added referral amount to partners
+82 -
+83 - added referralId to user
+84 - Added transaction type "Refferal"
+85 - Added relationships to player table
+86 - Added sequence increment to avoid table clashes
+87 - Added pictureUrl field to player
+88 - Added game variation templates for Las Vegas and Atlantic City, Low Medium and High
+89 - Changes topup amount to 2500, referral amount to 5000
+90 - Changes of game variation property values for lobby games: Blackjack, Roulette, Texas Holdem - Low Medium and High
+91 - tournament template Daily blackjack competition, game variation template (for this tournament) Blackjack daily tournament
+92 - Changed initial balance in partner table for newly registered player was 1000 -> now 2500
+93 - Changed game variation template properties for Texas Holdem
+94 - Player/partner leaderboard removal
+95 - Added tournament summary table
+96 - Added field for last tournament details on players
+97 - Added prize pool to tournament variation template
+98 - Removed last tournament from player, no longer required by business
+99 - Tournament cleanup
+100 - remove CHIPS_TO_POINTS_MULTIPLIER BONUS_POINTS_QUOTIENT properties
+101 - drop col POINT_ACCOUNT_ID from PLAYER
+102 - add column to BAD_WORD to identify those words to be found anywhere in a word
+103 - Wirecard Transaction Type
+104 - Added External Transaction Table
+105 - Additional columns for External Transaction
+106 - External Transaction View for use by Grails
+107 - External Status for transactions.
+108 - Added FORCE_CLOSING status to table_status
+109 - Transaction type referenced from External Transaction, some additional indexes.
+110 -
+111 - Added description column to tournament variation rounds.
+112 - Added parent account to account table.
+113 - Added transaction types for reservation and release
+114 - Added preferred currency to PLAYER
+115 - Added table AUTHENTICATION
+116 - Change roulette betting timeout
+117 - Added ELIMINATION_REASON to TOURNAMENT_PLAYER
+118 - Change Blackjack tournament template to hit players till 21
+119 - Close all open tables (one off cleanup)
+120 - Add 50 chip to jacks table variations and Change max timeouts for poker to 1
+121 - Indexed timestamp/hostname on closed table audit table
+122 - Indexed player name on player
+123 - Created client dump table
+124 - Changed IP column length on dump table as we may get IPv6 addresses
+125 - Moved client config to database
+126 - Removed tournament leaderboard functionality
+127 - Removed old leaderboard tables, added new trophy tables
+128 - Fixed naming in leaderboard table, added name to leaderboard result
+129 - Added tx type for leaderboard awards
+130 - Remove TRANSFER_PLAYERS_TO_NEXT from TABLE_INFO, add MILLISECONDS_PREPARE_NEW_HAND to CLIENT_PROPERTIES
+131 - Created ACHIEVEMENT table and added ACHIEVEMENT column to PLAYER
+132 - Added ACHIEVEMENT_TITLE to ACHIEVEMENT and included first poker achievements
+133 - blackjack achievements (phase 1)
+134 - tournament (blackjack/poker) achievements (phase 1)
+135 - blackjack achievements rename
+136 - update blackjack achievement ids
+137 = roulette achievements (phase 1)
+138 = alter roulette achievements workings (phase 1)
+139 - Fix blackjack wordings
+140 - Added expiry column to leaderboards
+141 - Fix blackjack wording
+142 - Split poker "eliminate players" achievement
+143 - Fixed index for audit tables
+144 - Short description column for achievements
+145 - Update achievement wordings/ split achievements in some cases (as per fitnesse tests)
+146 - Close all open tables on next deployment after fixing problem with tournament tables not closing
+147 - Added properties column to Tournament player
+148 - Added ROULETTE_n_NEIGHBOURS to ACHIEVEMENT [1 <= n <= 4]
+149 - Change working on achievements yet again
+150 - Change wording on achievements again
+151 - Added properties for bribery.
+152 - Added rewards transaction type.
+153 - altered texas holdem variations  to account for changes to max away hands
+154 - Replaced poker client properties
+155 - Changed credit amount for bookmarks
+156 -
+157 - Changed ACHIEVEMENT table to InnoDB
+158 - Achievement enhancements
+159 - Added accumulator to player
+160 - Fixed messages for roulette achievements
+161 - Added game type to achievements
+162 - Renamed accumulatorstate to achievementprogress on player
+163 - Poker/BJ P2 achievements, sans messages because they're not done yet, 4 days after impl started.
+164 - Roulette P2 achivements, as above re messages
+165 - Added exclusive event flag to appropriate roulette achievements
+166 - event naming fix
+167 - Event fixes, no idea why these ones were missed.
+168 - merged a roulette event because we use two different terms to discuss the same thing
+169 - Reverse 168 as according to the Fitnesse tests they are different things despite our fucked up terminology
+170 - Added text for achivements from acceptance tests
+171 - New achievements for poker
+172 - fixed poker achievement name
+173 - Added missing roulette descriptions
+174 - Added missing poker achievement
+175 - Added text for poker achievements
+176 - Updated text with latest cut from Mel.
+177 - Updated messages. Again.
+178 - Fixed lucky guy message to use correct parameter.
+179 - Added slots client
+180 - Added slots client properties
+181 - Added system messages table
+182 - ?
+183 - ?
+184 - Storing player level
+185 - Storing leveling system
+186 - Poker level system
+187 - Poker level adjustment
+188 - New transaction type: Level Bonus
+189 - Blackjack/Roulette leveling systems
+190 - Added version to LEVEL_SYSTEM (required by GORM)
+191 - Balancing levels
+192 - Reset all LEVEL_SYSTEM versions to 0 (they were all null)
+193 - Change slots client property (MILLIS_REEL_SPINNED) to 2000
+194 - Added ACHIEVEMENT_LEVEL and ACHIEVEMENT_HOW_TO_GET to ACHIEVEMENT
+195 - Removing achievements without images and made new columns not null
+196 - Added levels and how to get data for achievements
+197 - More changes for achievements info
+198 - Changed tournament summary
+199 - Added leaderboard position to LEADERBOARD_PLAYER
+200 - Fixed PLAYER_ID columns in LEADERBOARD_PLAYER, LEADERBOARD_RESULT and TROPHY
+201 - Created PLAYER_TROPHY table to store the trophies that a player has won
+202 - Added GAME_TYPE to TROPHY
+203 - Make PKAYER_TROPHY_ID auto generated for table PLAYER_TROPHY
+204 - Added Trophy Leader board Controller in Request mappings
+205 - Added Trophy Controller in Request mappings
+206 - Created PLAYER_INBOX table
+207 - Added unique constraint to PLAYER_INBOX
+208 - Fixed TIMESTAMP columns in LEADERBOARD and PLAYER_INBOX to not update automatically
+209 - Remove player id from trophy table
+201 - Added short description and message to trophy table
+211 - Adding default trophies
+212 - Removed game type from trophy names and added unique constraint for TROPHY (NAME,GAME_TYPE)
+213 - Removed .png from trophy images
+214 - Added MESSAGE_CABINET to TROPHY
+215 - Change cycle_length to bigint column
+216 - Added messages for medals
+217 - added TSCREATED to PLAYER
+218 - Added owner_id column to table_info
+219 - Decreased cool down period after reels spun in slots to 200ms
+220 - Table Invite table added
+221 - Added OPEN column to TABLE_INVITE
+222 - Added initial leveling system for slots
+223 - Added IP_ADDRESS to ACCOUNT_SESSION
+224 - Create SLOTS Templates
+225 - Added referer to ACCOUNT_SESSION
+226 - Increased size of referer field
+227 - Added PLAYER_EVENT table
+228 - Added new roles to backoffice
+229 - User /Player refactor
+230 - Removed unique index for email in LOBBY_USER
+231 - Added money-in/money-out per game variation template etl table, procedure for population and an event to trigger it
+232 - Fixed picture url for LOBBY_USER and PLAYER
+233 - Added first/last name, date of birth to LOBBY_USER
+234 - Data extracts for new registrations/external txns and invitations reports
+235 - Activity report extract - Data extract for daily number of distinct users per game source report (number unique users landing on game XX page)
+236 - Activity report extract - Data extract for monthly number of distinct users per game source report (number unique users landing on game XX page)
+237 - Activity report extract - Data extract for weekly number of distinct users per game source report (number unique users landing on game XX page)
+238 - Activity report extract - Data extract for distinct daily players per game
+239 - Activity report extract - Data extract for distinct weekly players per game
+240 - Activity report extract - Data extract for distinct monthly players per game
+241 - Added system config table and default topup amount
+242 - Added Last topped up date to Player table
+243 - Changed CLIENT_PROPERTY MILLIS_REEL_SPINNED to 4000
+244 - Daily award system config items
+245 - Marketing data weekly and monthly extract fix
+246 - Changed CLIENT_PROPERTY MILLIS_REEL_SPINNED to 4000 added MILLIS_REEL_SPINNED_BONUS as 2000
+247 - Changed CLIENT_PROPERTY MILLIS_REEL_SPINNED_BONUS to 1700, added new transaction type for reversals
+248 - fix for hourly reports txns at end of aren't included in report due to time taken to persist txn
+249 - Activity report changes - new way of generating distinct player information.
+250 - Drop redundant column from rpt_distinct_players - now use rpt_report_status to find last run time
+251 - Move scheduled tasks to GMT morning
+252 - Add new TRANSACTION_LOG columns for timestamp/running balance
+253 - Made TRANSACTION_LOG.transaction_ts nullable
+254 - Modified distinct user Activity report - caluculation of texas user now based on 'holdem' rather than 'texashodem'
+255 - Adding index to new transaction_log column
+256 - Move New Tournament Status to Error
+257 - Added registration error status to lobby user
+258 - Create index on LOBBY_USER.EMAIL_ADDRESS
+259 - Additional level placeholders added
+260 - RATTLA game added
+261 - Create table for Recurring Tournament Definitions
+262 - Move to single-entry bookkeeping - TABLE_INFO.TABLE_ACCOUNT_ID made nullable.  Added POT field to TOURNAMENT and TOURNAMENT.TOURNAMENT_ACCOUNTID and TOURNAMENT.TOURNAMENT_POT_ACCOUNT_ID made nullable
+263 - Added BLOCKED flag to LOBBY_USER
+264 -
+265 - Added INVITATIONS table
+266 - new game variation templates for fast games
+267 - migration of tournaments in prod
+268 - corrected BETTING_TIMOUTS for fast roulette tables (medium and high)
+269 - Changes to INVITATIONS table: some renames, REWARD column is now nullable and new timestamp columns
+270 - Close obsolete table accounts in the DB.
+271 - Close abandoned child accounts
+272 - Level system for Rattla
+273 - Clean-up duplicate accounts
+274 - Add iTunes deposit as a transaction type for mobile payments
+275 - Added game type column to external transaction
+276 - Added Maximiles view on external transaction; indexed timestamp in external transaction
+277 - Applied prod fix to change SYSTEM_CONFIG.value to text
+278 - Add RATTLA game variations
+279 - Renamed RATTLA to Hissteria
+280 - add index on PLAYER.tscreated and TOURNAMENT_SUMMARY.TOURNAMENT_FINISHED_TS
+281 - increased value of KILL_TIMEOUT for some poker game variations used for tournaments
+282 - Added a preffered payment method to the player
+283 - Added the initial game variation values for Hissteria
+284 - Drop obsolete backoffice/audit tables
+285 - Update game end animation time for Hissteria to 16 seconds
+286 - New property to adjust the latency for a Hissteria game
+287 - Additional stakes for Hissteria game
+288 - Adjusting stakes for Hissteria game
+289 - Increase the size of the relationships on player
+290 - Delete obsolete PLAYER_EVENT table
+291 - Change EXCLUSION_PERIODS column in RECURRING_TOURNAMENT_DEFINITION to TEXT
+292 - Added the ZONG_TRANSACTION table which is used in addition to EXTERNAL_TRANSACTION to track zong transactions
+293 - Change histeria to minimum of 3 players
+294 - Drop account constraint on TOPUP_REQUEST to avoid async account write issues
+295 - Drop account constraint on PLAYER to avoid async account write issues
+296 - Remove auto-increment on ACCOUNT.ACCOUNT_ID as this is now sourced from a sequence.
+297 - WEB-465 Set credit limit of all players to zero (as +ve credit limits allows players to go overdrawn)
+298 - Drop account constraint on TOURNAMENT_PLAYER to avoid async account write issues
+299 - Added Bingo (game type, game type variants, client)
+300 - Defining level system for Bingo
+301 - Renaming Bingo game variant
+302 - WEB-490 Promotion
+303 - WEB-671 - clean-up of obsolete DB fields
+304 - WEB-490 - changed type of PROMOTION_PLAYER.player_id
+305 - BNG-193 Redefining Bingo levels
+306 - WEB 490 PROMOTION_PLAYER.player_id should be int(20)
+307 - WEB 490 PROMOTION_PLAYER.player_id should be BIGINT(20) - argggh
+308 - WEB-632 Extra precision for the Zong transactions amounts recording
+309 - WEB-837 Changed column type of PROMOTION_PLAYER.PROMO_ID to signed
+310 - WEB-836 Move daily chip award to Operations
+311 - Create table to store iOS devices.
+312 - WEB-903, WEB-907 Replace wheel deal, blackjack, poker and roulette achievements
+313 - Fixed short description for achievements using parameters
+314 - ???
+315 - Modify Constraint for IOS_PLAYER_DEVICE
+316 - Re-modify constraint for IOS_PLAYER_DEVICE
+317 - Added recurring flag for tournaments
+318 - Updated achievement definitions for slots
+319 - Updated game variation for slots
+320 - WEB-1124 reset default promotion's start/end dates (may have been edited by marketing
+321 - WEB-1123 add promotion type to promotion
+322 - HIGH STAKES added to master
+323 - WEB-1122 Create generic promotion details table
+324 - WEB-1122 fix for missing config in daily award configuration
+325 - WEB-1122 fix for missing config in daily award configuration space between ! and =
+326 - WEB-1122 finally a working version of setting up PROMOTION_CONFIG
+327 - WEB 1151 remove content root (senet.web.content) from default images
+328 - Defined Bingo achievements
+329 - Modifications to wording of Bingo achievements
+330 - Drop unused CLIENT_DUMP table
+331 - WEB-1121 add nullable priority column to PROMOTION
+332 - WEB-958 added ability to change achievement Facebook post title and action; both text and links
+333 - Changed action and title links for each game type.
+334 - ???
+335 - Update High Stakes game variation safe crack multiplier for the eight index.
+336 - Updated High Stakes game variation safe crack multipliers, payouts, unit stakes and achievement descriptions
+337 - High Stakes - Updated payouts
+338 - High Stakes - Removed Final Crack achievement
+339 -
+340 - Achievements - Changed posted title link and posted action link
+341 - High Stakes - medium table stakes, time between safe cracks
+342 - Progress Bar Bonus - added PROGRESS_BAR table as it was originally in DW342 - Progress Bar Bonus - added PROGRESS_BAR table as it was originally in DW342 - Progress Bar Bonus - added PROGRESS_BAR table as it was originally in DW
+343 - Changed unit stakes for slots-low
+344 - Added new Progress Bar table to replace old one as it was looking to lobby when it shouldn't have been
+345 - Updated Wheel Deal achievements copy
+346 - Increase Bingo "buy in" to 1,000 chips
+347 - HST-171 have included new values on the reels to allow for multiple non paying items
+348 - WEB-1378 have added column to record if user has enabled us to publish to their Facebook stream
+349 - WEB-1269 - Drop TOPUP_REQUEST
+350 - HST-205 - Adjusted & removed game variation properties for controlling occurrence of safe crack.
+351 - Slots game variation
+352 - HST-205 - correction for 350
+353 - WEB-1313 - Drop obsolete INVITATIONS table
+354 - WEB-1257 - Add PLAYER_ID to LOBBY_USER
+355 - WEB-1257 - Index LOBBY_USER.PLAYER_ID
+356 - WEB-1257 - Make USER_ID nullable on PLAYER
+357 - WEB-1127 - Buy Chip Promotions - add comment field to PLAYER_REWARDS
+358 - WEB-1127 - Drop unique index on PROMOTION.name
+359 - WEB-1591 - Final digit achievement for High Stakes
+360 - WEB-1602 - Add seed and control group percentage to PROMOTION, add control_group flag to PROMOTION_PLAYER_DETAIL
+361 - WEB-1766 - Added new field to LOBBY_USER to toggle profile sync on and off
+362 - WEB 1602 - add default packages to promotions
+363 - WEB-1258 - Drop GAME_TYPE constraint on table info to allow dynamic game types
+364 - WEB-1808 - new user-defined function to identify player as control group member in promotion
+365 - WEB-1841 - column on PROMOTION to determine which control group function to use
+366 - WEB-1841 - Yet another user-defined function to identify player as control group member in promotion
+367 - Conditionally adding TSREG column to LOBBY_USER (because some environments already have it)
+368 - WEB-2072 - Extend Backoffice Promotion tool to create promotions specifically for iOS apps
+369 - WEB-2072 - Provide default values for TARGET_CLIENTS for pre-existing PROMOTIONs
+370 - Drop invalid views
+371 - WEB-2072 - Changes to pre-existing PROMOTION records
+372 - WEB-2190 - increase WD cooldown period
+373 - WEB-2080	WD first phase achievements simplification AND WEB-2208	HS first phase achievements simplification
+374 - WEB-2171 - Game properties for medium win line and big win multipliers for WD
+375 - WEB-2064 - Copy of the old RPX provider's name to the new field
+376 - WEB-2064 - Fix for delta 375
+377 - WEB-1923 - Add PLAYER_COUNT to PROMOTION
+378 - WEB-2347 - Added Verification Transaction Type
+379 - WEB-2286 - move LOBBY_USER logic to the PlayerProfileDAO
+380 - WEB-2381 - remove invalid Player Profile records to ensure users are not blocked from creating new accounts; WEB-2333 - clean up YAZINO_LOGIN table
+381 - port-client-flex4 - new poker client property Flop community card dealt animation duration, other client animation duration changes and achievement changes
+382 - WEB-2295 - added new table to keep track of the state of the Daily Award topup and days played
+383 - Game configuration introduced to control centre
+384 - Game configuration - changed game Id to String value
+385 - WEB-2166 - High stakes game properties for medium win line and big win multipliers
+386 - WEB-2057 - SLOTS - slots low game variation changes to REELS, WHEEL_TYPES, WHEEL_TYPE_MULTIPLIERS and PAYOUTS
+387 - WEB-2138 - Deleting superseded functions (see Delta 117 on strataproddw)
+388 - WEB-2301 - Progressive Daily award settings
+398 - New fields + data for GameConfiguration
+390 - Game configuration change
+391 - Cleanup - dropped invalid/obsolete DB objects
+392 - Cleanup - dropped invalid/obsolete DB objects
+393 - Latest for game configuration
+394 - Create PaymentState table for exclusive locking of payments
+395 - WEB-2731 - Adding configuration for default stake selection, which is based on the players balance
+396 - WEB-2731 - Reverting default stake selection. Simplified to use only the multiplication factor
+397 - WEB-2731 - Added minimum stake selection for High Stakes
+398 - WEB-2747 - Blackjack achievements - most are not recurring
+399 - WEB-2747 - Adding default game template name to game configuration
+400 - WEB-2815 - Added ACCOUNT_STATEMENT table
+401 - WEB-2825 - Removed obsolete DB objects
+402 - HST-261 - Variation properties for new High Stakes bonus game
+403 - HST-261 - Game configuration for new version of High Stakes
+404 - WEB-2839 - update existing player devices to remove spaces and angled brackets
+405 - Support for promotion player exclusion lists & added auto increment column (to be used as high-watermark) to ACCOUNT_STATEMENT
+406 - HST-345 - Tweaked timings for bonus round started animation and timeouts between guesses
+407 - HST-354 - Removed High Stakes Medium and High variations (no longer used)
+408 - ??
+409 - ? once was bad
+410 - Reel symbol change for High Stakes - add another no paying symbol to reels 1, 2 and 3 to reduce base game payout % to around 57%
+411 - HST-365 - Change warning / kick inactivity timeouts for high stakes
+412 - HST-362 - High Stakes property for table joining desirability relative to number of players
+413 - WEB-2906 - Added INVITATION table
+414 - Game configuration - removes class name
+415 - HST-368 - Change reels and adjust bonus round multiplier based on number of players
+416 - Reel symbol change for High Stakes - on 1st reel replaced a 3 with a 4 to reduce reel payout% to 56%
+417 - Adding game client URL to Game Configuration
+418 - Clean INVITATIONS - delete all invites that are NOT 'ACCEPTED' but where recipient has registered
+419 - WEB-2999 Change High Stakes property MINIMUM_LEVEL_FOR_STAKE, open higher bets at lower levels. Change bonus amounts when levelling up.
+420 - Yazino login hardening (type, attempts)
+421 - Yazino login hardening (salt, last_modified)
+422 - Wheel Deal uses flash lobby
+423 - Change Yazino Login to use Player ID
+424 - web-3024 add app store link to high stakes web lobby
+425 - WEB-1431 - remove obsolete PUBLISHED property from GAME_VARIATION_TEMPLATE_PROPERTY
+426 - Remove unused VOIDED_GAME table
+427 - WEB-1688 - remove GAME_TYPE table
+428 - Added ts_last_update to PLAYER (to be used by/for player profile)
+429 - WEB-3023 - drop column USER_ID from YAZINO_LOGIN
+430 - add bundle column to IOS_PLAYER_DEVICE
+431 - Move country codes from code to data
+432 - WEB-3208 new col to support querying of top up result acknowledgement, PLAYER_PROMOTION_STATUS.TOP_UP_ACKNOWLEDGED
+433 - WEB-3316 - add index for PLAYER_PROMOTION_REWARD.PLAYER_ID
+434 - High Stakes Game available on canvas
+435 - WEB-3374 - modified app that the "other games" functionality in the iOS app points at.
+436 - Added index on rewarded_date to PROMOTION_PLAYER_REWARD
+437 - ?
+438 - WEB-3495 drop on update clause TSREG in LOBBY_USER. Note that in most databases this column is a VARCHAR(255), in PRD its a TIMESTAMP.
+439 - WEB-3460 - remove obsolete columns from PLAYER
+----------------------------------------------------------------------------
+BASELINE
+438 - Structure
+439 - Data
+
+Normal service resumes below here.
+----------------------------------------------------------------------------
+440 - WEB-3678 - remove foreign key between account statement and account
+441 - WEB-3678 - Index ACCOUNT_IDs since we lose this via dropping the foreign key
+442 - WEB-3680 - increased width of PAYMENT_STATE.STATE to accommodate 'FinishedFailed'
+443 - WEB-3598 - Added index to IOS_PLAYER_DEVICES
+444 - WEB-3702 - add tags column to TABLE_INFO
+445 - WEB-3807 - Remove AGL Blackjack IOS_PLAYER_DEVICE entries
+446 - Reel symbol change for SLOTS. Reduce base payout to 53.8% - 53.9%. Swapped 6th symbol to 2 (from 3)
+447 - WEB-3860 - Fix TEXAS_HOLDEM metadata to indicate tournament support
+448 - added email_opt_in to LOBBY_USER table
+449 - WEB-3932 - Deleting "MAX_NUMBER_OF_PLAYERS" as a client property because it can't be edited in Control Centre and is overriding a variation property with the same name
+450 - WEB-3934 - Added MINIMUM_LEVEL_FOR_STAKE game variation template for slots
+451 - WEB-4049 - Moved SLOTS to position one.
+452 - WEB-4112 - index name columns in LOBBY_USER for searching.
+453 - FLS-1697 + WEB-4128 - New variation and game properties for slots 2.0
+454 - WEB-4128 - Added missing variation
+455 - WEB-4195 - changed name of Wheel Deal to Slots Wheel Deal
+456 - WEB-4202 - new table PAYMENT_STATE_ANDROID
+457 - WEB-4217 - add ability to mark game configurations as disabled.
+458 - WEB-4217 - Disable HISSTERIA and BINGO
+459 - WEB-4234 - Fixed number of seats for slots client
+460 - WEB-4220 - advance sequence to avoid collisions with ACCOUNT_SESSION
+461 - WEB-4243 - create merged operations/control centre auth tables
+462 - WEB-4173 - drop MAXIMILES_ID (aka player profile ID)
+463 - WEB-4173 - remove unused LOBBY_USER fields
+464 - WEB-4244 - clean up of old auth tables for control-centre
+465 - WEB-4252 - character set cleanup: reset the default character sets
+466 - Purge some old/rubbish tables
+467 - WEB-4255 - delete obsolete picture location column on LOBBY_USER
+468 - WEB-3953 - fix ACCOUNT_ID type
+469 - WEB-3953 - fix PLAYER_ID type
+470 - WEB-3953 - fix TABLE_ID type
+471 - WEB-3953 - fix TOURNAMENT_ID type
+472 - WEB-4260 - transform blocked into status
+473 - WEB-4265 - dropped obsolete BLOCKED column
+474 - WEB-4279 - cache validation results in DB
+475 - WEB-4296 - move Payment Options to the DB
+476 - WEB-4296 - Fix to payment option level
+477 - WEB-4276 - track forex rates for packages
+478 - WEB-4276 - add support for commissions
+479 - WEB-4276 - add base currency to payment_option_current
+480 - WEB-4276 - add platform/payment option mappings for FACEBOOK_CANVAS
+481 - WEB-4273 - support for guest play
+482 - WEB-4326 - add table to track transactions requiring settlement
+483 - WEB-4326 - increase exchange rate precision to match WorldPay
+484 - WEB-4326 - added Player ID, Promo ID PAYMENT_SETTLEMENT
+485 - WEB-4319 - remove CURRENCY_LABEL from PAYMENT_OPTION
+486 - WEB-4394 - Added game configuration, client, variation and leveling system for SPLOTS
+487 - WEB-4362 - added PAYMENT_CHARGEBACK
+488 - WEB-4386 - added gifts
+489 - WEB-4386 - added collectDate to gifting table
+490 - WEB-4407 - changed payouts for leveling on SLOTS
+491 - WEB-4471 - new slots variations supporting 5 bet ranges. Levelling up bonuses changed.
+492 - WEB-4484 - New game client to support 7 player slots
+493 - WEB-4491 - All bet ranges slots variation - leveling system for slots awards level x 1000 when bet range is unlocked
+494 - WEB-4493 - more leveling system changes for slots
+495 - WEB-4352 - added last_played_ts to PLAYER table
+496 - WEB-4352 - dropping PLAYER_OLD table that was used to create PLAYER table
+497 - WEB-4604 - added payment option ids for AMAZON, changed ANDROID payment option ids since price is now different to IOS.
+498 - WEB-4612 - reconciliation of game config variation template across environments
+499 - WEB-4612 - reconciliation of tournament variation template and recurring tournaments across environments
+500 - WEB-4612 - reconciliation of trophies across environments
+501 - WEB-4612 - reconciliation of leaderboards across environments
+502 - added PARTNER_ID to LOBBY_USER for Tango project
+503 - adds partner for TANGO
+504 - WEB-4653 - apply XP changes for new Blackjack client
+505 - WEB-4652, WEB-4655 - Trophy Leaderboard point & payout changes
+506 - WEB-4660 - remove obsolete columns from PARTNER
+507 - WEB-4683 - correct AMAZON/ANDROID level 2 payment option price (is 8.99 should be 7.99)
+508 - WEB-4696 - Pharoahs blackjack variation
+509 - WEB-4724 - Adding TAGS column to player
+510 - WEB-4734 - correct fubar avatar URLs
+511 - WEB-4747 - remove foreign key constraints from gifting
+512 - somebody?
+513 - WEB-4832 - Incorrect game types for Blackjack in test envs
+514 - ??
+515 - WEB-4875 - correct name of Blackjack template
+516 - WEB-4905 - add backing tables for disputed payments
+517 - WEB-4905 - index dispute status
+518 - WEB-4905 - added Promo ID to PAYMENT_DISPUTE

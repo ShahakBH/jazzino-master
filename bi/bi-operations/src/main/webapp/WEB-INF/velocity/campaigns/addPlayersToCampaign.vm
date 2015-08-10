@@ -1,0 +1,37 @@
+#set($pageTitle = "Campaigns - Add Players")
+<article class="main">
+    <h1>Add Players to Campaign</h1>
+    <div class="dialog" style="width=100%;">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>$campaignSchedule.name</td>
+            </tr>
+            <tr>
+                <td>Start Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$campaignSchedule.nextRunTs.toDate())}</td>
+            </tr>
+            <tr>
+                <td>End Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$campaignSchedule.endTime.toDate())}</td>
+            </tr>
+        </table>
+            #springBind("campaignPlayerUpload.*")
+            <div>
+                <h2>
+                    Upload a list of player ids to this promotion.<p/>
+                </h2>
+                #if($status.error)
+                    <div class="errors">
+                        #foreach($error in $status.errorMessages)$error<br/> #end
+                    </div>
+                #end
+                <form action="#springUrl('/campaigns/addPlayers')" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="text/csv"/>
+                    <input type="submit" value="load"/>
+                    <input type="hidden" name="campaignId" value="$campaignSchedule.campaignId"/>
+                    <input type="hidden" name="campaignScheduleWithName" value="$campaignSchedule"/>
+                </form>
+            </div>
+    </div>
+</article>

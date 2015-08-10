@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'time'
+
+#first do the export!
+#then do the upload!
+#then do the delete!
+
+dated = Time.now.strftime("%Y%m%dT%H%M")
+
+def s3cmd(commands)
+    output = %x(s3cmd -c /opt/etc/s3cfg #{commands})
+    [$?.exitstatus, output]
+end
+
+output= %x(psql reporting -Upostgres -c"insert into archive_<%= @table%>(<%= @select_query %>)")
+
+exit_status = $?.exitstatus
+if exit_status!=0
+    puts "outputting <%= @select_query %> blew up!"
+    puts output
+    exit 1
+end
+
+
+output= %x(psql reporting -Upostgres -c"<%= @delete_query %>")
+
+exit_status = $?.exitstatus
+if exit_status!=0
+puts "outputting <%= @delete_query %> blew up!"
+puts output
+exit 1
+end
+

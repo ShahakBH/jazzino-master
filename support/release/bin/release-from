@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# A script to allow running the release scripts from a branch
+
+BASE_DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+if [ -z "$1" ]; then
+    $BASE_DIR/release $@
+    exit 1
+fi
+
+BRANCH=$1
+
+GIT_REPO='git@github.com:yazino/support.git'
+
+if [ "$BRANCH" == "--latest-artefact" ]; then
+    ARTEFACT_DETAILS=$($BASE_DIR/get-latest-artefact)
+    if [ $? -ne 0 ]; then
+        echo "Could not get latest artefact from release server; exiting. Output was: $ARTEFACT_DETAILS"
+        exit 1
+    fi
+
+    LATEST_ARTEFACT=$(echo "$ARTEFACT_DETAILS" | awk '{print $1}')
+    BRANCH=$(echo "$ARTEFACT_DETAILS" | awk '{print $2}')
+fi
+
+TEMP=$TMPDIR
+if [ -z "$TEMP" ]; then
+    TEMP=/TMP
+fi
+
+echo "Retrieving release scripts from branch $BRANCH"
+
+TIMESTAMP=$(date '+%d%m%YT%H%M%S')
+WORK_DIR="$TEMP/release-$TIMESTAMP"
+mkdir -p $WORK_DIR
+pushd $WORK_DIR > /dev/null
+
+OUTPUT=$(git clone $GIT_REPO support 2>&1)
+if [ $? -ne 0 ]; then
+    echo "Clone failed; exiting. Output was: $OUTPUT"
+    exit 1
+fi
+
+cd support
+OUTPUT=$(git checkout $BRANCH 2>&1)
+if [ $? -ne 0 ]; then
+    echo "Failed to switch to branch $BRANCH; exiting. Output was: $OUTPUT"
+    exit 1
+fi
+
+cd release
+echo "Invoking release script in $(pwd) with arguments: $@"
+echo "-----------------------------------------------------------------------------"
+bin/release $@
+SUCCESS=$?
+echo "-----------------------------------------------------------------------------"
+
+popd > /dev/null
+if [ $SUCCESS -eq 0 -a -d "$WORK_DIR" ]; then
+    echo "Cleaning up branch release scripts from $(pwd)"
+    rm -rf $WORK_DIR
+fi
+
+exit $SUCCESS

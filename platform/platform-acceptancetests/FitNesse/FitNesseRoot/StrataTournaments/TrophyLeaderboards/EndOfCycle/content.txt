@@ -1,0 +1,31 @@
+!3 Give chips to the top ranking players on the leaderboard at the end of the cycle
+
+Assume that everyone's chip balance is 0
+
+!|game leaderboard payout structure|
+|rank|chips|
+|1|100000|
+|2|80000|
+|3|60000|
+
+!|final game leaderboard is|
+|rank|player|points|
+|1|Alan|100|
+|2|Bill|78|
+|2|Hugo|78|
+|4|Elle|76|
+|5|Fred|72|
+|6|Greg|68|
+|7|Carl|42|
+|7|Jane|42|
+|9|Dave|40|
+|9|Kyle|40|
+
+!|Chip balance for players|
+|player|balance|
+|Alan|100000|
+|Bill|70000|
+|Hugo|70000|
+|Elle|0|
+
+!|Check|game leaderboard is reset|yes|

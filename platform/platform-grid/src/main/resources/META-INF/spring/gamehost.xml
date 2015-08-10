@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="uuidSource" class="com.yazino.platform.util.JavaUUIDSource"/>
+
+    <bean id="destinationFactory" class="com.yazino.platform.messaging.destination.DestinationFactory"/>
+
+    <bean id="getStatusPreprocessor" class="com.yazino.platform.gamehost.preprocessing.InitialGetStatusPreprocessor"/>
+
+    <bean id="anonymousPlayerPreprocessor"
+          class="com.yazino.platform.gamehost.preprocessing.TournamentPlayerValidator"/>
+
+    <bean id="observerGetStatusPreprocessor"
+          class="com.yazino.platform.gamehost.preprocessing.ObserverGetStatusPreprocessor"/>
+
+    <bean id="tableClosedPreprocessor" class="com.yazino.platform.gamehost.preprocessing.TableClosedPreprocessor"/>
+
+    <bean id="tableClosingPreprocessor" class="com.yazino.platform.gamehost.preprocessing.TableClosingPreprocessor"/>
+
+    <bean id="gameDisabledPreprocessor" class="com.yazino.platform.gamehost.preprocessing.GameDisabledPreprocessor"/>
+
+    <bean id="acknowledgementPreprocessor"
+          class="com.yazino.platform.gamehost.preprocessing.AcknowledgementPreprocessor"/>
+
+    <bean id="auditPreprocessor" class="com.yazino.platform.gamehost.preprocessing.AuditPreprocessor"/>
+
+    <bean id="tableReadyEventPreprocessor"
+          class="com.yazino.platform.gamehost.preprocessing.TableReadyEventPreprocessor"/>
+
+    <bean id="nopEventPreprocessor" class="com.yazino.platform.gamehost.preprocessing.NopEventPreprocessor"/>
+
+    <bean id="eventStillValidPreprocessor"
+          class="com.yazino.platform.gamehost.preprocessing.EventStillValidPreprocessor"/>
+
+    <bean id="playerNotificationPostProcessor"
+          class="com.yazino.platform.gamehost.postprocessing.PlayerNotificationPostProcessor"/>
+
+    <bean id="observerNotificationPostprocessor"
+          class="com.yazino.platform.gamehost.postprocessing.ObserverNotificationPostprocessor"/>
+
+    <bean id="tableUpdatePostprocessor" class="com.yazino.platform.gamehost.postprocessing.TableUpdatePostprocessor"/>
+
+    <bean id="notifyLocationChangesPostprocessor"
+          class="com.yazino.platform.gamehost.postprocessing.NotifyLocationChangesPostprocessor"/>
+
+    <bean id="gameCompletePostprocessor" class="com.yazino.platform.gamehost.postprocessing.GameCompletePostprocessor"/>
+
+    <bean id="gameDisabledPostprocessor" class="com.yazino.platform.gamehost.postprocessing.GameDisabledPostprocessor"/>
+
+    <bean id="gameXPPublishingPostProcessor"
+          class="com.yazino.platform.gamehost.postprocessing.GameXPPublishingPostProcessor"/>
+
+    <bean id="gameStatisticsPublishingPostProcessor"
+          class="com.yazino.platform.gamehost.postprocessing.GameStatisticsPublishingPostProcessor"/>
+
+    <bean id="tableAuditPostprocessor" class="com.yazino.platform.gamehost.postprocessing.TableAuditPostprocessor"/>
+
+    <bean id="tableReservationPostProcessor"
+          class="com.yazino.platform.gamehost.postprocessing.TableReservationsPostProcessor"/>
+
+    <bean id="gameInitialiser" class="com.yazino.platform.gamehost.GameInitialiser">
+        <property name="commandPreInitialisationProcessors">
+            <list>
+                <!--<ref bean="getStatusPreprocessor"/>-->
+                <!--<ref bean="observerGetStatusPreprocessor"/>-->
+                <ref bean="tableClosedPreprocessor"/>
+                <ref bean="gameDisabledPreprocessor"/>
+                <ref bean="anonymousPlayerPreprocessor"/>
+                <!--<ref bean="acknowledgementPreprocessor"/>-->
+            </list>
+        </property>
+        <property name="eventPreInitialisationProcessors">
+            <list>
+                <ref bean="tableClosedPreprocessor"/>
+                <ref bean="gameDisabledPreprocessor"/>
+            </list>
+        </property>
+        <property name="postInitialisationProcessors">
+            <list>
+                <ref bean="playerNotificationPostProcessor"/>
+                <!--<ref bean="observerNotificationPostprocessor"/>-->
+                <ref bean="notifyLocationChangesPostprocessor"/>
+                <ref bean="tableUpdatePostprocessor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="gameHost" class="com.yazino.platform.gamehost.GameHost">
+        <property name="playerRemovalProcessors">
+            <list>
+                <ref bean="notifyLocationChangesPostprocessor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="gameEventExecutor" class="com.yazino.platform.gamehost.GameEventExecutor">
+        <property name="preExecutionProcessors">
+            <list>
+                <ref bean="auditPreprocessor"/>
+                <ref bean="tableReadyEventPreprocessor"/>
+                <ref bean="nopEventPreprocessor"/>
+                <ref bean="eventStillValidPreprocessor"/>
+            </list>
+        </property>
+        <property name="postExecutionProcessors">
+            <list>
+                <ref bean="gameCompletePostprocessor"/>
+                <ref bean="notifyLocationChangesPostprocessor"/>
+                <ref bean="tableReservationPostProcessor"/>
+                <ref bean="playerNotificationPostProcessor"/>
+                <!--<ref bean="observerNotificationPostprocessor"/>-->
+                <ref bean="gameDisabledPostprocessor"/>
+                <ref bean="tableUpdatePostprocessor"/>
+                <ref bean="gameXPPublishingPostProcessor"/>
+                <ref bean="gameStatisticsPublishingPostProcessor"/>
+                <ref bean="tableAuditPostprocessor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="gameCommandExecutor" class="com.yazino.platform.gamehost.GameCommandExecutor">
+        <property name="preExecutionProcessors">
+            <list>
+                <ref bean="getStatusPreprocessor"/>
+                <ref bean="observerGetStatusPreprocessor"/>
+                <ref bean="acknowledgementPreprocessor"/>
+                <ref bean="auditPreprocessor"/>
+                <ref bean="tableClosingPreprocessor"/>
+                <ref bean="getStatusPreprocessor"/>
+            </list>
+        </property>
+        <property name="postExecutionProcessors">
+            <list>
+                <ref bean="gameCompletePostprocessor"/>
+                <ref bean="notifyLocationChangesPostprocessor"/>
+                <ref bean="tableReservationPostProcessor"/>
+                <ref bean="playerNotificationPostProcessor"/>
+                <!--<ref bean="observerNotificationPostprocessor"/>-->
+                <ref bean="gameDisabledPostprocessor"/>
+                <ref bean="tableUpdatePostprocessor"/>
+                <ref bean="gameXPPublishingPostProcessor"/>
+                <ref bean="gameStatisticsPublishingPostProcessor"/>
+                <ref bean="tableAuditPostprocessor"/>
+            </list>
+        </property>
+
+    </bean>
+
+
+</beans>

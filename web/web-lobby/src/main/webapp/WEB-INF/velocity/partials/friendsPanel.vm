@@ -1,0 +1,77 @@
+#* @vtlvariable name="lobbyInformation" type="com.yazino.web.domain.LobbyInformation" *#
+<div id="friends-panel" class="lobbyInformationWidget" data-ctaContext="FRIENDS_PANEL">
+  <div id="friends-panel-head" class="font-friend-panel-1 check-1 roll">
+    <div class="div2 div3">
+      <div class="div1 active">
+        <h3 class="tab1">FRIENDS</h3>
+      </div>
+      <h3 class="tab2">WORLD</h3>
+    </div>
+  </div>
+#set($tabBodies=[1..3])
+
+#foreach ($idx in $tabBodies)
+	#if($idx == 1)
+		<div class="tab-body-${idx} friends-panel-body" style="display:block">
+	#else
+		<div class="tab-body-${idx} friends-panel-body" style="display:none">
+	#end
+
+	<p class="right-slide${idx}"></p>
+
+	<div class="friends-div">
+	<ul class="slides" #if($filterByGameType)gameType="$gameType"#end>
+
+        #set($slideCount=[1..8])
+
+		#foreach ($it in $slideCount)
+		<li>
+			<div class="friend-bar color-grey font-friend-bar">
+				<div class="on">
+					<h3 class="font-friend-bar-head"></h3>
+	
+					<div>
+						<img src="$!{assetUrl}/images/gloss/friend-bar-none-photo.png" alt="" width="52" height="52">
+	
+						<div class="font-friend-circle circle"></div>
+					</div>
+					<p><span class="bold"></span></p>
+	
+					<p></p>
+	
+					<p><span class="grey"></span></p>
+					<a href="#"></a>
+				</div>
+				<div class="off font-friend-bar-grey">
+					#if ($idx != 3)
+						<img src="$!{assetUrl}/images/gloss/loader-friends.gif" alt="loader" width="32" height="32" style="position:relative; top:80px;">
+					#else
+						<h3 class="font-friend-bar-head">Invite</h3>
+		
+						<div>
+							<img src="$!{assetUrl}/images/gloss/friend-bar-none-photo.png" alt="" width="52"
+								 height="52">
+							<img src="$!{assetUrl}/images/gloss/free-chips.png" alt="free chips!" style="position:absolute;top:35px;left:30px;z-index:2000" width="60"
+								 height="60">
+						</div>
+						<b>
+						<p></p>
+						<p><p><p>INVITE NOW
+		
+						<p>& GET</p>
+
+						<a href="yazino:inviteFriends" data-ctaContext="FRIENDS_PANEL_EXTRA">FREE CHIPS</a>
+
+						</p></p></p>
+						</b>
+					#end
+				</div>
+			</div>
+		</li>
+		#end
+	</ul>
+	</div>
+	<p class="left-slide${idx}"></p>
+	</div>
+#end
+</div>

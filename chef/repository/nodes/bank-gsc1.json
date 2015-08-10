@@ -1,0 +1,44 @@
+{
+    "name": "bank-gsc1",
+    "chef_type": "node",
+    "json_class": "Chef::Node",
+    "run_list": [
+        "role[gigaspaces]"
+    ],
+    "normal": {
+        "environment": "bank",
+        "internal_interface": "eth0",
+        "ssh": {
+            "harden": "false"
+        },
+        "monitoring": {
+            "suppress": true
+        },
+        "security": {
+            "denyhosts": false
+        },
+        "nfs": {
+            "mount_points": {
+                "bank-gsm:/var/staging": "/var/staging",
+                "bank-gsm:/var/yazino-games": "/var/yazino-games"
+            }
+        },
+        "gigaspaces": {
+            "gsc_count": 2,
+            "gsm_count": 2,
+            "roles": [
+                "gsc",
+                "lus"
+            ],
+            "lookup_locators": [
+                "bank-gsc1.london.yazino.com:4174",
+                "bank-gsc2.london.yazino.com:4174"
+            ],
+            "zones": [
+                "account",
+                "table"
+            ],
+            "host_ip": "bank-gsc1.london.yazino.com"
+        }
+    }
+}

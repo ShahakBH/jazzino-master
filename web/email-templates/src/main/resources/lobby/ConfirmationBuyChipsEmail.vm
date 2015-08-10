@@ -1,0 +1,66 @@
+#set($!title = 'Play with your purchase')
+#parse('lobby/header.vm')
+
+                <!--start body-->
+                <tr>
+                    <td colspan="4" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/reusable-assets/20120123T000000/no-article-top.jpg" width="700" height="7" alt="" style="vertical-align:top;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="25"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="$!targetUrl" style="text-decoration: none;"><font
+                            style="font-family:Helvetica, Arial, sans-serif; font-size: 18px;"
+                            face="Helvetica Arial" size="5">
+                        <b><font color="#E72020" style="color: #E72020;">WAY TO GO!</font><font color="#B5730F" style="color:#B5730F;"> YOU'VE SNAPPED UP A STACK&nbsp;OF SHINY NEW CHIPS</font>
+                        </b></font></a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="15"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <!-- start of body content -->
+                <tr bgcolor="#ffffff">
+                    <td></td>
+                    <td>
+                        <p>
+                            <font face="Helvetica, Arial, sans-serif" color="#707070" style="font-size:12px;line-height:15px;">
+                                Hi $!esc.html($!playerFirstName),<br>You have <strong>$!{purchasedChips}</strong> more chips in your account! You paid $!esc.html($!amountSpent) on $!{paymentDate} $!{PAYMENT_BODY}.
+                            </font>
+                        </p>
+                        <p>
+                            <font face="Helvetica, Arial, sans-serif" color="#707070" style="font-size:12px;line-height:15px;">If you have any questions about your transaction, please email us at
+                                <a href="mailto:contact@yazino.com" style="text-decoration: none;">
+                                    <font color="#e52525">contact@yazino.com</font>
+                                </a> quoting your unique ID: $!{paymentId}.
+                                <br>Thank you for your purchase.
+                            </font>
+                        </p>
+                        <br/>
+                        <a href="$!targetUrl"><img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/Yazino_ConfirmationBuyChips/join-a-game-btn.png" alt="Play Now" width="176" height="34"/></a>
+                    </td>
+                    <td align="center" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/Yazino_ConfirmationBuyChips/confirmed-buy-chips-main.png" alt="bought chips image" width="220 //" height="150"/>
+                    </td>
+                    <td></td>
+                </tr>
+                <!--end of body content-->
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            #parse('lobby/footer.vm')

@@ -1,0 +1,24 @@
+#parse("includes/header.vm")
+<section id="content">
+    <pre class="game-status"></pre>
+</section>
+<script>
+    var logPoller = function() {
+        var result = {},
+                path = "${request.contextPath}/logs/gameHostChunk",
+                target = jQuery(".game-status"),
+                getNextChunk = function() {
+                    jQuery.getJSON(path, function(log) {
+                        for(var i = 0; i < log.length; i++){
+                            target.append(log[i].v+"\n");
+                        }
+
+                    })
+                };
+        result.start = function(){
+            setInterval(getNextChunk, 1000);
+        };
+        return result;
+    };
+    logPoller().start();
+</script>

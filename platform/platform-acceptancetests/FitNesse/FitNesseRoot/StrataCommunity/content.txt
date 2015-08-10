@@ -1,0 +1,21 @@
+
+!contents -R
+
+A player can appear to another player as one of the below:
+  * Not friend
+  * Friend
+  * Blocked
+  * Blocked friend
+  * Hidden
+  * Hidden friend
+
+Actions available to players are as below:
+  * Add friend - send an invitation to become friend
+  * Remove friend
+  * Block 
+  * Unblock
+  * Private chat
+
+Things to do with invitations: 
+  * Reject friend - reject an invitation
+  * Accept friend - accept an invitation and become friends

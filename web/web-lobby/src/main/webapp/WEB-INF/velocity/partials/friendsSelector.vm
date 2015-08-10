@@ -1,0 +1,70 @@
+<div id="window-select-friends" class="selectFriendsPanel" >
+	<div class="window-body tableInviteWidget">
+		#if(!$facebookConnect || !$facebookCanvasActionsAllowed)
+			<div class="friendSelectionContainer" >
+				<h1>SELECT FRIENDS <a class="closeButton" href="#"></a></h1>
+				<div class="select-friends-body">
+					<div class="block">
+						<div class="left">
+							<p>Your table:</p>
+
+							<p>Stake:</p>
+						</div>
+						<div class="right">
+							<p class="tableName"></p>
+
+							<p class="tableDetails"></p>
+
+						</div>
+					</div>
+					<h2>all Friends (<span class="selectedFriendsCount">0</span>) <input type="text" class="search" style="display:none;"></h2>
+
+					<div class="scroll-pane" style="height:275px;">
+                        <ul style="display:none">
+                            <li class="friendTemplate" style="display:none">
+                                    <div class="friend-bg backgroundFrame">
+                                        <div class="photo">
+                                            <img src="$!{assetUrl}/images/gloss/friend-bar-none-photo.png" alt="" width="50" height="50">
+                                        </div>
+                                        <p class="friendName">Bianca Wolf</p>
+                                    </div>
+                            </li>
+                        </ul>
+						<ul id="select-friend" class="friendsContainer">
+						</ul>
+					</div>
+					<div class="block b1">
+						<textarea class="msg">Come join me at my $!{gameTitles.get($gameType)} table!</textarea>
+						<a id="window-btn-invite" class="btn146 green" href="#">INVITE NOW</a>
+					</div>
+					<div class="block b2">
+						<p>or copy paste the link below in an email or IM for your friends to access</p>
+						<input type="text" id="link" class="tableInviteLink" >
+					</div>
+
+				</div>
+				<div class="bottom"></div>
+			</div>
+			<div class="dialogContainer" style="display:none">
+				<h1><a class="closeButton" href="#"></a></h1>
+				<div class="singleMessage sendingInvitations" style="display:none">
+					<p class="font-my-invites-1">SENDING INVITATIONS</p>
+					<img src="$!{assetUrl}/images/spinner2.gif" style="text-align:center;">
+				</div>
+				<div class="singleMessage invitationResult">
+					<p class="font-my-invites-1 success">INVITATIONS HAVE BEEN SENT!</p>
+					<p class="font-my-invites-1 failure">OOPS! SOMETHING FAILED. PLEASE TRY AGAIN!</p>
+				</div>
+				<div class="bottom"></div>
+			</div>
+		#else
+			<div id="window" class="select-friends facebook">
+				<div id="divIframe-FriendsSelector"
+					 style="text-align:center; padding-top:50px; height:600px; z-index:1001; visibility:hidden;">
+					<iframe name="iframe-FriendsSelector" id="iframe-FriendsSelector" class="iframe-inviteFriends" frameborder="0" scrolling="no"
+							width="625px" height="600px"></iframe>
+				</div>
+			</div>
+		#end
+	</div>
+</div>

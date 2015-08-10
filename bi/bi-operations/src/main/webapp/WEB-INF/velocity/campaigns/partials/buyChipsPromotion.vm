@@ -1,0 +1,147 @@
+#springBind("campaignForm.buyChipsForm.*")
+
+
+<article promo-type-chooser="buyChips">
+    <h2>Buy Chips Promotion</h2>
+
+    #springFormHiddenInput("campaignForm.campaign.promo" true)
+    <div>#springFormHiddenInput("campaignForm.buyChipsForm.promotionDefinitionId" )</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="allPlayers">Player Selection:</label>
+
+    <div>#springFormRadioButtons("campaignForm.buyChipsForm.allPlayers" ${allPlayers} '<br>' )</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="priority">Priority:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.priority" )</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="validFor">Valid For(In Hours):</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.validForHours")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="upTo">Maximum Rewards:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.maxRewards")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="onSiteHeader">In Game Message Header:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.inGameNotificationHeader")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="notificationMessage">In Game Notification Message:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.inGameNotificationMsg")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="buyChipsHeader">Buy Chips Header:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.rolloverHeader")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+    <label for="buyChipsMessage">Buy Chips Message:</label>
+
+    <div>#springFormInput("campaignForm.buyChipsForm.rolloverText")</div>
+    #springShowErrors("<br>" "errorMessage")<br>
+
+
+    <label for="platforms">Promotion Platforms:</label>
+
+    <div>
+        #springBind("campaignForm.buyChipsForm.platforms")
+        #foreach($platformKey in $platformMap.keySet())
+            <input type="checkbox" name="${status.expression}" id="platformCheckbox$platformKey" value="$platformKey"
+                #foreach($item in $status.actualValue)
+                    #if($item == $platformKey) checked="checked" #end
+                #end
+                    />$platformMap.get($platformKey)&nbsp;
+        #end
+        #springShowErrors("<br>" "errorMessage")<br>
+    </div>
+
+
+    #macro( packageMapToTable $path $options $styleClass)
+        #springBind($path)
+        <table class="${styleClass}">
+            #foreach($key in $status.actualValue.keySet())
+                <tr>
+                    <td><em>P$key </em></td>
+
+                    #set($currentChipAmountFieldName= ${status.expression} + "[" + $key  + "]")
+                    #foreach($option in $options.keySet())
+                        <td>
+                        <input type="radio" name="$currentChipAmountFieldName" value="${option}" id="${status.expression}-${option}"
+
+                            #if("$status.actualValue.get($key).intValue()" == "$options.get($option)")
+                               checked="checked"
+                            #end
+                            #springCloseTag()
+                            <label for="${status.expression}-${option}">${options.get($option)}%</label>
+                        </td>
+                    #end
+
+
+                </tr>
+            #end
+        </table>
+        <br/><br/>
+    #end
+
+    #macro( chipPackageTable $packageList)
+        <table class="chipPackageEditor">
+            <col width="25%"/>
+            <col width="15%"/>
+            <col width="60%"/>
+            <tr style="background-color: #f0f0f0;">
+                <th>Price</th>
+                <th>Default<br/>Chips</th>
+            </tr>
+
+            #foreach($package in $packageList)
+                    <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+                <td>
+                    #foreach($price in $package.packagePrices.values())
+                        $price.currencyLabel$price.price
+                        #if($velocityCount < $package.packagePrices.values().size())/#end
+                    #end
+                </td>
+                #set($index=$velocityCount - 1)
+                <td>$package.defaultChips</td>
+                </tr>
+            #end
+        </table>
+    #end
+
+
+    <div><br/><br/></div>
+    <div class="row2">
+
+        <h2> Promotion package percentages</h2>
+        #packageMapToTable("campaignForm.buyChipsForm.chipsPackagePercentages" ${allAvailablePercentages} 'chipsPercentage')
+
+        <div><br/><br/></div>
+
+        <span class="packages">
+            <label class="filter-type" for="filter">Click to see default packages</label>
+            <input type="checkbox" id="filter">
+            <div class="defaultPackagesList">
+                <h2>WEB</h2>
+                #chipPackageTable($!{defaultBuyChipPackagesWEB})
+                <h2>IOS</h2>
+                #chipPackageTable($!{defaultBuyChipPackagesIOS})
+                <h2>FACEBOOK</h2>
+                #chipPackageTable($!{defaultBuyChipPackagesFACEBOOK_CANVAS})
+                <h2>ANDROID</h2>
+                #chipPackageTable($!{defaultBuyChipPackagesANDROID})
+                <h2>AMAZON</h2>
+                #chipPackageTable($!{defaultBuyChipPackagesAMAZON})
+            </div>
+        </span>
+
+    </div>
+
+</article>

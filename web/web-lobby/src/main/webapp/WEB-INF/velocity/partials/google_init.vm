@@ -1,0 +1,10 @@
+##<div id="google-root"></div>
+
+<script src="${assetUrl}/javascript/partial/google.js"></script>
+<script>
+    function googleApiHasLoaded(){
+        YAZINO.googleApi.hasLoaded();
+    }
+</script>
+<script src="https://apis.google.com/js/client.js?onload=googleApiHasLoaded"></script>
+

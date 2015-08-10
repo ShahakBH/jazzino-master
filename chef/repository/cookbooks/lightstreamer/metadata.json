@@ -1,0 +1,29 @@
+{
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "description": "Installs/Configures Lightstreamer",
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+  "attributes": {
+  },
+  "conflicting": {
+  },
+  "platforms": {
+  },
+  "dependencies": {
+  },
+  "providing": {
+  },
+  "version": "0.1.0",
+  "maintainer": "Yazino Technologies",
+  "name": "lightstreamer",
+  "replacing": {
+  },
+  "license": "Commercial",
+  "maintainer_email": "dev@yazino.com"
+}

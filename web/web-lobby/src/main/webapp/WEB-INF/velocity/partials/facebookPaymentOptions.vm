@@ -1,0 +1,10 @@
+<ul>
+    <li>
+        <input type="radio" class="paimentRadio" id="paiment_facebook" name="paymentMethod" checked="checked" value="facebook">
+        <label class="facebook" for="paiment_facebook">Pay with Facebook</label>
+    </li>
+    <li>
+        <input type="radio" class="paimentRadio" id="paiment_facebook_earn" name="paymentMethod" checked="checked" value="facebook">
+        <label class="facebook_earn" for="paiment_facebook_earn">Earn Chips</label>
+    </li>
+</ul>

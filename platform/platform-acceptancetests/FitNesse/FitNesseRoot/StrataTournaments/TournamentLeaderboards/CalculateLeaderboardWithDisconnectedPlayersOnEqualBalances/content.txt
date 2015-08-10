@@ -1,0 +1,31 @@
+!3 Calculate leaderboard positions, where some players have been eliminated while holding equal balances with active players
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|2|for template|Blackjack Tournament|with min stake|100|
+!|Create tournament template level|3|for template|Blackjack Tournament|with min stake|1000|
+
+!|Chips at end of level|1|
+|Player|Chips|
+|Anna|1000|
+|Bill|200|
+|Cara|900|
+|Dave|300|
+|Elle|200|
+
+!|Player|Bill|goes offline|
+
+!|Start level|
+!|Stop level|
+
+Purge will happen at the start of the next round.
+
+!|Start level|
+
+Two players are eliminated, so their leaderboard positions won't change
+!|Check leaderboard|
+|Rank|Player|
+|1|Anna|
+|2|Cara|
+|3|Dave|
+|4|Elle|
+|5|Bill|

@@ -1,0 +1,386 @@
+html, body {
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+    background-color: white;
+    font-size: 12px;
+    font-family: Helvetica, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid rgb(239, 239, 239);
+    margin-top: 8px;
+}
+
+td, th {
+    font-size: 12px;
+    font-family: Helvetica, Verdana, sans-serif;
+    padding: 4px;
+    margin: 0;
+    border: 1px solid rgb(239, 239, 239);
+}
+
+tr.error {
+    background-color: #ffcab7 !important;
+}
+
+table tr:nth-child(2n + 1) {
+    background-color: white;
+}
+
+table tr:nth-child(2n) {
+    background-color: rgb(244, 246, 250);
+}
+
+table thead tr:first-child {
+    background-color: rgb(239, 239, 239) !important;
+    border: 1px solid rgb(225, 225, 225);
+}
+
+table thead tr, table tfoot tr {
+    background-color: rgb(249, 249, 249) !important;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+table .paging {
+    text-align: right;
+    word-spacing: 4px;
+}
+
+pre.collapsed, pre.expanded {
+    margin: 0;
+    padding: 0;
+}
+
+pre.collapsed:hover, pre.expanded:hover {
+    cursor: pointer;
+}
+
+pre.collapsed {
+    height: 1.2em;
+    width: 300px;
+    overflow: hidden;
+}
+
+pre.expanded {
+    height: inherit;
+    width: inherit;
+    overflow: auto;
+}
+
+ul {
+    padding-left: 24px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+td ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.form-value ul {
+    padding-left: 20px;
+    margin: 4px 0;
+}
+
+td li, .form-value li {
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: bold;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+header {
+    background-color: rgb(60, 60, 60);
+    color: white;
+    padding: 8px;
+    position: relative;
+}
+
+header a {
+    color: white;
+    font-weight: bold;
+}
+
+header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.info {
+    padding: 8px;
+    background-color: rgb(204, 255, 60);
+    border: 1px solid rgb(172, 216, 89);
+}
+
+header ul.locations {
+    position: absolute;
+    left: 170px;
+    top: 12px;
+    font-weight: normal;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header ul.locations li {
+    float: left;
+    margin: 0;
+    padding: 0 16px;
+    border-left: 1px solid rgb(120, 120, 120);
+}
+
+header ul.locations li:first-child {
+    padding-left: 0;
+    border-left: none;
+}
+
+header .session {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    width: 200px;
+    text-align: right;
+}
+
+caption, label {
+    font-weight: bold;
+}
+
+.show label, .create label, .edit label {
+    display: block;
+    float: left;
+    padding-top: 5px;
+    padding-right: 6px;
+    width: 144px;
+    text-align: right;
+}
+
+.show td label, .create td label, .edit td label {
+    font-weight: normal;
+    float: none;
+    width: inherit;
+    padding: inherit;
+}
+
+.show td .value-tooltip, .create td .value-tooltip, .edit td .value-tooltip {
+    font-size: 10px;
+    color: rgb(80, 80, 80);
+    text-align: right;
+}
+
+.show input, .create input, .edit input,
+.show select, .create select, .edit select,
+.show div.form-value, .create div.form-value, .edit div.form-value {
+    float: left;
+    width: 200px;
+    margin-right: 100px;
+}
+
+.show fieldset, .create fieldset, .edit fieldset {
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    width: 500px;
+}
+
+input[type=submit] {
+    float: none;
+    clear: both;
+    margin-left: 440px;
+    margin-top: 16px;
+    width: 60px;
+}
+
+input[type=submit].single-action-form-submit {
+    margin-left: 15px;
+    martin-top: 0;
+    width: auto;
+}
+
+.show td input, .create td input, .edit td input,
+.show td select, .create td select, .edit td input,
+.show td textarea, .create td textarea, .edit td textarea {
+    width: 100%;
+    margin: 0;
+}
+
+.disabled {
+    color: rgb(215, 215, 215);
+}
+
+#home > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#home > ul h2 {
+    margin: 0;
+    padding: 2px 0 0 4px;
+}
+
+#home > ul > li {
+    border-bottom: 1px solid rgb(215, 215, 215);
+    padding: 4px;
+    margin: 0;
+    height: 109px;
+    clear: both;
+}
+
+#home > ul > li:nth-child(2n) {
+    background-color: rgb(229, 229, 229);
+}
+
+#home > ul > li:nth-child(2n + 1) {
+    background-color: rgb(237, 237, 237);
+}
+
+#home > ul > li > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#home > ul > li > ul > li {
+    float: left;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+#home > ul > li > ul > li a {
+    display: block;
+    padding: 8px 8px 6px 8px;
+    width: 72px;
+    height: 72px;
+    color: black;
+    text-decoration: none;
+}
+
+#home > ul > li > ul > li a:hover {
+    text-decoration: underline;
+}
+
+#home > ul > li > ul > li.disabled {
+    color: rgb(215, 215, 215);
+    padding: 8px 8px 6px 8px;
+    width: 72px;
+    height: 72px;
+}
+
+#home > ul > li > ul > li:not(.disabled):hover {
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#home > ul > li:nth-child(2n + 1) > ul > li {
+    border: 1px solid rgb(237, 237, 237);
+}
+
+#home > ul > li:nth-child(2n) > ul > li {
+    border: 1px solid rgb(229, 229, 229);
+}
+
+#home > ul > li:nth-child(2n + 1) > ul > li:not(.disabled):hover {
+    background-color: rgb(229, 229, 229);
+    border: 1px solid rgb(215, 215, 215);
+}
+
+#home > ul > li:nth-child(2n) > ul > li:not(.disabled):hover {
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgb(215, 215, 215);
+}
+
+#home > ul > li > ul > li img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 2px;
+}
+
+#home > ul > li > ul > li.disabled img {
+    opacity: 0.5;
+}
+
+#actions {
+    list-style: none;
+    height: 30px;
+    background-color: rgb(237, 237, 237);
+}
+
+#actions ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#actions ul li {
+    margin: 0;
+    padding: 7px 16px;
+    float: left;
+    border-right: 1px solid rgb(215, 215, 215);
+}
+
+#actions ul li select {
+    margin: -3px 0;
+}
+
+#action ul li:first-child {
+    padding-left: 4px;
+}
+
+#actions ul li a {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+}
+
+#content {
+    padding: 16px 8px;
+}
+
+#games-play-area {
+    padding: 20px;
+    width: 935px;
+    height: 594px;
+}
+
+#games-play-area .game-container {
+    width: 934px;
+    height: 624px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.game-status {
+    font-family: Monaco, courier;
+}

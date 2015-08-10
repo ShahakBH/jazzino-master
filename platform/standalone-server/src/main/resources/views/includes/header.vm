@@ -1,0 +1,29 @@
+<header>
+    <h1><a href="${request.contextPath}/" title="Go home">Yazino Standalone Server</a></h1>
+
+    #if ($location)
+    <ul class="locations">
+        <li><a href="${request.contextPath}/" title="Go home">Home</a></li>
+        <li>$location</li>
+    </ul>
+    #end
+
+    <div class="session">
+        #if(!$standalonePlayerSession.active)
+            No session.
+            <a href="${request.contextPath}/players/new?return=${request.contextPath}${request.pathInfo}">Create</a>
+            or
+            <a href="${request.contextPath}/players/list">Pick</a>
+            one.
+    #else
+        Session for: <strong>$standalonePlayerSession.name</strong>
+    #end
+    </div>
+
+</header>
+#if($request.getParameter("message"))
+    #set($message = $request.getParameter("message"))
+#end
+<div class="info" #if(!$message)style="display:none"#end>
+    $message
+</div>

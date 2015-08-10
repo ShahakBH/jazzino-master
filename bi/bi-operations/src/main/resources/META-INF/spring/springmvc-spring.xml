@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+
+    <context:annotation-config/>
+
+    <mvc:interceptors>
+        <bean class="com.yazino.bi.operations.interceptor.UserInformationInterceptor"/>
+    </mvc:interceptors>
+
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+
+    <import resource="classpath:META-INF/spring/ftp-server.xml"/>
+    <import resource="classpath:META-INF/spring/yaps-rabbit-config.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-authentication.xml"/>
+    <import resource="classpath:META-INF/spring/currency-rates.xml"/>
+    <import resource="classpath:META-INF/spring/promotion-spring.xml"/>
+    <import resource="classpath:META-INF/spring/invitation-query-service.xml"/>
+    <import resource="classpath:META-INF/spring/campaign-context.xml"/>
+    <import resource="classpath*:/META-INF/spring/grid-services.xml"/>
+    <import resource="classpath*:/META-INF/spring/payment-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/shared-context.xml"/>
+    <import resource="classpath*:/META-INF/spring/player-profile-service.xml"/>
+
+    <context:component-scan base-package="com.yazino.mobile.yaps"/>
+    <context:component-scan base-package="com.yazino.bi.tracking"/>
+    <context:component-scan base-package="com.yazino.bi.payment"/>
+    <context:component-scan base-package="com.yazino.bi.operations"/>
+    <context:component-scan base-package="com.yazino.android"/>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <ehcache:annotation-driven cache-manager="ehCacheManager"/>
+
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="shared" value="true"/>
+    </bean>
+
+    <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"
+          destroy-method="destroy">
+        <property name="locateExistingServerIfPossible" value="true"/>
+    </bean>
+
+    <bean class="net.sf.ehcache.management.ManagementService"
+          init-method="init"
+          destroy-method="dispose">
+        <constructor-arg ref="ehCacheManager"/>
+        <constructor-arg ref="mbeanServer"/>
+        <constructor-arg value="false"/>
+        <constructor-arg value="false"/>
+        <constructor-arg value="true"/>
+        <constructor-arg value="true"/>
+    </bean>
+
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="${velocity.files}"/>
+
+        <property name="velocityProperties">
+            <props>
+                <prop key="velocimacro.library"/>
+                <!-- Development Only Properties -->
+                <prop key="file.resource.loader.cache">${velocity.cache}</prop>
+                <prop key="velocimacro.library.autoreload">false</prop>
+                <prop key="exposeSpringMacroHelpers">true</prop>
+                <prop key="velocimacro.permissions.allowInline">true</prop>
+                <prop key="velocimacro.permissions.allow.inline.to.replace.global">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+        A certain someone decided to accomplish multi-format reports using multiple
+        Spring dispatchers, each on a different extension. This appear to be the least
+        worst option to keep this working without a) duplicating the context and b)
+        breaking everything.
+    -->
+    <bean id="contentSwitchingViewResolver"
+          class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="0"/>
+        <property name="contentNegotiationManager">
+            <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+                <property name="favorPathExtension" value="true"/>
+                <property name="defaultContentType" value="text/html"/>
+                <property name="mediaTypes">
+                    <value>
+                        xls=application/vnd.ms-excel
+                        csv=text/csv
+                    </value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="excelViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentType" value="application/vnd.ms-excel"/>
+        <property name="viewClass" value="com.yazino.bi.operations.view.ExcelStreamView"/>
+        <property name="attributesMap">
+            <map>
+                <entry key="helper" value-ref="excelReportHelper"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="csvViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="order" value="2"/>
+        <property name="contentType" value="text/csv"/>
+        <property name="viewClass" value="com.yazino.bi.operations.view.CsvStreamView"/>
+        <property name="attributesMap">
+            <map>
+                <entry key="helper" value-ref="csvReportHelper"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="velocityViewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="order" value="4"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="suffix" value=".vm"/>
+        <property name="layoutUrl" value="layout/main.vm"/>
+        <property name="cache" value="true"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="numberToolAttribute" value="numberTool"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+        <property name="allowSessionOverride" value="true"/>
+        <property name="viewNames" value="*"/>
+    </bean>
+
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <bean class="org.springframework.core.convert.support.StringToEnumConverterFactory"/>
+        </property>
+    </bean>
+
+    <bean class="com.yazino.bi.operations.util.ExcelReportHelperImpl" factory-method="getInstance"
+          id="excelReportHelper"/>
+
+    <bean class="com.yazino.bi.operations.util.BufferedWriterFactoryImpl"
+          id="csvReportHelper"/>
+
+    <util:map id="gameTypeValidatorMap" key-type="com.yazino.engagement.ChannelType">
+        <entry key="FACEBOOK_APP_TO_USER_REQUEST">
+            <bean class="com.yazino.bi.operations.engagement.GameTypeValidator">
+                <constructor-arg>
+                    <util:list>
+                        <value>SLOTS</value>
+                        <value>HIGH_STAKES</value>
+                    </util:list>
+                </constructor-arg>
+            </bean>
+        </entry>
+        <entry key="FACEBOOK_APP_TO_USER_NOTIFICATION">
+            <bean class="com.yazino.bi.operations.engagement.GameTypeValidator">
+                <constructor-arg>
+                    <util:list>
+                        <value>SLOTS</value>
+                        <value>HIGH_STAKES</value>
+                    </util:list>
+                </constructor-arg>
+            </bean>
+        </entry>
+        <entry key="IOS">
+            <bean class="com.yazino.bi.operations.engagement.GameTypeValidator">
+                <constructor-arg>
+                    <util:list>
+                        <value>SLOTS</value>
+                        <value>BLACKJACK</value>
+                        <value>ROULETTE</value>
+                        <value>TEXAS_HOLDEM</value>
+                        <value>HISSTERIA</value>
+                        <value>HIGH_STAKES</value>
+                        <value>BINGO</value>
+                    </util:list>
+                </constructor-arg>
+            </bean>
+        </entry>
+    </util:map>
+
+    <util:list id="nonAdSources">
+        <value>ACOUNT=0</value>
+        <value>APP-PAGE</value>
+        <value>APPD_FRIENDS_APPS</value>
+        <value>APPD_MY_RECENT</value>
+        <value>BOOKMARKS</value>
+        <value>CANVAS_BKMK_MORE</value>
+        <value>CANVAS_BKMK_TOP</value>
+        <value>GAMES_FRIENDS_APPS</value>
+        <value>GAMES_MY_RECENT</value>
+        <value>NF</value>
+        <value>NOTIF</value>
+        <value>TS</value>
+        <value>NF+STREAM</value>
+        <value>STREAM</value>
+        <value>AGGREGATION</value>
+        <value>APPCENTER</value>
+        <value>APPCENTER_SEARCH</value>
+        <value>APPCENTER_REQUEST</value>
+        <value>BOOKMARK_APPS</value>
+        <value>CANVASBOOKMARK</value>
+        <value>CANVASBOOKMARK_RECOMMENDED</value>
+        <value>FEED</value>
+        <value>FEED_OPENGRAPH</value>
+        <value>FEED_OPEN_GRAPH</value>
+        <value>FEED_PLAYING</value>
+        <value>HOVERCARD</value>
+        <value>MYAPPS</value>
+        <value>NOTIFICATION</value>
+        <value>OTHER_MULTILINE</value>
+        <value>REQUEST</value>
+        <value>SEARCH</value>
+        <value>FB-WELCOME-TAB</value>
+        <value>PASSIVE_ACTION</value>
+        <value>REMINDERS</value>
+    </util:list>
+
+    <util:list id="organicSources">
+        <value>NATURAL</value>
+        <value>INVITED</value>
+    </util:list>
+
+    <bean class="com.yazino.bi.operations.persistence.facebook.FacebookAdApiServiceImpl">
+        <property name="accessToken"
+                  value="${facebook.graph.ad-api.access-token}"/>
+        <property name="adAccount"
+                  value="${facebook.graph.ad-api.ad-account}"/>
+        <property name="timeShift"
+                  value="-1"/>
+    </bean>
+
+    <task:scheduler id="taskScheduler"/>
+
+    <task:executor id="taskExecutor" pool-size="3"/>
+
+    <task:annotation-driven executor="taskExecutor" scheduler="taskScheduler"/>
+
+    <!-- promotion archive service runs once a day at 9:50-->
+    <task:scheduled-tasks scheduler="taskScheduler">
+        <task:scheduled ref="facebookDataRecoveryService" method="fillFacebookData" cron="0 0 0/1 * * ?"/>
+        <task:scheduled ref="promotionArchiveService" method="archiveExpiredPromotions" cron="0 50 3,9,15,21 * * ?"/>
+    </task:scheduled-tasks>
+
+    <!--you want this to be a 'hardcoded' (well, at least static) list so it's done here.-->
+    <util:map id="supportedGameTypes" key-type="java.lang.String">
+        <entry key="TEXAS_HOLDEM" value="Texas Holdem"/>
+        <entry key="BLACKJACK" value="Blackjack"/>
+        <entry key="ROULETTE" value="Roulette"/>
+        <entry key="SLOTS" value="WheelDeal"/>
+        <entry key="HIGH_STAKES" value="High Stakes"/>
+    </util:map>
+</beans>

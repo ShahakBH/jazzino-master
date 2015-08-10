@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.yazino.platform.invitation"/>
+
+    <bean class="com.yazino.platform.invitation.InvitationConfig"/>
+
+    <bean id="invitiationsMessageListenerContainer"
+          class="org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer">
+        <property name="acknowledgeMode" value="AUTO"/>
+        <property name="connectionFactory" ref="invitationsConnectionFactory"/>
+        <property name="queues" ref="invitationsQueue"/>
+        <property name="concurrentConsumers" value="1"/>
+        <property name="messageListener" ref="invitationsMessageAdapter"/>
+        <property name="channelTransacted" value="false"/>
+        <property name="autoStartup" value="true"/>
+        <property name="errorHandler" ref="loggingErrorHandler"/>
+    </bean>
+
+    <bean id="invitationsMessageAdapter"
+          class="org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="invitationsMessageListener"/>
+        <property name="messageConverter" ref="invitationsConverter"/>
+    </bean>
+    <bean id="loggingErrorHandler" class="com.yazino.platform.messaging.SLF4JLoggingErrorHandler"/>
+</beans>

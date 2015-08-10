@@ -1,0 +1,8 @@
+hosts:
+    demo.casino-platform.com:
+        roles:
+            - all
+        params:
+            senet.web.content: https://$ENVIRONMENT.casino-platform.com:8143/web-content
+            strata.server.lobby.ssl.content: https://$ENVIRONMENT.casino-platform.com:8143/web-content
+            senet.web.application-content: https://$ENVIRONMENT.casino-platform.com:8143/client-content

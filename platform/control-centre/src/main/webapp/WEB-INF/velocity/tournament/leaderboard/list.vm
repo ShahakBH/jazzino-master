@@ -1,0 +1,78 @@
+#set ($location = "Trophy Leaderboards")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($leaderboards.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/tournament/leaderboard/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/leaderboard/create">New Trophy Leaderboard</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Trophy Leaderboards</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Game Type</th>
+                <th>Enabled</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    #paging( $leaderboards.startPosition $pageSize $leaderboards.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="7">
+                    #paging( $leaderboards.startPosition $pageSize $leaderboards.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($leaderboard in $leaderboards.data)
+                <tr>
+                    <td>$leaderboard.id</td>
+                    <td>$leaderboard.name</td>
+                    <td>${gameTypes.get($leaderboard.gameType)}</td>
+                    <td>#if($leaderboard.active)Yes#{else}No#{end}</td>
+                    <td>$dateTool.format('dd/MM/yyyy', $leaderboard.startTime)</td>
+                    <td>$dateTool.format('dd/MM/yyyy', $leaderboard.endTime)</td>
+                    <td>
+                        <a href="${request.contextPath}/tournament/leaderboard/show/${leaderboard.id}"
+                           title="View leaderboard ${leaderboard.id}">View</a>
+                        #if ($leaderboard.active)
+                        | <a href="${request.contextPath}/tournament/leaderboard/disable/${leaderboard.id}"
+                             class="action-named" data-action="Disable" data-id="${leaderboard.id}"
+                             data-type="leaderboard"
+                             title="Disable leaderboard ${leaderboard.id}">Disable</a>
+                        #else
+                        | <a href="${request.contextPath}/tournament/leaderboard/enable/${leaderboard.id}"
+                             class="action-named" data-action="Enable" data-id="${leaderboard.id}"
+                             data-type="leaderboard"
+                             title="Enable leaderboard ${leaderboard.id}">Enable</a>
+                        #end
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

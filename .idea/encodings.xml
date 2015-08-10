@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/bi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/RestAPI" charset="windows-1255" />
+    <file url="file://$PROJECT_DIR$/bi/bi-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-dbdw" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-operations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-promotion" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-reporting" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-shared" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/bi-worker" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bi/rabbit-replayer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/game-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/control-centre" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/lightstreamer-adapter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-acceptancetests" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-db" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-grid" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-shared" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/platform-worker" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/platform/standalone-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/build/pom-flash" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/build/pom-java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/configuration" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/email-services" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/logging" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/metrics" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/metrics-reporter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/novomatic-cgs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/rabbitmq-exchange-declarer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/test-helpers" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/validation" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/support/lib/worldpay" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/email-templates" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/mobile-ws" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-content" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-facebookpages" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-lobby" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-marketingpages" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-redirector" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/web-shared" charset="UTF-8" />
+  </component>
+</project>

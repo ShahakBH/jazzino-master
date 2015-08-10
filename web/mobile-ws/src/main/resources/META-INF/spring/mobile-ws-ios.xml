@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.yazino.mobile.ws.spring.PatternMatchingPropertyConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:mobile-*.properties</value>
+                <value>classpath*:environment.properties</value>
+                <value>file:/etc/senet/environment.properties</value>
+                <value>file:/etc/senet/environment.generated.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="iosMinimumVersions" class="com.yazino.mobile.ws.spring.PatternMatchingPropertyMap">
+        <constructor-arg value="ios\.(.*)\.minimumVersion"/>
+    </bean>
+
+    <bean id="iosLatestVersions" class="com.yazino.mobile.ws.spring.PatternMatchingPropertyMap">
+        <constructor-arg value="ios\.(.*)\.latestVersion"/>
+    </bean>
+
+    <bean id="iosIdentifiers" class="com.yazino.mobile.ws.spring.PatternMatchingPropertyMap">
+        <constructor-arg value="ios\.(.*)\.identifier"/>
+    </bean>
+
+    <bean id="iosTapjoyURLs" class="com.yazino.mobile.ws.spring.PatternMatchingPropertyMap">
+        <constructor-arg value="ios\.(.*)\.tapjoyEarnChipsURL"/>
+    </bean>
+
+    <bean id="iOSConfig" class="com.yazino.mobile.ws.ios.IOSConfig">
+        <property name="minimumVersions" ref="iosMinimumVersions"/>
+        <property name="latestVersions" ref="iosLatestVersions"/>
+        <property name="identifiers" ref="iosIdentifiers"/>
+    </bean>
+
+    <bean id="tapjoyConfig" class="com.yazino.mobile.ws.config.TapjoyConfig">
+        <property name="earnChipsURLs" ref="iosTapjoyURLs"/>
+    </bean>
+
+</beans>

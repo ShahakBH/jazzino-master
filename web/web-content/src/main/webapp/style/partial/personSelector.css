@@ -1,0 +1,100 @@
+.personSelector {
+    width: 420px;
+}
+
+.personSelector .search input, .personSelector .search, .personSelector .person {
+    color: #575757;
+    font-size: 12px;
+}
+
+.personSelector .search {
+    padding: 5px 0;
+    margin-bottom: 5px;
+}
+
+.personSelector .search input {
+    padding: 12px;
+    margin-left: 10px;
+    width: 300px;
+    margin-bottom: 8px;
+    border: 1px solid #e6e6e6;
+}
+
+.personSelector .personLists {
+    overflow: hidden;
+}
+
+.personSelector .personLists .personList {
+    width: 205px;
+    height: 312px;
+    overflow-y: scroll;
+    float: left;
+    background: #ffffff;
+    border: 1px solid #E6E6E6;
+    border-radius: 6px;
+}
+
+.personSelector .personLists .personList.selectedPeople {
+    height: 267px;
+}
+
+.personSelector .personLists .personList + .personList {
+    margin-left: 6px;
+}
+
+.personSelector .personLists .personList h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #E72020;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.personSelector .personLists .personList .person, .personSelector .personLists .personList .person input {
+    cursor: pointer;
+}
+
+.personSelector .personLists .personList .person {
+    padding: 10px;
+}
+
+.personSelector .personLists .personList.availablePeople > * + * {
+    border-top: 1px dotted #E2E2E2;
+}
+
+.personSelector .personLists .personList .person input {
+    margin-right: 10px;
+}
+
+.personSelector .personLists .personList .person.disabled, .personSelector .personLists .personList .person.disabled input {
+    cursor: default;
+}
+
+.personSelector .personLists .personList .person.disabled input {
+    visibility: hidden
+}
+
+.personSelector .personLists .personList .person .comment {
+    display: block;
+    color: red;
+    margin-left: 22px;
+}
+
+.personSelector .personLists .continueControl {
+    margin: 10px 0 0;
+    float: right;
+}
+
+.personSelector .nextPageButton, .personSelector .previousPageButton {
+    padding: 8px 32px;
+    color: #8C8C8C;
+    font-size: 10px;
+    text-transform: uppercase;
+    display: block;
+    cursor: pointer;
+}
+
+.personSelector .nextPageButton:hover, .personSelector .previousPageButton:hover {
+    color: #575757;
+    background: #F2F2F2;
+}

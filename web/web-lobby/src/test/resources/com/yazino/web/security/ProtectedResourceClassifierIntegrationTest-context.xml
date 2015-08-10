@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/remoting/openspaces-remoting.xsd">
+
+    <bean id="authenticationWhiteListPathMatcher"
+          class="org.springframework.util.AntPathMatcher"/>
+
+    <bean id="publicDomain" class="com.yazino.web.security.WhiteListDomain">
+        <constructor-arg>
+            <set>
+                <value>/facebookLogin/</value>
+                <value>/public/facebookLogin/</value>
+                <value>/facebookLogin/**/*</value>
+                <value>/</value>
+                <value>/public/**/*</value>
+                <value>/publicCommand/**/*</value>
+                <value>/lobbyCommand/**/*</value>
+                <value>/command/**/*</value>
+                <value>/error/**/*</value>
+                <value>/rules/**/*</value>
+                <value>/legal/**/*</value>
+                <value>/friends</value>
+                <value>/index</value>
+                <value>/public</value>
+                <value>/login</value>
+                <value>/login/FACEBOOK</value>
+                <value>/fb/**/*</value>
+                <value>/facebookOAuthLogin/**</value>
+                <value>/connectLogin</value>
+                <value>/connectLogin</value>
+                <value>/registration</value>
+                <value>/resetPassword</value>
+                <value>/referral</value>
+                <value>/maintenance</value>
+                <value>/maintenance/**/*</value>
+                <value>/mytable</value>
+                <value>/contactus</value>
+                <value>/aboutus</value>
+                <value>/sitemap</value>
+                <value>/games</value>
+                <value>/tournaments</value>
+                <value>/tournaments/**/*</value>
+                <value>/lobby/games</value>
+                <value>/game</value>
+                <value>/lobby/game</value>
+                <value>/buyChips/inGameMessage</value>
+                <value>/lobbyInformation</value>
+                <value>/noCookies</value>
+                <value>/player/balance</value>
+                <value>/social/*</value>
+                <value>/not-allowed/**/*</value>
+                <value>/jobs</value>
+                <value>/management</value>
+                <value>/management/*</value>
+                <value>/lobby/checkNewMessages</value>
+                <value>/messages/check</value>
+                <value>/verify/*/*/*</value>
+                <value>/support/**/*</value>
+                <value>/strata.server.lobby.support/*</value>
+                <value>/channel.html</value>
+                <value>/command/version</value>
+                <value>/payment/trialpay/callback</value>
+                <!--note this is rewritten by urlrewrite.xml -->
+                <value>/payment/radium/callback</value>
+                <!--note this is rewritten by urlrewrite.xml -->
+                <value>/payment/zong/callback</value>
+                <!--note this is rewritten by urlrewrite.xml -->
+                <value>/payment/facebook/callback</value>
+                <value>/payment/itunes/*</value>
+                <value>/api/*/promotion/*/*</value>
+                <value>/fbog/**/*</value>
+                <value>/mobile/tapjoy/**/*</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="authenticationWhiteListPathMatcher"/>
+        </constructor-arg>
+    </bean>
+</beans>

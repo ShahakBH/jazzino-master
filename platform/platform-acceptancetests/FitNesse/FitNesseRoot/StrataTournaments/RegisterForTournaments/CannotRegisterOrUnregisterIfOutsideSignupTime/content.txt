@@ -1,0 +1,23 @@
+!3 Players can only register or unregister for a tournament between the signup start and end times. 
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|with signup start time|18/06/2009 10:00:00|and signup end time|19/06/2009 09:57:00|
+
+!|Force state for|June Blackjack Tournament|to|Registering|
+
+!4 Player must register within signup time
+!|Player registers for tournament|
+|Tournament name|Player name|Signup Time|message?| 
+|June Blackjack Tournament|Adam|18/06/2009 09:59:00|This tournament is not open yet|
+|June Blackjack Tournament|Bill|18/06/2009 10:00:00|OK|
+|June Blackjack Tournament|Carl|19/06/2009 09:56:00|OK|
+|June Blackjack Tournament|Dane|19/06/2009 09:57:01|This tournament is now closed|
+
+!4 Player must also unregister within signup time
+!|Player unregisters for tournament|
+|Tournament name|Player name|Signup Time|message?|
+|June Blackjack Tournament|Bill|18/06/2009 10:00:00|OK|
+|June Blackjack Tournament|Carl|19/06/2009 09:57:01|It is too late unregister for this tournament|

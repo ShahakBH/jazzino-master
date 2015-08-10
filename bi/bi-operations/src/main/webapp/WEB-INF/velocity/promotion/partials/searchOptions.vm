@@ -1,0 +1,8 @@
+<div class="buttons">
+    <form class="promotionSearchForm" action="list" method="post">
+        &nbsp;#springFormSingleSelect("searchForm.promotionType" $searchForm.promotionTypes "")&nbsp;
+        <input class="create" type="submit" name="create" value="Create New"/>
+        <input class="search" type="submit" name="search" value="Search"/>
+        #springFormRadioButtons("searchForm.searchType" $searchForm.searchTypes "&nbsp;" "")
+    </form>
+</div>

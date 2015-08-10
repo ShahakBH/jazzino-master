@@ -1,0 +1,79 @@
+#parse("includes/header.vm")
+
+#* @vtlvariable name="gameType" type="java.lang.String" *#
+#* @vtlvariable name="gameUrl" type="java.lang.String" *#
+#* @vtlvariable name="flashvars" type="java.util.Map" *#
+#* @vtlvariable name="config" type="com.yazino.model.StandaloneServerConfiguration" *#
+<div id="games-play-area">
+    <script type="text/javascript">
+        (function() {
+            var currentTs = new Date().getTime(),
+                    journeyId = "$playerId" + "-" + currentTs;
+
+            swfobject.embedSWF(
+                    "${request.contextPath}/flash-assets/${config.loaderSwf}",
+                    "loader",
+                    "100%",
+                    "100%",
+                    "10.0.0",
+                    "", {
+                        amqpHost: "$config.rabbitHost",
+                        amqpVirtualHost: "$config.rabbitVirtualHost",
+                        amqpPort: "5672",
+                        commandUrl: '${request.contextPath}/game/',
+                        contentUrl: '${request.contextPath}/flash-assets/',
+                        clientUrl: '${request.contextPath}/flash-assets/',
+                        permanentContentUrl: "$permanentContentUrl",
+                        playerId: "$standalonePlayerSession.playerId",
+                        playerName: "$standalonePlayerSession.name",
+                        gameType: "$config.gameType",
+                        showTopBar: false,
+                        #if ($countdown)
+                            countDown: "$countdown",
+                        #end
+                        tableId: "1",
+                        tableVariation: "Default Variation",
+                        journeyId: journeyId,
+                        #foreach ($flashvarName in $flashvars.keySet())
+                        $flashvarName: "$flashvars.get($flashvarName)",
+                        #end
+                        gameSwf: "$config.gameSwf",
+                        speedName: "Default Speed"
+                    }, {
+                        align: "middle",
+                        quality: "high",
+                        scale: "exactFit",
+                        bgcolor: "#ffffff",
+                        wmode: "opaque",
+                        allowScriptAccess: "always"
+                    }
+            );
+        })();
+    </script>
+    <div id="loader"></div>
+</div>
+
+<script>
+
+    var tableStatusPoller = function() {
+        var result = {},
+                path = "${request.contextPath}/logs/tableStatus",
+                target = jQuery(".info"),
+                checkStatus = function() {
+                    jQuery.get(path, function(data) {
+                        if(data === "error"){
+                            target.html("<strong>Table is broken!</strong> <a href='${request.contextPath}/logs/fullTableStatus'>Check details... </a> ");
+                            target.show();
+                        }
+                    })
+                };
+        result.start = function(){
+            checkStatus();
+            setInterval(checkStatus, 5000);
+        };
+        return result;
+    };
+    tableStatusPoller().start();
+
+
+</script>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+    <util:list id="contentPatterns"
+               value-type="java.lang.String">
+        <value type="java.lang.String">${senet.web.content}</value>
+        <value type="java.lang.String">${strata.server.lobby.ssl.content}</value>
+        <value type="java.lang.String">^https?://cdn(-small)?.yazino.com/(public/)?(web-)?content-\d+T\d+</value>
+    </util:list>
+
+    <util:list id="avatarPatterns"
+               value-type="java.lang.String">
+        <value type="java.lang.String">${senet.web.avatars}</value>
+        <value type="java.lang.String">^https?://(www\.)?yazino.com/avatars</value>
+        <value type="java.lang.String">^https?://(www\.)?absolutecasino.com/avatars</value>
+        <value type="java.lang.String">^https?://lobby.absolutecasino.com/avatars</value>
+        <value type="java.lang.String">^https?://(www\.)?breakmycasino.com/avatars</value>
+        <value type="java.lang.String">http://localhost:8085/senet.server.web.avatars</value>
+    </util:list>
+
+    <bean id="avatarTokeniser"
+          class="com.yazino.platform.util.community.AvatarTokeniser">
+        <constructor-arg index="1" ref="contentPatterns"/>
+        <constructor-arg index="3" ref="avatarPatterns"/>
+    </bean>
+
+</beans>

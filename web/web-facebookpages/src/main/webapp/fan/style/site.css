@@ -1,0 +1,146 @@
+body {
+    background-color: white;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    border: none;
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+}
+
+div, section, header {
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    padding: 10px 0 0 10px;
+    height: 78px;
+}
+
+.splash {
+    width: 740px;
+    height: 434px;
+    background-image: url('../images/background-splash.png');
+}
+
+.SLOTS .splash {
+    height: 470px;
+    background-image: url('../images/background-splash-large.png');
+}
+
+.splash-image {
+    height: 329px;
+    width: 734px;
+    position: relative;
+}
+
+.SLOTS .splash-image {
+    height: 402px;
+}
+
+a, a:link, a:visited, a:hover {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    width: 256px;
+    height: 37px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    position: absolute;
+    top: 260px;
+    left: 239px;
+    text-align: center;
+    line-height: 18px;
+    padding-top: 32px;
+    cursor: pointer;
+}
+
+a:hover {
+    background-position: 0 69px;
+}
+
+.SLOTS a, .SLOTS a:link, .SLOTS a:visited, .SLOTS a:hover {
+    width: auto;
+    height: auto;
+    position: static;
+}
+
+p {
+    margin: 32px;
+    padding: 0;
+    border: none;
+}
+
+p strong {
+    display: block;
+}
+
+.BLACKJACK p strong {
+    color:  #6AAE1B;
+}
+
+.BLACKJACK a {
+    background-image: url('../images/button-BLACKJACK.png');
+}
+
+.BLACKJACK .splash-image {
+    background-image: url('../images/background-BLACKJACK.png');
+}
+
+.HIGH_STAKES p strong {
+    color:  #00538D;
+}
+
+.HIGH_STAKES a {
+    background-image: url('../images/button-HIGH_STAKES.png');
+}
+
+.HIGH_STAKES .splash-image {
+    background-image: url('../images/background-HIGH_STAKES.png');
+}
+
+.ROULETTE p strong {
+    color:  #D11B1B;
+}
+
+.ROULETTE a {
+    background-image: url('../images/button-ROULETTE.png');
+}
+
+.ROULETTE .splash-image {
+    background-image: url('../images/background-ROULETTE.png');
+}
+
+.SLOTS p {
+    text-align: center;
+    margin: 22px;
+}
+
+.SLOTS p strong {
+    display: inline;
+    color:  #D11B1B;
+}
+
+.SLOTS .splash-image {
+    background-image: url('../images/background-SLOTS.jpg');
+}
+
+.TEXAS_HOLDEM p strong {
+    color:  #2E9CCF;
+}
+
+.TEXAS_HOLDEM a {
+    background-image: url('../images/button-TEXAS_HOLDEM.png');
+}
+
+.TEXAS_HOLDEM .splash-image {
+    background-image: url('../images/background-TEXAS_HOLDEM.png');
+}

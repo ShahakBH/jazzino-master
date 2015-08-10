@@ -1,0 +1,12 @@
+<div id="sign-up-area">
+	<h3 class="terms-head big-red-head">WELCOME!</h3>
+
+	<div id="login-body">
+		<div class="sign2">
+			<div class="login block">
+				<p>Thank you for registering with Yazino, you can now play! Simply close this window and tap &lsquo;Login with Yazino&rsquo; on the next screen.</p>
+			</div>
+		</div>
+		<div id="terms-bottom"></div>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Invite your friends</title>
+    <link rel="stylesheet" href="$!assetUrl/style/partial/social-flow.css" type="text/css">
+    #parse("partials/glossStyle.vm")
+    #parse("partials/preScripts.vm")
+    #parse("partials/social-flow/configuration.vm")
+    #parse("partials/google_init.vm")
+    #parse("partials/fb_init.vm")
+    <style>
+        html {
+            border-top: 0 none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="headless social-flow $!{pageClasses}">
+    #parse('partials/social-flow/header.vm')
+    <div class="friends widgetArea">
+        #parse('partials/social-flow/providersWidget.vm')
+        #if ($showPersonSelector)
+            <article class="feature"><div><header><h1>Your Google Contacts</h1></header><div class="personSelector"></div></div></article>
+        #else
+            #parse('partials/social-flow/sendToEmailAddresses.vm')
+        #end
+    </div>
+
+    #parse("partials/glossScripts.vm")
+<script>
+    window.onload = YAZINO.socialFlow.util.resetHeight;
+</script>
+</body>
+</html>

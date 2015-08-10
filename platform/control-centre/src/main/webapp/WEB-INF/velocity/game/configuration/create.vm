@@ -1,0 +1,40 @@
+#set ($location = "Create Game Configurations")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/configuration/list">Cancel Create</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Create Game Configuration</h2>
+        <form method="post" action="${request.contextPath}/game/configuration/save">
+
+            <fieldset>
+                <legend>Details</legend>
+
+                <label for="gameId">Game ID:</label>
+                #springFormInput( 'gameConfiguration.gameId' "" )
+
+                <label for="displayName">Display Name:</label>
+                #springFormInput( 'gameConfiguration.displayName' "" )
+
+                <label for="aliases">Aliases:</label>
+                #springFormInput( 'gameConfiguration.aliases' "" )
+
+                <label for="order">Order:</label>
+                #springFormInput( 'gameConfiguration.order' "" )
+
+            </fieldset>
+            <input type="submit" value="Next"/>
+        </form>
+    </div>
+</section>

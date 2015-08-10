@@ -1,0 +1,20 @@
+{
+  "name": "lobby",
+  "description": "Lobby machine",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[base]",
+    "recipe[java]",
+    "recipe[limits]",
+    "recipe[nfs::client]",
+    "recipe[jetty]",
+    "recipe[httpd::content]",
+    "recipe[static-content::default]",
+    "recipe[flash-policy-server]"
+  ]
+}

@@ -1,0 +1,62 @@
+#achievements-container iframe {
+    width: 724px;
+}
+
+#achievements-container .container-border {
+    width: 741px;
+}
+
+#achievements-container .container-content {
+    width: 721px;
+}
+
+#achievements-overlay div ul {
+    width: 689px;
+    margin: 10px 0 auto auto;
+}
+
+#achievements-overlay li:first-child h1 {
+    margin-left: 208px;
+}
+
+#achievements-overlay.ROULETTE li:first-child h1,
+#achievements-overlay.SLOTS li:first-child h1,
+#achievements-overlay.HIGH_STAKES li:first-child h1{
+    margin-left: 346px;
+}
+
+#achievements-overlay > ul > li > div {
+    width: 714px;
+}
+
+#achievements-overlay .trophy-cabinet ul {
+    background-image: url('../../images/achievements/background-cabinet-compact.png')
+}
+
+#achievements-overlay li.trophy-cabinet div ul {
+    width: 707px;
+}
+
+#achievements-overlay .trophy-cabinet li {
+    width: 166px;
+}
+
+#achievements-overlay .trophy-cabinet img {
+    padding-top: 44px;
+}
+
+#achievements-overlay .trophy-cabinet li.champion-trophy {
+    width: 209px;
+}
+
+#achievements-overlay .trophy-cabinet div > p span.property:first-child {
+    padding-left:3px;
+}
+
+#achievements-overlay .achievements div > p span.property:first-child {
+    padding-left:23px;
+}
+
+#achievements-container .close-button {
+    margin-right: 4px;
+}

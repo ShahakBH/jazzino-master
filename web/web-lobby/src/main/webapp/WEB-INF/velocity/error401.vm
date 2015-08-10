@@ -1,0 +1,7 @@
+<div id="system-error">
+    <h1>Session Expired</h1>
+
+    <h2>For your security you've been logged out.</h2>
+
+    <p>You've been idle and have been logged out. Please login again to continue.</p>
+</div>

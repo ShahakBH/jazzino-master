@@ -1,0 +1,212 @@
+/*login form*/
+/*login form*/
+.loginForm {
+    max-width: 445px;
+    margin: auto;
+    padding: 4px 4px;
+    font-size: 12px;
+    color: #575757;
+    line-height: 1.2em;
+}
+
+.loginForm .forgottenPassword a {
+    color: #80808d;
+    text-decoration: underline;
+}
+
+.loginForm .forgottenPassword a:hover {
+    color: #575757;
+}
+
+.loginForm fieldset, .loginForm fieldset input[disabled] {
+    background: #f8efef;
+}
+
+.loginForm fieldset {
+    padding: 12px 30px;
+}
+
+.loginForm fieldset + fieldset {
+    margin-top: 4px;
+}
+
+.loginForm fieldset.rememberMe {
+    background: transparent;
+}
+
+.loginForm fieldset.facebook {
+    padding-top:15px;
+    background: #e8e8f1;
+}
+
+.loginForm h1 {
+    color: #e72020;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 white;
+}
+
+.loginForm h4 {
+    font-size: 11px;
+    color: #86868d;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 white;
+}
+
+.loginForm input[type="text"], .loginForm input[type="password"], .loginForm input[type="email"], .loginForm .forgottenPassword {
+    float: right;
+    width: 200px;
+    padding: 5px;
+}
+
+.loginForm #email {
+    width: 270px;
+}
+
+.loginForm .forgottenPassword {
+    padding-right: 10px; /* input has 5px padding - this will push the words to the edge of the whole input */
+    clear: right;
+    text-align: left;
+}
+
+.loginForm  label {
+    float: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.loginForm .loginMiniForm, .loginForm .registerMiniForm {
+    clear: right;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.loginForm fieldset > input {
+    margin-bottom: 10px;
+}
+
+.loginForm .registrationArea input {
+    margin-bottom: 10px;
+}
+
+.loginForm fieldset > * + * {
+    padding-top: 12px;
+}
+
+.loginForm label {
+    padding-left: 20px;
+    position: relative;
+}
+
+.loginForm .registrationArea label, .loginForm .new-or-existing-user label {
+    margin-bottom: 10px;
+    margin-top: 1px;
+    clear: left;
+}
+
+.loginForm label input {
+    float: none;
+    position: absolute;
+    left: 2px; /* Enough to avoid overflow: hidden cutting off the left edge. */
+}
+
+.loginForm .new-or-existing-user input[type="password"] {
+    margin-top: 6px;
+}
+
+.loginForm .disabled {
+    color: #80808d;
+    border-color: #80808d;
+}
+
+.loginForm .loginButton {
+    background: url('../../images/login-form/login-button.png') no-repeat #e72020;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    height:29px;
+    padding: 7px 6px;
+    width: 125px;
+    float: right;
+    clear: both;
+}
+
+.loginForm .loginButton:hover {
+    background-image: url('../../images/login-form/login-button-hover.png');
+}
+
+.loginForm #termsAndSignup {
+    clear: both;
+    padding-left: 80px;
+    overflow: visible;
+    font-size: 11px;
+}
+
+.loginForm #termsAndSignup label {
+    padding: 0 20px 10px;
+}
+
+.loginForm #termsAndSignup label.optInLabel {
+    padding: 0 20px;
+}
+
+.loginForm .honeypot {
+    display: none;
+}
+
+.loginForm .registrationArea label {
+    padding-left: 0
+}
+
+.loginForm .registrationArea input[type="text"] {
+    margin-right: 5px;
+    width: 131px
+}
+
+.loginForm .registrationArea .validationRequirement {
+    float: right;
+    width: 154px;
+    font-size: 11px;
+    color: #80808d;
+    padding: 6px 0;
+}
+
+.loginForm .rememberMe label {
+    float: none;
+}
+
+.loginForm .rememberMe p {
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+}
+
+.loginForm .rememberMe label, .loginForm .rememberMe p {
+    color: #8c8c8c;
+}
+
+.forgot-password {
+    overflow: hidden;
+}
+
+.loginForm .rememberMe .yaz-std-close-button, .forgot-password .yaz-std-close-button {
+    float: right;
+}
+
+.forgot-password .yaz-std-close-button {
+    margin: 2px 4px 6px;
+}
+
+.loginForm .error {
+    display: block;
+    clear: both;
+    color: red;
+    padding-top: 5px;
+    margin-left: 85px;
+}
+
+.loginForm p.error {
+    margin-left: 20px;
+}

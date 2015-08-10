@@ -1,0 +1,41 @@
+[mysqld]
+event_scheduler = ON
+max_connections         = <%= @max_connections %>
+max_allowed_packet      = <%= @max_allowed_packet %>
+thread_cache_size       = <%= @thread_cache_size %>
+group_concat_max_len    = 65535
+table_open_cache        = <%= @table_open_cache %>
+default-storage-engine  = InnoDB
+
+<% if @use_percona %>
+innodb_flush_method = ALL_O_DIRECT
+<% else %>
+ignore-builtin-innodb
+plugin-load             = innodb=ha_innodb_plugin.so
+<% end %>
+innodb_file_per_table
+# should be ~ RAM size - 1G
+innodb_buffer_pool_size = <%= @innodb_buffer_pool_size %>
+innodb_log_file_size    = <%= @innodb_log_file_size %>
+innodb_log_buffer_size  = <%= @innodb_log_buffer_size %>
+innodb_flush_log_at_trx_commit = 0
+
+expire_logs_days         = 8
+
+slow_query_log          = 1
+slow_query_log_file     = slow-queries.log
+long_query_time         = 2
+
+<% if @role == "master" %>
+log-bin					= <%= @binlog_dir %>
+server-id               = 1
+binlog-do-db            = <%= @dbname %>
+sync-binlog             = 1
+<% elsif @role == "slave" %>
+server-id               = 2
+<% end %>
+
+datadir                 = <%= @data_dir %>
+
+[xtrabackup]
+target_dir              = <%= @backup_dir %>

@@ -1,0 +1,10 @@
+You can only see table chat for players you are not ignoring:
+
+!|Relationship|See table chat?|
+|Not friend|Y|
+|Invite sent|Y|
+|Friend|Y|
+|Block|N|
+|Block Friend|N|
+|Suggest Friend|Y|
+|Don't Suggest|Y|

@@ -1,0 +1,18 @@
+#set ($location = "Create System Message")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/maintenance/messages/list">List System Messages</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Create System Message</h2>
+
+        #parse("maintenance/messages/form.vm")
+    </div>
+</section>

@@ -1,0 +1,29 @@
+{
+    "recommendations": {
+    },
+    "license": "Nagios",
+    "recipes": {
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "description": "Installs/Configures nagios",
+    "platforms": {
+    },
+    "version": "0.0.1",
+    "providing": {
+    },
+    "maintainer": "Yazino Technologies",
+    "replacing": {
+    },
+    "name": "nagios",
+    "maintainer_email": "chef@signtechno.com",
+    "groupings": {
+    },
+    "attributes": {
+    },
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n"
+  }

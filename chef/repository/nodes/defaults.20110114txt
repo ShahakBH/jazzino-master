@@ -1,0 +1,60 @@
+This file contians the defaults from the recipes as of the 14th Jan 2011.
+Essentially, if the value is set in here it doesn't need to be in your <node>.json file.
+
+	set_unless[:gigaspaces][:gsm_hosts] = []
+	set_unless[:gigaspaces][:java][:min_mem] = "256m"
+	set_unless[:gigaspaces][:java][:max_mem] = "2048m"
+	set_unless[:gigaspacesces][:java][:permgem_mem] = "256m"
+	set_unless[:gigaspaces][:host_ip] = "0.0.0.0"
+	set_unless[:gigaspaces][:zones] = []
+	set_unless[:gigaspaces][:lookup_group] = node[:environment]
+
+	set_unless[:httpd][:port] = 80
+	set_unless[:loadbalancer][:gsc_hosts] = []
+
+	default[:limits][:soft] = 30001
+	default[:limits][:hard] = 50001
+	default[:limits][:ulimit] = 30000
+
+	set_unless[:mysql][:db] = "senettest"
+	set_unless[:mysql][:role] = "standalone"
+	set_unless[:mysql][:replication][:username] = "repl"
+	set_unless[:mysql][:replication][:password] = "MySQL_r3pl1c4t!on"
+	set_unless[:mysql][:tunable][:max_connections] = "800"
+	set_unless[:mysql][:tunable][:max_allowed_packet] = "16M"
+	set_unless[:mysql][:tunable][:innodb_buffer_pool_size] = "4GB"
+
+	set_unless[:nfs][:exports] = []
+	set_unless[:nfs][:server_host] = ""
+	set_unless[:nfs][:mount_points] = {}
+
+	set_unless[:ntp][:service] = "ntpd"
+	set_unless[:ntp][:servers] = ["0.centos.pool.ntp.org", "1.centos.pool.ntp.org", "2.centos.pool.ntp.org"]
+	set_unless[:ntp][:zoneinfo] = "Europe/London"
+
+	set_unless[:rabbitmq][:nodename]  = "rabbit"
+	set_unless[:rabbitmq][:address]  = "0.0.0.0"
+	set_unless[:rabbitmq][:port]  = "5672"
+	set_unless[:rabbitmq][:erl_args]  = "+K true +A 30 -kernel inet_default_listen_options [{nodelay,true},{sndbuf,16384},{recbuf,4096}] -kernel inet_default_connect_options [{nodelay,true}]"
+	set_unless[:rabbitmq][:start_args] = ""
+	set_unless[:rabbitmq][:logdir] = "/var/log/rabbitmq"
+	set_unless[:rabbitmq][:mnesiadir] = "/var/lib/rabbitmq/mnesia"
+	set_unless[:rabbitmq][:cluster] = "no"
+	set_unless[:rabbitmq][:cluster_config] = "/etc/rabbitmq/rabbitmq_cluster.config"
+	set_unless[:rabbitmq][:cluster_disk_nodes] = []
+	set_unless[:rabbitmq][:max_ets_tables] = "10000"
+
+
+	set_unless[:rabbitmq][:vhosts] = []
+
+	set_unless[:ssh][:allowed_clients] = ["151.237.239.34"]
+	set_unless[:ssh][:users]  = {'root' => nil, 'gsrun' => nil, 'spanner' => 's1gn4tur3'}
+	set_unless[:ssh][:sudoers] = ['spanner']
+	set_unless[:ssh][:harden] = true
+
+	set_unless[:tomcat][:java][:min_mem] = "256m"
+	set_unless[:tomcat][:java][:max_mem] = "3072m"
+	set_unless[:tomcat][:java][:permgem_mem] = "256m"
+	set_unless[:tomcat][:port] = 8080
+	set_unless[:tomcat][:ssl_port] = 8443
+	set_unless[:tomcat][:port] = 8080

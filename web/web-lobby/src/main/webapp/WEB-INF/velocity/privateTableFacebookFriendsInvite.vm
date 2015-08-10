@@ -1,0 +1,68 @@
+<html>
+<head>
+    #set($closeMaskURL="$hostUrl/friends/invitedToPrivateTableFromFacebook")
+
+    #if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+    <script type="text/javascript" src="${assetUrl}/javascript/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    #parse("partials/fb_init.vm")
+<script type="text/javascript">
+    jQuery(function () {
+        ## the following hack works around a bug in facebook's send dialog
+        var shown = false;
+
+        var dismissDialog = function() {
+            location.replace("$closeMaskURL");
+        }
+
+        var dismissIfCancelled = function() {
+            if ($('#fb-root div.fb_dialog').css('top').charAt(0) === '-') {
+                if (shown) {
+                    dismissDialog();
+                } else {
+                    setTimeout(dismissIfCancelled, 100);
+                }
+            } else {
+                shown = true;
+                setTimeout(dismissIfCancelled, 100);
+            }
+        };
+
+        var showDialog = function() {
+            FB.ui({
+                method: 'send',
+                display: 'iframe',
+                name: "Play ${privateTableGameName} at the table '${privateTableName}'",
+                link: '${hostUrl}/table/${privateTableId}',
+                redirect_uri: "$closeMaskURL"
+            }, function(response) {
+                if (typeof console != 'undefined') {
+                    console.log(response);
+                }
+            });
+            setTimeout(dismissIfCancelled, 100);
+        };
+
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse || response.status === 'connected') {
+                showDialog();
+            } else {
+                FB.login(function(response) {
+                    if (response.authResponse || response.status === 'connected') {
+                        showDialog();
+                    } else {
+                        dismissDialog();
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

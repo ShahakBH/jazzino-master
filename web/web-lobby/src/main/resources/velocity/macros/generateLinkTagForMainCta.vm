@@ -1,0 +1,11 @@
+#macro(generateLinkTagForMainCta $game $redirectTo)
+    #set($loginUrl="/login?gameType=$game")
+    #if($redirectTo)
+        #set($loginUrl="/login?gameType=$game&redirectTo="+$redirectTo)
+    #end
+    <a href="${loginUrl}" class="iFramePopUp featureLink gameSpecific major playNow" data-lightboxWidget-class="loginDialog">
+        <span class="button">
+            #message('global.cta.playNowButton')
+        </span>
+    </a>
+#end

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:os-core="http://www.openspaces.org/schema/core"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.openspaces.org/schema/core http://www.openspaces.org/schema/core/openspaces-core.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+         This file contains items which are only active in primary spaces.
+
+         This will also be loaded when a backup-space becomes a primary.
+     -->
+
+    <os-core:giga-space-context/>
+
+    <context:annotation-config/>
+
+    <bean id="tableEventChecker"
+          class="com.yazino.platform.processor.table.PeriodicTableChecker">
+        <property name="defaultDelay"
+                  value="500"/>
+    </bean>
+
+    <bean id="privateTableExpirer"
+          class="com.yazino.platform.processor.table.PrivateTableExpirer"
+          init-method="initialise"
+          destroy-method="shutdown">
+        <property name="pollingDelay"
+                  value="86400000"/>
+        <property name="daysToWaitBeforeExpiring"
+                  value="30"/>
+        <property name="daysToWarnBeforeExpiring"
+                  value="1"/>
+    </bean>
+
+    <bean id="accountPersistencePeriodicCheck"
+          class="com.yazino.platform.processor.PersistencePeriodicChecker">
+        <constructor-arg index="2" ref="accountPersister"/>
+        <constructor-arg index="3">
+            <bean class="com.yazino.platform.model.account.AccountPersistenceRequest"/>
+        </constructor-arg>
+
+        <property name="initialDelay" value="60000"/>
+    </bean>
+
+    <bean id="playerAchievementsPersistencePeriodicCheck"
+          class="com.yazino.platform.processor.PersistencePeriodicChecker">
+        <constructor-arg index="2" ref="playerAchivementsPersister"/>
+        <constructor-arg index="3">
+            <bean class="com.yazino.platform.model.statistic.PlayerAchievementsPersistenceRequest"/>
+        </constructor-arg>
+
+        <property name="initialDelay" value="80000"/>
+    </bean>
+
+    <bean id="playerLevelsPersistencePeriodicCheck"
+          class="com.yazino.platform.processor.PersistencePeriodicChecker">
+        <constructor-arg index="2" ref="playerLevelsPersister"/>
+        <constructor-arg index="3">
+            <bean class="com.yazino.platform.model.statistic.PlayerLevelsPersistenceRequest"/>
+        </constructor-arg>
+
+        <property name="initialDelay" value="100000"/>
+    </bean>
+
+    <bean id="playerLastPlayedPersistencePeriodicCheck"
+          class="com.yazino.platform.processor.PersistencePeriodicChecker">
+        <constructor-arg index="2" ref="playerLastPlayedPersister"/>
+        <constructor-arg index="3">
+            <bean class="com.yazino.platform.processor.community.PlayerLastPlayedPersistenceRequest"/>
+        </constructor-arg>
+
+        <property name="initialDelay" value="100000"/>
+    </bean>
+
+
+
+    <bean id="tournamentEventChecker"
+          class="com.yazino.platform.processor.tournament.PeriodicTournamentChecker"
+          init-method="init"
+          destroy-method="stop">
+        <property name="checkDelay"
+                  value="500"/>
+    </bean>
+
+    <bean id="tournamentLeaderboardNotificationService"
+          class="com.yazino.platform.processor.tournament.TournamentLeaderboardNotificationService"
+          init-method="init"
+          destroy-method="stop">
+        <property name="checkDelay"
+                  value="5000"/>
+    </bean>
+
+    <bean id="periodicTrophyLeaderboardResultingChecker"
+          class="com.yazino.platform.processor.tournament.PeriodicTrophyLeaderboardResultingChecker"
+          init-method="init"
+          destroy-method="stop">
+        <property name="checkDelay"
+                  value="60000"/>
+    </bean>
+
+    <bean id="periodicRecurringTournamentPoller"
+          class="com.yazino.platform.processor.tournament.RecurringTournamentPoller"
+          init-method="start"
+          destroy-method="stop"/>
+
+    <bean id="gigaspaceCleanerService"
+          class="com.yazino.platform.service.community.GigaspaceCleanerService"/>
+
+    <bean id="periodicSpaceCleaner"
+          class="com.yazino.platform.processor.community.PeriodicSpaceCleaner"/>
+
+    <bean id="periodicGiftCleaner"
+          class="com.yazino.platform.processor.community.PeriodicGiftCleaner"/>
+
+</beans>

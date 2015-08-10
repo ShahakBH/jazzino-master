@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:environment.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:annotation-config/>
+
+    <bean id="dataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="overrideDefaultUser" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="overrideDefaultPassword" value="${db.password}"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="30"/>
+        <property name="maxIdleTime" value="600"/>
+        <property name="maxConnectionAge" value="1200"/>
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="checkoutTimeout" value="5000"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
+    </bean>
+
+    <import resource="classpath:/META-INF/spring/avatar-tokeniser.xml"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="jdbcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="jdbcTransactionManager"/>
+
+    <bean id="sequenceGenerator" class="com.yazino.platform.persistence.JDBCSequenceGenerator">
+        <constructor-arg index="1" value="100"/>
+    </bean>
+
+    <bean id="profanityService"
+          class="com.yazino.platform.test.DummyProfanityService"/>
+
+    <bean id="recurringTournamentDefinitionDAO"
+          class="com.yazino.platform.persistence.tournament.JDBCRecurringTournamentDefinitionDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="tournamentDao" class="com.yazino.platform.persistence.tournament.JDBCTournamentDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="tournamentPlayerDao"/>
+    </bean>
+
+    <bean id="tournamentPlayerDao" class="com.yazino.platform.persistence.tournament.JDBCTournamentPlayerDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="tournamentSummaryDao" class="com.yazino.platform.persistence.tournament.JDBCTournamentSummaryDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="trophyLeaderboardResultDAO"
+          class="com.yazino.platform.persistence.tournament.JDBCTrophyLeaderboardResultDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="trophyLeaderboardDAO" class="com.yazino.platform.persistence.tournament.JDBCTrophyLeaderboardDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="tournamentSummaryRepository" class="senet.server.tournament.FitTournamentSummaryRepository"/>
+
+    <bean id="tournamentInfoRepository" class="senet.server.tournament.FitTournamentInfoRepository"/>
+
+    <bean id="tournamentLeaderboardRepository" class="senet.server.tournament.FitTournamentLeaderboardRepository"/>
+
+    <bean name="clientRepository" class="senet.server.table.InMemoryClientRepository">
+        <property name="defaultClients">
+            <list>
+                <bean class="com.yazino.platform.model.table.Client">
+                    <property name="clientFile" value="Blue.swf"/>
+                    <property name="clientId" value="Blue Blackjack"/>
+                    <property name="gameType" value="BLACKJACK"/>
+                    <property name="clientProperties">
+                        <util:map map-class="java.util.LinkedHashMap">
+                            <entry key="MILLISECONDS_ANIMATION_PER_CARD" value="500"/>
+                        </util:map>
+                    </property>
+                    <property name="numberOfSeats" value="5"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="tableAllocatorFactory" class="com.yazino.platform.processor.tournament.PredefinedTableAllocatorFactory">
+        <constructor-arg>
+            <list>
+                <bean class="com.yazino.platform.processor.tournament.EvenByBalanceTableAllocator"/>
+                <bean class="com.yazino.platform.processor.tournament.EvenRandomTableAllocator"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <alias name="tournamentRepository" alias="globalTournamentRepository"/>
+
+    <bean id="tournamentRepository" class="senet.server.tournament.FitTournamentRepository"/>
+
+    <bean id="playerSessionRepository" class="senet.server.tournament.FitPlayerSessionRepository"/>
+    <alias name="playerSessionRepository" alias="playerSessionGlobalRepository"/>
+
+    <alias name="playerRepository" alias="playerGlobalRepository"/>
+
+    <bean id="tournamentHost" class="com.yazino.platform.processor.tournament.TournamentHost"/>
+
+    <bean id="tournamentPlayerStatisticPublisher" class="senet.server.util.InMemoryTournamentPlayerStatisticPublisher"/>
+
+    <bean id="timeSource" class="com.yazino.game.api.time.SettableTimeSource"/>
+
+    <bean id="tournamentViewFactory" class="com.yazino.platform.model.conversion.TournamentViewFactory">
+        <constructor-arg ref="timeSource"/>
+    </bean>
+
+    <bean id="transactionalTournamentService"
+          class="com.yazino.platform.service.tournament.transactional.TransactionalTournamentService"/>
+
+    <bean id="tournamentScheduleGlobalRepository"
+          class="senet.server.tournament.FitTournamentScheduleRepository"/>
+
+    <bean id="tournamentService" class="com.yazino.platform.service.tournament.GigaspaceRemotingTournamentService">
+        <constructor-arg ref="tournamentRepository"/>
+        <constructor-arg ref="sequenceGenerator"/>
+        <constructor-arg ref="transactionalTournamentService"/>
+        <constructor-arg ref="tournamentViewFactory"/>
+        <constructor-arg>
+            <bean class="org.mockito.Mockito" factory-method="mock">
+                <constructor-arg value="org.openspaces.core.GigaSpace" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="auditLabelFactory"
+          class="com.yazino.platform.service.audit.UUIDAuditLabelFactory"/>
+
+    <bean id="sessionService" class="senet.server.session.FitSessionService"/>
+
+    <bean id="tournamentTableService" class="senet.server.table.FitTournamentTableService"/>
+
+    <bean id="tableRepository" class="senet.server.table.FitTableRepository"/>
+    <bean id="tableService" class="senet.server.table.FitTableService"/>
+
+    <bean id="tableInviteService" class="senet.server.table.FitTableInvitationService"/>
+
+    <bean id="playerService" class="com.yazino.platform.test.InMemoryPlayerDetailsService"/>
+
+    <bean id="playerRepository" class="com.yazino.platform.test.InMemoryPlayerRepository"/>
+
+    <bean id="communityService" class="senet.server.host.table.InMemoryCommunityService">
+        <constructor-arg ref="playerService"/>
+    </bean>
+
+    <bean id="gameRepository" class="com.yazino.platform.test.InMemoryGameRepository">
+        <constructor-arg type="java.util.List">
+            <list/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="inMemoryTableDAO" class="com.yazino.platform.test.InMemoryTableInfoRepository"/>
+
+    <bean id="fitTableService" class="senet.server.util.TableService">
+        <constructor-arg type="com.yazino.platform.persistence.table.TableDAO" ref="inMemoryTableDAO"/>
+        <constructor-arg type="com.yazino.platform.persistence.SequenceGenerator" ref="sequenceGenerator"/>
+    </bean>
+
+    <bean id="accountRepository" class="senet.server.host.FitAccountRepository"/>
+
+    <bean id="aggregateWalletService" class="com.yazino.platform.test.InMemoryInternalWalletService">
+        <constructor-arg ref="walletService"/>
+    </bean>
+    <bean id="walletService" class="com.yazino.platform.test.InMemoryWalletService">
+        <constructor-arg value="true"/>
+    </bean>
+
+    <bean id="documentDispatcher" class="com.yazino.platform.messaging.dispatcher.MemoryDocumentDispatcher"/>
+
+    <bean id="profanityFilter" class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="playerProfileEventQueuePublishingService"
+          class="strata.server.worker.DummyPlayerProfileEventQueuePublishService"/>
+
+    <util:list id="playerProfileListeners"/>
+
+    <util:list id="playerProfileUpdaters"/>
+
+    <bean id="invitationService"
+          class="strata.server.work.invitations.publisher.FitnesseInvitationService"/>
+</beans>

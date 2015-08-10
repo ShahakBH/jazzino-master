@@ -1,0 +1,20 @@
+<html>
+<head>
+    #parse("payment/paypal/libs.vm")
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            top.YAZINO.businessIntelligence.trackPlayerEvent("lobby", "paypal-user-cancellation-displayed", "purchases");
+            var yazinoWindow = parent;
+            top.clearPaymentsOverlay();
+            if (top.dg.isOpen() === true) {
+                top.dg.closeFlow();
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

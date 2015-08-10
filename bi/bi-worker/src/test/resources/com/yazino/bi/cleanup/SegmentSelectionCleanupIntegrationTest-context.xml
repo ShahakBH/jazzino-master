@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd">
+
+
+    <context:annotation-config/>
+
+    <import resource="classpath:/strata/server/worker/PostgresDatasources.xml"/>
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+
+    <context:component-scan base-package="com.yazino.bi.cleanup"/>
+    <bean id="aggregatorLockDao" class="com.yazino.bi.aggregator.AggregatorLockDao"/>
+
+</beans>

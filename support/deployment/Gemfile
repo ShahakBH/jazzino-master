@@ -1,0 +1,13 @@
+source 'https://rubygems.org'
+
+gem "rainbow", ">=1.0.3"
+gem "rest-client", ">=1.6.7"
+gem "aws-sdk", ">=1.32.0"
+gem "terminal-notifier", ">=1.6.0"
+gem "rake", ">=10.1.0"
+
+group :test do
+  gem "test-unit", ">=2.4.2"
+  gem "mocha", ">=0.10.0"
+end
+

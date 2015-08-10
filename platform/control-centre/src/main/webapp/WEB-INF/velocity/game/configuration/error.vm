@@ -1,0 +1,26 @@
+#set ($location = "Error")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set ($baseUrl = "${request.contextPath}/game/configuration/error")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/configuration/list">List Configurations</a></li>
+    </ul>
+</section>
+
+<fieldset>
+    <legend>Error occurred</legend>
+    <p>
+        #if($message)
+            $message
+        #end
+    </p>
+    <p>
+        #if($exception)
+            $exception
+        #end
+    </p>
+</fieldset>

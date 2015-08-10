@@ -1,0 +1,26 @@
+!3 Profanity filter replaces words marked as "bad" with stars
+
+|list of bad words|
+|word|Find as part of word|
+|ass|No|
+|lick|No|
+|butt|No|
+|cock|Yes|
+
+|profanity filtering|
+|original text|filtered text?|comment|
+|hello and welcome, this is all free|hello and welcome, this is all free|no marked words|
+|this is harassment|this is harassment|ass is not replaced as part of another word|
+|kick his ass|kick his ***|ass replaced as a single word|
+|he's an ass, but he's good|he's an ***, but he's good|interpunction is not considered part of a word|
+|if it's not ass it's butt|if it's not *** it's ****|multiple words in the same sentence|
+|if it's not ASS|if it's not ***|capitalised words|
+|if it's not "ass"|if it's not "***"|double quoted words|
+|if it's not 'ass'|if it's not '***'|quoted words|
+|if it's not Ass|if it's not ***|part capitalised words|
+|if it's not (ass)|if it's not (***)|bracketed words|
+|if it's not ass?|if it's not ***?|question marks|
+|if it's not anotcocksnsn|if it's not anot****snsn|in part of word|
+|if it's not cock|if it's not ****|not in part of word|
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Put this in the root of the web site -->
+<scripts>
+  <script name="Top" DoNotReplaceCondition="&lt;!-- ClickTale Top part --&gt;">
+    <![CDATA[
+	<!-- ClickTale Top part -->
+	<script type="text/javascript">
+	var WRInitTime=(new Date()).getTime();
+	</script>
+	<!-- ClickTale end of Top part -->
+	]]>
+  </script>
+  <script name="Bottom" DoNotReplaceCondition="&lt;!-- No ClickTale --&gt;|&lt;!-- ClickTale Bottom part --&gt;" InsertBefore="&lt;!-- ClickTale Bottom part Here --&gt;|&lt;/body&gt;">
+    <![CDATA[
+	<!-- ClickTale Bottom part -->
+	<div id="ClickTaleDiv" style="display: none;"></div>
+	<script type="text/javascript">
+	document.write(unescape("%3Cscript%20src='"+
+(document.location.protocol=='https:'?
+'https://clicktale.pantherssl.com/':
+'http://s.clicktale.net/')+
+"WRc9.js'%20type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+        if(typeof ClickTale=='function') {
+            var trackingCode = parseInt(YAZINO.configuration.clickTale.trackingCode);
+            var recordingRatio = parseFloat(YAZINO.configuration.clickTale.recordingRatio);
+            var useDirectHost = ('true' === YAZINO.configuration.clickTale.useDirectHost);
+            var hostName = YAZINO.configuration.hostName;
+            var domain = YAZINO.configuration.clickTale.domain;
+
+            if (isNaN(trackingCode)) {
+                console.info("Skipping ClickTale tracking: no tracking code.");
+            } else if (isNaN(recordingRatio)) {
+                console.info("Skipping ClickTale tracking: no recording ratio.");
+            } else {
+                var ClickTaleSSL = 1;
+                if (useDirectHost) {
+                    ClickTaleFetchFrom = "http://" + hostName + "/ClickTaleCache?h=%CacheToken%";
+                } else {
+                    ClickTaleFetchFrom = "http://%RootPath%/ClickTaleCache?h=%CacheToken%";
+                }
+                if (domain) {
+                    ClickTaleCookieDomain = domain;
+                }
+                ClickTale(trackingCode, recordingRatio, "www09");
+            }
+        }
+	} catch (e) {
+	    console.log("Unable to report to ClickTale.", e);
+	}
+	</script>
+	<!-- ClickTale end of Bottom part -->
+	]]>
+  </script>
+</scripts>

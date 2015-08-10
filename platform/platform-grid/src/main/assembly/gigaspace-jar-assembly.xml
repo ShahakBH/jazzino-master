@@ -1,0 +1,31 @@
+<assembly>
+	<id>gigaspace-jar-assembly</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+		<!-- Once the code is refactored these dependencies will need to be SPLIT,
+		     The spaces classes should stay here and the rest of the classes go under lib -->
+		<dependencySet>
+			<scope>runtime</scope>
+			<outputDirectory>shared-lib</outputDirectory>
+			<useProjectArtifact>false</useProjectArtifact>
+			<excludes>
+				<exclude>cglib:*</exclude>
+				<exclude>org.apache.geronimo.specs:geronimo-jta</exclude>
+				<exclude>javax.transaction:*</exclude>
+				<exclude>org.springframework:*</exclude>
+			</excludes>
+		</dependencySet>
+	</dependencySets>
+</assembly>

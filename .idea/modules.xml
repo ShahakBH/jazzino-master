@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bi/RestAPI/RestAPI.iml" filepath="$PROJECT_DIR$/bi/RestAPI/RestAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/assemblies/assemblies.iml" filepath="$PROJECT_DIR$/support/lib/assemblies/assemblies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi.iml" filepath="$PROJECT_DIR$/bi/bi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-api/bi-api.iml" filepath="$PROJECT_DIR$/bi/bi-api/bi-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-dbdw/bi-dbdw.iml" filepath="$PROJECT_DIR$/bi/bi-dbdw/bi-dbdw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-operations/bi-operations.iml" filepath="$PROJECT_DIR$/bi/bi-operations/bi-operations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-promotion/bi-promotion.iml" filepath="$PROJECT_DIR$/bi/bi-promotion/bi-promotion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-reporting/bi-reporting.iml" filepath="$PROJECT_DIR$/bi/bi-reporting/bi-reporting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-shared/bi-shared.iml" filepath="$PROJECT_DIR$/bi/bi-shared/bi-shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/bi-worker/bi-worker.iml" filepath="$PROJECT_DIR$/bi/bi-worker/bi-worker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/build/checkstyle-loose/checkstyle-loose.iml" filepath="$PROJECT_DIR$/support/build/checkstyle-loose/checkstyle-loose.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/configuration/configuration.iml" filepath="$PROJECT_DIR$/support/lib/configuration/configuration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/control-centre/control-centre.iml" filepath="$PROJECT_DIR$/platform/control-centre/control-centre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/email-services/email-services.iml" filepath="$PROJECT_DIR$/support/lib/email-services/email-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/email-templates/email-templates.iml" filepath="$PROJECT_DIR$/web/email-templates/email-templates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-api/game-api.iml" filepath="$PROJECT_DIR$/game-api/game-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/lightstreamer-adapter/lightstreamer-adapter.iml" filepath="$PROJECT_DIR$/platform/lightstreamer-adapter/lightstreamer-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/logging/logging.iml" filepath="$PROJECT_DIR$/support/lib/logging/logging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/metrics/metrics.iml" filepath="$PROJECT_DIR$/support/lib/metrics/metrics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/metrics-reporter/metrics-reporter.iml" filepath="$PROJECT_DIR$/support/lib/metrics-reporter/metrics-reporter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/mobile-ws/mobile-ws.iml" filepath="$PROJECT_DIR$/web/mobile-ws/mobile-ws.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/novomatic-cgs/novomatic-cgs.iml" filepath="$PROJECT_DIR$/support/lib/novomatic-cgs/novomatic-cgs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform.iml" filepath="$PROJECT_DIR$/platform/platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-acceptancetests/platform-acceptancetests.iml" filepath="$PROJECT_DIR$/platform/platform-acceptancetests/platform-acceptancetests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-api/platform-api.iml" filepath="$PROJECT_DIR$/platform/platform-api/platform-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-db/platform-db.iml" filepath="$PROJECT_DIR$/platform/platform-db/platform-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-grid/platform-grid.iml" filepath="$PROJECT_DIR$/platform/platform-grid/platform-grid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-shared/platform-shared.iml" filepath="$PROJECT_DIR$/platform/platform-shared/platform-shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/platform-worker/platform-worker.iml" filepath="$PROJECT_DIR$/platform/platform-worker/platform-worker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/build/pom-base/pom-base.iml" filepath="$PROJECT_DIR$/support/build/pom-base/pom-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/build/pom-flash/pom-flash.iml" filepath="$PROJECT_DIR$/support/build/pom-flash/pom-flash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/build/pom-java/pom-java.iml" filepath="$PROJECT_DIR$/support/build/pom-java/pom-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bi/rabbit-replayer/rabbit-replayer.iml" filepath="$PROJECT_DIR$/bi/rabbit-replayer/rabbit-replayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/rabbitmq-exchange-declarer/rabbitmq-exchange-declarer.iml" filepath="$PROJECT_DIR$/support/lib/rabbitmq-exchange-declarer/rabbitmq-exchange-declarer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/platform/standalone-server/standalone-server.iml" filepath="$PROJECT_DIR$/platform/standalone-server/standalone-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/support-libs.iml" filepath="$PROJECT_DIR$/support/lib/support-libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/test-helpers/test-helpers.iml" filepath="$PROJECT_DIR$/support/lib/test-helpers/test-helpers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/validation/validation.iml" filepath="$PROJECT_DIR$/support/lib/validation/validation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-content/web-content.iml" filepath="$PROJECT_DIR$/web/web-content/web-content.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-facebookpages/web-facebookpages.iml" filepath="$PROJECT_DIR$/web/web-facebookpages/web-facebookpages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-lobby/web-lobby.iml" filepath="$PROJECT_DIR$/web/web-lobby/web-lobby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-marketingpages/web-marketingpages.iml" filepath="$PROJECT_DIR$/web/web-marketingpages/web-marketingpages.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-redirector/web-redirector.iml" filepath="$PROJECT_DIR$/web/web-redirector/web-redirector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web-shared/web-shared.iml" filepath="$PROJECT_DIR$/web/web-shared/web-shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support/lib/worldpay/worldpay.iml" filepath="$PROJECT_DIR$/support/lib/worldpay/worldpay.iml" />
+    </modules>
+  </component>
+</project>

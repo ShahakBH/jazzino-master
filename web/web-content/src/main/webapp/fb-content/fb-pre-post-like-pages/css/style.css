@@ -1,0 +1,424 @@
+html, body {
+    width: 810px;
+}
+
+body {
+    font-family: helvetica, verdana, sans-serif;
+}
+
+.fb-like {
+    min-height: 21px;
+    position: relative;
+    top: -4px;
+}
+
+.prelikeHeader {
+   background-image: url(../images/hero.jpg);
+    padding-top: 30px;
+	width: 810px;
+	min-height: 220px;
+	margin-top: 0px;
+	background-repeat: no-repeat;
+	background-position: right;
+	font-size: 10pt;
+	line-height: 1.4em;
+	color: #666666;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+
+header.liked {
+    background-image: url(../images/heropost.jpg);
+	padding-top: 0px;
+	width: 810px;
+	min-height: 220px;
+	margin-top: 0px;
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+
+header p {
+	font-family: Helvetica Neue, Arial, sans-serif;
+    padding-bottom: 1em;
+	font-size: 14px;
+    line-height: 1.4em;
+}
+
+header h4 {
+	font-family: Helvetica Neue, Arial, sans-serif;
+    color: #e52525;
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 0.2em;
+    line-height: 1.2em;
+    margin-right: 30px;
+}
+
+header.liked h4 {
+    margin-right: 0;
+}
+
+
+h2{
+	
+	font-family: Helvetica Neue, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+	
+    margin-bottom: 10px;
+    line-height: 1.4em;
+	
+}
+
+
+.socialMediaLinks {
+	padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.socialMediaLinks li {
+    float: right;
+}
+
+.socialMediaLinks li.facebook {
+    padding-top: 10px;
+    float: left;
+}
+
+a.socialbtn {
+    display: inline-block;
+    background-image: url(../images/social-2.png);
+    width: 36px;
+    min-height: 36px;
+    margin-left: 4px;
+    margin-right: 4px;
+    text-indent: -9999px;
+}
+
+.gameTeaser .teaserItem {
+    background: url('../images/strip_repeater.jpg') repeat-x #CCCCCC;
+    border: solid 1px #bdbdbd;
+}
+
+.gameTeaser .teaserItem + .teaserItem {
+    border-top: 0 none;
+}
+
+.gameTeaser .teaserItem .contentMin {
+    background: no-repeat 5px center;
+    padding: 40px 0 0 180px;
+    min-height: 56px;
+    overflow: hidden;
+}
+
+.gameTeaser .blackjack.teaserItem .contentMin h3 {
+    line-height: 1.2em;
+}
+
+.gameTeaser .contentMin h3 {
+	font-family: Helvetica Neue, Arial, sans-serif;
+	font-size: 24px;
+    font-weight: bold;
+    width: 338px;
+    float: left;
+    background: url(../images/arrows.png) no-repeat 0 3px transparent;
+    padding-left: 60px;
+    line-height: 0.7em;
+}
+
+.gameTeaser .playButton {
+    float: left;
+    min-height: 38px;
+    width: 154px;
+    background-image: url(../images/btn_indent.png);
+    padding: 6px;
+    margin-top: -15px;
+}
+
+.gameTeaser .blackjack .playButton {
+    margin-top: 3px;
+}
+
+.gameTeaser .playButton a {
+    display: block;
+    width: 152px;
+    height: 20px;
+    background-image: url(../images/buttons-3.png);
+    color: #FFFFFF;
+    padding: 8px 0;
+    overflow: visible;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+	font-family: Helvetica Neue, Arial, sans-serif;
+}
+
+.gameTeaser .contentExtra {
+	background: no-repeat top right #FFFFFF;
+	padding: 20px 180px 10px 20px;
+	color: #666666;
+}
+
+.gameTeaser .contentExtra h4 {
+	font-family: Helvetica Neue, Arial, sans-serif;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1.4em;
+}
+
+.gameTeaser .contentExtra h4 b {
+	font-family: Helvetica Neue, Arial, sans-serif;
+    color: #454545;
+}
+
+.gameTeaser .contentExtra p {
+	font-family: Helvetica Neue, Arial, sans-serif;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.6em;
+}
+
+.gameTeaser .closed .contentExtra {
+    display: none;
+}
+
+.gameTeaser .transitioningItem .fb-like {
+    display: none;
+}
+
+/* Game Specifics */
+
+.gameTeaser .wheelDeal .contentMin {
+    background-image: url(../images/wheeldeal-logo-2.png);
+}
+
+.gameTeaser .wheelDeal .contentMin h3, .gameTeaser .wheelDeal .contentExtra strong {
+	background-position: 0 -200px;
+	color: #e52525;
+}
+
+.gameTeaser .wheelDeal .contentMin h3:hover {
+	background-position: 0 -300px;
+	color: #a31f1e;
+}
+
+.gameTeaser .wheelDeal.closedItem .contentMin h3 {
+    background-position: 0 0;
+}
+
+.gameTeaser .wheelDeal.closedItem .contentMin h3:hover {
+    background-position: 0 -100px;
+}
+
+.gameTeaser .wheelDeal .contentExtra h4 {
+    padding-right: 160px;
+}
+
+.gameTeaser .highStakes .contentMin {
+    background-image: url(../images/highstakes-logo.png);
+}
+
+.gameTeaser .highStakes .contentMin h3, .gameTeaser .highStakes .contentExtra strong {
+    background-position: 0 -600px;
+    color: #073F7A;
+}
+
+.gameTeaser .highStakes .contentMin h3:hover {
+    background-position: 0 -700px;
+    color: #2D8CD8;
+}
+
+.gameTeaser .highStakes.closedItem .contentMin h3 {
+    background-position: 0 -400px;
+}
+
+.gameTeaser .highStakes.closedItem .contentMin h3:hover {
+    background-position: 0 -500px;
+}
+
+.gameTeaser .highStakes .contentExtra h4 {
+	padding-right: 160px;
+}
+
+.gameTeaser .blackjack .contentMin {
+    background-image: url(../images/blackjack-logo.png);
+    padding-top: 22px;
+    padding-bottom: 18px;
+}
+
+.gameTeaser .blackjack .contentMin h3, .gameTeaser .blackjack .contentExtra strong {
+    background-position: 0 -980px;
+    color: #1140B3;
+}
+
+.gameTeaser .blackjack .contentMin h3:hover {
+    background-position: 0 -1080px;
+    color: #1B57E8;
+}
+
+.gameTeaser .blackjack.closedItem .contentMin h3 {
+    background-position: 0 -780px;
+    line-height: 1.2em;
+}
+
+.gameTeaser .blackjack.closedItem .contentMin h3:hover {
+    background-position: 0 -880px;
+}
+
+.gameTeaser .texasHoldem .contentMin {
+    background-image: url(../images/poker.png);
+}
+
+.gameTeaser .texasHoldem .contentMin h3, .gameTeaser .texasHoldem .contentExtra strong {
+    background-position: 0 -2200px;
+    color: #189CE6;
+}
+
+.gameTeaser .texasHoldem .contentMin h3:hover {
+    background-position: 0 -2300px;
+    color: #3cc5fd;
+}
+
+.gameTeaser .texasHoldem.closedItem .contentMin h3 {
+    background-position: 0 -2000px;
+}
+
+.gameTeaser .texasHoldem.closedItem .contentMin h3:hover {
+    background-position: 0 -2100px;
+}
+
+.gameTeaser .roulette .contentMin {
+    background-image: url(../images/roulette.png);
+}
+
+.gameTeaser .roulette .contentMin h3, .gameTeaser .roulette .contentExtra strong {
+    background-position: 0 -2600px;
+    color: #BC0F1B;
+}
+
+.gameTeaser .roulette .contentMin h3:hover {
+    background-position: 0 -2700px;
+    color: #E70000;
+}
+
+.gameTeaser .roulette.closedItem .contentMin h3 {
+    background-position: 0 -2400px;
+}
+
+.gameTeaser .roulette.closedItem .contentMin h3:hover {
+    background-position: 0 -2500px;
+}
+
+.gameTeaser .wheelDeal .contentExtra {
+    background-image: url(../images/bg_wheeldeal-3.jpg);
+}
+
+.gameTeaser .highStakes .contentExtra {
+    background-image: url(../images/bg_highstakes.jpg);
+}
+
+.gameTeaser .blackjack .contentExtra {
+    background-image: url(../images/bg_blackjack.jpg);
+}
+
+.gameTeaser .texasHoldem .contentExtra {
+    background-image: url(../images/bg_poker.jpg);
+}
+
+.gameTeaser .roulette .contentExtra {
+    background-image: url(../images/bg_roulette.jpg);
+}
+
+.gameTeaser .roulette .contentExtra h4 {
+	padding-right: 180px;
+}
+
+/* Sprites */
+
+#twitbtn {
+    background-position: 0px 0px;
+}
+
+#twitbtn:hover {
+    background-position: 0px -36px;
+}
+
+
+#pinbtn {
+    background-position: -36px 0px;
+}
+
+#pinbtn:hover {
+    background-position: -36px -36px;
+}
+
+#youtbtn {
+    background-position: -72px 0px;
+}
+
+#youtbtn:hover {
+    background-position: -72px -36px;
+}
+
+#blogbtn {
+    background-position: -108px 0px;
+}
+
+#blogbtn:hover {
+    background-position: -108px -36px;
+}
+
+.gameTeaser .wheelDeal .playButton a {
+    background-position: 0px 0px;
+}
+
+.gameTeaser .wheelDeal .playButton a:hover {
+    background-position: 152px 0px;
+}
+
+.gameTeaser .highStakes .playButton a {
+    background-position: 0px -216px;
+}
+
+.gameTeaser .highStakes .playButton a:hover {
+    background-position: 152px -216px;
+}
+
+.gameTeaser .blackjack .playButton a {
+    background-position: 0px -108px;
+}
+
+.gameTeaser .blackjack .playButton a:hover {
+    background-position: 152px -108px;
+}
+
+.gameTeaser .texasHoldem .playButton a {
+    background-position: 0px -72px;
+}
+
+.gameTeaser .texasHoldem .playButton a:hover {
+    background-position: 152px -72px;
+}
+
+.gameTeaser .roulette .playButton a {
+    background-position: 0px -36px;
+}
+
+.gameTeaser .roulette .playButton a:hover {
+    background-position: 152px -36px;
+}
+
+/* Facebook Fixes */
+
+html body .clear {
+    clear: both;
+    float: none;
+}

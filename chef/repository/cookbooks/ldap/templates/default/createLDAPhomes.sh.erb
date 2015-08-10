@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# this script pulls all the users from <%= @allowed_group %> group ("serveradministrators by default"),
+# (and all groups within this group) and creates home directories for these users, plus default bash profiles.
+#
+# by martin@yazino.com, Fri 6 Jul 2012
+
+
+# get all members
+MEMBERS=`ldapsearch -x -L -b cn=<%= @allowed_group %>,cn=groups,dc=deus,dc=signtechno,dc=com memberUid | grep "^memberUid: " | sed -e 's/memberUid: \(.*\)/\1/'`
+
+# look for subgroups and the members from these subgroups
+for GROUP in `ldapsearch -x -L -b cn=<%= @allowed_group %>,cn=groups,dc=deus,dc=signtechno,dc=com apple-group-nestedgroup | grep "^apple-group-nestedgroup: " | sed -e 's/apple-group-nestedgroup: \(.*\)/\1/'`
+do
+    GROUP_MEMBERS=`ldapsearch -x -L -b cn=groups,dc=deus,dc=signtechno,dc=com apple-generateduid=$GROUP memberUid | grep "^memberUid: " | sed -e 's/memberUid: \(.*\)/\1/'`
+    MEMBERS="$MEMBERS $GROUP_MEMBERS"
+done
+
+# create homes
+for MEMBER in $MEMBERS
+do
+
+    # only create if it doesn't exist
+    if [ ! -d "/Users/$MEMBER" ]; then
+
+	mkdir /Users/$MEMBER
+	chown $MEMBER.staff /Users/$MEMBER
+	chmod 700 /Users/$MEMBER
+
+	touch /Users/$MEMBER/.bash_history
+	chown $MEMBER.staff /Users/$MEMBER/.bash_history
+	chmod 600 /Users/$MEMBER/.bash_history
+	chattr +a /Users/$MEMBER/.bash_history
+
+	cp /etc/bashrc.default /Users/$MEMBER/.bashrc
+	chown $MEMBER.staff /Users/$MEMBER/.bashrc
+	chmod 644 /Users/$MEMBER/.bashrc
+#	chattr +a /Users/$MEMBER/.bashrc
+
+	cp /etc/bash_profile.default /Users/$MEMBER/.bash_profile
+	chown $MEMBER.staff /Users/$MEMBER/.bash_profile
+	chmod 644 /Users/$MEMBER/.bash_profile
+	
+    fi
+done

@@ -1,0 +1,36 @@
+<article class="buddyListStatement">
+    <div class="haveBuddies">
+        <div>
+            <p class="description">Join friends online and challenge them to a game! <label class="search">Search <input placeholder="Start typing a name"></label></p>
+
+        </div>
+        <div class="buddyListRoot">
+        </div>
+        <div style="display:none" class="template">
+            <li class="buddyListItemTemplate">
+                <img class="avatar" src="" alt="">
+
+                <div class="playerName">TEMPLATE NAME</div>
+                <div class="playerStatus">TEMPLATE STATUS</div>
+                <span class="featureLink removeBuddy">
+                    <a href="#" class="button">Remove</a>
+                </span>
+                <span class="featureLink challengeBuddy">
+                    <a href="#" class="button">Send Challenge</a>
+                </span>
+            </li>
+        </div>
+    </div>
+    <div class="haveNoBuddies">
+        <div class="loserContainer">
+            <div class='loser'>Add Yazino Buddies in-game to:
+            <ul>
+                <li>See who's online</li>
+                <li>Private chat in-game</li>
+                <li>Find friends faster</li>
+                <li>Play together</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</article>

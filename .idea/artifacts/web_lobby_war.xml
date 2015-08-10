@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="web-lobby:war">
+    <output-path>$PROJECT_DIR$/web/web-lobby/target</output-path>
+    <root id="archive" name="web-lobby-2.2.34-SNAPSHOT.war">
+      <element id="artifact" artifact-name="web-lobby:war exploded" />
+    </root>
+  </artifact>
+</component>

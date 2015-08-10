@@ -1,0 +1,21 @@
+Players will be paid out from the pot containing the entry fee. 
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|senet.server.tournament.CreateTournamentPayoutForTournamentTemplate|
+|Template Name|Rank|Prize as percentage|
+|Blackjack Tournament|1|50|
+|Blackjack Tournament|2|25|
+|Blackjack Tournament|3|10|
+|Blackjack Tournament|4|7|
+|Blackjack Tournament|5|5|
+|Blackjack Tournament|6|1.99999|
+|Blackjack Tournament|7|1.00001|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+!|Tournament template|Blackjack Tournament|got|7|Payout Ranks added|
+
+!|Total payout prize for tournament template|Blackjack Tournament|is|100|percent|

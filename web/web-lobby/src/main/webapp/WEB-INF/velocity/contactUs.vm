@@ -1,0 +1,45 @@
+    <div id="contact-us-area">
+      <h3 class="gray-red-header"><span>GET</span> IN TOUCH!</h3>
+
+      <div id="contacts">
+        <h4 class="gray-header">Email us</h4>
+        <ul id="contact-list">
+          <li>
+            <div class="contact-list-block">
+              <h5>For questions, support and feedback</h5><br>
+              <a href="mailto:contact@yazino.com">contact@yazino.com</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-list-block">
+              <h5>Press</h5><br>
+              <a href="mailto:press@yazino.com">press@yazino.com</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-list-block">
+              <h5>Partnerships</h5><br>
+              <a href="mailto:partnerships@yazino.com">partnerships@yazino.com</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-list-block">
+              <h5>Jobs</h5><br>
+              <a href="mailto:jobs@yazino.com">jobs@yazino.com</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="contact-us-body">
+        <p>
+          Or you can connect with us on the web
+        </p>
+        <div id="social-networks">
+          <a href="http://www.facebook.com/Yazino"><img src="${assetUrl}/images/facebook-link.png" alt="facebook"></a>
+          <a href="http://twitter.com/yazino"><img src="${assetUrl}/images/twitter-link.png" alt="twitter"></a>
+          <a href="http://www.youtube.com/user/YazinoLetsPlay"><img src="${assetUrl}/images/youtube-link.png" alt="youtube"></a>
+          <a href="http://blog.yazino.com"><img src="${assetUrl}/images/blog-link.png" alt="blog"></a>
+        </div>
+      </div>
+    </div>

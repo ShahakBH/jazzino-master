@@ -1,0 +1,45 @@
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/players/new">New Player</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Players</h2>
+
+        #if ($players.size() == 0)
+            <p>There are no players available yet. <a href="${request.contextPath}/players/new">Create the first one.</a></p>
+        #else
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Chips</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach ($player in $players)
+                <tr>
+                    <td>$player.playerId</td>
+                    <td>$player.name</td>
+                    <td>$player.chips</td>
+                    <td><a href="${request.contextPath}/players/play_as/$player.playerId">Use</a></td>
+##                    <td>
+##                        <a href="${request.contextPath}/game/variation/show/${gameVariation.id}" title="View variation ${gameVariation.id}">View</a>
+##                        | <a href="${request.contextPath}/game/variation/edit/${gameVariation.id}" title="Edit variation ${gameVariation.id}">Edit</a>
+##                        | <a class="action-delete" data-id="${gameVariation.id}" data-type="game variation"
+##                             href="${request.contextPath}/game/variation/delete/${gameVariation.id}"
+##                             title="Delete variation ${gameVariation.id}">Delete</a>
+##                    </td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+        #end
+    </div>
+</section>

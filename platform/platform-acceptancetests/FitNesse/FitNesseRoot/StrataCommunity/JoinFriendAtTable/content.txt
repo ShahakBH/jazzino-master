@@ -1,0 +1,38 @@
+!contents -R2 -g -p -f -h
+
+You can only join a friend at a table if they are all of the following: 
+- A friend
+- Online
+- Sitting at a table (i.e. They can't be spectating)
+
+!|Players|
+|Name|Online|
+|Melissa|Y|
+|Sameer|Y|
+|Nadia|Y|
+|Martin|Y|
+|Tom|N|
+
+!|Friends|
+|Player A|Player B|
+|Melissa|Sameer|
+|Nadia|Sameer|
+
+!|Players at tables|
+|Table name|Players|Spectators|
+|European 1|Melissa|Nadia|
+|Atlantic 1|Melissa, Martin||
+
+!|Sameer|can|Join at tables|
+|Player|Tables|
+|Melissa|European 1, Atlantic 1|
+|Nadia||
+|Martin||
+|Tom||
+
+!|Friend|Online|Friend sitting at table|Join friend at table?|
+|Y|Y|Y|Y|
+|Y|N|N|N|
+|N|Y|Y|N|
+|Y|Y|N|N|
+

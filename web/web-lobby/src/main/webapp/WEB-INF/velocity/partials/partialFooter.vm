@@ -1,0 +1,5 @@
+#if($partial)
+    #parse("partials/glossScripts.vm")
+</body>
+</html>
+#end

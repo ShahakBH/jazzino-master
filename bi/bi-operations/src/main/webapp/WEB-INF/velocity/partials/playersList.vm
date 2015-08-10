@@ -1,0 +1,51 @@
+#set($players = $searchResult.playersList)
+
+#set($pageSize = $searchResult.pageSize)
+#set($currentPage = ($players.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/player/search?query=$codec.encode($searchResult.query)")
+
+#if($players.size > 0)
+<table class="resultList">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Blocked</th>
+        <th>Display Name (Real Name)</th>
+        <th>Email</th>
+        <th>Provider</th>
+        <th>Avatar</th>
+    </tr>
+    <tr class="paging">
+        <td colspan="6">#paging( $players.startPosition $pageSize $players.totalSize $baseUrl '' )</td>
+    </tr>
+    </thead>
+    <tbody>
+    #foreach ($player in $searchResult.playersList)
+        <tr>
+            <td>
+                <a href="#springUrl('/player')/${player.playerId}">$player.playerId</a>
+            </td>
+            <td>
+                #if($player.status.id == 'B')
+                    <span class="warn">&#10004;</span>
+                #else
+                    &#10008;
+                #end
+            </td>
+            <td>
+                <a href="#springUrl('/player')/${player.playerId}">#if($player.displayName.isPresent())${player.displayName.get()}#{else}Not specified#end</a>
+                #if($player.realName.isPresent())($player.realName.get())#end
+            </td>
+            <td>#if($player.emailAddress.isPresent())<a href="mailto:$player.emailAddress">$player.emailAddress.get()</a>#end</td>
+            <td>$player.providerName</td>
+            <td>#if($player.avatarUrl.isPresent())<img src="$player.avatarUrl.get()">#end</td>
+        </tr>
+    #end
+    </tbody>
+    <tfoot>
+    <tr class="paging">
+        <td colspan="6">#paging( $players.startPosition $pageSize $players.totalSize $baseUrl '' )</td>
+    </tr>
+    </tfoot>
+</table>
+#end

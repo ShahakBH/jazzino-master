@@ -1,0 +1,123 @@
+#* @vtlvariable name="ResultMessage" type="java.lang.String" *#
+#* @vtlvariable name="secureAssetUrl" type="java.lang.String" *#
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Confirmation Sorry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="icon" type="image/png" href="$!secureAssetUrl/images/favicon.png"/>
+    <link rel="stylesheet" href="$!secureAssetUrl/style/gloss/payments.css" type="text/css"/>
+
+#parse("payment/creditcard/libs.vm")
+    <script type="text/javascript">
+        YAZINO.businessIntelligence.track.purchase.failure();
+
+        $(document).ready(function() {
+            YAZINO.businessIntelligence.trackPlayerEvent("lobby", "creditcard-failure-displayed", "purchases");
+            $('#payment_method_box #paiment_method_body ul li input:checked').closest('li').addClass('check');
+
+            $('#payment_method_box #paiment_method_body ul li label').click(function() {
+                $(this).closest('li').addClass('check');
+                $(this).closest('li').siblings().removeClass('check');
+                $(this).siblings('input').attr('checked', 'checked');
+            });
+
+            switch ($('#payment_method_box #paiment_method_body ul li.check').index()) {
+                case 1:
+                case 2:
+                    $('#container').addClass('paypal-or-mobile');
+                    break;
+                default:
+                    $('#container').removeClass('paypal-or-mobile');
+            }
+            $('#payment_method_box #paiment_method_body ul li').click(function() {
+                switch ($(this).index()) {
+                    case 1:
+                    case 2:
+                        $('#container').addClass('paypal-or-mobile');
+                        break;
+                    default:
+                        $('#container').removeClass('paypal-or-mobile');
+                }
+            });
+
+            $('#payment_method_box #paiment_method_body ul li label.credit-cart').click(function() {
+                window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=CREDITCARD';
+            });
+
+            $('#payment_method_box #paiment_method_body ul li label.pay-pal').click(function() {
+                window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=PAYPAL';
+            });
+
+            $('#payment_method_box #paiment_method_body ul li label.trialpay').click(function() {
+                window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=TRIALPAY';
+            });
+
+
+        });
+
+    </script>
+</head>
+
+<body class="buy-chips-popup">
+<div id="container" class="$gameType cashier_overlay">
+    <div id="main" class="confirmation sorry">
+        <div id="overlay"></div>
+        <div id="buy_chips_main">
+            <div id="main_body">
+                <div id="payment_method_box" class="box">
+                    <div id="payment_title" class="cover-upper"></div>
+                    <div id="paiment_method_body">
+                        <ul>
+                            <li>
+                                <input type="radio" class="paimentRadio" id="paiment_credit" name="paimentmethodradio"
+                                       onclick="window.location='$!hostUrl/lobbyPartials/cashier?paymentMethodType=CREDITCARD'"
+                                       checked="checked" value="creditcard"/>
+                                <label class="credit-cart" for="paiment_credit">Pay by credit card</label>
+                            </li>
+                            <li>
+                                <input type="radio" class="paimentRadio" id="paiment_pay_pal" name="paimentmethodradio"
+                                       onclick="window.location='$!hostUrl/lobbyPartials/cashier?paymentMethodType=PAYPAL'"
+                                       value="byPayPal"/>
+                                <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+                            </li>
+                             <li>
+                                <input type="radio" class="paimentRadio" id="paiment_trialpay" name="paymentMethod"
+                                       value="trialpay"/>
+                                <label class="trialpay" for="paiment_trialpay">Earn Chips</label>
+                            </li>
+              </ul>
+                    </div>
+                </div>
+                <div id="action_box" class="box">
+                    <div id="tabs" class="buy-chips"></div>
+                    <div id="action_body">
+                        <div id="cofirmation_Body">
+                            <div class="cofirmation-status">
+                                <span class="status">Sorry</span>
+                                #if ($ResultMessage)
+                                    $!ResultMessage
+                                #else
+                                    <span class="status-desc">There was a problem with your card details.</span>
+                                    <span class="additionally">No chips have been added to your account.</span>
+                                #end
+                                <a href="$!hostUrl/lobbyPartials/cashier?paymentMethod=CREDITCARD" class="button">Try again</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">Have questions? Contact us at <a
+                href="http://support.yazino.com" target="_blank">support.yazino.com</a>
+            </div>
+        </div>
+    </div>
+</div>
+    #parse("partials/external_tracking.vm")
+</body>
+</html>
+
+

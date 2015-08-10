@@ -1,0 +1,22 @@
+<label for="playerRegistrationStart">Registrations from:</label>
+<div class="compound">
+    <div>#springFormInput("command.playerRegistrationStart" "class='fromDatePickable'")</div>
+    <div><label for="playerRegistrationEnd">to</label></div>
+    <div>#springFormInput("command.playerRegistrationEnd" "class='toDatePickable'")</div>
+</div>
+#if($showPlatform)
+<label for="platform">Platform:</label>
+<div>#springFormSingleSelect("command.platform" $platforms "")</div>
+#end
+<label for="purchasesStart">Purchases from:</label>
+<div class="compound">
+    <div>#springFormInput("command.purchasesStart" "class='fromDatePickable'")</div>
+    <div><label for="purchasesEnd">to</label></div>
+    <div>#springFormInput("command.purchasesEnd" "class='toDatePickable'")</div>
+</div>
+<label for="reportFormat">Format:</label>
+<div>#springFormSingleSelect("command.reportFormat" $reportFormats "id='reportFormat'")</div>
+<div class="actions">
+    <input type="submit" value="Submit">
+</div>
+</form>

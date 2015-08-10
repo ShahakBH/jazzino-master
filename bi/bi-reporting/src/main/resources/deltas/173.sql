@@ -1,0 +1,1 @@
+alter table day_zero add column day_offset integer;

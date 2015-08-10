@@ -1,0 +1,46 @@
+#set ($location = "Edit Game Configuration")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/configuration/list">List Configurations</a></li>
+        <li><a href="${request.contextPath}/game/configuration/show/${gameConfiguration.gameId}">Cancel Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Edit Game Configuration ${gameConfiguration.gameId}</h2>
+
+        #parse("game/configuration/form.vm")
+
+        <h1>Lobby launcher properties</h1>
+        <table>
+            <tr><th>Name</th>                   <th>Description</th>                                    <th>Example value</th></tr>
+            <tr><td>gameType</td>               <td>Versions of the game</td>                           <td>ATLANTIC CITY, VEGAS</td></tr>
+            <tr><td>gameSpeed</td>              <td>Speeds the game can play at</td>                    <td>NORMAL,FAST</td></tr>
+            <tr><td>buyInAmount</td>            <td>Amount required to buy in</td>                      <td>1000</td></tr>
+            <tr><td>numberOfPlayers</td>        <td>Minimum number of players</td>                      <td>6</td></tr>
+            <tr><td>defaultTemplateName</td>    <td>The variation to use by defaults</td>               <td>Atlantic City</td></tr>
+            <tr><td>stakes</td>                 <td>Used by the take selector</td>                      <td>1,5,10,100:50,100,500,1000</td></tr>
+            <tr><td>minimumStakes</td>          <td>Minimum bet amount for variation</td>               <td>10, 1000, 25000</td></tr>
+            <tr><td>minimumBalanceFactor</td>   <td>Used to choose stake based on users balance</td>    <td>50</td></tr>
+            <tr><td>variationNames</td>         <td>Used to form the play now URL</td>                  <td>Low,Medium,High</td></tr>
+            <tr><td>variationDescriptions</td>  <td>Appears above the slider</td>                       <td>10-1K,1K-25K,25K-1M</td></tr>
+            <tr><td>gameClientURL</td>          <td>Location of the game swf relative to content</td>   <td>games/roulette/default.swf</td></tr>
+            <tr><td>supportsAwards</td>         <td>If the games has awards</td>                        <td>true</td></tr>
+            <tr><td>supportsTrophies</td>       <td>If the games has trophies</td>                      <td>true</td></tr>
+            <tr><td>supportsTournaments</td>    <td>If the games has tournaments</td>                   <td>true</td></tr>
+            <tr><td>supportsPrivateTables</td>  <td>If the games has private tables</td>                <td>true</td></tr>
+            <tr><td>onCanvas</td>               <td>If the game is available on facebook canvas</td>    <td>false</td></tr>
+            <tr><td>iPhoneURL</td>              <td>If there is an iphone app</td>                      <td>http://itunes.apple.com/us/app/blackjack-by-yazino/id448662321</td></tr>
+            <tr><td>usesFlashLobby</td>         <td>If the launcher is written in Flash</td>            <td>true</td></tr>
+        </table>
+    </div>
+</section>

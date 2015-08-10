@@ -1,0 +1,12 @@
+ssh_options:
+    port: 5123
+    username: spanner
+    key: deployment-key
+    args: -4
+working_dir: /home/ubuntu/tmp/deployment
+staging_dir: /var/staging
+maven:
+    repository: http://46.101.41.217/artifactory/repo
+s3:
+    access-key: AKIAJNTQTI3CPQ23IYMA
+    secret-key: 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

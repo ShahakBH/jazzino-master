@@ -1,0 +1,14 @@
+!contents -R2 -g -p -f -h
+
+Not testing: 
+* Status transactions, because they are handled by background processor, which can't be tested in FitNesse
+** New -> Announced: manually via back office
+** Announced -> Registering: background processor at sign up start time
+** Registering -> Announced: background processor at sign up end time (if before tournament start time)
+** Announced / Registering -> Running: background processor at tournament start time
+** Running -> On Break: background processor at end of each level (except last level)
+** On Break -> Running: background processor at start of each level
+** Running -> Completed: at end of last level or when the tournament ends
+
+* Tournament variation templates (incl. linking game variation templates to tournament templates), because we can't
+** Tournament sign up end time should be before the tournament start time

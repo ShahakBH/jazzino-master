@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="gameVariationPropertyOptions">
+        <entry key="BLACKJACK" value-ref="blackjackVariationPropertyOptions"/>
+        <entry key="ROULETTE" value-ref="rouletteVariationPropertyOptions"/>
+        <entry key="TEXAS_HOLDEM" value-ref="texasHoldemVariationPropertyOptions"/>
+        <entry key="SLOTS" value-ref="slotsVariationPropertyOptions"/>
+        <entry key="HISSTERIA" value-ref="hissteriaVariationPropertyOptions"/>
+        <entry key="BINGO" value-ref="bingoVariationPropertyOptions"/>
+        <entry key="HIGH_STAKES" value-ref="highStakesVariationPropertyOptions"/>
+    </util:map>
+
+    <util:list id="highStakesVariationPropertyOptions">
+
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="TABLE_JOINING_DESIRABILITY"/>
+            <property name="defaultValue" value="5,4,3,2,1,6,7,8"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ALLOWED_UNIT_STAKES"/>
+            <property name="defaultValue" value="1,5,10,50,100,250,500,1000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_LEVEL_FOR_STAKE"/>
+            <property name="defaultValue" value="0:1,3:5,5:10,8:50,12:100,14:250,16:500,18:1000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DEFAULT_MAXIMUM_UNIT_STAKE"/>
+            <property name="defaultValue" value="10"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BIG_WIN_MULTIPLIER"/>
+            <property name="defaultValue" value="200"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MEDIUM_WIN_LINE_MULTIPLIER"/>
+            <property name="defaultValue" value="75"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="INACTIVE_PLAYER_TIMEOUT_SECONDS"/>
+            <property name="defaultValue" value="240"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="INACTIVE_PLAYER_WARNING_SECONDS"/>
+            <property name="defaultValue" value="180"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_NUMBER_OF_PLAYERS"/>
+            <property name="defaultValue" value="9"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="9" value="9"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PAYOUTS"/>
+            <property name="defaultValue" value="1,3,200:1,4,500:1,5,1000:2,3,75:2,4,100:2,5,150:3,3,100:3,4,150:3,5,250:4,3,20:4,4,50:4,5,100:5,3,15:5,4,30:5,5,75:6,3,10:6,4,15:6,5,30:7,3,4:7,4,7:7,5,15:8,3,2:8,4,5:8,5,10:9,3,1:9,4,2:9,5,5"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PAY_LINES"/>
+            <property name="defaultValue" value="1,1,1,1,1:0,0,0,0,0:2,2,2,2,2:0,1,2,1,0:2,1,0,1,2:1,2,1,2,1:1,0,1,0,1:2,1,2,1,2:0,1,0,1,0:0,0,1,2,2:2,2,1,0,0:1,0,1,2,1:1,2,1,0,1:0,1,1,1,2:2,1,1,1,0:1,0,0,1,2:1,2,2,1,0:1,1,0,1,2:1,1,2,1,0:0,0,1,2,1"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="REELS"/>
+            <property name="defaultValue" value="8,6,3,91,8,5,6,7,5,91,6,4,9,2,8,3,9,5,1,0,9,3,91,8,9,4,2,8,1,91,7,2,6,4,7,91,5,9,2,3,7,4:6,8,0,7,2,92,6,4,7,9,5,6,1,7,3,92,8,4,9,0,6,8,92,2,9,92,9,3,92,8,2,92,4,7,9,5,2,8,3,9,1,5,3:7,9,0,6,7,3,9,11,1,8,7,4,93,5,7,93,9,4,2,93,5,8,6,7,2,6,3,93,8,5,93,1,0,3,6,9,4,8,93,2,93,9,8,7:2,6,94,9,8,0,2,6,5,7,9,3,7,8,94,94,9,5,2,1,94,4,8,9,5,7,94,0,2,8,3,6,4,9,5,94,1,6,4,7,94,3:7,95,2,8,6,3,9,7,4,8,6,2,95,1,7,5,0,6,3,9,1,95,5,6,3,7,8,95,4,9,5,7,4,9,2,6,8,9,5"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_MULTIPLIER_START_INDEXES"/>
+            <property name="defaultValue" value="1:1,2:2,3:3,4:4,5:5,6:6,7:6,8:6,9:6"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_MULTIPLIERS"/>
+            <property name="defaultValue" value="2,3,4,5,6,7,8,9,10,12"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_RANK_MULTIPLIERS"/>
+            <property name="defaultValue" value="4:1,5:2,6:3,7:4,8:5,9:6"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PLAYER_SPIN_ACTIVITY_TIMEOUT"/>
+            <property name="defaultValue" value="10"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SECONDS_TO_SPIN_REELS"/>
+            <property name="defaultValue" value="3"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DIAMOND_MULTIPLIER"/>
+            <property name="defaultValue" value="0.01"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="JOKER_SYMBOL"/>
+            <property name="defaultValue" value="1"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_SYMBOL"/>
+            <property name="defaultValue" value="11"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PROMOTION_SYMBOL"/>
+            <property name="defaultValue" value="0"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="TIFFANY_BOX_SYMBOL"/>
+            <property name="defaultValue" value="10"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_SPIN_THRESHOLD_FOR_SAFE_CRACK_SYMBOL"/>
+            <property name="defaultValue" value="75"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_SPIN_THRESHOLD_FOR_SAFE_CRACK_SYMBOL"/>
+            <property name="defaultValue" value="125"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SECONDS_BETWEEN_PROMOTIONS"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+
+        <!--/* promotion */-->
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_PROMOTION_FOR_RANK"/>
+            <property name="defaultValue" value="4,6,7,8,9,10,11,12,14"/>
+            <property name="valueType" value="string"/>
+        </bean>
+
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_AWARDING_ONE_PROMOTION"/>
+            <property name="defaultValue" value="500"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_AWARDING_TWO_PROMOTIONS"/>
+            <property name="defaultValue" value="280"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_AWARDING_THREE_PROMOTIONS"/>
+            <property name="defaultValue" value="130"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_AWARDING_FOUR_PROMOTIONS"/>
+            <property name="defaultValue" value="50"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ODDS_OF_AWARDING_FIVE_PROMOTIONS"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_SPIN_THRESHOLD_FOR_PROMOTION"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_SPIN_THRESHOLD_FOR_PROMOTION"/>
+            <property name="defaultValue" value="25"/>
+            <property name="valueType" value="number"/>
+        </bean>
+
+        <!--/* safe crack */-->
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_TIMEOUT_SECONDS"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_STARTED_ANIMATION_SECONDS"/>
+            <property name="defaultValue" value="8"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_MULTIPLIER_ANIMATION_SECONDS"/>
+            <property name="defaultValue" value="4"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="END_GAME_ANIMATION_SECONDS"/>
+            <property name="defaultValue" value="10"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_DIGIT_CORRECT_ANIMATION_SECONDS"/>
+            <property name="defaultValue" value="2.25"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SAFE_CRACK_DIGIT_INCORRECT_ANIMATION_SECONDS"/>
+            <property name="defaultValue" value="1.0"/>
+            <property name="valueType" value="number"/>
+        </bean>
+
+    </util:list>
+
+    <util:list id="bingoVariationPropertyOptions">
+
+    </util:list>
+
+    <util:list id="hissteriaVariationPropertyOptions">
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_NUMBER_OF_PLAYERS"/>
+            <property name="defaultValue" value="3"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_NUMBER_OF_PLAYERS"/>
+            <property name="defaultValue" value="3"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="LADDER_MOVE"/>
+            <property name="defaultValue" value="5"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SNAKE_MOVE"/>
+            <property name="defaultValue" value="-2"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="-1" value="-1"/>
+                    <entry key="-2" value="-2"/>
+                    <entry key="-3" value="-3"/>
+                    <entry key="-4" value="-4"/>
+                    <entry key="-5" value="-5"/>
+                    <entry key="-6" value="-6"/>
+                </map>
+            </property>
+        </bean>
+    </util:list>
+
+    <util:list id="slotsVariationPropertyOptions">
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_NUMBER_OF_PLAYERS"/>
+            <property name="defaultValue" value="12"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="12" value="12"/>
+                    <entry key="11" value="11"/>
+                    <entry key="10" value="10"/>
+                    <entry key="9" value="9"/>
+                    <entry key="8" value="8"/>
+                    <entry key="7" value="7"/>
+                    <entry key="6" value="6"/>
+                    <entry key="5" value="5"/>
+                    <entry key="4" value="4"/>
+                    <entry key="3" value="3"/>
+                    <entry key="2" value="2"/>
+                    <entry key="1" value="1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="WHEEL_SYMBOL"/>
+            <property name="defaultValue" value="0"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                    <entry key="7" value="7"/>
+                    <entry key="8" value="8"/>
+                    <entry key="9" value="9"/>
+                    <entry key="10" value="10"/>
+                    <entry key="11" value="11"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="JOKER_SYMBOL"/>
+            <property name="defaultValue" value="1"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                    <entry key="7" value="7"/>
+                    <entry key="8" value="8"/>
+                    <entry key="9" value="9"/>
+                    <entry key="10" value="10"/>
+                    <entry key="11" value="11"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="CAR_SYMBOL"/>
+            <property name="defaultValue" value="3"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                    <entry key="5" value="5"/>
+                    <entry key="6" value="6"/>
+                    <entry key="7" value="7"/>
+                    <entry key="8" value="8"/>
+                    <entry key="9" value="9"/>
+                    <entry key="10" value="10"/>
+                    <entry key="11" value="11"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="REELS"/>
+            <property name="defaultValue"
+                      value="8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,4\t6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,1,5,3\t7,9,0,6,7,3,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7\t2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8\t7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PAYOUTS"/>
+            <property name="defaultValue"
+                      value="1,3,150\t1,4,500\t1,5,1000\t2,3,75\t2,4,100\t2,5,150\t3,3,100\t3,4,150\t3,5,250\t4,3,20\t4,4,50\t4,5,100\t5,3,15\t5,4,30\t5,5,75\t6,3,10\t6,4,15\t6,5,30\t7,3,4\t7,4,7\t7,5,15\t8,3,2\t8,4,5\t8,5,10\t9,3,1\t9,4,2\t9,5,5\t11,3,200\t11,4,1000\t11,5,10000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="LINES"/>
+            <property name="defaultValue"
+                      value="1,1,1,1,1\t0,0,0,0,0\t2,2,2,2,2\t0,1,2,1,0\t2,1,0,1,2\t1,2,1,2,1\t1,0,1,0,1\t2,1,2,1,2\t0,1,0,1,0\t0,0,1,2,2\t2,2,1,0,0\t1,0,1,2,1\t1,2,1,0,1\t0,1,1,1,2\t2,1,1,1,0\t1,0,0,1,2\t1,2,2,1,0\t1,1,0,1,2\t1,1,2,1,0\t0,0,1,2,1"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BONUS_MULTIPLIER"/>
+            <property name="defaultValue" value="0.02"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0.02" value="0.02"/>
+                    <entry key="0.04" value="0.04"/>
+                    <entry key="0.05" value="0.05"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BONUS_MULTIPLIER_SECOND_PHASE"/>
+            <property name="defaultValue" value="0.02"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="0.02" value="0.02"/>
+                    <entry key="0.04" value="0.04"/>
+                    <entry key="0.05" value="0.05"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SCATTERED_BONUS_MULTIPLIER"/>
+            <property name="defaultValue" value="0"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="0.05" value="0.05"/>
+                    <entry key="0.1" value="0.1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SCATTERED_WHEELS_REQUIRED"/>
+            <property name="defaultValue" value="5"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="5" value="5"/>
+                    <entry key="3" value="3"/>
+                    <entry key="1" value="1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="NUMBER_OF_WHEELS_TO_COLLECT"/>
+            <property name="defaultValue" value="12"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="5" value="5"/>
+                    <entry key="12" value="12"/>
+                    <entry key="20" value="20"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ALLOWED_UNIT_STAKES"/>
+            <property name="defaultValue" value="5,10,50,100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="WHEEL_TYPES"/>
+            <property name="defaultValue" value="TwinTop,180,175,140,125,125,117,117,112,105,103,100,100,FourWay,180,175,140,125,125,117,117,112,105,103,100,100,Tripletto,20,21,25,28,29,29,30,30,30,30,30,30,Quattro,5,5,6,8,8,9,10,10,10,10,10,10,Ultimo,1,1,1,1,2,2,2,2,2,2,2,2"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BIG_WIN_MULTIPLIER"/>
+            <property name="defaultValue" value="200"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MEDIUM_WIN_LINE_MULTIPLIER"/>
+            <property name="defaultValue" value="75"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="WHEEL_TYPE_MULTIPLIERS"/>
+            <property name="defaultValue" value="TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500\tFourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20\tTripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100\tQuattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500\tUltimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT"/>
+            <property name="defaultValue" value="36000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MILLIS_REEL_SPINNED"/>
+            <property name="defaultValue" value="3000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MILLIS_REEL_SPINNED_BONUS"/>
+            <property name="defaultValue" value="2000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MILLIS_BET_TIMEOUT"/>
+            <property name="defaultValue" value="300000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MILLIS_BEFORE_BONUS_ALLOWED"/>
+            <property name="defaultValue" value="0"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_LEVEL_FOR_STAKE"/>
+            <property name="defaultValue" value="1:1,2:2,3:5,4:10,5:25,6:50,7:100,8:250,9:500,10:1000,11:5000,12:10000,13:50000,14:100000,15:500000,16:1000000,17:1000000,18:1000000,19:1000000,20:1000000,21:1000000,22:1000000,23:1000000,24:1000000,25:1000000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="string"/>
+        </bean>
+    </util:list>
+
+    <util:list id="texasHoldemVariationPropertyOptions">
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BIG_BLIND"/>
+            <property name="defaultValue" value="10"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SMALL_BLIND"/>
+            <property name="defaultValue" value="5"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_TIMEOUTS"/>
+            <property name="defaultValue" value="5"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MIN_BUYIN"/>
+            <property name="defaultValue" value="100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_BUYIN"/>
+            <property name="defaultValue" value="1000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DEFAULT_CHIPS"/>
+            <property name="defaultValue" value="500"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_NUMBER_OF_MISSED_BLINDS"/>
+            <property name="defaultValue" value="0"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+            <property name="toolTip" value="Not enforced if 0."/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_NUMBER_OF_AWAY_HANDS"/>
+            <property name="defaultValue" value="3"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+            <property name="toolTip" value="Not enforced if 0. Overrides MAX_NUMBER_OF_MISSED_BLINDS."/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PLAYER_TIMEOUT"/>
+            <property name="defaultValue" value="30000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BUY_IN_TIMEOUT"/>
+            <property name="defaultValue" value="30000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BLIND_PLACEMENT_TIMEOUT"/>
+            <property name="defaultValue" value="30000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="KILL_TIMEOUT"/>
+            <property name="defaultValue" value="300000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="JOINING_ALLOWED"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="LEAVING_ALLOWED"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+            <property name="toolTip" value="If No, overrides MANUAL_PLACE_BLINDS_ALLOWED."/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BUYIN_AGAIN_ALLOWED"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MANUAL_PLACE_BLINDS_ALLOWED"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+            <property name="toolTip" value="If No, overrides INITIAL_AUTO_PLACE_BLINDS."/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="INITIAL_AUTO_PLACE_BLINDS"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="INITIAL_EARLY_BUY_IN"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="EARLY_BUY_IN_OPTION_AVAILABLE"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+    </util:list>
+
+    <util:list id="rouletteVariationPropertyOptions">
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_LIMIT_MINIMUM_INSIDE_BET"/>
+            <property name="defaultValue" value="5"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_LIMIT_MAXIMUM_INSIDE_BET"/>
+            <property name="defaultValue" value="100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_LIMIT_MINIMUM_OUTSIDE_BET"/>
+            <property name="defaultValue" value="5"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_LIMIT_MAXIMUM_OUTSIDE_BET"/>
+            <property name="defaultValue" value="100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="WHEEL_STYLE"/>
+            <property name="defaultValue" value="European"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="European" value="European"/>
+                    <entry key="American" value="American"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="CHIPS"/>
+            <property name="multiple" value="true"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="10" value="10"/>
+                    <entry key="100" value="100"/>
+                    <entry key="500" value="500"/>
+                    <entry key="1000" value="1000"/>
+                    <entry key="5000" value="5000"/>
+                    <entry key="10000" value="10000"/>
+                    <entry key="25000" value="25000"/>
+                    <entry key="50000" value="50000"/>
+                    <entry key="100000" value="100000"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_NUMBER_OF_SEATS"/>
+            <property name="defaultValue" value="4"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="LAYOUT_STYLE"/>
+            <property name="defaultValue" value="standard"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BETTING_TIMEOUT"/>
+            <property name="defaultValue" value="60000"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_LIMIT_NUMBER_OF_BETS"/>
+            <property name="defaultValue" value="100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+    </util:list>
+
+    <util:list id="blackjackVariationPropertyOptions">
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_CHIPS_PER_PLAY"/>
+            <property name="defaultValue" value="100"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_CHIPS_PER_PLAY"/>
+            <property name="defaultValue" value="1"/>
+            <property name="required" value="true"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="NUMBER_OF_HOLE_CARDS"/>
+            <property name="defaultValue" value="1"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="0" value="0"/>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="NUMBER_OF_DECKS"/>
+            <property name="defaultValue" value="6"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="4" value="4"/>
+                    <entry key="6" value="6"/>
+                    <entry key="8" value="8"/>
+                    <entry key="10" value="10"/>
+                    <entry key="Infinite" value="0"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SHUFFLE_WHEN_PACK_GOES_BELOW"/>
+            <property name="defaultValue" value="60"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="50" value="50"/>
+                    <entry key="60" value="60"/>
+                    <entry key="70" value="70"/>
+                    <entry key="80" value="80"/>
+                    <entry key="90" value="90"/>
+                    <entry key="100" value="100"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DEALER_WINS_TIES"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SPLIT_HANDS"/>
+            <property name="defaultValue" value="2"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="1" value="1"/>
+                    <entry key="2" value="2"/>
+                    <entry key="3" value="3"/>
+                    <entry key="4" value="4"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DOUBLE_ON"/>
+            <property name="defaultValue" value="9,10,11"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="None" value="None"/>
+                    <entry key="10,11" value="10,11"/>
+                    <entry key="9,10,11" value="9,10,11"/>
+                    <entry key="8,9,10,11" value="8,9,10,11"/>
+                    <entry key="Any" value="Any"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DEALER_STANDS_ON"/>
+            <property name="defaultValue" value="Soft 17"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Soft 15" value="Soft 15"/>
+                    <entry key="Hard 15" value="Hard 15"/>
+                    <entry key="Soft 16" value="Soft 16"/>
+                    <entry key="Hard 16" value="Hard 16"/>
+                    <entry key="Soft 17" value="Soft 17"/>
+                    <entry key="Hard 17" value="Hard 17"/>
+                    <entry key="Soft 18" value="Soft 18"/>
+                    <entry key="Hard 18" value="Hard 18"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="DOUBLE_AFTER_SPLIT"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ALLOW_DOUBLE_DOWN_ON_BLACKJACK"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SPLIT_UNLIKE_10_VALUE_CARDS"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="ONE_CARD_ONLY_AFTER_SPLIT_ACES"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PEEK_ON"/>
+            <property name="defaultValue" value="A,10,J,Q,K"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="A,10,J,Q,K" value="A,10,J,Q,K"/>
+                    <entry key="A" value="A"/>
+                    <entry key="Never" value="Never"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="INSURANCE"/>
+            <property name="defaultValue" value="2:1"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="None" value="None"/>
+                    <entry key="3:1" value="3:1"/>
+                    <entry key="2:1" value="2:1"/>
+                    <entry key="3:2" value="3:2"/>
+                    <entry key="1:1" value="1:1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BLACKJACK_PAYS"/>
+            <property name="defaultValue" value="3:2"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="3:1" value="3:1"/>
+                    <entry key="2:1" value="2:1"/>
+                    <entry key="3:2" value="3:2"/>
+                    <entry key="1:1" value="1:1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="CHIPS"/>
+            <property name="multiple" value="true"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="10" value="10"/>
+                    <entry key="50" value="50"/>
+                    <entry key="100" value="100"/>
+                    <entry key="500" value="500"/>
+                    <entry key="1000" value="1000"/>
+                    <entry key="5000" value="5000"/>
+                    <entry key="10000" value="10000"/>
+                    <entry key="25000" value="25000"/>
+                    <entry key="50000" value="50000"/>
+                    <entry key="100000" value="100000"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SPLIT_ACES_ONCE_ONLY"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SURRENDER"/>
+            <property name="defaultValue" value="None"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="None" value="None"/>
+                    <entry key="Late" value="Late"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="NO_BLACKJACK_ON_SPLITS"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="TIMEOUT"/>
+            <property name="defaultValue" value="15000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="KILL_TIMEOUT"/>
+            <property name="defaultValue" value="120000"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="JOINING_ALLOWED"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="LEAVING_ALLOWED"/>
+            <property name="defaultValue" value="Yes"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="AUTO_BET"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MINIMUM_NUMBER_OF_SEATS"/>
+            <property name="defaultValue" value="1"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAXIMUM_NUMBER_OF_SEATS"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="MAX_SEATS_PER_PLAYER"/>
+            <property name="defaultValue" value="5"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="AUTO_HIT_PLAYERS_UNTIL"/>
+            <property name="defaultValue" value="Soft 11"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Never" value="Never"/>
+                    <entry key="Soft 11" value="Soft 11"/>
+                    <entry key="Any" value="Any"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="NUMBER_OF_HIDDEN_CARDS"/>
+            <property name="defaultValue" value="0"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PURGE_TIMEOUT"/>
+            <property name="defaultValue" value="500"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="BET_TIMEOUTS_ALLOWED"/>
+            <property name="defaultValue" value="2"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SIDE_BETS_ENABLED"/>
+            <property name="defaultValue" value="No"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="Yes" value="Yes"/>
+                    <entry key="No" value="No"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SUITED_BLACKJACK_PAYS"/>
+            <property name="defaultValue" value="15:1"/>
+            <property name="availableOptions">
+                <map>
+                    <entry key="16:1" value="16:1"/>
+                    <entry key="15:1" value="15:1"/>
+                    <entry key="14:1" value="14:1"/>
+                    <entry key="13:2" value="13:2"/>
+                    <entry key="12:1" value="12:1"/>
+                    <entry key="11:1" value="11:1"/>
+                    <entry key="10:1" value="10:1"/>
+                    <entry key="9:1" value="9:1"/>
+                    <entry key="8:1" value="8:1"/>
+                </map>
+            </property>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="SUITED_BLACKJACK_DEALT_ANIMATION_TIME"/>
+            <property name="defaultValue" value="3500"/>
+            <property name="valueType" value="number"/>
+        </bean>
+        <bean class="strata.server.lobby.controlcentre.model.GameVariationPropertyOption">
+            <constructor-arg value="PER_PLAYER_SUITED_BLACKJACK_WIN_ANIMATION_TIME"/>
+            <property name="defaultValue" value="1500"/>
+            <property name="valueType" value="number"/>
+        </bean>
+    </util:list>
+</beans>

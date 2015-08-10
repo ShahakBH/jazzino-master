@@ -1,0 +1,26 @@
+<div id="home">
+    #parse("includes/header.vm")
+
+    #if ($error)
+        <div class="failure">$error</div>
+    #end
+
+    <section id="content">
+        <div class="edit">
+
+            <form name="login" action="${request.contextPath}/security/login" method="POST">
+                <fieldset>
+                    <legend>Login</legend>
+
+                    <label for="username">Username:</label>
+                    <input id="username" class="default-focus" type="text" name="j_username">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" name="j_password">
+                </fieldset>
+
+                <input type="submit" value="Login">
+            </form>
+
+        </div>
+    </section>
+</div>

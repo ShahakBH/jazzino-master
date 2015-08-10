@@ -1,0 +1,54 @@
+## Don't remove this please as it does some crazy shit that I don't understand. Deleting this breaks shit in canvas mode.
+#if(!$viewName || $viewName.indexOf("Rules") == -1)
+    #set($footerClass='class="normal"')
+#else
+    #set($footerClass='class="rules"')
+#end
+
+#if($canvas)
+    #set($target = 'target="_blank"')
+#else
+    #set($target = '')
+#end
+<footer $!footerClass>
+    <div class="">
+        #if(!$canvas)
+            <ul>
+                <li class="title">About</li>
+                <li><a href="${request.contextPath}/aboutus" $target title="About Yazino">About Yazino</a></li>
+                <li><a href="${request.contextPath}/management" $target title="Management">Management</a></li>
+                <li><a href="${request.contextPath}/jobs" title="Jobs">Jobs</a></li>
+
+                <li><a href="${request.contextPath}/contactus" $target title="Contact">Contact</a></li>
+                <li><a href="${request.contextPath}/sitemap" $target title="Sitemap">Sitemap</a></li>
+            </ul>
+        #end
+        <ul>
+            <li class="title">Community</li>
+            #if($lobbySession)
+                <li><a href="${supportLoggedInLink}" target="_blank" title="Support">Support</a></li>
+            #else
+                <li><a href="${supportLoggedOutLink}" target="_blank" title="Support">Support</a></li>
+            #end
+            #if(!$canvas)
+                <li><a href="http://blog.yazino.com/press" target="_blank" title="Press">Press</a></li>
+                <li><a href="http://blog.yazino.com/" target="_blank" title="Blog">Blog</a></li>
+                <li><a href="http://www.facebook.com/Yazino" target="_blank" title="Facebook">Facebook</a></li>
+                <li><a href="http://twitter.com/yazino" target="_blank" title="Twitter">Twitter</a></li>
+            #end
+        </ul>
+        <ul>
+            <li class="title">Legal</li>
+            <li><a href="${request.contextPath}/legal/termsOfPurchase" $target title="Terms of Purchase">Terms of
+                Purchase</a></li>
+            <li><a href="${request.contextPath}/legal/termsOfService" $target title="Terms of Service"">Terms of
+                Service</a></li>
+            <li><a href="${request.contextPath}/legal/privacy" $target title="Privacy Policy">Privacy Policy</a>
+            </li>
+        </ul>
+        <p>Copyright &copy; 2011-13 <span class="bold">Yazino.</span> All rights reserved.</p>
+    </div>
+</footer>
+
+<div class="dialogMask" style="display:none">
+</div>

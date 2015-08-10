@@ -1,0 +1,67 @@
+#set ($location = "Tournament Variations")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($variations.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/tournament/variation/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/variation/create">New Variation</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Tournament Variations</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Game Type</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    #paging( $variations.startPosition $pageSize $variations.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    #paging( $variations.startPosition $pageSize $variations.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($variation in $variations.data)
+                <tr>
+                    <td>$variation.id</td>
+                    <td>$variation.name</td>
+                    <td>$variation.gameType</td>
+                    <td>
+                        <a href="${request.contextPath}/tournament/variation/show/${variation.id}"
+                           title="View variation ${variation.id}">View</a>
+                        | <a href="${request.contextPath}/tournament/variation/edit/${variation.id}"
+                             title="Edit variation ${variation.id}">Edit</a>
+                        | <a class="action-named" data-action="Delete" data-id="${variation.id}"
+                             data-type="variation"
+                             href="${request.contextPath}/tournament/variation/delete/${variation.id}"
+                             title="Delete variation ${variation.id}">Delete</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

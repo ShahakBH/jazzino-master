@@ -1,0 +1,19 @@
+!|dbfit.MySqlTest|
+
+|connect|db.signtechno.com|senettest|senettest|senettest|
+
+These commands are here to kill any data left over from the JDBC Auditing Tests. The audit transactions have a propagation of REQUIRES_NEW so there data is always written to the DB.
+
+|Execute|DELETE FROM AUDIT_TABLE_LABEL|
+
+|Execute|DELETE FROM AUDIT_COMMAND|
+
+|Execute|DELETE FROM AUDIT_EVENT|
+
+|Execute|DELETE FROM AUDIT_MESSAGE|
+
+|Execute|DELETE FROM AUDIT_TABLE_INFO|
+
+|Execute|DELETE FROM AUDIT_TABLE_PLAYER|
+
+|Execute|DELETE FROM AUDIT_TABLE_PLAYER|

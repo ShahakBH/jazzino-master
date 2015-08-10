@@ -1,0 +1,20 @@
+#set ($location = "Show Tournament Variation")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/variation/list">List Variations</a></li>
+        <li><a href="${request.contextPath}/tournament/variation/edit/${variation.id}">Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Variation ${variation.id}</h2>
+
+        #set($readonly = "true")
+        #parse("tournament/variation/form.vm")
+    </div>
+</section>

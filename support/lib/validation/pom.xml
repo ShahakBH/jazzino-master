@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yazino</groupId>
+        <artifactId>pom-java</artifactId>
+        <version>1.0.14</version>
+        <relativePath>../../build/pom-java/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>validation</artifactId>
+    <version>1.0.1</version>
+    <name>Yazino: Validation</name>
+
+    <description>Shared validation.</description>
+
+    <scm>
+        <connection>scm:git:git@github.com:yazino/support.git</connection>
+    </scm>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://issues.london.yazino.com/browse/WEB</url>
+    </issueManagement>
+
+    <properties>
+        <surefireJvmArgs>-Xmx256m</surefireJvmArgs>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yazino</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.0.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.2.2</version>
+                <configuration>
+                    <goals>deploy changes:announcement-mail</goals>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>perform</goal>
+                        </goals>
+                        <configuration>
+                            <pomFileName>${project.build.directory}/checkout/lib/validation/pom.xml</pomFileName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <issueManagementSystems>
+                        <issueManagementSystem>JIRA</issueManagementSystem>
+                    </issueManagementSystems>
+                    <smtpHost>deus.local</smtpHost>
+                    <component>validation</component>
+                    <filter>labels=${project.artifactId}</filter>
+                    <toAddresses>
+                        <toAddress>dev@yazino.com</toAddress>
+                    </toAddresses>
+                    <mailSender>
+                        <name>Maven</name>
+                        <email>maven@london.yazino.com</email>
+                    </mailSender>
+                    <useJql>true</useJql>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

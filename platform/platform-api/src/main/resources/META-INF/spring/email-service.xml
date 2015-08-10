@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+     This file is intended for inclusion by clients.
+
+     You will need to define:
+     * The configuration, as described in environment.properties
+    -->
+
+    <context:annotation-config/>
+
+    <bean id="emailValidationService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${platform.worker.url}/service/email-validation"/>
+        <property name="serviceInterface"
+                  value="com.yazino.platform.email.EmailValidationService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${platform.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

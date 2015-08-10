@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+     <bean id="dataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="${db.read.url}"/>
+        <property name="user" value="${db.read.user}"/>
+        <property name="overrideDefaultUser" value="${db.read.user}"/>
+        <property name="password" value="${db.read.password}"/>
+        <property name="overrideDefaultPassword" value="${db.read.password}"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="30"/>
+        <!-- Keep Idle connections for 1 minute apparently MySQL is quicker to start up connections -->
+        <property name="maxIdleTime" value="600"/>
+        <!-- Keep an active connection for a max of 4 hours -->
+        <property name="maxConnectionAge" value="1200"/>
+        <!-- Test the idle connections every 10 minutes (Yes the idle timeout is 60 but we have a min pool size.)-->
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="checkoutTimeout" value="5000"/>
+        <property name="unreturnedConnectionTimeout" value="60"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
+    </bean>
+
+    <bean id="replicaJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>

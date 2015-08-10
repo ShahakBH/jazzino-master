@@ -1,0 +1,60 @@
+#set($!title = '$!userName is waiting for you to play at Yazino.')
+#parse('lobby/header.vm')
+
+                <!--start body-->
+                <tr>
+                    <td colspan="4" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/reusable-assets/20120123T000000/no-article-top.jpg" width="700" height="7" alt="" style="vertical-align:top;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="25"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="$!targetUrl" style="text-decoration: none;"><font
+                            style="font-family:Helvetica, Arial, sans-serif; font-size: 18px;"
+                            face="Helvetica Arial" size="5">
+                        <b >
+                            <font color="#E72020" style="color: #E72020;">COME AND <font color="#CEA700" style="color: #CEA700">PLAY!</font></font>
+                        </b></font></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="15"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td valign="top">
+                        <p style="margin: 0; padding: 0 0 15px 0;"><font
+                                style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;color:#707070;">
+                            Join $!userName and have some fun playing free, live social casino games at <a href="$!targetUrl" style="color:#E72020">Yazino</a>!
+                            Reel in the jackpot in Wheel Deal slots, beat your buddies in Blackjack,
+                            take a seat at&nbsp;the Texas Hold&rsquo;em tables and more now!
+                        </font></p>
+                        <br/>
+                        <a href="$!targetUrl"><img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/invite-friends/accept-and-play-btn.png" alt="Accept and Play" width="212" height="27"/></a>
+                    </td>
+                    <td align="center" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/invite-friends/invite-reminder01.png" alt="invite reminder image" width="220" height="130"/>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            #parse('lobby/footer.vm')
+
+

@@ -1,0 +1,24 @@
+Players will be paid out from the pot containing the entry fee. 
+
+!|Payout for tournament|
+|Rank|Payout|
+|1|.5|
+|2|.3|
+|3|.2|
+
+!|Entry fee is|25|
+
+!|Final rank for tournament|
+|Player|Ending Chips|
+|Adam|1500|
+|Bill|1000|
+|Carl|500|
+|Dave|0|
+
+ 
+!|Payouts|
+|Player|Payout?|
+|Adam|50|
+|Bill|30|
+|Carl|20|
+|Dave|0|

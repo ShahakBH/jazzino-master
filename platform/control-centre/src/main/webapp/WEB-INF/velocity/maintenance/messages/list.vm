@@ -1,0 +1,69 @@
+#set ($location = "System Messages")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($systemMessages.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/maintenance/messages/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/maintenance/messages/create">New System Message</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>System Messages</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Valid From</th>
+                <th>Valid To</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    #paging( $systemMessages.startPosition $pageSize $systemMessages.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    #paging( $systemMessages.startPosition $pageSize $systemMessages.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($systemMessage in $systemMessages.data)
+                <tr>
+                    <td>$systemMessage.id</td>
+                    <td>$systemMessage.message</td>
+                    <td>$dateTool.format('dd/MM/yyyy HH:mm:ss Z', $systemMessage.validFrom.toDate())</td>
+                    <td>$dateTool.format('dd/MM/yyyy HH:mm:ss Z', $systemMessage.validTo.toDate())</td>
+                    <td>
+                        <a href="${request.contextPath}/maintenance/messages/show/${systemMessage.id}"
+                           title="View system message ${systemMessage.id}">View</a>
+                        | <a href="${request.contextPath}/maintenance/messages/edit/${systemMessage.id}"
+                             title="Edit system message ${systemMessage.id}">Edit</a>
+                        | <a class="action-named" data-action="Delete" data-id="${systemMessage.id}"
+                             data-type="system message"
+                             href="${request.contextPath}/maintenance/messages/delete/${systemMessage.id}"
+                             title="Delete system message ${systemMessage.id}">Delete</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

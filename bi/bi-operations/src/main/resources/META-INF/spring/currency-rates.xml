@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="currencyInformationDao"
+          class="com.yazino.bi.operations.currency.persistence.PostgresCurrencyInformationDAO">
+        <constructor-arg ref="externalDwDataSource"/>
+    </bean>
+
+    <util:map id="currencyRates" map-class="java.util.LinkedHashMap">
+        <entry key="USD" value="1.625"/>
+        <entry key="GBP" value="1"/>
+        <entry key="EUR" value="1.153"/>
+        <entry key="SEK" value="10.61"/>
+        <entry key="AUD" value="1.577"/>
+        <entry key="NZD" value="1.972"/>
+        <entry key="CAD" value="1.614"/>
+        <entry key="MXN" value="18.66"/>
+        <entry key="NOK" value="8.651"/>
+        <entry key="SGD" value="1.952"/>
+        <entry key="CHF" value="1.248"/>
+        <entry key="ZAR" value="11.12"/>
+        <entry key="MYR" value="4.826"/>
+        <entry key="TRY" value="2.664"/>
+        <entry key="PHP" value="68.69"/>
+        <entry key="CZK" value="27.76"/>
+        <entry key="IDR" value="13716"/>
+        <entry key="INR" value="71.47"/>
+        <entry key="DKK" value="8.454"/>
+        <entry key="VEF" value="6.912"/>
+        <entry key="PEN" value="4.400"/>
+        <entry key="PLN" value="4.543"/>
+        <entry key="HUF" value="315.7"/>
+        <entry key="COP" value="2824"/>
+        <entry key="ARS" value="6.626"/>
+        <entry key="CLP" value="742.6"/>
+        <entry key="HKD" value="12.53"/>
+        <entry key="RUB" value="47.18"/>
+        <entry key="BRL" value="2.513"/>
+        <entry key="TWD" value="47.42"/>
+    </util:map>
+
+    <bean class="com.yazino.bi.operations.currency.CurrencyRatesDefinition">
+        <constructor-arg ref="currencyRates"/>
+        <constructor-arg ref="currencyInformationDao"/>
+    </bean>
+
+</beans>

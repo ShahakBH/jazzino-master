@@ -1,0 +1,4 @@
+#parse("includes/header.vm")
+<section id="content">
+    <pre class="game-status">$status</pre>
+</section>

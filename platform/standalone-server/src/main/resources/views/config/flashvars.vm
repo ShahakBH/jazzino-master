@@ -1,0 +1,28 @@
+#parse("includes/header.vm")
+
+<section id="content">
+    <div class="list">
+        <h2>Additional Flashvars</h2>
+
+        <p>Any setting listed here can be overridden in <strong>/etc/yazino/standalone-server.properties</strong>.</p>
+
+        <p>All entries starting with "<strong>standalone-server.flashvars.</strong>" will be read as flashvars and added to the game page.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach ($prop in $properties.keySet())
+                <tr>
+                    <td>$prop</td>
+                    <td>$properties.get($prop)</td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+</section>

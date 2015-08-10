@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress AutowiredDependenciesInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:rabbit-replayer.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <property name="host" value="${rabbit-replayer.host}"/>
+        <property name="port" value="${rabbit-replayer.port}"/>
+        <property name="virtualHost" value="${rabbit-replayer.virtualhost}"/>
+        <property name="username" value="${rabbit-replayer.username}"/>
+        <property name="password" value="${rabbit-replayer.password}"/>
+    </bean>
+
+    <bean id="amqpTemplate" class="org.springframework.amqp.rabbit.core.RabbitTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="queue" value="${rabbit-replayer.queue}"/>
+    </bean>
+
+    <bean id="replayer" class="strata.server.performance.rabbit.ReplayPublisher" autowire="constructor"/>
+
+</beans>

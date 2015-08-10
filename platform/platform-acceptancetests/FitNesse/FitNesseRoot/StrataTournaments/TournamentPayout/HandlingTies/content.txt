@@ -1,0 +1,75 @@
+!3 If there’s a tie: We will pay out the prizes equally to the players, e.g. Adam & Bill tie for 1st, so they share 100 + 50 = 150 between them
+ 
+!2 Setup
+
+!|Number of players is|38|
+
+!3 Minimum Prize Pool
+!|Minimum Prize Pool is |40000| 
+
+!|Payout for tournament|
+|Rank|Payout|
+|1|.5|
+|2|.3|
+|3|.2|
+
+!3 Entry Fee Prize Pool
+!|Entry fee is|1000|
+ 
+!2 Examples
+
+Assume the tournament has 38 players and closes with the top 10 players having the following chips: 
+!|Final rank for tournament|
+|Player|Ending Chips|
+|Adam|2000|
+|Bill|2000|
+|Carl|1000|
+|Dave|999|
+|Elle|998|
+|Gill|998|
+|Hall|997|
+|Igor|997|
+|John|997|
+|Kate|997|
+
+The payouts are as follows:
+!|Payouts3|
+|Number of Players|38|
+|rank|actual payout?|
+|1|20000|
+|2|12000|
+|3|8000|
+|4|4560|
+|5|3420|
+|6|0|
+
+Adam and Bill are tied in 1st place so they share the combined payouts for ranks 1 (20,000 chips) and 2 (12,000 chips), which is 32,000 chips or 16,000 each: 
+!|Payouts|
+|Player|Payout?|
+|Adam|16,000|
+|Bill|16,000|
+
+Carl takes 3rd place and receives the 8,000 chips allocated to 3rd place:
+!|Payouts|
+|Player|Payout?|
+|Carl|8,000|
+
+Dave takes 4th place and receives the 4,560 chips allocated to 4th place:
+!|Payouts|
+|Player|Payout?|
+|Dave|4,560|
+
+Elle and Gill are tied in 5th place so they share the combined payouts for ranks 5 (3,420 chips) and 6 (0 chips), which is 3,420 chips or 1,710 chips each:
+!|Payouts|
+|Player|Payout?|
+|Elle|1,710|
+|Gill|1,710|
+
+Hall, Igor, John and Kate tie for 6th place but there is no payout for 6th place so they receive nothing:
+!|Payouts|
+|Player|Payout?|
+|Hall|0|
+|Igor|0|
+|John|0|
+|Kate|0|
+

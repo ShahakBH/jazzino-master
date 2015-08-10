@@ -1,0 +1,1 @@
+alter table player_activity_daily drop constraint player_activity_daily_pkey;

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="control-centre:war">
+    <output-path>$PROJECT_DIR$/platform/control-centre/target</output-path>
+    <root id="archive" name="control-centre-2.42.2-SNAPSHOT.war">
+      <element id="artifact" artifact-name="control-centre:war exploded" />
+    </root>
+  </artifact>
+</component>

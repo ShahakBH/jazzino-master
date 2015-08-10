@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<toolbox>
+	<tool>
+		<key>esc</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.EscapeTool</class>
+	</tool>
+	<tool>
+        <key>list</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.ListTool</class>
+	</tool>
+	<tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+	</tool>
+    <tool>
+        <key>versionTool</key>
+        <scope>application</scope>
+        <class>com.yazino.mobile.ws.ios.VersionTool</class>
+    </tool>
+
+</toolbox>

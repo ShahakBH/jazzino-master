@@ -1,0 +1,16 @@
+service http
+{
+    disable = no
+    socket_type = stream
+    user = root
+    wait = no
+    redirect = 127.0.0.1 <%= @port %>
+}
+service https
+{
+    disable = no
+    socket_type = stream
+    user = root
+    wait = no
+    redirect = 127.0.0.1 <%= @ssl_port %>
+}

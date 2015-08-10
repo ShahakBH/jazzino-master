@@ -1,0 +1,222 @@
+<div id="how-to-play" class="BLACKJACK">
+	<div id="how-to-play-area">
+		<div id="grey-window">
+			<div id="grey-window-head"><h3 class="font-grey-window-head">BLACKJACK - HOW TO PLAY & RULES</h3></div>
+			<div id="grey-window-center">
+				<div id="grey-window-body">
+					<div class="block1">
+						<div class="float-right-col">
+							<div id="back-to-games">
+                                <a href="${request.contextPath}/blackjack" class="font-how-to-play-back-game uppercase">Back to blackjack</a>
+							</div>
+						</div>
+						<div class="float-left-col">
+							<h4 class="color-BLACKJACK-2 font-compnonlogged-texthead">HOW TO PLAY at yazino</h4>
+
+							<div class="paragraph1 font-compnonlogged-1"><p class="pre-line">In Blackjack, it's you against the dealer. The aim is to draw
+								cards ('hit') until your hand adds up to 21, or as close as
+								possible without exceeding 21. If your first two cards total 21,
+								you have Blackjack, which is the highest hand possible.
+								Learn Blackjack and beat the dealer at Yazino! There are 2
+								variations of Blackjack rules on offer at our casino,
+								Atlantic City and Las Vegas, with their differences highlighted.</p>
+							</div>
+                             <a class="app-store" href="http://itunes.apple.com/us/app/blackjack-by-yazino/id542346370">
+                                <img src="$assetUrl/images/gloss/available-to-app-store.png">
+                            </a>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="block2 font-compnonlogged-2">
+						<div class="float-right-col">
+							<img src="$assetUrl/images/gloss/how-to-play-image-1.png" alt="#">
+							<img src="$assetUrl/images/gloss/how-to-play-image-2.png" alt="#">
+						</div>
+						<div class="left-col">
+							<div class="paragraph1">
+								<p class="bold">Atlantic City</p>
+
+								<p>8 Decks</p>
+
+								<p>Dealer Stands On Soft 17</p>
+
+								<p>Surrender Available </p>
+							</div>
+							<div class="paragraph2">
+								<p class="bold">Las Vegas</p>
+
+								<p>2 Decks</p>
+
+								<p>Dealer Hits Soft 17</p>
+
+								<p>No Surrender </p>
+							</div>
+							<div class="paragraph3">
+								<p class="bold">How do I start playing?</p>
+
+								<p>Once you have chosen a table, a window will pop-up and the game will load. To join in
+									the Blackjack game you need to be sitting at a seat. Available seats are buttons
+									showing 'Join' on the table. Clicking on any of these will put you at the seat. You
+									can play Blackjack on more than one seat if you want. A hand of cards will be dealt
+									to each seat. </p>
+							</div>
+							<div class="paragraph4">
+								<p class="bold">How do I place a bet?</p>
+
+								<p>Once you are sitting at a seat you need to choose how much to bet. Your Blackjack
+									bank balance is shown in the dashboard at the bottom of your screen. </p>
+
+								<p>Please click a chip in the bottom left to choose how much to bet - the chip value.
+									Then clicking on the bet circle (highlighted with 'Bet') will place that chip on the
+									table. Repeated clicks keep adding chips of the selected value to the table. Once
+									you are happy and have placed bets at all your seats, please confirm your bet by
+									clicking the 'Deal' button. </p>
+
+								<p>If you make a mistake, please click the 'Clear' button and you can start again. </p>
+
+								<p>If you don't confirm your bet (by placing bets and clicking 'Deal') on time, you will
+									lose your seat. The countdown timer shows how long you have left to confirm your
+									bet.</p>
+							</div>
+						</div>
+					</div>
+					<div class="block3 font-compnonlogged-2">
+						<h4 class="font-how-to-play-headline drop bold">blackjack Rules</h4>
+
+						<div>
+							<div class="float-right-col">
+								<img src="$assetUrl/images/gloss//how-to-play-image-3.png">
+							</div>
+							<div class="left-col">
+								<div class="paragraph1">
+									<p> Once all active players have confirmed their bets each player and the dealer are
+										dealt two cards. Your cards will be face up. The dealer's first card will be
+										face up, the second face down. </p>
+								</div>
+								<div class="paragraph2">
+									<p> '2' to '10' are worth their face value. Jack, Queen and King are worth 10 each.
+										Aces are worth either 1 or 11. Any card with a value below 10 that is combined
+										with an Ace is considered a 'soft hand', meaning that it can be counted as 5 or
+										soft 15. Both values are shown. </p>
+								</div>
+								<div class="paragraph3">
+									<p> If you are dealt two cards other than a Blackjack, you can 'Stand' (and not
+										receive any more cards) or 'Hit' (receive another card). You may keep hitting
+										until you bust (exceed 21) or stand. If you bust, you'll lose your bet,
+										regardless of what the dealer has. </p>
+								</div>
+								<div class="paragraph4"><p>After all the players have had their turn, the dealer will
+									reveal the face down card. The dealer has to hit until the cards reach a certain
+									value - this value is dependent on the specific table rules. You'll win if you have
+									a higher hand than the dealer (and have not gone bust), or if the dealer has gone
+									bust and you have not. If you win, you are paid out at 1:1. Alternatively, you'll
+									lose if you have a lower hand than the dealer or if you have gone bust. In this
+									case, you forfeit your bet. If you have the same total, it's a push (tie) and you
+									receive your bet back in most rule sets.</p>
+								</div>
+								<div class="paragraph5"><p>The summary of table rules of Blackjack are viewable at the
+									table by clicking the 'Game Rules' button at the bottom of the screen. </p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block4 font-compnonlogged-2">
+						<h4 class="font-how-to-play-headline drop bold">blackjack Options</h4>
+
+						<div>
+							<div class="left-col">
+								<div class="paragraph1">
+									<p class="bold">Splitting</p>
+
+									<p>If the table rules allow and you are dealt two cards with equal value, you can
+										'split' your cards into two separate hands. Your initial bet will be matched and
+										the hands are played separately. A hand can only be split once. If you split a
+										pair of Aces, you will only be dealt one more card.</p></div>
+								<div class="paragraph2">
+									<p class="bold">Double Down</p>
+
+									<p>If the table rules allow, you can double down on your first two cards. This
+										doubles your bet, but only one more card is dealt. You may or may not be allowed
+										to double down each hand after splitting a pair. </p>
+								</div>
+								<div class="paragraph3">
+									<p class="bold">Insurance</p>
+
+									<p>If the dealer's up card is an Ace, you may be offered insurance against the
+										dealer having Blackjack. Taking insurance means that you make an additional bet
+										(of half your original bet) that the dealer's face down card is valued at 10. If
+										this happens, you are paid out on the insurance bet, but lose the initial bet.
+										If the dealer does not have Blackjack, you lose the insurance bet and the hand
+										is played out as normal. </p>
+								</div>
+								<div class="paragraph4">
+									<p class="bold">Surrender</p>
+
+									<p>If the table rules allow, you can 'Surrender' at the beginning of your turn which
+										folds your hand at half the cost of the original bet. The decision to surrender
+										must be made prior to any other action. Once you draw, split or double down then
+										surrender is no longer available as an option. In the late surrender, the dealer
+										first checks for Blackjack. Surrender is only then available if the dealer does
+										not have a Blackjack. </p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block5 font-compnonlogged-2">
+						<h4 class="font-how-to-play-headline drop bold">table Rules</h4>
+
+						<div>
+							<div class="left-col">
+								<div class="paragraph1">
+									<p class="bold">Min / Max Bet</p>
+
+									<p>This limits the minimum and maximum amount you may bet per seat (before doubling
+										down, accepting insurance, or splitting pairs). </p></div>
+								<div class="paragraph2">
+									<p class="bold">Blackjack Pays</p>
+
+									<p>This is the amount you will be paid out if you have Blackjack (and the dealer
+										doesn't). </p>
+								</div>
+								<div class="paragraph3">
+									<p class="bold">Insurance</p>
+
+									<p>This is the amount you will be paid out if you win the insurance bet. </p>
+								</div>
+								<div class="paragraph4">
+									<p class="bold">Split</p>
+
+									<p>Determines whether splitting pairs is allowed. On some tables, you may be able to
+										split unlike 10 valued pairs, such as a J and 10. </p>
+								</div>
+								<div class="paragraph5">
+									<p class="bold">Dealer Wins Ties</p>
+
+									<p>Determines whether the dealer wins if there is a 'push' and you both have the
+										same valued hand. </p>
+								</div>
+								<div class="paragraph6">
+									<p class="bold">Double On</p>
+
+									<p>This will show you which valued hands you are allowed to double down on. This may
+										be hands valued at: 10 or 11; 9 to 11; 8 to 11; any value; or on some tables,
+										you can never double down. </p>
+								</div>
+								<div class="paragraph7">
+									<p class="bold">Dealer Stands On</p>
+
+									<p>Indicates which valued hands the dealer must stand on. If the dealer has a hand
+										below this, the dealer must hit. </p>
+								</div>
+								<div class="paragraph8">
+									<p>Malfunction voids all pays and plays. </p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="grey-window-bottom"></div>
+		</div>
+	</div>
+</div>

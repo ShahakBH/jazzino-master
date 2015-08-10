@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+require 'yaml'
+
+require 'aws-sdk'
+
+module Yazino
+
+  class GetLatestArtefact
+
+    def initialize
+      @config = YAML.load_file(config_file)
+    end
+
+    def latest_artefact
+      s3 = AWS::S3.new(:access_key_id => @config['s3']['access-key'], :secret_access_key => @config['s3']['secret-key'])
+
+      release_bucket = s3.buckets['yazino-releases']
+      available_files = release_bucket.objects.collect {|obj| obj.key}
+
+      artefact = available_files.keep_if {|file| file =~ /^strata-release-\d+(\.\d+)?\.txt$/}.sort.last.gsub(/\.txt$/, '')
+      raise "Error: Cannot determine latest release; available files was: #{available_files}" if artefact.nil?
+
+      raise "Error: Cannot find definition for artefact #{artefact}" if !available_files.index("#{artefact}.txt")
+      artefact_details =  release_bucket.objects["#{artefact}.txt"].read.strip
+      raise "Error: Cannot read definition for artefact #{artefact}" if artefact.nil?
+
+      branch = nil
+      git_hash = nil
+      if artefact_details =~ /^VCS: [^ ]+ ([^ ]+) ([^ ]+)$/
+        branch = $1
+        git_hash = $2
+      else
+        raise "Error: malformed artefact information: #{artefact_details}"
+      end
+
+      {:artefact => artefact, :branch => branch}
+    end
+
+    private
+
+    def base_dir
+      File.expand_path("#{File.dirname(__FILE__)}/..")
+    end
+
+    def config_file
+      File.expand_path("#{base_dir}/config/release.yaml")
+    end
+
+  end
+
+end
+
+if __FILE__ == $0
+  begin
+    detail = Yazino::GetLatestArtefact.new.latest_artefact
+    puts "#{detail[:artefact]} #{detail[:branch]}"
+    exit 0
+
+  rescue => e
+    puts "#{e}"
+    exit 1
+  end
+end

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+     This file is intended for inclusion by clients.
+
+     You will need to define:
+     * The configuration, as described in environment.properties
+    -->
+
+    <bean id="invitationQueryService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${platform.worker.url}/service/invitation-query"/>
+        <property name="serviceInterface"
+                  value="com.yazino.platform.invitation.InvitationQueryService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${platform.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,60 @@
+|insert|ACCOUNT|
+|BALANCE|ACCOUNT_ID?|
+|0|>>melissa|
+
+|insert|PLAYER|
+|PLAYER_ID|PARTNER_ID|EXTERNAL_ID|ACCOUNT_ID|
+|1|INTERNAL|melissa|<<melissa|
+
+|insert|FRIEND_INVITATION|
+|ACCOUNT_ID|PARTNER_ID|FRIEND_USER_ID|ID?|
+|<<melissa|INTERNAL|sameer|>>sameer1|
+|<<melissa|INTERNAL|nadia|>>nadia1|
+
+|insert|ACCOUNT|
+|BALANCE|ACCOUNT_ID?|
+|0|>>sameer|
+|0|>>nadia|
+
+|insert|PLAYER|
+|PLAYER_ID|PARTNER_ID|EXTERNAL_ID|ACCOUNT_ID|
+|2|INTERNAL|sameer|<<sameer|
+|3|INTERNAL|nadia|<<nadia|
+
+|execute procedure|process_friend_invitation|
+
+|query|!- select account_id, balance from ACCOUNT where ACCOUNT_ID in (@melissa) -!|
+|ACCOUNT_ID|BALANCE|
+|<<melissa|2000.0000|
+
+|query|!- select account_id, amount, transaction_type  from TRANSACTION_LOG where ACCOUNT_ID in (@melissa) -!|
+|ACCOUNT_ID|AMOUNT|TRANSACTION_TYPE|
+|<<melissa|1000.0000|Invite|
+|<<melissa|1000.0000|Invite|
+
+|insert|FRIEND_INVITATION|
+|ACCOUNT_ID|PARTNER_ID|FRIEND_USER_ID|ID?|
+|<<melissa|INTERNAL|jessica|>>jessica1|
+|<<nadia|INTERNAL|jessica|>>jessica2|
+
+|insert|ACCOUNT|
+|BALANCE|ACCOUNT_ID?|
+|0|>>jessica|
+
+|insert|PLAYER|
+|PLAYER_ID|PARTNER_ID|EXTERNAL_ID|ACCOUNT_ID|
+|4|INTERNAL|jessica|<<jessica|
+
+|execute procedure|process_friend_invitation|
+
+|query|!- select account_id, balance from ACCOUNT where ACCOUNT_ID in (@melissa, @nadia) -!|
+|ACCOUNT_ID|BALANCE|
+|<<melissa|3000.0000|
+|<<nadia|1000.0000|
+
+|execute procedure|process_friend_invitation|
+
+|query|!- select account_id, balance from ACCOUNT where ACCOUNT_ID in (@melissa, @nadia) -!|
+|ACCOUNT_ID|BALANCE|
+|<<melissa|3000.0000|
+|<<nadia|1000.0000|

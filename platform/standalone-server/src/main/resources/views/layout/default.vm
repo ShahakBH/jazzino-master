@@ -1,0 +1,11 @@
+<html>
+<head>
+    <title>Yazino Standalone Server</title>
+    <script type="text/javascript" src="${request.contextPath}/assets/javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/assets/javascript/swfobject.js"></script>
+    <link rel="stylesheet" href="${request.contextPath}/assets/style/default.css" type="text/css" media="screen">
+</head>
+<body>
+${screen_content}
+</body>
+</html>

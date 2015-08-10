@@ -1,0 +1,4 @@
+hosts:
+    jrae-centos.london.yazino.com:
+        roles:
+            - all

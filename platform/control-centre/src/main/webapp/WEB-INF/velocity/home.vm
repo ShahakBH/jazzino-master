@@ -1,0 +1,137 @@
+<div id="home">
+    #parse("includes/header.vm")
+
+    <ul>
+        #if ($auth.anyGranted("ROLE_GAME ROLE_GLOBAL_ADMIN"))
+        <li>
+            <h2>Game Configuration</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/game/configuration/">
+                        <img src="${request.contextPath}/images/icon-game-configurations.png"/>
+                        Game configuration
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/game/variation/list">
+                        <img src="${request.contextPath}/images/icon-game-variations.png"/>
+                        Variations
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/game/level/">
+                        <img src="${request.contextPath}/images/icon-levels.png"/>
+                        Levels
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/game/achievement/">
+                        <img src="${request.contextPath}/images/icon-achievements.png"/>
+                        Achievements
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>Tournaments</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/tournament/tournament/list">
+                        <img src="${request.contextPath}/images/icon-tournaments.png"/>
+                        Tournaments
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/tournament/recurring/list">
+                        <img src="${request.contextPath}/images/icon-recurring-tournaments.png"/>
+                        Recurring
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/tournament/variation/list">
+                        <img src="${request.contextPath}/images/icon-tournament-variations.png"/>
+                        Variations
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/tournament/trophy/list">
+                        <img src="${request.contextPath}/images/icon-trophies.png"/>
+                        Trophies
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/tournament/leaderboard/list">
+                        <img src="${request.contextPath}/images/icon-leaderboards.png"/>
+                        Leaderboards
+                    </a>
+                </li>
+            </ul>
+        </li>
+        #end
+        #if ($auth.anyGranted("ROLE_MARKETING ROLE_GLOBAL_ADMIN"))
+        <li>
+            <h2>Maintenance</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/maintenance/messages/list">
+                        <img src="${request.contextPath}/images/icon-lobby-message.png"/>
+                        Lobby Message
+                    </a>
+                </li>
+                #if ($auth.anyGranted("ROLE_GLOBAL_ADMIN"))
+                <li>
+                    <a href="${request.contextPath}/maintenance/countdown/show">
+                        <img src="${request.contextPath}/images/icon-countdown.png"/>
+                        Countdown
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/game/management/">
+                        <img src="${request.contextPath}/images/icon-shutdown.png"/>
+                        Manage Game Status
+                    </a>
+                </li>
+                #end
+            </ul>
+        </li>
+        #end
+        #if ($auth.anyGranted("ROLE_GAME ROLE_GLOBAL_ADMIN"))
+        <li>
+            <h2>Monitoring</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/monitor/table/list">
+                        <img src="${request.contextPath}/images/icon-table-monitor.png"/>
+                        Table Monitor
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/monitor/tournament/list">
+                        <img src="${request.contextPath}/images/icon-tournament-monitor.png"/>
+                        Tournament Monitor
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/monitor/session/list">
+                        <img src="${request.contextPath}/images/icon-session-monitor.png"/>
+                        Session Monitor
+                    </a
+                </li>
+            </ul>
+        </li>
+        #end
+        #if ($auth.anyGranted("ROLE_GLOBAL_ADMIN"))
+        <li>
+            <h2>Administration</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/admin/user/list">
+                        <img src="${request.contextPath}/images/icon-users.png"/>
+                        Users
+                    </a>
+                </li>
+            </ul>
+        </li>
+        #end
+    </ul>
+</div>

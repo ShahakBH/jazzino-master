@@ -1,0 +1,135 @@
+package com.yazino.payment.worldpay.nvp;
+
+public class RiskGuardianMessage extends NVPMessage {
+    private static final long serialVersionUID = -2630841527003039315L;
+
+    private static final int TRX_SOURCE_WEB = 4;
+
+    private static final String TYPE_DIGITAL_GOODS = "D";
+
+    private static final int MAX_ID_DOCUMENTS = 5;
+
+    {
+        defineField("MOP", NVPType.ALPHA, null, 2, true);
+        defineField("TRXSource", NVPType.NUMERIC, false);
+        defineField("TypeOfSale", NVPType.ALPHANUMERIC, null, 1, false);
+        defineField("OrderNumber", NVPType.ALPHANUMERIC, null, 35, false);
+        defineField("AcctName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("AcctNumber", NVPType.NUMERIC, false);
+        defineField("AcctNumber2", NVPType.NUMERIC, false);
+        defineField("CardId", NVPType.NUMERIC, false);
+        defineField("CustomerId", NVPType.ALPHANUMERIC, null, 35, false);
+        defineField("ExpDate", NVPType.NUMERIC, 6, 6, false);
+        defineField("CurrencyId", NVPType.NUMERIC, true);
+        defineField("Amount", NVPType.NUMERIC, true);
+        defineField("CurrencyId", NVPType.NUMERIC, false);
+        defineField("IsMember", NVPType.NUMERIC, false);
+        defineField("AgeVerify", NVPType.NUMERIC, false);
+        defineField("IDVerify", NVPType.NUMERIC, false);
+        defineField("ProfileVerify", NVPType.NUMERIC, false);
+        defineField("SanctionsVerify", NVPType.NUMERIC, false);
+        defineField("DOB", NVPType.NUMERIC, 8, 8, false);
+        defineField("IDType", NVPType.ALPHA, 2, 2, false);
+        defineField("IDNumber", NVPType.ALPHANUMERIC, null, 30, false);
+        for (int i = 0; i < MAX_ID_DOCUMENTS; ++i) {
+            defineField("IDType" + i, NVPType.ALPHA, 2, 2, false);
+            defineField("IDNumber" + i, NVPType.ALPHANUMERIC, null, 30, false);
+            defineField("IDCode" + i, NVPType.ALPHANUMERIC, null, 2, false);
+            defineField("IDIssuingCountry" + i, NVPType.ALPHA, null, 3, false);
+            defineField("IDCountryOfOrigin" + i, NVPType.ALPHA, null, 3, false);
+            defineField("IDNationality" + i, NVPType.ALPHA, null, 3, false);
+            defineField("IDExpiryDate" + i, NVPType.NUMERIC, 8, 8, false);
+            defineField("IDIssueDate" + i, NVPType.NUMERIC, 8, 8, false);
+        }
+        defineField("Title", NVPType.ALPHANUMERIC, null, 20, false);
+        defineField("Company", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("FirstName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("MiddleName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("LastName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Gender", NVPType.ALPHA, 1, 1, false);
+        defineField("AliasFirstName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("AliasMiddleName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("AliasLastName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Suffix", NVPType.ALPHANUMERIC, null, 20, false);
+        defineField("Address1", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Address2", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Address3", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Address4", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("Address5", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("City", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("StateCode", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ZipCode", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("CountryCode", NVPType.ALPHA, null, 2, false);
+        defineField("PhoneNumber", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("PhoneExtension", NVPType.ALPHANUMERIC, null, 10, false);
+        defineField("Email", NVPType.ALPHANUMERIC, null, 50, false);
+        defineField("ShipToTitle", NVPType.ALPHANUMERIC, null, 20, false);
+        defineField("ShipToCompany", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToFirstName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToMiddleName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToLastName", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToSuffix", NVPType.ALPHANUMERIC, null, 20, false);
+        defineField("ShipToAddress1", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToAddress2", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToAddress3", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToCity", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("ShipToStateCode", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("ShipToZipCode", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("ShipToCountryCode", NVPType.ALPHA, null, 2, false);
+        defineField("ShipToPhoneNumber", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("ShipToPhoneExtension", NVPType.ALPHANUMERIC, null, 10, false);
+        defineField("RGProfileID", NVPType.NUMERIC, false);
+        defineField("MRZLine1", NVPType.ALPHANUMERIC, null, 50, false);
+        defineField("MRZLine2", NVPType.ALPHANUMERIC, null, 50, false);
+        defineField("MRZShort", NVPType.ALPHANUMERIC, null, 16, false);
+        defineField("REMOTE_ADDR", NVPType.ALPHANUMERIC, null, 100, false);
+        defineField("HTTP_USER_AGENT", NVPType.ALPHANUMERIC, null, 200, false);
+        defineField("HTTP_ACCEPT_LANGUAGE", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("HTTP_ACCEPT_CHARSET", NVPType.ALPHANUMERIC, null, 100, false);
+        defineField("HTTP_REFERER", NVPType.ALPHANUMERIC, null, 200, false);
+        defineField("ProductType", NVPType.ALPHANUMERIC, null, 50, false);
+        defineField("IsExtended", NVPType.NUMERIC, null, 1, false);
+        defineField("MerchantReference", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("MerchantReference2", NVPType.ALPHANUMERIC, null, 60, false);
+        defineField("SecureId", NVPType.ALPHANUMERIC, null, 20, false);
+        defineField("CHEnrolled", NVPType.ALPHA, null, 1, false);
+        defineField("TXStatus", NVPType.ALPHA, null, 1, false);
+        defineField("PTVerify", NVPType.NUMERIC, false);
+        defineField("CVN", NVPType.NUMERIC, 3, 4, false);
+        defineField("IssueNumber", NVPType.NUMERIC, false);
+        defineField("StartDate", NVPType.NUMERIC, 6, 6, false);
+        defineField("XDate", NVPType.NUMERIC, 8, 8, false);
+        defineField("ClassOfTicket", NVPType.ALPHA, null, 2, false);
+        defineField("IsOneWayTrvl", NVPType.NUMERIC, null, 1, false);
+        defineField("IsDirectTravel", NVPType.NUMERIC, null, 1, false);
+        defineField("ArrivalAirportCode", NVPType.ALPHA, null, 3, false);
+        defineField("DepartureAirportCode", NVPType.ALPHA, null, 3, false);
+        defineField("PassengerName", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("AirlineCode", NVPType.ALPHANUMERIC, null, 3, false);
+        defineField("BookingSystemTrvl", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("FlightCode", NVPType.ALPHANUMERIC, null, 10, false);
+        defineField("IsSeatSale", NVPType.NUMERIC, null, 1, false);
+        defineField("IsWithChild", NVPType.NUMERIC, null, 1, false);
+        defineField("PurchaseType", NVPType.NUMERIC, null, 1, false);
+        defineField("IsFreqFlyer", NVPType.NUMERIC, null, 1, false);
+        defineField("IsPackageTrvl", NVPType.NUMERIC, null, 1, false);
+        defineField("IsFlexTicket", NVPType.NUMERIC, null, 1, false);
+        defineField("IsInsPurchased", NVPType.NUMERIC, null, 1, false);
+        defineField("AgentTrvl", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("IsChartered", NVPType.NUMERIC, null, 1, false);
+        defineField("SecProgTrvl", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("XField1", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("XField2", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("XField3", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("XField4", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("XField5", NVPType.ALPHANUMERIC, null, 30, false);
+        defineField("IsSIM", NVPType.NUMERIC, null, 1, false);
+
+        withValue("VersionUsed", 3);
+        withValue("TransactionType", "RG");
+        withValue("TimeOut", 60000);
+        withValue("MOP", "CC");
+        withValue("TRXSource", TRX_SOURCE_WEB);
+        withValue("TypeOfSale", TYPE_DIGITAL_GOODS);
+    }
+}

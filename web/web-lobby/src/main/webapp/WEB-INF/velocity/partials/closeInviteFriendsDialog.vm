@@ -1,0 +1,28 @@
+<html>
+<head>
+</head>
+<body>
+#if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+<script>
+    var p = parent;
+    var count = 0;
+    while (p) {
+        if (p.YAZINO) {
+            p.YAZINO.closeInviteFriends();
+            break;
+        }
+        if (count++ < 5) {
+            p = p.parent;
+        }
+        else {
+            p = undefined;
+        }
+    }
+</script>
+</body>
+</html>

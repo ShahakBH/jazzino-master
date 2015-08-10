@@ -1,0 +1,1 @@
+Used by FtpOutboundFileSenderIntegrationTest to test FTP transfer to CDN

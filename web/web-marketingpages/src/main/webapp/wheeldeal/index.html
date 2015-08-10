@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Yazino</title>
+
+    <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="js/javascript.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+        <div class="header clearfix">
+            <div class="logo">
+                <a href="http://www.yazino.com">
+                    <img src="images/logo.png" />
+                </a>
+            </div>
+            <div class="links">
+                <a href="http://www.yazino.com/login">
+                    Sign In
+                </a>
+                <div class="hr"></div>
+            </div>
+            <div class="wheel-deal"></div>
+        </div>
+        <div class="main-content">
+            <div class="signup-login-form">
+                <form name="loginform" method="POST" action="https://www.yazino.com/login">
+                    <input class="input-ref" type="hidden" name="ref" value="" />
+                    <input type="hidden" name="redirectTo" value="/wheelDeal" />
+                    <input type="hidden" name="registered" value="new-user" />
+                    <input type="hidden" name="avatar" value="https://cdn-small.yazino.com/web-content-20130605T110404/images/gloss/friend-bar-none-photo.png">
+                    <a href="https://www.yazino.com/fb/slots/">
+                        <img src="images/play-using-facebook.png" />
+                    </a>
+                    <div class="inputs">
+                        <input type="text" value="Email" id="email" name="email" />
+                        <input type="text" value="Display Name" class="last" id="displayName" name="displayName" />
+                        <input type="text" value="Password" id="password" name="password" />
+                    </div>
+                    <div class="checbox-fieldset clearfix">
+                        <input type="checkbox" checked="checked" name="optIn" /> <div class="fieldset-label">I'd like to receive news and special offers by email</div>
+                    </div>
+                    <div class="checbox-fieldset clearfix">
+                        <input type="checkbox" checked="checked" name="termsAndConditions" /> <div class="fieldset-label">I agree to the <a href="https://www.yazino.com/legal/termsOfService" target="_blank">Terms of Service</a> and <a href="https://www.yazino.com/legal/privacy" target="_blank">Privacy Policy</a></div>
+                    </div>
+                    <input type="submit" class="submit-button" value="" />
+                </form>
+            </div>
+            <div class="reels"></div>
+            <div class="bonus-wheel"></div>
+        </div>
+        <img src="images/wolds-first-live-multiplayer-casino-slots.png" />
+        <div class="footer">
+            <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.slots&hl=en">
+                <img src="images/google-play.png" />
+            </a>
+            <a href="https://itunes.apple.com/gb/app/slots-wheel-deal-free-live/id422074428?mt=8">
+                <img src="images/app-store.png" />
+            </a>
+            <br />
+            &copy; 2013 YAZINO, ISLAND HOUSE, GRANDE RUE, ST MARTINS, GUERNSEY, GY4 6RU
+        </div>  
+    </div>
+</body>
+</html>
+<script>
+    
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+    }
+
+    $(document).ready(function(){
+        var ref = getURLParameter("ref");
+        $(".input-ref").val(ref);
+    });
+
+</script>

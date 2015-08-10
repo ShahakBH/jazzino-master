@@ -1,0 +1,4 @@
+hosts:
+    borough.london.yazino.com:
+        roles:
+            - all

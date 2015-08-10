@@ -1,0 +1,17 @@
+#set ($location = "Achievement Management")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if($message)
+<div class="info">
+    $message
+</div>
+#end
+
+<section id="content">
+    <h2>Achievement Definitions</h2>
+    <form method="post" action="${request.contextPath}/game/achievement/refresh">
+        <input class="single-action-form-submit" type="submit" value="Reload from database"/>
+    </form>
+</section>

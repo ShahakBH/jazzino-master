@@ -1,0 +1,48 @@
+<div id="create-my-table">
+	<div id="create-my-table-area">
+		<div id="grey-window">
+			<div id="grey-window-head"><h3 class="font-grey-window-head">my table</h3></div>
+			<div id="grey-window-center">
+				<div id="grey-window-body">
+					<div id="sign-up">
+						#if(!$lobbySession)
+						   #generateLinkTagForMainCta("blackjack")
+						#end
+					</div>
+					<div class="paragraph1 font-create-my-table-1 bold">
+						<p>With Yazino, you can create your own private casino table!</p>
+
+						<p>You can create your own tables for:</p>
+					</div>
+					<div class="paragraph2 font-create-my-table-1">
+						<p>Blackjack, Texas Holdem or Roulette</p>
+					</div>
+					<div class="paragraph3">
+						<div class="techno-float">
+							<div>
+								<p class="font-create-my-table-big-number">1.</p>
+
+								<div class="step step1"></div>
+								<p class="font-create-my-table-2">Give it a name</p>
+							</div>
+							<div>
+								<p class="font-create-my-table-big-number">2.</p>
+
+								<div class="step step2"></div>
+								<p class="font-create-my-table-2">Choose your stake</p>
+							</div>
+							<div>
+								<p class="font-create-my-table-big-number">3.</p>
+
+								<div class="step step3"></div>
+								<p class="font-create-my-table-2">Invite your friends</p>
+							</div>
+						</div>
+					</div>
+					<div class="paragraph4"><p class="font-create-my-table-3">And have great fun!</p></div>
+				</div>
+			</div>
+			<div id="grey-window-bottom"></div>
+		</div>
+	</div>
+</div>

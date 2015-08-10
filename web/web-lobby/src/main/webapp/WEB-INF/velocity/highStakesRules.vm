@@ -1,0 +1,170 @@
+<div id="how-to-play" class="HIGH_STAKES">
+    <div id="how-to-play-area">
+        <div id="grey-window">
+            <div id="grey-window-head"><h3 class="font-grey-window-head">HIGH STAKES - HOW TO PLAY & RULES</h3></div>
+            <div id="grey-window-center">
+                <div id="grey-window-body">
+                    <div class="block1">
+                        <div class="float-right-col">
+                            <div id="back-to-games">
+                                <a href="${request.contextPath}/highStakes"
+                                   class="font-how-to-play-back-game uppercase">Back to High Stakes</a>
+                            </div>
+                        </div>
+                        <div class="left-col">
+                            <h4 class="colour-HIGH_STAKES font-compnonlogged-texthead">
+                                HOW TO PLAY HIGH STAKES AT YAZINO
+                            </h4>
+
+                            <div class="paragraph1 font-compnonlogged-1">
+                                <p>Experience a thrilling, multiplayer slots game where you compete with others in the
+                                    risky and glamourous world of an international heist.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <script type="text/javascript">
+                        #if ($!canvas)
+                            #set($movieWidth= '671px')
+                            #set($movieHeight = '428px')
+                        #else
+                            #set($movieWidth= '824px')
+                            #set($movieHeight = '525px')
+                        #end
+                        $(document).ready(function() {
+                            swfobject.embedSWF(
+                                "$!clientUrl/videos/highStakesPromo.swf",
+                                "tutorial",
+                                "$movieWidth",
+                                "$movieHeight",
+                                "10.0.0",
+                                "",
+                                {
+                                    contentUrl: '#qualifyUrl($assetUrl)',
+                                    clientUrl: '#qualifyUrl($clientUrl)'
+                                },
+                                {
+                                    align: "middle",
+                                    quality: "high",
+                                    scale: "exactFit",
+                                    bgcolor: "#ffffff",
+                                    wmode: "opaque",
+                                    allowScriptAccess: "always"
+                                }
+                            );
+                        });
+                    </script>
+                    <div class="HighStakesPromo" align="center">
+                        <div id="tutorial">
+                            <a href="http://www.adobe.com/go/getflashplayer">
+                                <img src="$assetUrl/images/get_flash_player.gif" alt="Get Adobe Flash player" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="block2 font-compnonlogged-2">
+                        <div class="float-right-col">
+                            <img src="$assetUrl/images/gloss/how-to-play-highStakes-image-1.png" alt="#"
+                                 class="highStakes-image-1"/>
+                            <img src="$assetUrl/images/gloss/how-to-play-highStakes-image-1a.png" alt="#"
+                                 class="highStakes-image-1a"/>
+                            <img src="$assetUrl/images/gloss/how-to-play-highStakes-image-2.png" alt="#"
+                                 class="highStakes-image-2"/>
+                            <img src="$assetUrl/images/gloss/how-to-play-highStakes-image-3.png" alt="#"
+                                 class="highStakes-image-3"/>
+                            <img src="$assetUrl/images/gloss/how-to-play-highStakes-image-4.png" alt="#"
+                                 class="highStakes-image-4"/>
+                        </div>
+                        <div class="left-col">
+                            <div class="paragraph">
+                                <p>High stakes is a multiplayer 5-reel, 20-line slot game where you compete with up
+                                    to nine other players to reach the top spot in the ranks of a team of gem thieves.</p>
+                            </div>
+
+                            <div class="paragraph">
+                                <p>Every time you spin, your bonus amount increases, based on your stake.
+                                    To win the biggest bonus, look for two special items on the reels:</p>
+                            </div>
+
+                            <div class="paragraph">
+                                <p class="subheading">Promotion</p>
+                                <p>Moves you up character rank. Every time you land a special 'promotion' symbol on the reels,
+                                    you move up too a higher rank with a higher bonus multiplier. There are nine ranks on the team:
+                                    The Lookout, Hustler, Il Piloto, Ms. Demolition, The Insider, La Distracci&oacute;n, The Geekster,
+                                    Cat Burglar, and finally The Boss.</p>
+                            </div>
+
+                            <div class="paragraph">
+                                <p class="subheading">Safe-Crack</p>
+                                <p>Triggers the bonus round, the first player to land the 'safe crack' will get the first attempt
+                                    at guessing the three-digit code that unlocks the safe (meaning a big payout!). If that player
+                                    guesses incorrectly, the next attempt goes to the player with the highest character rank. This
+                                    sequence continues until the safe is cracked. Cracking the safe in less guesses leads to a higher
+                                    bonus multliplier for everyone and bigger payouts!</p>
+                            </div>
+                            <div class="paragraph">
+                                <p class="heading">HOW DO I PLAY?</p>
+                                <ul>
+                                    <li><span>Press the Spin button</span></li>
+                                    <li><span>Win on the reels</span></li>
+                                    <li>
+                                        <span>Guess the three-digit code when you get a Safe-Crack item on your reels</span>
+                                    </li>
+                                    <li><span>Receive your bonus when the safe is unlocked</span></li>
+                                </ul>
+                            </div>
+                            <div class="paragraph">
+                                <p class="subheading">Cracking the safe</p>
+                                <p>When you see the Safe-Crack reel item on the reels, it's your turn to try and guess the
+                                    three-digit code that opens the safe. If you get a number right, you receive a promotion and
+                                    increase the bonus multiplier for all players. If you get it wrong, you decrease the bonus
+                                    multiplier for all players and the next player gets a chance to crack the safe instead.
+                                    Only the top six ranks get a chance to crack the safe but all the other players watch your
+                                    attempt. (No pressure!)</p>
+                            </div>
+                            <div class="paragraph">
+                                <p class="subheading">Bonus Payout</p>
+                                <p>When any player gets the third digit correct the Bonus Payout is triggered.
+                                    The payout you receive is based on your bonus and your current multipliers.</p>
+                                <ul>
+                                    <li><span>Each rank has a static multiplier, with The Boss's multiplier being the highest and Ms. Demolitions's being the lowest (that still pays).</span></li>
+                                    <li><span>There is a second, bonus multiplier on the safe itself.</span></li>
+                                    <li><span>When you guess a digit correctly, you are promoted and the multiplier increases too.</span></li>
+                                    <li><span>If you guess incorrectly, your rank stays the same, but the bonus multiplier goes down.</span></li>
+                                    <li><span>Final payout =  Bonus Bank  &times;  Rank Multiplier  &times;  Bonus Multiplier</span></li>
+                                </ul>
+                            </div>
+                            <div class="paragraph">
+                                <p class="subheading">Betting and levels</p>
+
+                                <p>There are no high/medium/low tables in High Stakes. Instead the amount you can bet per line
+                                    is connected to your player level. As you level up, you'll unlock higher bet levels. You can
+                                    level up by getting successful bets and completing the bonus games &ndash; in other words, through
+                                    spinning and playing High Stakes.</p>
+                            </div>
+                            <div class="paragraph">
+                                <p class="subheading">How do I change my bet?</p>
+
+                                <p>Select your bet per line by clicking on the '-', '+' or 'MAX' buttons next to the 'CHIPS'
+                                    field in the bottom right of the screen. Adjusting the number of lines you're betting is controlled
+                                    the same way with the buttons next to the 'LINES' field. The total amount you have staked will be
+                                    shown in the 'TOTAL BET' field just above these controls.</p>
+                            </div>
+                            <div class="paragraph">
+                                <p>Once you've chosen your stake and win lines, press the 'SPIN' button. The reels will spin and
+                                    then stop at random. If the combination of symbols on the reels forms a line of 3, 4 or 5 matching
+                                    symbols (from the left) on one of the lines you selected to play, you win. Winning lines are
+                                    highlighted and your winnings are credited to your chips balance. Press the 'Pay table' button
+                                    at the bottom of the screen to see the pay tables.</p>
+                            </div>
+                            <div class="paragraph">
+                                <p>Malfunction voids all pays and plays.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="grey-window-bottom"></div>
+        </div>
+    </div>
+</div>

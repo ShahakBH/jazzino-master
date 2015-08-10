@@ -1,0 +1,151 @@
+#parse ('partials/partialHeader.vm')
+
+<script type="text/javascript">
+    var yazinoWindow;
+    $(document).ready(function () {
+        var attach, detach;
+
+        yazinoWindow = #if($partial)parent.window.YAZINO#{else}YAZINO#{end};
+
+        ## WEB-3728 - This is a horrid hack, where we suspend validation if the user mouse-overs FB login.
+        attach = function () {
+            $('.loginForm').attr('novalidate', '').validationEngine('attach', { promptPosition : "topLeft", scroll: false });
+        };
+        detach = function () {
+            $('.loginForm').attr('novalidate', '').validationEngine('detach');
+        };
+
+        attach();
+        $('#fb-login a').mouseenter(detach).mouseleave(attach);
+
+        $('#fb-login a').click(function () {
+            ## Use hide here as it is a lot, lot faster than using the validationEngine hideAll function
+            $('.loginForm .formError').hide();
+        });
+    });
+</script>
+
+#springBind("loginForm")
+<form class="loginForm" name="loginForm" method="POST" action="/login">
+    <input type="hidden" value="$!{partial}" name="partial"/>
+    <input type="hidden" name="gameReferrer" value="#if($!gameReferrer)${esc.html($gameReferrer)}#end">
+    <input type="hidden" name="avatar" value="$!{assetUrl}/images/gloss/friend-bar-none-photo.png">
+
+    <fieldset class="facebook" id="fb-login">
+        <a href="/fb/${esc.html($game)}/" target="_top"><img src="${assetUrl}/images/loginFacebookButton.png" width="201" height="29" alt="Login with Facebook"/></a>
+    </fieldset>
+
+    <fieldset>
+        <h1>Login with Yazino</h1>
+
+        #springBind("loginForm")
+        #if ($status.error || $loginError)
+        <p class="error">
+            $!{loginError}
+            #springShowErrors(" " "")
+        </p>
+        #end
+
+        <p>
+            <label for="email">#message("playerProfile.fields.emailAddress.label")</label>
+            #springBind("loginForm.email")
+            <input type="email" id="${status.expression}" name="${status.expression}" value="$!status.value"
+                   required="required" data-validation-engine="validate[required,custom[email]]"/>
+            #springShowErrors(" " 'error')
+        </p>
+    </fieldset>
+    <fieldset class="new-or-existing-user">
+        <h4>
+            #message("instructions.login.havePassword")
+        </h4>
+        <label>
+
+            #springBind("loginForm.registered")
+
+            <input name="registered" type="radio" id="registered" value="existing-user"
+                   #if($loginForm.registered != "new-user")checked="checked"#end class="required-when-active">
+            #message("instructions.login.yesPassword")
+
+        </label>
+
+        <div class="only-active-for-existing-users loginMiniForm">
+            #springFormPasswordInput("loginForm.registeredPassword" 'size="30" class="required-when-enabled" data-validation-engine="validate[required]"')
+
+            <p class="only-active-for-existing-users forgottenPassword">
+                #if($!loginForm.email)
+                    #set($resetEmail="&email=" + ${esc.html($loginForm.email)})
+                #end
+                <a href="/resetPassword?gameType=${esc.html($game)}#if($partial)&partial=true$!{resetEmail}#end">Forgot Password?</a>
+            </p>
+        </div>
+        <p class="registerMiniForm">
+            <label>
+                #springBind("loginForm.registered")
+                <input name="registered" type="radio" value="new-user" id="registered"
+                       #if($loginForm.registered == "new-user")checked="checked"#end class="required-when-active">
+                #message("instructions.login.noPassword")
+            </label>
+        </p>
+
+        <div class="only-shown-for-existing-users">
+            <input class="loginButton" value="Login" type="submit">
+        </div>
+    </fieldset>
+    <fieldset class="only-shown-for-new-users registrationArea">
+        <p>
+            <label for="displayName">#message("playerProfile.fields.displayName.label")</label>
+            <span class="validationRequirement">#message("playerProfile.fields.displayName.comment")</span>
+            #springFormInput("loginForm.displayName" 'class="required-when-enabled" data-validation-engine="validate[required,minSize[3],maxSize[10],custom[onlyLetterNumber]"') #springShowErrors(" " 'error')
+        </p>
+
+        <p>
+            <label for="password">#message("playerProfile.fields.password.label")</label><span
+                class="validationRequirement">#message("playerProfile.fields.password.comment")</span>
+            #springFormInput("loginForm.password" 'autocapitalize="none" autocorrect="off" class="required-when-enabled" data-validation-engine="validate[required,minSize[5], maxSize[20]]"') #springShowErrors(" " 'error')
+        </p>
+
+        <div id="termsAndSignup">
+            <label for="optIn" class="optInLabel">
+                    <input type="checkbox" id="optIn" name="optIn" #if($loginForm.optIn) checked="checked" #end>
+                I'd like to receive news and special offers by email
+            </label>
+
+            #springBind("loginForm.termsAndConditions")
+            #if ($status.error)
+                <p class="error">
+                    #message("empty.registration.termsAndConditions")
+                </p>
+            #end
+            <label for="termsAndConditions">
+                <input type="checkbox" id="termsAndConditions" name="termsAndConditions"
+                    #if($loginForm.termsAndConditions) checked="checked" #end class="required-when-enabled"
+                       data-validation-engine="validate[required]" data-prompt-position="bottomLeft"
+                       data-errormessage-value-missing="You must accept the terms and conditions">
+                I agree to the
+                <a href="/legal/termsOfService" target="_blank">
+                    Terms of Service
+                </a> and
+                <a href="/legal/privacy" target="_blank">
+                    Privacy Policy
+                </a>
+            </label>
+        </div>
+
+        <input class="loginButton" value="Login" type="submit">
+    </fieldset>
+
+    <fieldset class="rememberMe">
+        #if($partial)
+            <input type="button" class="lightboxKillerClose yaz-std-close-button" value="Close"/>
+        #end
+        <label>
+            #springBind("loginForm._spring_security_remember_me")
+            <input type="checkbox" name="_spring_security_remember_me" id="rememberMe"
+                   checked>#message("empty.registration.rememberMe")
+        </label>
+
+        <p>#message("empty.registration.rememberMe.note")</p>
+    </fieldset>
+</form>
+
+#parse ('partials/partialFooter.vm')

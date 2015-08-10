@@ -1,0 +1,13 @@
+#if ($!verificationResult)
+    <div class="verification graphical-area success">
+        <p >Open up the fun with <strong>These Sparkling Chips</strong></p>
+        <a class="featureLink gameSpecific major" href="/">Let's Play!</a>
+    </div>
+#else
+    <div class="verification graphical-area failure">
+        <h2>Sorry</h2>
+        <p>This link is no longer available</p>
+        <p>You can earn more chips by completing our special offers.</p>
+        <a class="featureLink gameSpecific major" href="/">Earn chips and play</a>
+    </div>
+#end

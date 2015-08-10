@@ -1,0 +1,22 @@
+#set ($location = "Show System Message")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/maintenance/messages/list">List System Messages</a></li>
+        <li><a href="${request.contextPath}/maintenance/messages/edit/${systemMessage.id}">Edit</a></li>
+        <li><a href="${request.contextPath}/maintenance/messages/delete/${systemMessage.id}"
+               class="action-delete" data-id="${systemMessage.id}" data-type="system message">Delete</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>System Message ${systemMessage.id}</h2>
+
+        #set($readonly = "true")
+        #parse("maintenance/messages/form.vm")
+    </div>
+</section>

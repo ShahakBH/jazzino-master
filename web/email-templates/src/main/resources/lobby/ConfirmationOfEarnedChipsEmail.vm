@@ -1,0 +1,58 @@
+#set($!title = "$!{displayName}, you've earned some chips")
+#parse('lobby/header.vm')
+
+                <!--start body-->
+                <tr>
+                    <td colspan="4" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/reusable-assets/20120123T000000/no-article-top.jpg" width="700" height="7" alt="" style="vertical-align:top;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="25"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><a href="$!targetUrl" style="text-decoration: none;"><font
+                            style="font-family:Helvetica, Arial, sans-serif; font-size: 18px;"
+                            face="Helvetica Arial" size="5">
+                        <b >
+                            <font color="#E72020" style="color: #E72020;">BRAVO! YOU BOOSTED YOUR CHIP&nbsp;BALANCE</font>
+                        </b></font></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="15"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <p><font face="Helvetica, Arial, sans-serif" color="#707070" style="font-size:15px;line-height:19px;">Hi $!esc.html($!playerFirstName),</font></p>
+                        <p><font face="Helvetica, Arial, sans-serif" color="#707070" style="font-size:15px;line-height:19px;">You've earned <strong>$!{earnedChips}</strong> more chips to play with! If you have any
+                            questions, please e-mail us at <a href="mailto:contact@yazino.com"
+                                                              style="text-decoration: none;"><font color="#e52525">contact@yazino.com</font></a>
+                            quoting your unique ID: $!{earnedId}.</font></p>
+                        <br/>
+                        <a href="$!targetUrl"><img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/Yazino_ConfirmationOfEarnedChips/play_now_btn.png" alt="Play Now" width="176" height="34"/></a>
+                    </td>
+                    <td align="center" valign="top">
+                        <img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/Yazino_ConfirmationOfEarnedChips/confirmed-earned-chips-main.jpg" alt="blast-off image" width="220" height="130"/>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            #parse('lobby/footer.vm')
+

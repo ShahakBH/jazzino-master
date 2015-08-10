@@ -1,0 +1,127 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        #foreach($user in $command.users)
+            $("#update_$formatter.escape("$user.userName")").click(function () {
+                $("#req").val("UPDATE");
+                $("#activeId").val("$user.userName");
+                $("#mainForm").submit();
+            });
+            $("#delete_$formatter.escape("$user.userName")").click(function () {
+                if (confirm("Are you sure?")) {
+                    $("#req").val("DELETE");
+                    $("#activeId").val("$user.userName");
+                    $("#mainForm").submit();
+                }
+            });
+        #end
+        $("#addNew").click(function () {
+            $("#req").val("INSERT");
+            $("#mainForm").submit();
+        });
+
+        #if ("$!command.req" != "")
+            $("#mainForm").submit(function () {
+                $("#errorMessage").fadeOut("slow");
+                $("#errorMessage2").fadeOut("slow");
+                if (!$("#activeUser\\.realName").val() || $("#activeUser\\.realName").val() == "") {
+                    $("#errorMessage2").html("The real name must be non-empty<br />");
+                    $("#errorMessage2").fadeIn("slow");
+                    return false;
+                }
+                if ($("#activeUser\\.password").val() != $("#pwCopy").val()) {
+                    $("#errorMessage").html("Passwords don't match<br />");
+                    $("#errorMessage").fadeIn("slow");
+                    return false;
+                }
+                #if ($command.req == "INSERT_COMMIT")
+                    if (!$("#activeUser\\.userName").val() || $("#activeUser\\.userName").val() == "") {
+                        $("#errorMessage").html("The user name must be non-empty<br />");
+                        $("#errorMessage").fadeIn("slow");
+                        return false;
+                    } else if (!$("#activeUser\\.password").val() || $("#activeUser\\.pasword").val() == "") {
+                        $("#errorMessage").html("The password must be non-empty<br />");
+                        $("#errorMessage").fadeIn("slow");
+                        return false;
+                    }
+                #end
+                return true;
+            });
+        #end
+    });
+</script>
+
+<form method="POST" action="#springUrl('/userAdmin')" id="mainForm">
+    #springFormHiddenInput("command.req" "")
+    #springFormHiddenInput("command.activeId" "")
+    <table class="report" cellpadding="5" cellspacing="0" width="80%" align="center">
+        <tr>
+            <th width="40%">User name</th>
+            <th>Real name</th>
+            <th>Access</th>
+            <th>Platforms</th>
+            <th>
+                #if("$!command.req" == "")
+                    <button id="addNew">Add new</button>
+                #end
+                &nbsp;
+            </th>
+        </tr>
+        #if("$!command.req" == "UPDATE_COMMIT" || "$!command.req" == "INSERT_COMMIT")
+            <tr>
+                <td class="totals_string">
+					<span class="errorMessage" id="errorMessage"
+                        #if("$!command.errorMessage" == "")
+                          style="display:none"
+                        #end
+                            >$command.errorMessage<br/></span>
+                    #if($command.req == "UPDATE_COMMIT")
+                        $command.activeUser.userName
+                    #else
+                        #springFormInput("command.activeUser.userName" "size='30'")
+                    #end
+                    <br/><span style="color:#00f">Password:</span>
+                    #springFormPasswordInput("command.activeUser.password" "size='30'")
+                    <br/><span style="color:#00f">Re-enter password:</span>
+                    <input type="password" id="pwCopy" size="30");
+                </td>
+                <td class="totals_string">
+                    <span class="errorMessage" style="display:none" id="errorMessage2"></span>
+                    #springFormInput("command.activeUser.realName" "size='30'")
+                </td>
+                <td class="totals_string">
+                    #springFormCheckboxes("command.activeUser.roles" $allRoles "<br />" "")
+                </td>
+                <td class="totals_string">
+                    #springFormCheckboxes("command.activeUser.platforms" $allPlatforms "<br />" "")
+                </td>
+                <td class="totals_string">
+                    <input type="submit" value="Submit"/>
+                </td>
+            </tr>
+        #end
+        #foreach($user in $command.users)
+            <tr>
+                <td>$user.userName</td>
+                <td>$user.realName</td>
+                <td>
+                    <ul>
+                        #foreach($role in $user.roles)
+                            <li>$role.roleName</li>
+                        #end
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        #foreach($platform in $user.platforms)
+                            <li>$platform.name()</li>
+                        #end
+                    </ul>
+                </td>
+                <td>
+                    <button id="update_$user.userName">Modify</button>
+                    <button id="delete_$user.userName">Delete</button>
+                </td>
+            </tr>
+        #end
+    </table>
+</form>

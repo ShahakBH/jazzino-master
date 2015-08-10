@@ -1,0 +1,98 @@
+!3 Players are paid a share of the entry fees or the minimum amount, whichever is greater.
+
+!2 Setup
+!3 Minimum Prize Pool
+!|Minimum Prize Pool is |40000| 
+
+!|Payout for tournament|
+|Rank|Payout|
+|1|.5|
+|2|.3|
+|3|.2|
+
+!3 Entry Fee Prize Pool
+!|Entry fee is|1000|
+ 
+!2 Examples
+The ''actual payout'' column indicates the number of chips to be paid to a sole player holding the given rank (i.e. it is assumed that there are no ties)
+
+!|Payouts2|
+|Number of Players|52|
+|rank|entry fee?|minimum?|actual payout?|
+|1|19760|20000|20000|
+|2|11440|12000|12000|
+|3|7800|8000|8000|
+|4|5720|0|5720|
+|5|4160|0|4160|
+|6|3120|0|3120|
+|7|0|0|0|
+
+!|Payouts2|
+|Number of Players|53|
+|rank|entry fee?|minimum?|actual payout?|
+|1|20140|20000|20140|
+|2|11660|12000|12000|
+|3|7950|8000|8000|
+|4|5830|0|5830|
+|5|4240|0|4240|
+|6|3180|0|3180|
+|7|0|0|0|
+
+!|Payouts2|
+|Number of Players|54|
+|rank|entry fee?|minimum?|actual payout?|
+|1|20520|20000|20520|
+|2|11880|12000|12000|
+|3|8100|8000|8100|
+|4|5940|0|5940|
+|5|4320|0|4320|
+|6|3240|0|3240|
+|7|0|0|0|
+
+!|Payouts2|
+|Number of Players|55|
+|rank|entry fee?|minimum?|actual payout?|
+|1|19250|20000|20000|
+|2|11550|12000|12000|
+|3|8250|8000|8250|
+|4|6050|0|6050|
+|5|4400|0|4400|
+|6|3300|0|3300|
+|7|2200|0|2200|
+|8|0|0|0|
+
+!|Payouts2|
+|Number of Players|56|
+|rank|entry fee?|minimum?|actual payout?|
+|1|19600|20000|20000|
+|2|11760|12000|12000|
+|3|8400|8000|8400|
+|4|6160|0|6160|
+|5|4480|0|4480|
+|6|3360|0|3360|
+|7|2240|0|2240|
+|8|0|0|0|
+
+!|Payouts2|
+|Number of Players|57|
+|rank|entry fee?|minimum?|actual payout?|
+|1|19950|20000|20000|
+|2|11970|12000|12000|
+|3|8550|8000|8550|
+|4|6270|0|6270|
+|5|4560|0|4560|
+|6|3420|0|3420|
+|7|2280|0|2280|
+|8|0|0|0|
+
+!|Payouts2|
+|Number of Players|58|
+|rank|entry fee?|minimum?|actual payout?|
+|1|20300|20000|20300|
+|2|12180|12000|12180|
+|3|8700|8000|8700|
+|4|6380|0|6380|
+|5|4640|0|4640|
+|6|3480|0|3480|
+|7|2320|0|2320|
+|8|0|0|0|

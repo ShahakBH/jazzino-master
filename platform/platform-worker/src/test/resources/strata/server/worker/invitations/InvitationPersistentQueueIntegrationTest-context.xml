@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:environment.properties</value>
+                <value>file:/etc/senet/environment.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.yazino.platform.invitation.InvitationConfig"/>
+
+    <rabbit:admin id="amqpAdmin"
+                  connection-factory="invitationsConnectionFactory"/>
+
+    <bean class="com.yazino.platform.messaging.publisher.SpringAMQPRoutedQueuePublishingService">
+        <constructor-arg index="0" value="strata.rabbitmq.invitations.host"/>
+        <constructor-arg index="1" value="${strata.rabbitmq.invitations.port}"/>
+        <constructor-arg index="2" value="${strata.rabbitmq.invitations.virtualhost}"/>
+        <constructor-arg index="3" value="${strata.rabbitmq.invitations.username}"/>
+        <constructor-arg index="4" value="${strata.rabbitmq.invitations.password}"/>
+        <constructor-arg index="5" ref="invitationsTemplate"/>
+    </bean>
+
+    <bean id="invitationsTemplate"
+          class="com.yazino.platform.messaging.publisher.CloneableRabbitTemplate">
+        <constructor-arg ref="invitationsConnectionFactory"/>
+
+        <property name="exchange" value="worker-exchange-invitations-integration-test"/>
+        <property name="queue" value="worker-queue-invitations-integration-test"/>
+        <property name="routingKey" value="worker-invitations-queue-test-routing"/>
+        <property name="messageConverter" ref="invitationsConverter"/>
+        <property name="messagePropertiesConverter">
+            <bean class="org.springframework.amqp.rabbit.support.DefaultMessagePropertiesConverter"/>
+        </property>
+    </bean>
+
+</beans>

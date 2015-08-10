@@ -1,0 +1,68 @@
+Players are assigned a random table at the start of each level, grouped by bankroll, with at least 3 people per table.
+
+!3 Tournament tables with 6 players
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|2|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|3|for template|Blackjack Tournament|with min stake|10|
+
+!|Create tournament| June Blackjack Tournament |from template|Blackjack Tournament|
+
+!|Force state for|June Blackjack Tournament|to|Registering|
+
+!|Setup tournament players for tournament|
+|Tournament Name|Players|Tournament Chips|
+|June Blackjack Tournament|Jack|1000|
+|June Blackjack Tournament|Ralph|1000|
+|June Blackjack Tournament|Greg|1000|
+|June Blackjack Tournament|John|1000|
+|June Blackjack Tournament|Tim|1000|
+|June Blackjack Tournament|Paul|1000|
+|June Blackjack Tournament|Bob|1000|
+
+!|Start level for tournament|June Blackjack Tournament|
+!|Stop level for tournament| June Blackjack Tournament|
+
+Players are assigned to tables for level 2
+!|Set player tournament balance|
+|Tournament Name|Player|Balance|
+|June Blackjack Tournament|Jack|1000|
+|June Blackjack Tournament|Ralph|900|
+|June Blackjack Tournament|Greg|950|
+|June Blackjack Tournament|John|800|
+|June Blackjack Tournament|Tim|700|
+|June Blackjack Tournament|Paul|600|
+|June Blackjack Tournament|Bob|500|
+
+!|Start level for tournament|June Blackjack Tournament|
+
+!| Check players at tables for tournament |
+|Tournament Name | Table Index | List Players() |
+| June Blackjack Tournament | A | Jack, Greg, Ralph, John |
+| June Blackjack Tournament | B | Tim, Paul, Bob |
+
+!|Set player tournament balance|
+|Tournament Name|Player|Balance|
+|June Blackjack Tournament|Jack|50|
+|June Blackjack Tournament|Ralph|1000|
+|June Blackjack Tournament|Greg|900|
+|June Blackjack Tournament|John|800|
+|June Blackjack Tournament|Tim|700|
+|June Blackjack Tournament|Paul|9|
+|June Blackjack Tournament|Bob|600|
+
+!|Stop level for tournament|June Blackjack Tournament|
+
+Players are assigned to tables for level 3
+
+!|Start level for tournament|June Blackjack Tournament|
+
+!| Check players at tables for tournament |
+|Tournament Name| Table Index | List Players() |
+| June Blackjack Tournament | A | Ralph, Greg, John |
+| June Blackjack Tournament | B | Tim, Bob, Jack |
+

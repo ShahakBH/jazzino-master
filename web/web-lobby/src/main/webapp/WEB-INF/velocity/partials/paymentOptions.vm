@@ -1,0 +1,19 @@
+<ul>
+    <li>
+        <input type="radio" class="paimentRadio" id="paiment_credit" name="paymentMethod"
+            #if($preferedPaymentType == "WIRECARD" || $preferedPaymentType == "CREDITCARD")
+               checked="checked" #end
+               value="creditcard">
+        <label class="credit-cart" for="paiment_credit">Pay by card</label>
+    </li>
+    <li>
+        <input type="radio" class="paimentRadio" id="paiment_pay_pal" name="paymentMethod"
+            #if($preferedPaymentType == "PAYPAL") checked="checked" #end value="paypal">
+        <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+    </li>
+    <li>
+        <input type="radio" class="paimentRadio" id="paiment_trialpay" name="paymentMethod"
+            #if($preferedPaymentType == "TRIALPAY") checked="checked" #end value="trialpay">
+        <label class="trialpay" for="paiment_trialpay">Earn Chips</label>
+    </li>
+</ul>

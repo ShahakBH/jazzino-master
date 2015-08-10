@@ -1,0 +1,202 @@
+#!/bin/bash
+
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+PORT=10098
+
+print_usage() {
+    echo "Usage: $0 [-w <warning count>] [-c <critical count>] -p <port=10098> -t <heap|og|ld|cc|ct> [--ignore-missing]"
+    exit $STATE_UNKNOWN
+}
+
+call_jmx() { # java, JMX jar, port, object, alternate object, options; returns $?, $JMX_OUT
+    local JAVA=$1
+    local JMX_JAR=$2
+    local PORT=$3
+    local OBJECT=$4
+    local OBJECT_ALT=$5
+    local OTHEROPTS=$6
+
+    OPTS="-U service:jmx:rmi:///jndi/rmi://localhost:$PORT/jmxrmi -O "
+
+    JMX_OUT=$($JAVA -jar $JMX_JAR $OPTS "$OBJECT" $OTHEROPTS 2>&1)
+    EXIT_CODE=$?
+
+    if [[ $EXIT_CODE == 2 && $JMX_OUT =~ 'objectName not found' && -n $OBJECT_ALT ]]; then
+        OBJECT=$OBJECT_ALT
+        JMX_OUT=$($JAVA -jar $JMX_JAR $OPTS "$OBJECT" $OTHEROPTS)
+        EXIT_CODE=$?
+    fi
+
+    return $EXIT_CODE
+}
+
+percentage_of_memory() { # java, JMX jar, port, type, percentage; returns $?, $RESULT
+    local JAVA=$1
+    local JMX_JAR=$2
+    local PORT=$3
+    local TYPE=$4
+    local PERCENTAGE=$5
+
+    if [ $TYPE = "heap" ]; then
+        local OBJECT="java.lang:type=Memory"
+        local OBJECT_ALT="$OBJECT"
+        local OTHEROPTS="-A HeapMemoryUsage -K max -u B"
+    elif [ $TYPE = "og" ]; then
+        local OBJECT="java.lang:type=MemoryPool,name=CMS Old Gen"
+        local OBJECT_ALT="java.lang:type=MemoryPool,name=PS Old Gen"
+        local OTHEROPTS="-A Usage -K max -u B"
+    else
+        echo "Unknown type: $TYPE"
+        return 1
+    fi
+
+    call_jmx "$JAVA" "$NAGIOS" "$PORT" "$OBJECT" "$OBJECT_ALT" "$OTHEROPTS"
+    if [[ $? -eq 0 && $JMX_OUT =~ .max\ =\ ([0-9]+) ]]; then
+        local MEMORY_MAX=${BASH_REMATCH[1]}
+        RESULT=$(echo "scale=2;x=($PERCENTAGE/100)*$MEMORY_MAX;scale=0;x/=1;print x" | bc)
+        return 0
+    else
+        echo "Cannot query max pool size: $JMX_OUT"
+        return 1
+    fi
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -w | --warning)
+            shift
+            WARNING_THRESHOLD=$1
+            ;;
+        -c | --critical)
+            shift
+            CRITICAL_THRESHOLD=$1
+            ;;
+        -p | --port)
+            shift
+            PORT=$1
+            ;;
+        -t | --type)
+            shift
+            TYPE=$1
+            ;;
+        -og)
+            shift
+            TYPE="og"
+            ;;
+        -ld)
+            shift
+            TYPE="ld"
+            ;;
+        -cc)
+            shift
+            TYPE="cc"
+            ;;
+        -ct)
+            shift
+            TYPE="ct"
+            ;;
+        --ignore-missing)
+            IGNORE_MISSING=true
+            ;;
+        *)  echo "Unknown argument: $1"
+            print_usage
+            exit $STATE_UNKNOWN
+            ;;
+        esac
+shift
+done
+
+if [ -z $TYPE ]; then
+    echo "No check type specified"
+    print_usage
+    exit $STATE_UNKNOWN
+fi
+
+if [ -n "$JAVA_HOME" -a -f "$JAVA_HOME/bin/java" ]; then
+    JAVA="$JAVA_HOME/bin/java"
+elif [ -d /opt/java/bin ]; then
+    JAVA=/opt/java/bin/java
+else
+    JAVA=java
+fi
+
+if [ -f "./check_jmx.jar" ]; then
+    NAGIOS=./check_jmx.jar
+elif [ -f "/usr/local/nagios/libexec/yazino/check_jmx.jar" ]; then
+    NAGIOS=/usr/local/nagios/libexec/yazino/check_jmx.jar
+elif [ -f "/usr/lib64/nagios/plugins/yazino/check_jmx.jar" ]; then
+    NAGIOS=/usr/lib64/nagios/plugins/yazino/check_jmx.jar
+elif [ -f "/usr/lib/nagios/plugins/yazino/check_jmx.jar" ]; then
+    NAGIOS=/usr/lib/nagios/plugins/yazino/check_jmx.jar
+else
+    echo "Cannot find JMX JAR: $NAGIOS"
+    exit $STATE_UNKNOWN
+fi
+
+if [ -n "$IGNORE_MISSING" -a -z "$(netstat -ln | grep :$PORT)" ]; then
+    echo "OK: No listener on $PORT"
+    exit $STATE_OK
+fi
+
+OPTS="-U service:jmx:rmi:///jndi/rmi://localhost:$PORT/jmxrmi -O "
+
+unset WARNING_OPTS
+if [ -n "$WARNING_THRESHOLD" ]; then
+    if [ "$TYPE" = "og" -o "$TYPE" = "heap" ]; then
+        percentage_of_memory "$JAVA" "$NAGIOS" "$PORT" "$TYPE" "$WARNING_THRESHOLD"
+        if [ $? -ne 0 ]; then
+            exit $STATE_UNKNOWN
+        fi
+        WARNING_THRESHOLD=$RESULT
+    fi
+    WARNING_OPTS="-w $WARNING_THRESHOLD"
+fi
+if [ -n "$CRITICAL_THRESHOLD" ]; then
+    if [ "$TYPE" = "og" -o "$TYPE" = "heap" ]; then
+        percentage_of_memory "$JAVA" "$NAGIOS" "$PORT" "$TYPE" "$CRITICAL_THRESHOLD"
+        if [ $? -ne 0 ]; then
+            exit $STATE_UNKNOWN
+        fi
+        CRITICAL_THRESHOLD=$RESULT
+    fi
+    WARNING_OPTS="$WARNING_OPTS -c $CRITICAL_THRESHOLD"
+fi
+
+# Old Generation Size
+if [ "$TYPE" = "og" ]; then
+    OBJECT="java.lang:type=MemoryPool,name=CMS Old Gen"
+    OBJECT_ALT="java.lang:type=MemoryPool,name=PS Old Gen"
+    OTHEROPTS="-A Usage -K used -u B $WARNING_OPTS"
+# Old Generation Size
+elif [ "$TYPE" = "heap" ]; then
+    OBJECT="java.lang:type=Memory"
+    OBJECT_ALT="$OBJECT"
+    OTHEROPTS="-A HeapMemoryUsage -K used -u B $WARNING_OPTS"
+# Last Duration
+elif [ "$TYPE" = "ld" ]; then
+    OBJECT="java.lang:type=GarbageCollector,name=ConcurrentMarkSweep"
+    OBJECT_ALT="java.lang:type=GarbageCollector,name=PS MarkSweep"
+    OTHEROPTS="-A LastGcInfo -K duration -u ms $WARNING_OPTS"
+# Collection Count
+elif [ "$TYPE" = "cc" ]; then
+    OBJECT="java.lang:type=GarbageCollector,name=ConcurrentMarkSweep"
+    OBJECT_ALT="java.lang:type=GarbageCollector,name=PS MarkSweep"
+    OTHEROPTS="-A CollectionCount $WARNING_OPTS"
+# Collection Time
+elif [ "$TYPE" = "ct" ]; then
+    OBJECT="java.lang:type=GarbageCollector,name=ConcurrentMarkSweep"
+    OBJECT_ALT="java.lang:type=GarbageCollector,name=PS MarkSweep"
+    OTHEROPTS="-A CollectionTime -u ms $WARNING_OPTS"
+else
+    echo "Unsupported type: $TYPE"
+    exit $STATE_UNKNOWN
+fi
+
+call_jmx "$JAVA" "$NAGIOS" "$PORT" "$OBJECT" "$OBJECT_ALT" "$OTHEROPTS"
+JMX_EXIT_CODE=$?
+echo $JMX_OUT
+exit $JMX_EXIT_CODE

@@ -1,0 +1,96 @@
+## We expect $flashLoaderId and $flashLoaderSwf to be set before entering this
+
+#set($gameClientURL = ${gameConfiguration.getProperty('gameClientURL')})
+#set($flashWMode = ${gameConfiguration.getProperty('flashWMode')})
+
+<div id="$flashLoaderId" class="flash-loader">
+    <script>
+        var minimumFlashVersion = "11.0.0",
+                loaded = false,
+                executed = false;
+        (function() {
+            swfobject.embedSWF(
+                    "$flashLoaderSwf",
+                    "$flashLoaderId",
+                    "100%",
+                    "100%",
+                    minimumFlashVersion,
+                    "", {
+                        showTopBar: true,
+                        playerId: '$!{lobbySession.playerId}',
+                        playerName: '$esc.javascript($!{lobbySession.playerName})',
+                        baseConfigurationUrl: "$hostUrl",
+                        gameType: "$gameType",
+                        #if ($countdown)countDown: "$countdown",#end
+                        swfPath: "$gameClientURL",
+                        gameSwf: "$gameClientURL",
+                        platform: "FACEBOOK_CANVAS",
+                        journeyId: '${lobbySession.playerId}-' + new Date().getTime()
+                    }, {
+                        align: "middle",
+                        quality: "high",
+                        scale: "exactFit",
+                        bgcolor: "#ffffff",
+                        wmode: #if($flashWMode)"$flashWMode"#else"opaque"#end,
+                        allowScriptAccess: "always",
+                        allowFullScreen: "true"
+                    },
+                    {},
+                    function (e) {
+                        executed = true;
+                        if (e.success) {
+                            loaded = true;
+                            return;
+                        }
+                        $('#${flashLoaderId}').css('background', 'none repeat');
+                        if (swfobject.getFlashPlayerVersion().major === 0) {
+                            $('#flash-required').show();
+                        } else if (!swfobject.hasFlashPlayerVersion(minimumFlashVersion)) {
+                            $('.minimumFlashVersion').text(minimumFlashVersion);
+                            $('#upgrade-required').show();
+                        } else {
+                            $('#unknown-problem').show();
+                        }
+                    }
+            );
+        })();
+    </script>
+    <div id="loader">
+        <div class="noflash-content">
+            <div id="flash-required" style="display: none">
+                <h2>We&rsquo;re sorry</h2>
+                <h3>
+                    You need <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player</a> to play our games.
+                </h3>
+                <p>
+                    Please install the <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player plug-in</a> to play.
+                </p>
+            </div>
+            <div id="upgrade-required" style="display: none">
+                <h2>We&rsquo;re sorry</h2>
+                <h3>
+                    Your <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player</a> is out of date.
+                </h3>
+                <p>
+                    Please install the latest <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player plug-in</a> to play.
+                </p>
+            </div>
+            <div id="unknown-problem" style="display: none">
+                <h2>We&rsquo;re sorry</h2>
+                <h3>
+                    The <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player</a> has failed to launch.
+                </h3>
+                <p>
+                    Please try again, or install the latest <a target="_blank" href="https://get.adobe.com/flashplayer/">Flash Player plug-in</a>.
+                </p>
+            </div>
+            <script type="text/javascript">
+                ## This gets around IE (in particular 9) being rubbish about loading delays.
+                ## Please note that document.ready() is too late for this call to be effective.
+                if (executed && loaded) {
+                    jQuery('.noflash-content').hide();
+                }
+            </script>
+        </div>
+    </div>
+</div>

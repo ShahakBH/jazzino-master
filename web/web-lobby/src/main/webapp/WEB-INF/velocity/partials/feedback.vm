@@ -1,0 +1,13 @@
+#if(!$canvas)
+<div id="bookmark" style="z-index: 880;">
+		<ul>
+			<li><a href="https://www.facebook.com/Yazino" target="_blank" title="Follow Yazino on Facebook"><img src="$!{assetUrl}/images/gloss/facebookTabNoBorder.png" alt="Follow us" width="41px" height="117px"></a></li>
+
+            #if($lobbySession)
+                <li><a href="${supportLoggedInLink}" target="_blank" title="Support"><img src="$!{assetUrl}/images/gloss/supportTabNoBorder.png" alt="Support" width="41px" height="117px"></a></li>
+            #else
+                <li><a href="${supportLoggedOutLink}" target="_blank" title="Support"><img src="$!{assetUrl}/images/gloss/supportTabNoBorder.png" alt="Support" width="41px" height="117px"></a></li>
+            #end
+		</ul>
+	</div>
+#end

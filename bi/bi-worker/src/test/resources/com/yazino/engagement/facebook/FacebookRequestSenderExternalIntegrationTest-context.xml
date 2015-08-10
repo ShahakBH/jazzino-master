@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd">
+    <context:annotation-config/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc-external-datawarehouse.xml"/>
+    <import resource="classpath:META-INF/spring/facebook-configuration-spring.xml"/>
+
+    <ehcache:annotation-driven cache-manager="ehCacheManager"/>
+
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="shared" value="true"/>
+    </bean>
+
+    <bean id="webrequestor" class="com.restfb.DefaultWebRequestor"/>
+    <bean id="facebookClientFactory" class="com.yazino.engagement.facebook.FacebookClientFactory"
+          factory-method="getInstance"/>
+
+    <context:component-scan base-package="com.yazino.android"/>
+    <context:component-scan base-package="com.yazino.engagement">
+        <context:exclude-filter type="regex" expression="com\.yazino\.engagement\.email\..*"/>
+        <context:exclude-filter type="regex" expression="com\.yazino\.engagement\.notifications\..*"/>
+        <context:exclude-filter type="regex" expression="com\.yazino\.engagement\.campaign\..*"/>
+        <context:exclude-filter type="regex" expression="com\.yazino\.engagement\.amazon\..*"/>
+    </context:component-scan>
+
+    <bean class="com.google.android.gcm.server.Sender">
+        <constructor-arg value="${google-cloud-messaging.api-key}"/>
+    </bean>
+
+    <bean id="engagementCampaignDao" class="com.yazino.engagement.campaign.dao.EngagementCampaignDao">
+        <constructor-arg ref="externalDwJdbcTemplate"/>
+    </bean>
+
+</beans>

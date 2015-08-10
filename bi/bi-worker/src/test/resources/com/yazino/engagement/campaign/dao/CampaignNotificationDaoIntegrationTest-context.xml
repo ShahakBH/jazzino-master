@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc-external-datawarehouse.xml"/>
+
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="externalDwDataSource"/>
+    </bean>
+
+    <bean id="campaignNotificationDao" class="com.yazino.engagement.campaign.dao.CampaignNotificationDao">
+        <constructor-arg index="0" ref="externalDwNamedJdbcTemplate"/>
+        <constructor-arg index="1" ref="gameTypeRepository"/>
+        <constructor-arg index="2" ref="yazinoConfiguration"/>
+    </bean>
+
+    <bean id="facebookExclusionsDao" class="com.yazino.engagement.campaign.dao.FacebookExclusionsDao">
+        <constructor-arg index="0" ref="externalDwNamedJdbcTemplate"/>
+    </bean>
+
+    <bean id="gameTypeRepository" class="strata.server.operations.repository.GameTypeRepository"/>
+
+</beans>

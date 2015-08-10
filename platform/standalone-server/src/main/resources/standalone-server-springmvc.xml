@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <bean class="com.yazino.model.config.InterceptedPropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="false"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:standalone-server.properties</value>
+                <value>file:/etc/yazino/standalone-server.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:annotation-config/>
+
+    <mvc:annotation-driven/>
+
+    <mvc:interceptors>
+        <bean class="com.yazino.interceptor.StandalonePlayerSessionInterceptor"/>
+    </mvc:interceptors>
+
+    <mvc:resources mapping="/assets/**" location="${standalone-server.internal.assets.location}"/>
+    <mvc:resources mapping="/flash-assets/**" location="${standalone-server.flash-assets.location}"/>
+
+    <bean id="standalonePlayerSession" class="com.yazino.model.session.StandalonePlayerSession" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean class="com.yazino.game.api.time.SystemTimeSource"/>
+
+    <context:component-scan base-package="com.yazino.controller"/>
+    <context:component-scan base-package="com.yazino.model"/>
+    <context:component-scan base-package="com.yazino.platform.plugin.game"/>
+    <context:component-scan base-package="com.yazino.platform.test"/>
+    <context:component-scan base-package="com.yazino.host"/>
+    <context:component-scan base-package="com.yazino.test.game"/>
+
+    <import resource="classpath:standalone-server-velocity.xml"/>
+    <import resource="classpath:standalone-server-rabbitmq.xml"/>
+    <import resource="classpath:standalone-server-gamehost.xml"/>
+
+    <alias name="playerRepository" alias="playerGlobalRepository"/>
+    <alias name="chatRepository" alias="chatGlobalRepository"/>
+
+</beans>

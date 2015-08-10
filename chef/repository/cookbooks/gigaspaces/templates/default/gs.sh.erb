@@ -1,0 +1,63 @@
+export GSHOMEDIR="<%= @gs_home %>"
+<% if !@lookup_locators.nil? && !@lookup_locators.empty? %>
+export LOOKUPLOCATORS='<%= @lookup_locators.join(',') %>'
+<% elsif !@lookup_group.nil? && !@lookup_group.empty? %>
+export LOOKUPGROUPS='<%= @lookup_group %>'
+<% end %>
+<% if !@nic_address.nil? %>
+export NIC_ADDR=<%= @nic_address %>
+<% end %>
+
+GS_STARTUP_OPTIONS="gsa.global.gsm <%= @gsm_count %> gsa.global.lus 0"
+<% if @gs_roles.include?('lus') %>
+GS_STARTUP_OPTIONS="$GS_STARTUP_OPTIONS gsa.lus 1"
+<% end %>
+<% if @gs_roles.include?('gsc') %>
+GS_STARTUP_OPTIONS="$GS_STARTUP_OPTIONS gsa.gsc <%= @gsc_count %>"
+<% end %>
+
+export EXT_JAVA_OPTIONS="-server -showversion "
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Djava.security.egd=file:/dev/./urandom"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.memory_usage_enabled=false -Djava.awt.headless=true"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dlogback.configurationFile=<%= @logback_config %>"
+
+<%# See http://docs.gigaspaces.com/xap97adm/tuning-communication-protocol.html %>
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.transport_protocol.lrmi.max-threads=<%= @lrmi_max_threads %>"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.transport_protocol.lrmi.selector.threads=<%= @lrmi_selector_threads %>"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.transport_protocol.lrmi.threadpool.idle_timeout=<%= @lrmi_thread_timeout %>"
+
+<% if !@lookup_locators.nil? && !@lookup_locators.empty? %>
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.sun.jini.reggie.initialUnicastDiscoveryPort=4174"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.jini_lus.locators='<%= @lookup_locators.join(',') %>'"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.multicast.enabled=false "
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Djava.net.preferIPv4Stack=true"
+<% end %>
+
+<% if !@gs_zones.nil? && !@gs_zones.empty? %>
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -Dcom.gs.zones=<%= @gs_zones.join(',') %>"
+<% end %>
+
+<% if @gc_type == 'cms' %>
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -XX:CMSIncrementalDutyCycleMin=0 -XX:CMSIncrementalDutyCycle=10 -XX:+UseParNewGC"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -XX:+CMSClassUnloadingEnabled"
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -XX:MaxGCPauseMillis=250 -XX:MaxGCMinorPauseMillis=100"
+<% elsif @gc_type == 'parallel' %>
+export EXT_JAVA_OPTIONS="$EXT_JAVA_OPTIONS -XX:+UseParallelGC -XX:ParallelGCThreads=2"
+<% end %>
+
+export GSC_JAVA_OPTIONS="$GSC_JAVA_OPTIONS -Xmn<%= @gsc_min_heap %>"
+export GSC_JAVA_OPTIONS="$GSC_JAVA_OPTIONS -Xmx<%= @gsc_max_heap %>"
+<% if @gsc_debug %>
+export GSC_JAVA_OPTIONS="$GSC_JAVA_OPTIONS -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8085"
+<% end %>
+
+export GSM_JAVA_OPTIONS="$GSM_JAVA_OPTIONS -Xmn<%= @gsm_min_heap %>"
+export GSM_JAVA_OPTIONS="$GSM_JAVA_OPTIONS -Xmx<%= @gsm_max_heap %>"
+
+export LUS_JAVA_OPTIONS="$LUS_JAVA_OPTIONS -Xmn<%= @lus_min_heap %>"
+export LUS_JAVA_OPTIONS="$LUS_JAVA_OPTIONS -Xmx<%= @lus_max_heap %>"
+
+# Required to allow errors to propagate correctly to the GSM logs
+YAZINO_LIB=/opt/gigaspaces/yazino/lib
+export POST_CLASSPATH="$YAZINO_LIB/slf4j-api-<%= @slf4j_version %>.jar:$YAZINO_LIB/logback-core-<%= @logback_version %>.jar:$YAZINO_LIB/logback-classic-<%= @logback_version %>.jar:$POST_CLASSPATH"

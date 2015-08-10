@@ -1,0 +1,303 @@
+<form method="post" action="${request.contextPath}/tournament/variation/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($variation.id)
+            #springFormHiddenInput( 'variation.id' '' )
+        #end
+
+        #springFormHiddenInput( 'variation.tournamentType', 'PRESET' )
+
+        <label for="name">Name:</label>
+        #springFormInput( 'variation.name' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.name' )
+        #springShowErrors( '' 'error' )
+
+        <label for="entryFee">Entry Fee:</label>
+        #springFormInput( 'variation.entryFee' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.entryFee' )
+        #springShowErrors( '' 'error' )
+
+        <label for="serviceFee">Service Fee:</label>
+        #springFormInput( 'variation.serviceFee' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.serviceFee' )
+        #springShowErrors( '' 'error' )
+
+        <label for="startingChips">Starting Chips:</label>
+        #springFormInput( 'variation.startingChips' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.startingChips' )
+        #springShowErrors( '' 'error' )
+
+        <label for="prizePool">Prize Pool:</label>
+        #springFormInput( 'variation.prizePool' "$!formoptions title=${quote}If unset then the prize pool is derived
+            from the entry fees.${quote}" )
+        #springBind( 'variation.prizePool' )
+        #springShowErrors( '' 'error' )
+
+        <label for="minPlayers">Minimum Players:</label>
+        #springFormInput( 'variation.minPlayers' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.minPlayers' )
+        #springShowErrors( '' 'error' )
+
+        <label for="maxPlayers">Maximum Players:</label>
+        #springFormInput( 'variation.maxPlayers' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'variation.maxPlayers' )
+        #springShowErrors( '' 'error' )
+
+        <label for="gameType">Game Type:</label>
+        #if ($readonly || $variation.id)
+            <input name="gameType" type="hidden" value="$variation.gameType">
+            <input id="gameType" name="gameTypeDisplay" type="text" readonly="readonly"
+                   value="$gameTypes.get($variation.gameType)">
+        #else
+            #springFormSingleSelect( 'variation.gameType' $gameTypes "$!formoptions required=${quote}required${quote}" )
+            #springBind( 'variation.gameType' )
+            #springShowErrors( '' 'error' )
+        #end
+
+        <label for="expiryDelay">Expiry Delay:</label>
+        #if ($readonly)
+            <input id="expiryDelay" name="expiryDelay" type="text" $!formoptions
+                   value="$expiryDelays.get($variation.expiryDelay)">
+        #else
+            #springFormSingleSelect( 'variation.expiryDelay' $expiryDelays "$!formoptions required=${quote}
+                required${quote}" )
+            #springBind( 'variation.expiryDelay' )
+            #springShowErrors( '' 'error' )
+        #end
+
+        <label for="allocator">Allocators:</label>
+        #if ($readonly)
+            <input id="allocator" name="allocator" type="text" $!formoptions
+                   value="$allocators.get($variation.allocator)">
+        #else
+            #springFormSingleSelect( 'variation.allocator' $allocators "$!formoptions required=${quote}
+                required${quote}" )
+            #springBind( 'variation.allocator' )
+            #springShowErrors( '' 'error' )
+        #end
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Rounds</legend>
+
+        #if ($variation.id)
+            #if (!$readonly)
+            <a href="javascript:void(0)" class="addRow" title="Add a new Round" data-tableId="roundTable"
+               data-templateId="roundTemplate">Add Round</a>
+            #end
+
+            <table id="roundTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>End Interval (ms)</th>
+                    <th>Length (ms)</th>
+                    <th>Game Variation</th>
+                    <th>Client Properties</th>
+                    <th>Minimum Balance</th>
+                    <th>Description</th>
+                    #if (!$readonly)
+                    <th>Actions</th>
+                    #end
+                </tr>
+                </thead>
+                <tbody>
+                    #foreach ($round in $variation.rounds)
+                    <tr>
+                        #set($index = $foreach.count - 1)
+                        <td>
+                            #if ($round.id)
+                                #springFormHiddenInput( "variation.rounds[$index].id" '' )
+                            #end
+                            #springFormInput( "variation.rounds[$index].number" "$!formoptions
+                                required=${quote}required${quote}" )
+                            #springBind( "variation.rounds[$index].number" )
+                            #springShowErrors( '' 'error' )
+                        </td>
+                        <td>
+                            #springFormInput( "variation.rounds[$index].endInterval" "$!formoptions
+                                required=${quote}required${quote}" )
+                            #springBind( "variation.rounds[$index].endInterval" )
+                            #springShowErrors( '' 'error' )
+                        </td>
+                        <td>
+                            #springFormInput( "variation.rounds[$index].length" "$!formoptions
+                                required=${quote}required${quote}" )
+                            #springBind( "variation.rounds[$index].length" )
+                            #springShowErrors( '' 'error' )
+                        </td>
+                        <td>
+                            #if ($readonly)
+                                <input name="variation.rounds[$index].gameVariationId" type="text"
+                                    $!formoptions value="$gameVariations.get($variation.rounds[$index].gameVariationId)">
+                            #else
+                                #springFormSingleSelect( "variation.rounds[$index].gameVariationId" $gameVariations
+                                "$!formoptions required=${quote}required${quote}" )
+                                #springBind( "variation.rounds[$index].gameVariationId" )
+                                #springShowErrors( '' 'error' )
+                            #end
+                        </td>
+                        <td>
+                            #if ($readonly)
+                                <input name="variation.rounds[$index].clientPropertiesId" type="text"
+                                    $!formoptions value="$clients.get($variation.rounds[$index].clientPropertiesId)">
+                            #else
+                                #springFormSingleSelect( "variation.rounds[$index].clientPropertiesId" $clients
+                                "$!formoptions required=${quote}required${quote}" )
+                                #springBind( "variation.rounds[$index].clientPropertiesId" )
+                                #springShowErrors( '' 'error' )
+                            #end
+                        </td>
+                        <td>
+                            #springFormInput( "variation.rounds[$index].minimumBalance" "$!formoptions
+                                required=${quote}required${quote}" )
+                            #springBind( "variation.rounds[$index].minimumBalance" )
+                            #springShowErrors( '' 'error' )
+                        </td>
+                        <td>
+                            #springFormInput( "variation.rounds[$index].description" "$!formoptions
+                                required=${quote}required${quote}" )
+                            #springBind( "variation.rounds[$index].description" )
+                            #springShowErrors( '' 'error' )
+                        </td>
+                        #if (!$readonly)
+                        <td>
+                            <a href="javascript:void(0)" class="removeRow" title="Remove this Round">Delete</a>
+                        </td>
+                        #end
+                    </tr>
+                    #end
+                    #if ($variation.rounds.size() == 0 && $readonly)
+                        <tr>
+                            <td colspan="7">No rounds defined</td>
+                        </tr>
+                    #end
+                </tbody>
+            </table>
+        #elseif (!$readonly)
+            <p>Rounds may be edited once the variation has been created.</p>
+        #end
+    </fieldset>
+
+    <fieldset>
+        <legend>Payouts</legend>
+
+        #if ($variation.id)
+            #if (!$readonly)
+            <a href="javascript:void(0)" class="addRow" title="Add a new Payout" data-tableId="payoutTable"
+               data-templateId="payoutTemplate">Add Payout</a>
+            #end
+
+            <table id="payoutTable">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Payout</th>
+                    #if (!$readonly)
+                        <th>Actions</th>
+                    #end
+                </tr>
+                </thead>
+                <tbody>
+            #foreach ($payout in $variation.payouts)
+                <tr>
+                    #set($index = $foreach.count - 1)
+                    <td>
+                        #if ($payout.id)
+                            #springFormHiddenInput( "variation.payouts[$index].id" '' )
+                        #end
+                        #springFormInput( "variation.payouts[$index].rank" "$!formoptions
+                            required=${quote}required${quote}" )
+                        #springBind( "variation.payouts[$index].rank" )
+                        #springShowErrors( '' 'error' )
+                    </td>
+                    <td>
+                        #springFormInput( "variation.payouts[$index].payout" "$!formoptions
+                            required=${quote}required${quote}" )
+                        #springBind( "variation.payouts[$index].payout" )
+                        #springShowErrors( '' 'error' )
+                    </td>
+                    #if (!$readonly)
+                        <td><a href="javascript:void(0)" class="removeRow" title="Remove this Payout">Delete</a></td>
+                    #end
+                </tr>
+            #end
+            #if ($variation.payouts.size() == 0 && $readonly)
+                <tr>
+                    <td colspan="2">No payouts defined</td>
+                </tr>
+            #end
+                </tbody>
+            </table>
+
+        #elseif (!$readonly)
+            <p>Payouts may be edited once the variation has been created.</p>
+        #end
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>
+
+#if (!$readonly && $variation.id)
+<div class="templates">
+    <table>
+        <tbody>
+        <tr id="roundTemplate">
+            <td>
+                <input name="rounds[0].number" id="rounds[0].number" required="required" value="">
+            </td>
+            <td>
+                <input name="rounds[0].endInterval" id="rounds[0].endInterval" required="required" value="0">
+            </td>
+            <td>
+                <input name="rounds[0].length" id="rounds[0].length" required="required" value="300000">
+            </td>
+            <td>
+                <select id="rounds[0].gameVariationId" name="rounds[0].gameVariationId">
+                    #foreach($option in $gameVariations.keySet())
+                        <option value="${option}">${gameVariations.get($option)}</option>
+                    #end
+                </select>
+            </td>
+            <td>
+                <select id="rounds[0].clientPropertiesId" required="required" name="rounds[0].clientPropertiesId">
+                    #foreach($option in $clients.keySet())
+                        <option value="${option}">${clients.get($option)}</option>
+                    #end
+                </select>
+            </td>
+            <td>
+                <input name="rounds[0].minimumBalance" required="required" id="rounds[0].minimumBalance" value="0">
+            </td>
+            <td>
+                <input name="rounds[0].description" required="required" id="rounds[0].description" value="">
+            </td>
+            <td>
+                <a href="javascript:void(0)" class="removeRow" title="Remove this Round">Delete</a>
+            </td>
+        </tr>
+
+        <tr id="payoutTemplate">
+            <td>
+                <input name="payouts[0].rank" required="required" id="payouts[0].rank" value="">
+            </td>
+            <td>
+                <input name="payouts[0].payout" required="required" id="payouts[0].payout" value="0">
+            </td>
+            <td><a href="javascript:void(0)" class="removeRow" title="Remove this Payout">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+#end

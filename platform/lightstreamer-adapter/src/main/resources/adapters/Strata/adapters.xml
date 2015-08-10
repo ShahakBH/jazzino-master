@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<adapters_conf id="STRATA">
+    <metadata_provider>
+        <adapter_class>
+            com.lightstreamer.adapters.metadata.LiteralBasedProvider
+        </adapter_class>
+    </metadata_provider>
+    <data_provider name="TABLE">
+        <adapter_class>
+            com.yazino.platform.lightstreamer.adapter.MobileSubscriptionAdapter
+        </adapter_class>
+    </data_provider>
+</adapters_conf>

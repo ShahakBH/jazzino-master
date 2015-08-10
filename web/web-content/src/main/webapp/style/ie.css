@@ -1,0 +1,26 @@
+#search-results div.center-wrap,
+#search-results .js,
+#search-results .carousel,
+#search-results .carousel .carousel-wrap,
+#search-results .carousel ul,
+#search-results .carousel .carousel-control {
+	zoom: 1;
+}
+
+#search-results .carousel .carousel-control:hover,
+#search-results .carousel .disabled,
+#container .carousel .disabled:hover {
+	filter: alpha(opacity = 70);
+	-ms-filter: "alpha(opacity=70)";
+}
+
+/*used on trophyCabinet page*/
+
+div#trophyCabinet table#medalsTable td.medalCell span {
+	left:2px;
+}
+
+div#trophyCabinet table.weeklyChampTable td.champCell span {
+	left:70px;
+}
+

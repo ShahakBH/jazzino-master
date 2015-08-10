@@ -1,0 +1,1 @@
+drop view successful_transactions_view;

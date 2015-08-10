@@ -1,0 +1,12 @@
+#* @vtlvariable name="lobbySession" type="com.yazino.web.session.LobbySession" *#
+
+<div id="general-warning" class="site-warning notificationWidget" style="display: none;">
+    <span class="message"></span>
+    <button type="button" class="button-close"></button>
+</div>
+
+#parse("partials/top-bar.vm")
+
+<div id="payments_overlay">
+    <img src='$!{assetUrl}/images/gloss/window-btn-close.png' id="payments_closeButton" class='closeButton'>
+</div>

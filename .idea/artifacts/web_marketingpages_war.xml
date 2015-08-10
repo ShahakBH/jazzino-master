@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="web-marketingpages:war">
+    <output-path>$PROJECT_DIR$/web/web-marketingpages/target</output-path>
+    <root id="archive" name="web-marketingpages-2.2.34-SNAPSHOT.war">
+      <element id="artifact" artifact-name="web-marketingpages:war exploded" />
+    </root>
+  </artifact>
+</component>

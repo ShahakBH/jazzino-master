@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+    <diskStore path="java.io.tmpdir/PromotionExternalCredentialsCache"/>
+
+    <cache name="playerPlayedEventCache"
+           eternal="true"
+           maxElementsInMemory="50000"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="86400"
+           memoryStoreEvictionPolicy="LRU"/>
+
+    <!-- timeToLiveSeconds=86400 is 1 day , FB app access tokens don't seem to expire but..-->
+    <cache name="facebookApplicationAccessTokenCache"
+           eternal="true"
+           maxElementsInMemory="40"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="86400"
+           memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="gameTypeCache"
+           eternal="false"
+           maxElementsInMemory="100"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="30"
+           memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="emailVisionTokens"
+           eternal="false"
+           maxElementsInMemory="10"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="300"
+           memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="openGraphPermissionCache"
+           eternal="false"
+           maxElementsInMemory="50000"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6300"
+           memoryStoreEvictionPolicy="LRU"/> <!-- timeToLiveSeconds=6300 is 1:45 minutes , FB timeout is 2 hours-->
+
+</ehcache>

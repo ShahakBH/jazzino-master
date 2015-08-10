@@ -1,0 +1,26 @@
+#parse("includes/header.vm")
+<section id="content">
+    <pre class="game-status"></pre>
+</section>
+<script>
+    var logPoller = function() {
+        var result = {},
+                path = "${request.contextPath}/logs/documentsChunk",
+                target = jQuery(".game-status"),
+                getNextChunk = function() {
+                    jQuery.getJSON(path, function(log) {
+                        for(var i = 0; i < log.length; i++){
+                            if(log[i].c){
+                                target.append(log[i].c+":\n")
+                            }
+                            target.append(log[i].v.replace(/\\t/g, "\t").replace(/\\n/g, "\n")+"\n\n");
+                        }
+                    })
+                };
+        result.start = function(){
+            setInterval(getNextChunk, 1000);
+        };
+        return result;
+    };
+    logPoller().start();
+</script>

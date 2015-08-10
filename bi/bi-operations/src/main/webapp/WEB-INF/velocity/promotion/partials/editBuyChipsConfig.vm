@@ -1,0 +1,150 @@
+#springFormHiddenInput("promotionForm.iosImage.imageUrl" "")
+#springFormHiddenInput("promotionForm.androidImage.imageUrl" "")
+
+## add context to relative urls
+#macro (showImageUrl $imageUrl)
+    #if ($imageUrl.indexOf("http") == 0)
+        $imageUrl
+    #else
+        ${assetUrl}/$imageUrl
+    #end
+#end
+
+#macro( paymentMethodCheckboxes $paymentMethods )
+    <label>Applicable payment methods:</label>
+    #springBind( "promotionForm.paymentMethods" )
+    #foreach($paymentMethod in $paymentMethods )
+        <input type="checkbox" name="paymentMethods"
+               value="$paymentMethod" #if($promotionForm.isPaymentMethodEnabled($paymentMethod))checked="true"#end />&nbsp;$paymentMethod&nbsp;
+    #end
+#end
+
+#macro( chipPackageTable $packageList $chipAmountFieldPrefix $platform)
+<table class="chipPackageEditor">
+    <col width="25%"/>
+    <col width="15%"/>
+    <col width="60%"/>
+    <tr>
+        <td colspan="3" class="multiplierConfig"></td>
+    </tr>
+    <tr style="background-color: #f0f0f0;">
+        <th>Price</th>
+        <th>Default<br/>Chips</th>
+        <th>Promo Chips</th>
+    </tr>
+
+    #foreach($package in $packageList)
+            <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+        <td>
+            #foreach($price in $package.packagePrices.values())
+                $price.currencyLabel$price.price
+                #if($velocityCount < $package.packagePrices.values().size())/#end
+            #end
+        </td>
+        #set($index=$velocityCount - 1)
+        <td>$package.defaultChips</td>
+        #set($currentChipAmountFieldNameOLD="promotionForm." + $chipAmountFieldPrefix + "[" + ($index) + "]")
+        #set($currentChipAmountFieldName="promotionForm.platformToDefaultToOverriddenChipAmounts[" + $platform + "][" + $package.defaultChips + "]")
+        <td class="chipQuantityEditor">
+            #springFormInput("$currentChipAmountFieldName" "size='10' maxlength='10' data-default-value='$!{package.defaultChips}'")
+            <button type="button" id="$index" class="useDefault">use default value</button>
+        </td>
+        </tr>
+    #end
+</table>
+#end
+
+#macro( imageUploadTable $platform $imageType $imageUrl $newImageUrl )
+<table class="$platform">
+<tr>
+    <td>$platform Image:</td>
+    <td>
+    <table>
+        <tr>
+            <td>
+                <input type="radio" name="${platform}Image.imageType" value="default" #if(${imageType} == "default")checked="checked"#end/>
+                #if($!imageUrl)
+                    Use default image:
+                    <span onmouseover="$('.${platform} #defaultImage').show()" onmouseout="$('.${platform} #defaultImage').hide()">#showImageUrl($imageUrl)</span>
+                    <div id="defaultImage" style="display:none">
+                        <img src="#showImageUrl(${imageUrl})"/>
+                    </div>
+                #else
+                    Use image returned by Daily Award promotion
+                #end
+            </td>
+        </tr>
+        #if($!newImageUrl)
+            <tr>
+                <td>
+                    <input type="radio" name="${platform}Image.imageType" value="current" #if(${imageType}=="current")checked="checked"#end/> Use current image:
+                    <span onmouseover="$('.${platform} #mainImage').show();" onmouseout="$('.${platform} #mainImage').hide()">#showImageUrl($newImageUrl)</span>
+                    <div id="mainImage" style="display:none">
+                        <img src="#showImageUrl(${newImageUrl})"/>
+                    </div>
+                </td>
+            </tr>
+        #end
+        <tr>
+            <td>
+                <input type="radio" name="${platform}Image.imageType" value="upload" #if(${imageType}=="upload")checked="checked"#end/>
+                Upload image: <input type="file" accept="image" name="${platform}Image.imageFile" size="200"/>
+            </td>
+        </tr>
+    </table>
+    </td>
+</tr>
+</table>
+#end
+
+<h2>Buy Chips Configuration</h2>
+<table>
+    <col width="15%"/>
+    <col width="85%"/>
+        <tr class="nonControlGroupAttributes">
+            <td>Rollover Header:</td>
+            <td>#springFormInput("promotionForm.rolloverHeader" "size='50' maxLength='50' #if($isDefaultPromo)
+                readonly='true'#end")
+                &nbsp;&nbsp;
+                Tip: The Rollover Header and Text should be less than 50 characters in total.
+            </td>
+        </tr>
+        <tr class="nonControlGroupAttributes">
+            <td>Rollover Text:</td>
+            <td>#springFormInput("promotionForm.rolloverText" "size='100' maxLength='100' #if($isDefaultPromo)
+                readonly='true'#end")</td>
+        </tr>
+        <tr class="nonControlGroupAttributes">
+            <td>In Game Notification Header:</td>
+            <td>#springFormInput("promotionForm.inGameNotificationHeader" "size='30' maxlength='30'")</td>
+        </tr>
+        <tr class="nonControlGroupAttributes">
+            <td>In Game Notification Message:</td>
+            <td>#springFormInput("promotionForm.inGameNotificationMsg" "size='75' maxlength='75'")</td>
+        </tr>
+</table>
+
+<article data-form-refinee="WEB">
+    <h2>Package Configuration - Web</h2>
+    #paymentMethodCheckboxes( [ "CREDITCARD", "PAYPAL" ] )
+    #chipPackageTable($!defaultWebBuyChipPackages "webNewChipAmounts" "WEB")
+</article>
+<article data-form-refinee="IOS">
+    <h2>Package Configuration - iOS</h2>
+    #paymentMethodCheckboxes( [ "ITUNES" ] )
+    #chipPackageTable($!defaultIOSBuyChipPackages "iOSNewChipAmounts" "IOS")
+    #imageUploadTable("ios" "${promotionForm.iosImage.imageType}" $defaultIosImageUrl $promotionForm.iosImage.imageUrl)
+</article>
+<article data-form-refinee="FACEBOOK_CANVAS">
+    <h2>Package Configuration - Facebook</h2>
+    #springBind("promotionForm.paymentMethods")
+    #paymentMethodCheckboxes( [ "FACEBOOK" ] )
+    #chipPackageTable($!defaultFacebookBuyChipPackages "facebookNewChipAmounts" "FACEBOOK_CANVAS")
+</article>
+<article data-form-refinee="ANDROID">
+    <h2>Package Configuration - Google Checkout</h2>
+    #springBind("promotionForm.paymentMethods")
+    #paymentMethodCheckboxes( [ "GOOGLE_CHECKOUT" ] )
+    #chipPackageTable($!defaultAndroidBuyChipPackages "androidNewChipAmounts" "ANDROID")
+    #imageUploadTable("android" "${promotionForm.androidImage.imageType}" $defaultAndroidImageUrl $promotionForm.androidImage.imageUrl)
+</article>

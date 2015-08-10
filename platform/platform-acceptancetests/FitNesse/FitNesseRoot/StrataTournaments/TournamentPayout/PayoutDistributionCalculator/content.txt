@@ -1,0 +1,107 @@
+The following three are simple test cases:
+
+!|payout distribution calculator|
+|Total number of players is|2|
+|Prize pool is|5000|
+|Finishing position|Players at position|Payout?|
+|1|1|2500.0|
+|2|1|1500.0|
+|3|0|0.0|
+|4|0|0.0|
+|5|0|0.0|
+
+!|payout distribution calculator|
+|Total number of players is|5|
+|Prize pool is|5000|
+|Finishing position|Players at position|Payout?|
+|1|1|2500.0|
+|2|1|1500.0|
+|3|1|1000.0|
+|4|1|0.0|
+|5|1|0.0|
+
+!|payout distribution calculator|
+|Total number of players is|50|
+|Prize pool is|50000|
+|Finishing Position|Players at position|Payout?|
+|1|1|19000.0|
+|2|1|11000.0|
+|3|1|7500.0|
+|4|1|5500.0|
+|5|1|4000.0|
+|6|1|3000.0|
+|7|1|0.0|
+
+!|payout distribution calculator|
+|Total number of players is|100|
+|Prize pool is|100000|
+|Finishing Position|Players at position|Payout?|
+|1|1|30000.0|
+|2|1|19000.0|
+|3|1|13250.0|
+|4|1|10500.0|
+|5|1|7500.0|
+|6|1|5500.0|
+|7|1|3750.0|
+|8|1|3000.0|
+|9|1|2250.0|
+|10|1|1750.0|
+|11|1|1750.0|
+|12|1|1750.0|
+|13|1|0.0|
+
+The following 2 cases test the edge of the ranges 2-27 and 28-36
+!|payout distribution calculator|
+|Total number of players is|27|
+|Prize pool is|27000|
+|Finishing Position|Players at position|Payout?|
+|1|1|13500.0|
+|2|1|8100.0|
+|3|1|5400.0|
+|4|1|0.0|
+
+!|payout distribution calculator|
+|Total number of players is|28|
+|Prize pool is|28000|
+|Finishing Position|Players at position|Payout?|
+|1|1|12600.0|
+|2|1|7000.0|
+|3|1|5040.0|
+|4|1|3360.0|
+|5|1|0.0|
+
+Non-standard prize pool (not sum of entry fees)
+
+!|payout distribution calculator|
+|Total number of players is|50|
+|Prize pool is|100000|
+|Finishing Position|Players at position|Payout?|
+|1|1|38000.0|
+|2|1|22000.0|
+|3|1|15000.0|
+|4|1|11000.0|
+|5|1|8000.0|
+|6|1|6000.0|
+|7|1|0.0|
+
+2 players finish in same position
+
+!|payout distribution calculator|
+|Total number of players is|5|
+|Prize pool is|5000|
+|Finishing position|Players at position|Payout?|
+|1|2|2000.0|
+|3|1|1000.0|
+|4|1|0.0|
+
+More players than specified in the distribution table
+
+!|payout distribution calculator|
+|Total number of players is|5000|
+|Prize pool is|1000000|
+|Finishing position|Players at position|Payout?|
+|1|1|206000.0|
+|2|1|136000.0|
+|3|1|101000.0|
+|16|1|3900.0|
+|160|1|1200.0|

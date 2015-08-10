@@ -1,0 +1,3 @@
+-- WEB-4265 - dropped obsolete BLOCKED column
+
+ALTER TABLE LOBBY_USER DROP COLUMN BLOCKED#

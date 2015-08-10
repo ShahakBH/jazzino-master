@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.paypal:merchant-java-sdk:1.2.95">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/paypal/merchant-java-sdk/1.2.95/merchant-java-sdk-1.2.95.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/paypal/merchant-java-sdk/1.2.95/merchant-java-sdk-1.2.95-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/paypal/merchant-java-sdk/1.2.95/merchant-java-sdk-1.2.95-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

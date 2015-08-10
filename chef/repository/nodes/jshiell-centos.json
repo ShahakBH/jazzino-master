@@ -1,0 +1,56 @@
+{
+    "name": "jshiell-centos",
+    "chef_type": "node",
+    "json_class": "Chef::Node",
+    "run_list": [
+        "role[all-in-one]"
+    ],
+    "normal": {
+        "environment": "jshiell-centos",
+        "ssh": {
+            "harden": "false"
+        },
+        "monitoring": {
+            "suppress": true
+        },
+        "security": {
+            "denyhosts": false
+        },
+        "gigaspaces": {
+            "gsc_count": 3,
+            "java": {
+                "max_mem": "768m"
+            },
+            "gsm_hosts": [
+                "jshiell-centos.london.yazino.com"
+            ],
+            "lookup_group": "jshiell-centos",
+            "zones": [
+                "table",
+                "account"
+            ],
+            "host_ip": "jshiell-centos.london.yazino.com"
+        },
+        "postgresql": {
+            "password": {
+                "postgres": "password"
+            },
+            "config": {
+                "listen_addresses": "0.0.0.0"
+            }
+        },
+        "rabbitmq": {
+            "nodename": "jshiell-centos",
+            "host_entries": [
+                "127.0.0.1 jshiell-centos"
+            ],
+            "erlang_cookie": "jshiell-centos-maggie",
+            "vhosts": [
+                "jshiell-centos.london.yazino.com"
+            ]
+        },
+        "jetty": {
+            "debug": true
+        }
+    }
+}

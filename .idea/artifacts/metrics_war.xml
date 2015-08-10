@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="metrics:war">
+    <output-path>$PROJECT_DIR$/support/lib/metrics/target</output-path>
+    <root id="archive" name="metrics-1.0.0.war">
+      <element id="artifact" artifact-name="metrics:war exploded" />
+    </root>
+  </artifact>
+</component>

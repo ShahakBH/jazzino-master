@@ -1,0 +1,55 @@
+#set($redirectTo="/blackjack/play")
+<div id="how-to-play" class="BLACKJACK pharaoh game-home">
+    <div id="how-to-play-area">
+        <div class="content_head"><h3 class="font-grey-window-head">PHARAOH&rsquo;S TOMB BLACKJACK</h3></div>
+        <div class="content">
+            <img src="$assetUrl/images/games/BLACKJACK/logo.png" alt="Pharaoh's Tomb Blackjack">
+
+            <h4>
+                Experience free, exciting<br>
+                multiplayer blackjack like<br>
+                you&rsquo;ve never seen before!
+            </h4>
+
+            <div class="links">
+                #generateLinkTagForMainCta("blackjack" $redirectTo)
+            </div>
+
+            <div class="links download">
+                <a href="https://itunes.apple.com/us/app/blackjack-by-yazino/id542346370" title="Download on the AppStore">
+                    <img src="$assetUrl/images/games/BLACKJACK/appstore-ios.png">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.blackjack" title="Get it on Google Play">
+                    <img src="$assetUrl/images/games/BLACKJACK/appstore-googleplay.png">
+                </a>
+##                <a href="http://todo" title="Get it on the Amazon Appstore">
+##                    <img src="$assetUrl/images/games/BLACKJACK/appstore-amazon.png">
+##                </a>
+            </div>
+
+            <img id="tournament" src="$assetUrl/images/games/BLACKJACK/tournaments.png" alt="Tournaments Logo">
+
+            <p>
+                Play, chat, and compete with your friends in live, multi-table tournaments as
+                you&rsquo;re swept into the land of the pharaohs! Unlock thrilling new tournaments
+                as you level up - like Ra&rsquo;s Ascension and Treasure of Osiris -
+                and place Side Bets to win even more!
+            </p>
+            <p>
+                Compete with up to 4 friends at a table in tournaments or quick play games. Follow the
+                rankings in real-time on the Tournament Leaderboard, and win weekly prizes of up to 1 million chips!
+                Use a single login for mobile and web to take your balance, friends and fun anywhere. Play Pharaoh&rsquo;s
+                Tomb Blackjack now and receive a <strong>5,000 chip welcome bonus!</strong>
+            </p>
+
+            <div class="screenshots">
+                <img src="$assetUrl/images/games/BLACKJACK/screenshot-lobby.png" alt="Screenshot of the game lobby">
+
+                <img src="$assetUrl/images/games/BLACKJACK/screenshot-ingame.png" alt="Screenshot in game">
+            </div>
+
+            <img id="dealer" src="$assetUrl/images/games/BLACKJACK/dealer.png" alt="Dealer character">
+        </div>
+        <div class="content_foot"></div>
+    </div>
+</div>

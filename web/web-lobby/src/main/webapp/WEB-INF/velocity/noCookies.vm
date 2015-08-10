@@ -1,0 +1,27 @@
+<div id="no-cookies">
+    <h1>Third Party Cookies are Disabled</h1>
+    <p>
+        In order to keep you logged in on Facebook we need to write a third party cookie containing a unique ID. Your
+        browser either does not support this or is not allowing this.
+    </p>
+    <p>
+        Please either change your settings as described below, or join us at
+        <a href="http://www.yazino.com/" title="Yazino">www.yazino.com</a>
+        where third party cookies are not required.
+    </p>
+
+    <h2>Chrome, Firefox &amp; Internet Explorer</h2>
+    <p>
+        If you are using <strong>Chrome</strong>, <strong>Firefox</strong> or <strong>Internet Explorer</strong>
+        then you or your system administrator have probably changed this, and will need to revert to the
+        default settings in order to use this site.
+    </p>
+    <h2>Safari</h2>
+    <p>
+        Open Safari preferences (&#8984;, or <strong>Safari</strong> -> <strong>Preferences</strong> on a Mac; Ctrl-,
+        or <strong>Menu</strong> -> <strong>Preferences...</strong> on Windows)
+        and go to the <strong>Security</strong> tab. Once there, ensure <i>Accept Cookies: Always</i> is checked,
+        as in the screenshot below.
+    </p>
+    <img src="$!assetUrl/images/safari-security.png" alt="Safari Security Preferences pane">
+</div>

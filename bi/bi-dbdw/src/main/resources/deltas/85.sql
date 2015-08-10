@@ -1,0 +1,13 @@
+CREATE TABLE `rpt_recent_registrations` (
+  `USER_ID` bigint(20) NOT NULL,
+  `AUDIT_TIME` datetime NOT NULL,
+  `START_PAGE` varchar(2048) DEFAULT '',
+  `PLATFORM` varchar(32) DEFAULT '',
+  `RPX` varchar(255) DEFAULT NULL,
+  `EXTERNAL_ID` varchar(255) DEFAULT NULL,
+  `PLAYED` tinyint(1) NOT NULL DEFAULT '0',
+  `ACCOUNT_ID` bigint(20) DEFAULT NULL,
+  `FIRST_NAME` varchar(255) DEFAULT '',
+  PRIMARY KEY (`USER_ID`),
+  KEY `IDX_AUDIT_DATE` (`AUDIT_TIME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8#

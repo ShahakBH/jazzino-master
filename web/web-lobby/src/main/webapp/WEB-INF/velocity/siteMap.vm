@@ -1,0 +1,84 @@
+<div id="buy-chip-area">
+	<h3 class="buy-chip-head big-red-head">SITEMAP</h3>
+
+	<div id="buy-chip-body">
+		<div id="grey-window-body22">
+			<div id="grey-window-body-site-map">
+					<ul class="firstColumn">
+						<li><a href="/">Home</a>
+							<ul>
+                                <li><a href="/highStakes">High Stakes</a>
+                                    <ul>
+                                        <li><a href="/rules/highStakes">How to play High Stakes slots</a></li>
+                                    </ul>
+                                </li>
+
+								<li><a href="/blackjack">Blackjack</a>
+									<ul>
+										<li><a href="/rules/blackjack">How to play Blackjack</a></li>
+									</ul>
+								</li>
+								<li><a href="/texasHoldem">Texas Hold'em</a>
+									<ul>
+										<li><a href="/rules/texasHoldem">How to play Texas Hold'em</a></li>
+									</ul>
+								</li>
+								<li><a href="/roulette">Roulette</a>
+									<ul>
+										<li><a href="/rules/roulette">How to play Roulette</a></li>
+									</ul>
+								</li>
+								<li><a href="/wheelDeal">Wheel Deal</a>
+									<ul>
+										<li><a href="/rules/wheelDeal">How to play Wheel Deal slots</a></li>
+									</ul>
+								</li>
+
+							</ul>
+						</li>
+
+                        <li><a href="/login">Login</a></li>
+
+                        <li><a href="/aboutus">About</a></li>
+
+                        <li><a href="http://blog.yazino.com/press">Press</a></li>
+
+                        <li><a href="http://blog.yazino.com">Blog</a></li>
+
+                        <li>About
+							<ul>
+                                <li><a href="${request.contextPath}/aboutus" title="About Yazino">About Yazino</a></li>
+                                <li><a href="${request.contextPath}/contactus" title="Contact">Contact</a></li>
+                                <li><a href="${request.contextPath}/jobs" title="Jobs">Jobs</a></li>
+                                <li><a href="${request.contextPath}/sitemap" title="Sitemap">Sitemap</a></li>
+                            </ul>
+                        </li>
+
+                        <li>Community
+							<ul>
+                                #if($lobbySession)
+                                    <li><a href="${supportLoggedInLink}" target="_blank" title="Support">Support</a></li>
+                                #else
+                                    <li><a href="${supportLoggedOutLink}" target="_blank" title="Support">Support</a></li>
+                                #end
+                                <li><a href="http://blog.yazino.com/press" target="_blank" title="Press">Press</a></li>
+                                <li><a href="http://blog.yazino.com/" target="_blank" title="Blog">Blog</a></li>
+                                <li><a href="http://www.facebook.com/Yazino" target="_blank" title="Facebook">Facebook</a></li>
+                                <li><a href="http://twitter.com/yazino" target="_blank" title="Twitter">Twitter</a></li>
+                            </ul>
+                        </li>
+
+                        <li>Legal
+							<ul>
+						        <li><a href="/legal/termsOfPurchase">Terms of Purchase</a></li>
+						        <li><a href="/legal/termsOfService">Terms of Service</a></li>
+                                <li><a href="/legal/privacy">Privacy Policy</a></li>
+						    </ul>
+                        </li>
+
+					</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="terms-bottom" class="white"></div>

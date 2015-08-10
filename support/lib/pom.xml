@@ -1,0 +1,41 @@
+<project xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'
+         xmlns='http://maven.apache.org/POM/4.0.0'
+         xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yazino</groupId>
+        <artifactId>pom-base</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../build/pom-base/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>support-libs</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+    <name>Yazino Support Libraries</name>
+
+    <packaging>pom</packaging>
+
+    <description>
+        Shared support libraries for Yazino projects.
+    </description>
+
+    <properties>
+        <sonar.scm.url>scm:git:git@github.com:yazino/support.git</sonar.scm.url>
+    </properties>
+
+    <modules>
+        <module>assemblies</module>
+        <module>email-services</module>
+        <module>test-helpers</module>
+        <module>logging</module>
+        <module>configuration</module>
+        <module>validation</module>
+        <module>rabbitmq-exchange-declarer</module>
+        <module>worldpay</module>
+        <module>novomatic-cgs</module>
+
+        <module>metrics</module>
+        <module>metrics-reporter</module>
+    </modules>
+</project>

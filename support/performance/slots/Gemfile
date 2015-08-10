@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'eventmachine'
+gem 'httpclient'
+gem 'amqp'
+gem 'puma'
+gem 'sinatra'

@@ -1,0 +1,42 @@
+#* @vtlvariable name="avatarURL" type="java.lang.String" *#
+
+
+#set($avatarURL = $status.value)
+
+#if(!$avatarURL || $avatarURL.trim().length() == 0)
+	#set($avatarURL = "${assetUrl}/images/gloss/friend-bar-none-photo.png")
+#end
+
+<input type="hidden" id="avatarURL" name="avatarURL" value="$avatarURL">
+
+<script type="text/javascript" src="${assetUrl}/javascript/avatarSelector.js"></script>
+
+<div class="left-col" >
+	<p style="padding-top:0; font-size:11px">Avatar <span>&nbsp;</span></p>
+</div>
+<div class="mid-col" style="width:250px">
+	<input id="file" type="file" name="file" class="input" size="22">
+
+</div>
+<div class="right-col" style="width:80px">
+	<p style="width:80px;padding-top:0"> <a onclick="return uploadAvatar();" href="#" class="upload">UPLOAD</a></p>
+</div>
+
+<div id="avatarHelp">
+	<p class="errorContainer" #if ($status.error) style="display:block;" #end>
+		#springShowErrors("" "error")
+	</p>
+
+
+	<div id="selectedAvatar">
+		<img id="selectedAvatarImg" src="#avatarImageUrl(${avatarURL} ${hostUrl} ${assetUrl})" width="50" height="50" alt=":-)">
+	</div>
+	<div>
+		You can upload your picture using<br>
+		a JPG, GIF or PNG file, up to 100KB.<br>
+		It will be resized if larger than 50x50 pixels.
+	</div>
+</div>
+
+<div id="uploading" style="display:none;">Uploading...</div>
+<div id="uploadError" class="error" style="display:none;"></div>

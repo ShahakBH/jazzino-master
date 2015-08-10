@@ -1,0 +1,7 @@
+<header class="primary">
+    <h1>INVITE YOUR FRIENDS &amp; GET <span class="feature">5,000</span> CHIPS WHEN THEY PLAY!</h1>
+</header>
+<div class="friends widgetArea">
+    #parse('partials/invitations/providersWidget.vm')
+    <article class="personSelector feature"></article>
+</div>

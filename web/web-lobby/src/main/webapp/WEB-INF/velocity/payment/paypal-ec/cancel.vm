@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    #parse("payment/paypal-ec/head.vm")
+    <title>Payment Cancelled</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="icon" type="image/png" href="$!assetUrl/images/favicon.png"/>
+    #if ($development)
+        <script type="text/javascript" src="$!assetUrl/javascript/yazino-core.js"></script>
+        <script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+    #else
+        <script type="text/javascript" src="$!assetUrl/javascript/yazino-core.min.js"></script>
+    #end
+
+    <style>
+    #payments_overlay{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1 !important;
+
+        //background: black;
+        background: url("$!{assetUrl}/images/gloss/close-window-background.png") repeat scroll 0 0 transparent;
+        display: block;
+        left: 0;
+        top: 0;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=57);
+        opacity: 0.57;
+    }
+
+    #container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -380px;
+        margin-top: -220px;
+    }
+    </style>
+
+    <script type="text/javascript">
+
+        YAZINO.businessIntelligence.track.purchase.cancelled();
+
+        function finishProcess() {
+                var mainWindow = window.opener.parent;
+                yazinoWindow.clearPaymentsOverlay();
+                yazinoWindow.focus();
+                window.close();
+        }
+
+        function startAnotherPaymentProcess(paymentType) {
+                var yazinoWindow = window.opener.parent;
+                yazinoWindow.showPaymentsOverlayAt(paymentType);
+                yazinoWindow.focus();
+                window.close();
+        }
+
+        $(document).ready( function() {
+
+           $("#tryAgainButton").click(function() {
+                startAnotherPaymentProcess('pay-pal');
+                return false;
+           });
+
+            $('#payment_method_box #paiment_method_body ul li input#paiment_pay_pal').closest('li').addClass('check');
+
+            $('#payment_method_box #paiment_method_body ul li label').click(function() {
+                $(this).closest('li').addClass('check');
+                $(this).closest('li').siblings().removeClass('check');
+                $(this).siblings('input').attr('checked', 'checked');
+                var paymentType = $(this).first().attr("class");
+                startAnotherPaymentProcess(paymentType);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        window.resizeTo(795, 510);
+    </script>
+  </head>
+
+  <div id="payments_overlay"></div>
+  <body>
+  <div id="container" class="$gameType paypal-or-mobile">
+    <div id="main" class="confirmation sorry">
+      <div id="buy_chips_main">
+        <div id="main_body">
+          <div id="payment_method_box" class="box">
+            <div id="payment_title" class="cover-upper"></div>
+            <div id="paiment_method_body">
+              <ul>
+                <li>
+                  <input type="radio" class="paimentRadio" id="paiment_credit" name="paimentmethodradio" checked="checked" value="byCreditCard"/>
+                  <label class="credit-cart" for="paiment_credit">Pay by credit card</label>
+                </li>
+                <li>
+                  <input type="radio" class="paimentRadio" id="paiment_pay_pal" name="paimentmethodradio" value="byPayPal"/>
+                  <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="action_box" class="box">
+            <div id="tabs" class="whelldeal buy-chips"></div>
+            <div id="action_body">
+              <div id="cofirmation_Body">
+                <div class="cofirmation-status">
+                  <span class="status">Sorry</span>
+                  <span class="status-desc">Your purchase has been cancelled.</span>
+                  <span class="additionally">Your account has not been debited.</span>
+                  <a id="tryAgainButton" href="#" class="button">try again</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="bottom">Have questions? Contact us at <a href="mailto:support@yazino.com">support@yazino.com</a></div>
+      </div>
+    </div>
+    </div>
+    #parse("payment/paypal-ec/external_tracking.vm")
+  </body>
+</html>
+

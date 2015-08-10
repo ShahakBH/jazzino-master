@@ -1,0 +1,173 @@
+/* IE 7 Debugs */
+body * {
+    position: relative;
+}
+
+body #buy-chip-area * {
+    position: static;
+}
+
+#language-drop-div .ie7-debug-status-bar-1 {
+    background: url('../../images/gloss/status-bar-drop-back.png') 0 -42px;
+    height: 20px;
+}
+
+#language-drop-div .ie7-debug-status-bar-1:hover {
+    background-position: 110px -42px;
+}
+
+#navigation .ie7-debug-navigation-1.index-area {
+    background: url('../../images/gloss/head-sprite.png') top right;
+}
+
+#navigation .ie7-debug-navigation-1 {
+    float: right;
+}
+
+#navigation .ie7-debug-navigation-1:hover {
+    background: url('../../images/gloss/home-btn-hov.png') 2px 0 no-repeat;
+}
+
+#aboutus-drop-menu.navigation-drop-menu .top p + p {
+    width: 28px;
+}
+
+#navigation li > a {
+    color: #d91d1d; /* .font-navigation { color: #d91d1d; } */
+}
+
+#head-area {
+    z-index: 1000;
+    height: 144px;
+}
+
+.navigation-drop-menu p.ie7-debug-navigation-2 {
+    height: 35px;
+    background: url('../../images/gloss/navigation-drop-back.png') left bottom;
+}
+
+#login-bar .enter input[type=checkbox] {
+    margin-top: -4px;
+    margin-left: -3px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity = 00); /* IE 5.5+*/
+}
+
+.stake-level {
+    z-index: 1000;
+}
+
+.reguest h1 div {
+    margin-top: -17px;
+    margin-right: 10px;
+}
+
+.close-alert {
+    z-index: 10000 !important;
+}
+
+#sign-up-area .right-col p {
+    margin-top: 7px;
+    height: 22px !important;
+}
+
+#sign-up-area .right-col p span {
+    height: 19px;
+    margin-top: 0;
+    line-height: 19px;
+}
+
+select {
+    margin: 0;
+    margin-top: 7px;
+    padding: 0;
+    height: 23px;
+}
+
+#grey-window-body div div {
+    zoom: 1;
+}
+
+.created_table .close {
+    top: -3px;
+    right: -47px;
+}
+
+#window-select-friends .closeButton {
+    z-index: 9999 !important;
+}
+
+#schedule-panel .body ul li p.register {
+    padding-left: 0px;
+}
+
+#competition-pages {
+    /*position:absolute;*/
+}
+
+#competition-pages .dialogContainer {
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 1000000 !important;
+}
+
+#cash-game-body.SLOTS  .tab-1 .line-4 {
+    z-index: 10000 !important;
+}
+
+#competition-pages #tournament-instructions h1 {
+    z-index: 10000;
+
+}
+
+#competition-pages #competition-info-container {
+    background: none;
+    top: -20px;
+    left: 0
+}
+
+header .menu .player:hover .dropmenu {
+    left: 9px;
+}
+
+header .menu .friendrequests:hover .dropmenu {
+    left: -13px;
+}
+
+#maskedContainer {
+    text-align: center;
+}
+
+#inviteFriendsViaYazino div {
+    text-align: left;
+}
+
+#inviteFriendsViaYazino .right-block div.email-string p {
+    margin-left: 0;
+}
+
+#inviteFriendsViaYazino .right-block .you-can {
+    margin-left: 0;
+}
+
+#inviteFriendsViaYazino .right-block .invite {
+    margin-left: 0;
+}
+
+#inviteFriendsViaYazino .right-block #submit {
+    margin-right: 38px;
+}
+
+.accessory-bar .preferences .info-popup {
+    top: -43px!important;
+}
+
+#achievements-overlay > ul > li > div {
+    left: -5px;
+    top: 30px;
+}
+
+#profile-area .calendarForInput.active {
+    position: static;
+}
+

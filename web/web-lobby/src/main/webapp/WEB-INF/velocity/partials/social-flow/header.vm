@@ -1,0 +1,6 @@
+<header class="primary">
+    <hgroup>
+        #set($pageHeader = "socialFlow.$!{pageType}.title.$!{pageHeaderType}")
+        $!{markdown.markdownToHtml($!springMacroRequestContext.getMessage($!{pageHeader}, "$!{pageHeader}"))}
+    </hgroup>
+</header>

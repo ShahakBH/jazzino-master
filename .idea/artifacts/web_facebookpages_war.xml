@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="web-facebookpages:war">
+    <output-path>$PROJECT_DIR$/web/web-facebookpages/target</output-path>
+    <root id="archive" name="web-facebookpages-2.2.34-SNAPSHOT.war">
+      <element id="artifact" artifact-name="web-facebookpages:war exploded" />
+    </root>
+  </artifact>
+</component>

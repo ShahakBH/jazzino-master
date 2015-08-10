@@ -1,0 +1,17 @@
+{ 
+  "motd": { "message": "Welcome to Alcatraz!" },
+  "mysql": { "db": "localhost" },
+  "rabbitmq": { "vhosts": ["local-vm"] },
+  "nfs": { "exports": ["/var/staging"] },
+  "loadbalancer": { "gsc_hosts": [ "localhost" ] },
+  "gigaspaces": { "gsm_hosts": [ "localhost" ],
+				  "java": {
+					"min_mem": "256m",
+					"max_mem": "768m",
+					"permgen_mem": "256m"
+				          }
+				},
+  "ssh_authorized_keys": { "users": [ "root", "gsrun" ] },
+  
+  "run_list": ["role[db]", "role[rabbitmq]", "role[gsc]", "role[loadbalancer]", "role[lobby]"]
+}

@@ -1,0 +1,47 @@
+#!/bin/bash
+DBHOST=$1
+PLAYER_ID=$2
+GCMDEVICE=$3
+
+#Usage is: $0 HOSTNAME PLAYER_ID [-g GOOGLE_ID] [-i APPLE_ID]
+
+TEXT="\
+INSERT INTO CAMPAIGN_DEFINITION (name, segmentSqlQuery) VALUES ('name', 'select TMPL_PLAYER_ID'); \
+INSERT INTO CAMPAIGN_SCHEDULE (CAMPAIGN_ID, NEXT_RUN_TS, RUN_HOURS )VALUES (LAST_INSERT_ID(), NOW(),1); \
+INSERT INTO CAMPAIGN_CONTENT VALUES (LAST_INSERT_ID(), 'title', 'this is the title'); \
+INSERT INTO CAMPAIGN_CONTENT VALUES (LAST_INSERT_ID(), 'description', 'this is the description'); \
+INSERT INTO CAMPAIGN_CONTENT VALUES (LAST_INSERT_ID(), 'tracking', 'this is the tracking'); \
+INSERT INTO CAMPAIGN_CONTENT VALUES (LAST_INSERT_ID(), 'message', 'this is the message from TMPL_DBHOST');"
+
+echo $TEXT | sed -e "s/TMPL_PLAYER_ID/$PLAYER_ID/g" -e"s/TMPL_DBHOST/$DBHOST/g" | mysql -h$DBHOST -ustrataproddw -pstrataproddw strataproddw
+
+OPTIND=3
+while getopts ":g:i:" optname
+ do
+   case "$optname" in
+     "g")
+        DEVICETEXT="REPLACE INTO GCM_PLAYER_DEVICE VALUES (TMPL_PLAYER_ID, 'SLOTS', 'TMPL_GCMDEVICE');"
+        echo $DEVICETEXT | sed -e "s/TMPL_PLAYER_ID/$PLAYER_ID/g" | sed -e "s/TMPL_GCMDEVICE/$OPTARG/g"
+        echo $DEVICETEXT | sed -e "s/TMPL_PLAYER_ID/$PLAYER_ID/g" | sed -e "s/TMPL_GCMDEVICE/$OPTARG/g" | mysql -h$DBHOST -ustrataproddw -pstrataproddw strataproddw
+       ;;
+     "i")
+        echo "IOS DEVICE has value $OPTARG"
+
+        DEVICETEXT="REPLACE INTO IOS_PLAYER_DEVICE VALUES ('SLOTS',TMPL_PLAYER_ID, 'TMPL_GCMDEVICE','com.yazino.YazinoApp');"
+        echo $DEVICETEXT | sed -e "s/TMPL_PLAYER_ID/$PLAYER_ID/g" | sed -e "s/TMPL_GCMDEVICE/$OPTARG/g"
+        echo $DEVICETEXT | sed -e "s/TMPL_PLAYER_ID/$PLAYER_ID/g" | sed -e "s/TMPL_GCMDEVICE/$OPTARG/g" | mysql -h$DBHOST -ustrataprod -pstrataprod strataprod
+       ;;
+     "?")
+       echo "Unknown option $OPTARG"
+       ;;
+     ":")
+       echo "No argument value for option $OPTARG"
+       ;;
+     *)
+     # Should not occur
+       echo "Unknown error while processing options"
+       ;;
+   esac
+ done
+
+

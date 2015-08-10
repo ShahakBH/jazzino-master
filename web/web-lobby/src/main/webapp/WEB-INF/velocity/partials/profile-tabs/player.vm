@@ -1,0 +1,155 @@
+
+#set($allowFullEdit = true)
+#set($reasonForLocking = "")
+#if($player.syncProfile && $facebookConnect)
+    #set($allowFullEdit = false)
+    #set($reasonForLocking = "Using Facebook profile data")
+#end
+
+#macro(renderFormSubmitsOrReasonForLock)
+    #if(!$allowFullEdit)
+    <b class='reasonForLocking'>$reasonForLocking</b>
+    #else
+    <fieldset class="action">
+        <input type="submit" value="#message("playerProfile.ctas.save.label")"/>
+        <input type="reset" value="#message("playerProfile.ctas.cancelEditing.label")"/>
+    </fieldset>
+    #end
+#end
+
+    <div id="profileContainer">
+        <h2>$!{player.displayName} - $!{player.emailAddress}</h2>
+
+        #if($facebookConnect)
+            <form method="POST" action="#springUrl("/player/profile/fbSync")" id="playerSyncProfile"
+                  class="autoSubmitOnAnyChange">
+                <input type="hidden" value="$!{partial}" name="partial"/>
+                <input type="checkbox" name="fbSync" id="fbSync" value="true" #if(${player.syncProfile})checked#end />
+                <label for="fbSync">#message("playerProfile.fields.fbSync.label"):</label>
+                <input type="submit" value="#message("playerProfile.ctas.submit.label")"/>
+            </form>
+        #end
+
+        #springBind("playerInfo")
+        <form method="POST" action="#springUrl("/player/profile/userProfileInfo")" id="playerDetails"
+              class="#if($playerInfoHasErrors)errorForm#end #if(!$allowFullEdit)lockedForm#end profileSection">
+            <input type="hidden" value="$!{partial}" name="partial"/>
+            #renderFormSubmitsOrReasonForLock()
+            <fieldset>
+                <label for="gender">#message("playerProfile.fields.gender.label"):</label>
+                #springFormSingleSelect("playerInfo.gender" $genders "
+                    data-yaz-util-formstorage-accepted-value='$!player.gender.id'")
+                #foreach($error in $status.errorMessages) <b class="error">$error</b> #end
+                <label for="country">#message("playerProfile.fields.country.label" "
+                    data-yaz-util-formstorage-accepted-value='$!player.country'"):</label>
+                #springFormSingleSelect("playerInfo.country" $countries)
+            </fieldset>
+            <fieldset>
+                <label for="dateOfBirth">#message("playerProfile.fields.dob.label"):</label>
+                #springFormInput("playerInfo.dateOfBirth" "
+                    data-yaz-util-formstorage-accepted-value='$!player.dateOfBirth'")
+            </fieldset>
+            <p class="comment">#message('playerProfile.fields.dob.comment')</p>
+        </form>
+
+        #springBind("displayName")
+        <form method="POST"
+              class="short profileSection #if($displayNameHasErrors)errorForm#end #if(!$allowFullEdit)lockedForm#end"
+              action="#springUrl("/player/profile/displayName")"
+              id="playerDisplayName">
+            <input type="hidden" value="$!{partial}" name="partial"/>
+            #renderFormSubmitsOrReasonForLock()
+            <fieldset>
+                <label for="displayName">#message("playerProfile.fields.displayName.label"):</label>
+                #springFormInput("displayName.displayName" "
+                    data-yaz-util-formstorage-accepted-value='$!{player.displayName}'")
+                #foreach($error in $status.errorMessages) <b class="error">$error</b> #end
+            </fieldset>
+            <p class="comment">#message('playerProfile.fields.displayName.comment')</p>
+
+            <p>#message("playerProfile.fields.displayName.description.part1")</p>
+
+            <p>#message("playerProfile.fields.displayName.description.part2")</p>
+        </form>
+
+        #springBind("emailAddress")
+        <form method="POST" class="short profileSection #if($communicationEmailHasErrors)errorForm#end"
+              action="#springUrl("/player/profile/communicationEmail")" id="playerCommunicationEmail">
+            <input type="hidden" value="$!{partial}" name="partial"/>
+            <fieldset class="action">
+                <input type="submit" value="#message("playerProfile.ctas.submit.label")"/>
+                <input type="reset" value="#message("playerProfile.ctas.cancelEditing.label")"/>
+            </fieldset>
+            <fieldset>
+                <label for="emailAddress">#message("playerProfile.fields.email.label"):</label>
+            ##            <input type="email" id="communicationEmail" name="communicationEmail" size="15"
+                    ##                   value="${player.emailAddress}"/>
+                #springFormInput("emailAddress.emailAddress" "
+                data-yaz-util-formstorage-accepted-value='$!{player.emailAddress}'")
+            </fieldset>
+            <p>#message("playerProfile.fields.email.description")</p>
+        </form>
+
+        #if($player.providerName == "YAZINO")
+            #springBind("passwordChange")
+            <form method="POST"
+                  class="short profileSection #if($emailAddressHasErrors)errorForm#end #if(!$allowFullEdit)lockedForm#end"
+                  action="#springUrl("/player/profile/password")" id="playerPasswordChange">
+                <input type="hidden" value="$!{partial}" name="partial"/>
+                #renderFormSubmitsOrReasonForLock()
+
+                #springFormHiddenInput("passwordChange.playerId")
+
+                <fieldset>
+                    <label for="currentPassword">#message("playerProfile.fields.currentPassword.label"):</label>
+                    #springFormPasswordInput("passwordChange.currentPassword" "")
+                    #foreach($error in $status.errorMessages) <b class="error">$error</b> #end
+                </fieldset>
+
+                <fieldset>
+                    <label for="newPassword">#message("playerProfile.fields.newPassword.label"):</label>
+                    #springFormPasswordInput("passwordChange.newPassword" "")
+                    <label for="confirmNewPassword">#message("playerProfile.fields.confirmNewPassword.label"):</label>
+                    #springFormPasswordInput("passwordChange.confirmNewPassword" "")
+
+                    <div class="errors">
+                        #springBind("passwordChange.newPassword")
+                        #foreach($error in $status.errorMessages) <b class="error">$error</b> #end
+                    </div>
+                </fieldset>
+            </form>
+        #end
+
+
+        #set($avatarURl = "/player/profile/avatar")
+        #if($partial)
+            #set($avatarURl = "/player/profile/avatar?partial=true")
+        #end
+        <form method="post" action="#springUrl($avatarURl)"
+              class="profileSection #if($avatarHasErrors)errorForm#end #if(!$allowFullEdit)lockedForm#end"
+              enctype="multipart/form-data">
+            <input type="hidden" value="$!{partial}" name="partial"/>
+            #renderFormSubmitsOrReasonForLock()
+            <fieldset>
+                <label for="avatar">#message("playerProfile.fields.avatar.label"):</label>
+                <input type="file" name="avatar" id="avatar"/>
+                <output class="readOnlyField"><img src="#avatarImageUrl(${avatar} ${hostUrl} ${assetUrl})" alt="Avatar image of $!{player.name}"/>
+                </output>
+                #foreach($error in $status.errorMessages) <b class="error">$error</b> #end
+            </fieldset>
+            <p class="comment">#message('playerProfile.fields.avatar.comment')</p>
+        </form>
+
+    </div>
+    <script>
+        jQuery(document).ready(function() {
+            $('#dateOfBirth').val(YAZINO.util.html5tools.createHtml5DateFromHtml5DateTime($('#dateOfBirth').val()));
+            $('#dateOfBirth').attr('data-yaz-util-formstorage-accepted-value', YAZINO.util.html5tools.createHtml5DateFromHtml5DateTime($('#dateOfBirth').attr('data-yaz-util-formstorage-accepted-value')));
+            YAZINO.PlayerProfileUi($('#profileContainer').find('form.profileSection'), {
+                editCtaText: '#jsMessage("playerProfile.ctas.openForEditing.label")',
+                errorMessageClass: 'error'
+            });
+            $('#profileContainer .autoSubmitOnAnyChange').autoSubmitOnAnyChange();
+            $('.lightboxKillerClose').click(parent.YAZINO.lightboxWidget.kill);
+        });
+    </script>

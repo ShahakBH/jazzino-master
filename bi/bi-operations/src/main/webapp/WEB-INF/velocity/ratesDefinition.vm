@@ -1,0 +1,21 @@
+<body>
+<form method="POST" action="#springUrl('/ratesDefinition')">
+    <br/><input type="submit" value="Update"/>
+    <br/>Currency rates:
+    #set($i = 0)
+    <table>
+    <tr>
+        #foreach($key in $command.rates.keySet())
+            #if($i > 0 && $i % 3 == 0)
+            </tr>
+            <tr>
+            #end
+            #set($i = $i + 1)
+            <td>$key:</td>
+            <td>#springBind("command.rates['$key']")
+                <input name="$status.expression" id="$status.expression" value="$!status.value" size="7"/></td>
+        #end
+    </tr>
+    </table>
+</form>
+</body>

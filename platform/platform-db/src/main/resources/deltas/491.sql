@@ -1,0 +1,136 @@
+INSERT IGNORE INTO `GAME_VARIATION_TEMPLATE` (`GAME_TYPE`, `NAME`, `VERSION`) VALUES ('SLOTS', 'Slots Beginner lvl1-5', 0)#
+REPLACE INTO `GAME_VARIATION_TEMPLATE_PROPERTY` (`GAME_VARIATION_TEMPLATE_ID`, `NAME`, `VALUE`, `VERSION`)
+  VALUES
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'ALLOWED_UNIT_STAKES', '1,2,3,4,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'BIG_WIN_MULTIPLIER', '200', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'BONUS_MULTIPLIER', '0.04', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'BONUS_MULTIPLIER_SECOND_PHASE', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'CAR_SYMBOL', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'JOKER_SYMBOL', '1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'LINES', '1,1,1,1,1	0,0,0,0,0	2,2,2,2,2	0,1,2,1,0	2,1,0,1,2	1,2,1,2,1	1,0,1,0,1	2,1,2,1,2	0,1,0,1,0	0,0,1,2,2	2,2,1,0,0	1,0,1,2,1	1,2,1,0,1	0,1,1,1,2	2,1,1,1,0	1,0,0,1,2	1,2,2,1,0	1,1,0,1,2	1,1,2,1,0	0,0,1,2,1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MAX_NUMBER_OF_PLAYERS', '7', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MEDIUM_WIN_LINE_MULTIPLIER', '75', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MILLIS_BEFORE_BONUS_ALLOWED', '30000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MILLIS_BET_TIMEOUT', '300000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MILLIS_REEL_SPINNED', '3000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MILLIS_REEL_SPINNED_BONUS', '2000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT', '36000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'MINIMUM_LEVEL_FOR_STAKE', '1:1,2:2,3:5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'NUMBER_OF_WHEELS_TO_COLLECT', '20', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'PAYOUTS', '1,3,150	1,4,500	1,5,1000	2,3,75	2,4,100	2,5,150	3,3,100	3,4,150	3,5,250	4,3,20	4,4,50	4,5,100	5,3,15	5,4,30	5,5,75	6,3,10	6,4,15	6,5,30	7,3,4	7,4,7	7,5,15	8,3,2	8,4,5	8,5,10	9,3,1	9,4,2	9,5,5	11,3,150	11,4,500	11,5,1000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'REELS', '8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,5	6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,11,5,3	7,9,0,6,7,2,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7	2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8	7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'SCATTERED_BONUS_MULTIPLIER', '0.1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'SCATTERED_WHEELS_REQUIRED', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'WHEEL_SYMBOL', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'WHEEL_TYPES', 'TwinTop,4501,4501,4412,4234,4355,4209,4209,4233,4355,4282,4234,4211,FourWay,3881,3881,4014,4297,4355,4544,4544,4513,4355,4380,4297,4211,Tripletto,1097,1097,1075,1065,976,943,943,948,976,994,1065,1128,Quattro,420,420,411,330,279,269,269,271,279,274,330,376,Ultimo,102,102,88,74,35,35,35,35,35,70,74,74', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl1-5'), 'WHEEL_TYPE_MULTIPLIERS', 'TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500	FourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20	Tripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100	Quattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500	Ultimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500', 0)#
+
+INSERT IGNORE INTO `GAME_VARIATION_TEMPLATE` (`GAME_TYPE`, `NAME`, `VERSION`) VALUES ('SLOTS', 'Slots Beginner lvl6+', 0)#
+REPLACE INTO `GAME_VARIATION_TEMPLATE_PROPERTY` (`GAME_VARIATION_TEMPLATE_ID`, `NAME`, `VALUE`, `VERSION`)
+  VALUES
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'ALLOWED_UNIT_STAKES', '1,2,3,4,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'BIG_WIN_MULTIPLIER', '200', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'BONUS_MULTIPLIER', '0.04', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'BONUS_MULTIPLIER_SECOND_PHASE', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'CAR_SYMBOL', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'JOKER_SYMBOL', '1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'LINES', '1,1,1,1,1	0,0,0,0,0	2,2,2,2,2	0,1,2,1,0	2,1,0,1,2	1,2,1,2,1	1,0,1,0,1	2,1,2,1,2	0,1,0,1,0	0,0,1,2,2	2,2,1,0,0	1,0,1,2,1	1,2,1,0,1	0,1,1,1,2	2,1,1,1,0	1,0,0,1,2	1,2,2,1,0	1,1,0,1,2	1,1,2,1,0	0,0,1,2,1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MAX_NUMBER_OF_PLAYERS', '11', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MEDIUM_WIN_LINE_MULTIPLIER', '75', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MILLIS_BEFORE_BONUS_ALLOWED', '30000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MILLIS_BET_TIMEOUT', '300000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MILLIS_REEL_SPINNED', '3000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MILLIS_REEL_SPINNED_BONUS', '2000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT', '36000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'MINIMUM_LEVEL_FOR_STAKE', '1:1,2:2,3:5,4:10,5:20,6:50,7:100,8:200,9:500,10:1000,11:5000,12:10000,13:50000,14:100000,15:500000,16:1000000,17:1000000,18:1000000,19:1000000,20:1000000,21:1000000,22:1000000,23:1000000,24:1000000,25:1000000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'NUMBER_OF_WHEELS_TO_COLLECT', '20', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'PAYOUTS', '1,3,150	1,4,500	1,5,1000	2,3,75	2,4,100	2,5,150	3,3,100	3,4,150	3,5,250	4,3,20	4,4,50	4,5,100	5,3,15	5,4,30	5,5,75	6,3,10	6,4,15	6,5,30	7,3,4	7,4,7	7,5,15	8,3,2	8,4,5	8,5,10	9,3,1	9,4,2	9,5,5	11,3,150	11,4,500	11,5,1000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'REELS', '8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,5	6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,11,5,3	7,9,0,6,7,2,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7	2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8	7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'SCATTERED_BONUS_MULTIPLIER', '0.1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'SCATTERED_WHEELS_REQUIRED', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'WHEEL_SYMBOL', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'WHEEL_TYPES', 'TwinTop,4501,4501,4412,4234,4355,4209,4209,4233,4355,4282,4234,4211,FourWay,3881,3881,4014,4297,4355,4544,4544,4513,4355,4380,4297,4211,Tripletto,1097,1097,1075,1065,976,943,943,948,976,994,1065,1128,Quattro,420,420,411,330,279,269,269,271,279,274,330,376,Ultimo,102,102,88,74,35,35,35,35,35,70,74,74', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Beginner lvl6+'), 'WHEEL_TYPE_MULTIPLIERS', 'TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500	FourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20	Tripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100	Quattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500	Ultimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500', 0)#
+
+INSERT IGNORE INTO `GAME_VARIATION_TEMPLATE` (`GAME_TYPE`, `NAME`, `VERSION`) VALUES ('SLOTS', 'Slots Rookie', 0)#
+REPLACE INTO `GAME_VARIATION_TEMPLATE_PROPERTY` (`GAME_VARIATION_TEMPLATE_ID`, `NAME`, `VALUE`, `VERSION`)
+  VALUES
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'ALLOWED_UNIT_STAKES', '10,20,30,40,50', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'BIG_WIN_MULTIPLIER', '200', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'BONUS_MULTIPLIER', '0.04', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'BONUS_MULTIPLIER_SECOND_PHASE', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'CAR_SYMBOL', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'JOKER_SYMBOL', '1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'LINES', '1,1,1,1,1	0,0,0,0,0	2,2,2,2,2	0,1,2,1,0	2,1,0,1,2	1,2,1,2,1	1,0,1,0,1	2,1,2,1,2	0,1,0,1,0	0,0,1,2,2	2,2,1,0,0	1,0,1,2,1	1,2,1,0,1	0,1,1,1,2	2,1,1,1,0	1,0,0,1,2	1,2,2,1,0	1,1,0,1,2	1,1,2,1,0	0,0,1,2,1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MAX_NUMBER_OF_PLAYERS', '11', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MEDIUM_WIN_LINE_MULTIPLIER', '75', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MILLIS_BEFORE_BONUS_ALLOWED', '30000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MILLIS_BET_TIMEOUT', '300000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MILLIS_REEL_SPINNED', '3000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MILLIS_REEL_SPINNED_BONUS', '2000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT', '36000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'MINIMUM_LEVEL_FOR_STAKE', '1:1,2:2,3:5,4:10,5:20,6:50,7:100,8:200,9:500,10:1000,11:5000,12:10000,13:50000,14:100000,15:500000,16:1000000,17:1000000,18:1000000,19:1000000,20:1000000,21:1000000,22:1000000,23:1000000,24:1000000,25:1000000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'NUMBER_OF_WHEELS_TO_COLLECT', '20', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'PAYOUTS', '1,3,150	1,4,500	1,5,1000	2,3,75	2,4,100	2,5,150	3,3,100	3,4,150	3,5,250	4,3,20	4,4,50	4,5,100	5,3,15	5,4,30	5,5,75	6,3,10	6,4,15	6,5,30	7,3,4	7,4,7	7,5,15	8,3,2	8,4,5	8,5,10	9,3,1	9,4,2	9,5,5	11,3,150	11,4,500	11,5,1000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'REELS', '8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,5	6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,11,5,3	7,9,0,6,7,2,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7	2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8	7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'SCATTERED_BONUS_MULTIPLIER', '0.1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'SCATTERED_WHEELS_REQUIRED', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'WHEEL_SYMBOL', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'WHEEL_TYPES', 'TwinTop,4501,4501,4412,4234,4355,4209,4209,4233,4355,4282,4234,4211,FourWay,3881,3881,4014,4297,4355,4544,4544,4513,4355,4380,4297,4211,Tripletto,1097,1097,1075,1065,976,943,943,948,976,994,1065,1128,Quattro,420,420,411,330,279,269,269,271,279,274,330,376,Ultimo,102,102,88,74,35,35,35,35,35,70,74,74', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Rookie'), 'WHEEL_TYPE_MULTIPLIERS', 'TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500	FourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20	Tripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100	Quattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500	Ultimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500', 0)#
+
+INSERT IGNORE INTO `GAME_VARIATION_TEMPLATE` (`GAME_TYPE`, `NAME`, `VERSION`) VALUES ('SLOTS', 'Slots Shark', 0)#
+REPLACE INTO `GAME_VARIATION_TEMPLATE_PROPERTY` (`GAME_VARIATION_TEMPLATE_ID`, `NAME`, `VALUE`, `VERSION`)
+  VALUES
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'ALLOWED_UNIT_STAKES', '1000,2000,3000,4000,5000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'BIG_WIN_MULTIPLIER', '200', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'BONUS_MULTIPLIER', '0.04', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'BONUS_MULTIPLIER_SECOND_PHASE', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'CAR_SYMBOL', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'JOKER_SYMBOL', '1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'LINES', '1,1,1,1,1	0,0,0,0,0	2,2,2,2,2	0,1,2,1,0	2,1,0,1,2	1,2,1,2,1	1,0,1,0,1	2,1,2,1,2	0,1,0,1,0	0,0,1,2,2	2,2,1,0,0	1,0,1,2,1	1,2,1,0,1	0,1,1,1,2	2,1,1,1,0	1,0,0,1,2	1,2,2,1,0	1,1,0,1,2	1,1,2,1,0	0,0,1,2,1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MAX_NUMBER_OF_PLAYERS', '11', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MEDIUM_WIN_LINE_MULTIPLIER', '75', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MILLIS_BEFORE_BONUS_ALLOWED', '30000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MILLIS_BET_TIMEOUT', '300000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MILLIS_REEL_SPINNED', '3000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MILLIS_REEL_SPINNED_BONUS', '2000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT', '36000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'MINIMUM_LEVEL_FOR_STAKE', '1:1,2:2,3:5,4:10,5:20,6:50,7:100,8:200,9:500,10:1000,11:5000,12:10000,13:50000,14:100000,15:500000,16:1000000,17:1000000,18:1000000,19:1000000,20:1000000,21:1000000,22:1000000,23:1000000,24:1000000,25:1000000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'NUMBER_OF_WHEELS_TO_COLLECT', '20', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'PAYOUTS', '1,3,150	1,4,500	1,5,1000	2,3,75	2,4,100	2,5,150	3,3,100	3,4,150	3,5,250	4,3,20	4,4,50	4,5,100	5,3,15	5,4,30	5,5,75	6,3,10	6,4,15	6,5,30	7,3,4	7,4,7	7,5,15	8,3,2	8,4,5	8,5,10	9,3,1	9,4,2	9,5,5	11,3,150	11,4,500	11,5,1000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'REELS', '8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,5	6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,11,5,3	7,9,0,6,7,2,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7	2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8	7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'SCATTERED_BONUS_MULTIPLIER', '0.1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'SCATTERED_WHEELS_REQUIRED', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'WHEEL_SYMBOL', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'WHEEL_TYPES', 'TwinTop,4501,4501,4412,4234,4355,4209,4209,4233,4355,4282,4234,4211,FourWay,3881,3881,4014,4297,4355,4544,4544,4513,4355,4380,4297,4211,Tripletto,1097,1097,1075,1065,976,943,943,948,976,994,1065,1128,Quattro,420,420,411,330,279,269,269,271,279,274,330,376,Ultimo,102,102,88,74,35,35,35,35,35,70,74,74', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots Shark'), 'WHEEL_TYPE_MULTIPLIERS', 'TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500	FourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20	Tripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100	Quattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500	Ultimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500', 0)#
+
+INSERT IGNORE INTO `GAME_VARIATION_TEMPLATE` (`GAME_TYPE`, `NAME`, `VERSION`) VALUES ('SLOTS', 'Slots High Roller', 0)#
+REPLACE INTO `GAME_VARIATION_TEMPLATE_PROPERTY` (`GAME_VARIATION_TEMPLATE_ID`, `NAME`, `VALUE`, `VERSION`)
+  VALUES
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'ALLOWED_UNIT_STAKES', '10000,20000,30000,40000,50000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'BIG_WIN_MULTIPLIER', '200', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'BONUS_MULTIPLIER', '0.04', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'BONUS_MULTIPLIER_SECOND_PHASE', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'CAR_SYMBOL', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'JOKER_SYMBOL', '1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'LINES', '1,1,1,1,1	0,0,0,0,0	2,2,2,2,2	0,1,2,1,0	2,1,0,1,2	1,2,1,2,1	1,0,1,0,1	2,1,2,1,2	0,1,0,1,0	0,0,1,2,2	2,2,1,0,0	1,0,1,2,1	1,2,1,0,1	0,1,1,1,2	2,1,1,1,0	1,0,0,1,2	1,2,2,1,0	1,1,0,1,2	1,1,2,1,0	0,0,1,2,1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MAX_NUMBER_OF_PLAYERS', '11', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MEDIUM_WIN_LINE_MULTIPLIER', '75', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MILLIS_BEFORE_BONUS_ALLOWED', '30000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MILLIS_BET_TIMEOUT', '300000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MILLIS_REEL_SPINNED', '3000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MILLIS_REEL_SPINNED_BONUS', '2000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MILLIS_WHEEL_OF_FORTUNE_SETTLEMENT', '36000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'MINIMUM_LEVEL_FOR_STAKE', '1:1,2:2,3:5,4:10,5:20,6:50,7:100,8:200,9:500,10:1000,11:5000,12:10000,13:50000,14:100000,15:500000,16:1000000,17:1000000,18:1000000,19:1000000,20:1000000,21:1000000,22:1000000,23:1000000,24:1000000,25:1000000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'NUMBER_OF_WHEELS_TO_COLLECT', '20', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'PAYOUTS', '1,3,150	1,4,500	1,5,1000	2,3,75	2,4,100	2,5,150	3,3,100	3,4,150	3,5,250	4,3,20	4,4,50	4,5,100	5,3,15	5,4,30	5,5,75	6,3,10	6,4,15	6,5,30	7,3,4	7,4,7	7,5,15	8,3,2	8,4,5	8,5,10	9,3,1	9,4,2	9,5,5	11,3,150	11,4,500	11,5,1000', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'REELS', '8,6,3,9,8,5,6,7,5,9,6,4,9,2,8,3,9,5,1,0,9,3,11,8,9,4,2,8,1,9,7,2,6,4,7,9,5,9,8,3,7,5	6,8,0,7,2,7,6,4,7,9,5,6,1,7,3,9,8,4,9,0,6,8,9,2,9,11,9,3,9,8,2,8,4,7,9,5,2,8,3,9,11,5,3	7,9,0,6,7,2,9,7,1,8,7,4,9,5,7,8,9,4,2,11,9,8,6,7,2,6,3,9,8,5,9,7,0,3,6,9,4,8,3,2,6,9,8,7	2,6,7,9,8,0,9,6,5,7,9,3,7,8,6,7,9,5,2,1,9,4,8,9,5,7,9,0,2,8,3,6,4,11,5,9,1,6,8,7,9,3,9,8	7,11,9,8,6,3,9,7,4,8,6,2,9,1,7,9,0,6,3,9,1,8,5,6,3,7,8,2,4,9,5,7,4,9,2,6,8,9,5,2,6,8,9,5', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'SCATTERED_BONUS_MULTIPLIER', '0.1', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'SCATTERED_WHEELS_REQUIRED', '3', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'WHEEL_SYMBOL', '0', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'WHEEL_TYPES', 'TwinTop,4501,4501,4412,4234,4355,4209,4209,4233,4355,4282,4234,4211,FourWay,3881,3881,4014,4297,4355,4544,4544,4513,4355,4380,4297,4211,Tripletto,1097,1097,1075,1065,976,943,943,948,976,994,1065,1128,Quattro,420,420,411,330,279,269,269,271,279,274,330,376,Ultimo,102,102,88,74,35,35,35,35,35,70,74,74', 0),
+  ((select game_variation_template_id from GAME_VARIATION_TEMPLATE where name = 'Slots High Roller'), 'WHEEL_TYPE_MULTIPLIERS', 'TwinTop,10,5,10,5,10,5,10,5,10,5,10,5,10,5,1000,10,5,10,5,10,5,10,5,10,5,10,5,10,5,10,5,500	FourWay,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,10,5,7,5,7,5,20,5,7,5,7,5,20,5,20	Tripletto,5,15,10,20,5,15,10,50,5,20,10,15,5,15,10,100,5,20,10,15,5,15,10,50,5,20,10,15,5,20,10,100	Quattro,50,25,75,25,50,25,75,500,25,50,25,75,25,50,25,500,25,50,25,50,25,75,25,500,50,25,75,25,50,25,75,500	Ultimo,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500,1000,10,500,10,1000,10,500,10,1000,10,500,10,1000,10,500,2500', 0)#
+
+update LEVEL_SYSTEM set LEVEL_DEFINITIONS = '100\t0\n225\t200\n350\t300\n500\t400\n700\t500\n936\t6000\n1490\t700\n2350\t800\n3683\t900\n5748\t10000\n8950\t1100\n13913\t1200\n21605\t1300\n33527\t1400\n52007\t1500\n80652\t16000\n125050\t1700\n193867\t1800\n300535\t1900\n465869\t2000\n722136\t2100\n1119351\t2200\n1735035\t2300\n2689344\t2400\n99999995\t2500\n99999996\t2600\n99999997\t2700\n99999998\t2800\n99999999\t2900' where game_type = 'SLOTS'#

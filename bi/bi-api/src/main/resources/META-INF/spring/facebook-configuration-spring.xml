@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="facebookConfiguration" class="strata.server.lobby.api.facebook.FacebookConfiguration">
+        <property name="appUrlRoot" value="${facebook.externalUrl}"/>
+        <property name="loginUrl" value="${facebook.loginUrl}"/>
+        <property name="reviewsEnabled" value="${facebook.reviewsEnabled}"/>
+        <property name="publishStreamEnabled" value="${facebook.publishStreamEnabled}"/>
+        <property name="appsEnabled" value="${facebook.appsEnabled}"/>
+
+        <property name="usingSeparateConnectApplication" value="${facebook.usingSeparateConnectApplication}"/>
+        <property name="connectAppConfiguration">
+            <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                <property name="gameType" value="${facebook.connect.gametype}"/>
+                <property name="apiKey" value="${facebook.connect.apikey}"/>
+                <property name="secretKey" value="${facebook.connect.secret}"/>
+                <property name="appName" value="${facebook.connect.appName}"/>
+                <property name="applicationId" value="${facebook.connect.application.id}"/>
+                <property name="fanPageId" value="${facebook.fanPageId}"/>
+                <property name="redirecting" value="${facebook.connect.redirect}"/>
+                <property name="redirectUrl" value="${facebook.connect.redirectUrl}"/>
+                <property name="canvasActionsAllowed" value="${facebook.connect.canvasActionsAllowed}"/>
+            </bean>
+        </property>
+
+        <property name="conversionTracking">
+            <util:map>
+                <entry key="registration">
+                    <bean class="strata.server.lobby.api.facebook.ConversionTrackingData">
+                        <constructor-arg value="${facebook.conversion.registration.id}"/>
+                        <constructor-arg value="${facebook.conversion.registration.h}"/>
+                    </bean>
+                </entry>
+                <entry key="purchase">
+                    <bean class="strata.server.lobby.api.facebook.ConversionTrackingData">
+                        <constructor-arg value="${facebook.conversion.purchase.id}"/>
+                        <constructor-arg value="${facebook.conversion.purchase.h}"/>
+                    </bean>
+                </entry>
+            </util:map>
+        </property>
+        <property name="applicationConfigs">
+            <list>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="BLACKJACK"/>
+                    <property name="apiKey" value="${facebook.blackjack.apikey}"/>
+                    <property name="secretKey" value="${facebook.blackjack.secret}"/>
+                    <property name="appName" value="${facebook.blackjack.appName}"/>
+                    <property name="applicationId" value="${facebook.blackjack.application.id}"/>
+                    <property name="fanPageId" value="${facebook.fanPageId}"/>
+                    <property name="redirecting" value="${facebook.blackjack.redirect}"/>
+                    <property name="redirectUrl" value="${facebook.blackjack.redirectUrl}"/>
+                    <property name="openGraphObjectPrefix" value="bj"/>
+                    <property name="canvasActionsAllowed" value="${facebook.blackjack.canvasActionsAllowed}"/>
+                </bean>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="ROULETTE"/>
+                    <property name="apiKey" value="${facebook.roulette.apikey}"/>
+                    <property name="secretKey" value="${facebook.roulette.secret}"/>
+                    <property name="appName" value="${facebook.roulette.appName}"/>
+                    <property name="applicationId" value="${facebook.roulette.application.id}"/>
+                    <property name="fanPageId" value="${facebook.fanPageId}"/>
+                    <property name="redirecting" value="${facebook.roulette.redirect}"/>
+                    <property name="redirectUrl" value="${facebook.roulette.redirectUrl}"/>
+                    <property name="canvasActionsAllowed" value="${facebook.roulette.canvasActionsAllowed}"/>
+                    <property name="openGraphObjectPrefix" value="rl"/>
+                </bean>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="TEXAS_HOLDEM"/>
+                    <property name="apiKey" value="${facebook.texasholdem.apikey}"/>
+                    <property name="secretKey" value="${facebook.texasholdem.secret}"/>
+                    <property name="appName" value="${facebook.texasholdem.appName}"/>
+                    <property name="applicationId" value="${facebook.texasholdem.application.id}"/>
+                    <property name="fanPageId" value="${facebook.fanPageId}"/>
+                    <property name="redirecting" value="${facebook.texasholdem.redirect}"/>
+                    <property name="redirectUrl" value="${facebook.texasholdem.redirectUrl}"/>
+                    <property name="canvasActionsAllowed" value="${facebook.texasholdem.canvasActionsAllowed}"/>
+                    <property name="openGraphObjectPrefix" value="th"/>
+                </bean>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="SLOTS"/>
+                    <property name="apiKey" value="${facebook.slots.apikey}"/>
+                    <property name="secretKey" value="${facebook.slots.secret}"/>
+                    <property name="appName" value="${facebook.slots.appName}"/>
+                    <property name="applicationId" value="${facebook.slots.application.id}"/>
+                    <property name="fanPageId" value="${facebook.fanPageId}"/>
+                    <property name="redirecting" value="${facebook.slots.redirect}"/>
+                    <property name="redirectUrl" value="${facebook.slots.redirectUrl}"/>
+                    <property name="openGraphObjectPrefix" value="wd"/>
+                    <property name="canvasActionsAllowed" value="${facebook.slots.canvasActionsAllowed}"/>
+                </bean>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="HIGH_STAKES"/>
+                    <property name="apiKey" value="${facebook.highstakes.apikey}"/>
+                    <property name="secretKey" value="${facebook.highstakes.secret}"/>
+                    <property name="appName" value="${facebook.highstakes.appName}"/>
+                    <property name="applicationId" value="${facebook.highstakes.application.id}"/>
+                    <property name="fanPageId" value="${facebook.fanPageId}"/>
+                    <property name="redirecting" value="${facebook.highstakes.redirect}"/>
+                    <property name="redirectUrl" value="${facebook.highstakes.redirectUrl}"/>
+                    <property name="canvasActionsAllowed" value="${facebook.highstakes.canvasActionsAllowed}"/>
+                    <property name="openGraphObjectPrefix" value="hs"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

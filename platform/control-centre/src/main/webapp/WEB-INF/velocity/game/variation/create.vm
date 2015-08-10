@@ -1,0 +1,39 @@
+#set ($location = "Create Game Variation")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/variation/list">List Variations</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Create Game Variation</h2>
+
+        #if ($gameTypes)
+            <form method="post" class="form-url-location"
+                  action="${request.contextPath}/game/variation/create/@"
+                  data-field="gameType">
+
+                <fieldset>
+                    <legend>Details</legend>
+
+                    <label for="gameType">Game Type:</label>
+                    <select id="gameType" name="gameType">
+                        #foreach ($gameType in $gameTypes)
+                        <option id="$gameType">$gameType</option>
+                        #end
+                    </select>
+
+                    <input type="submit" value="Next"/>
+                </fieldset>
+                
+            </form>
+        #else
+            #parse("game/variation/form.vm")
+        #end
+    </div>
+</section>

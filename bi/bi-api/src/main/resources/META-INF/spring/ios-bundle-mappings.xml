@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--util:map promotionDefinitionId="bundleMappings" key-type="java.lang.String" value-type="java.lang.String" map-class="java.util.HashMap">
+        <entry key="yazino.WheelDeal" value="SLOTS"/>
+        <entry key="yazino.Blackjack" value="BLACKJACK"/>
+        <entry key="yazino.HighStakes" value="HIGH_STAKES"/>
+        <entry key="com.yazino.YazinoApp" value="SLOTS"/>
+        <entry key="com.yazino.Blackjack" value="BLACKJACK"/>
+    </util:map -->
+
+    <bean id="bundleMappings" class="com.yazino.mobile.yaps.config.TypedMapBean">
+        <constructor-arg>
+            <map>
+                <entry key="com.yazino.Blackjack" value="BLACKJACK"/>
+                <entry key="yazino.Blackjack" value="BLACKJACK"/>
+                <entry key="yazino.HighStakes" value="HIGH_STAKES"/>
+                <entry key="com.yazino.YazinoApp" value="SLOTS"/>
+                <entry key="yazino.WheelDeal" value="SLOTS"/>
+                <entry key="yazino.wheelDealForTango" value="SLOTS"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

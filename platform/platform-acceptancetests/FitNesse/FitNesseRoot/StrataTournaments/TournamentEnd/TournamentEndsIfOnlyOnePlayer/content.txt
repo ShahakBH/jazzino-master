@@ -1,0 +1,31 @@
+!3 Tournament ends if there is only one player with more than the min stake
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+!|Force state for|June Blackjack Tournament|to|Registering|
+
+!|Player registers for tournament|
+|Tournament name|Player name|message?|
+|June Blackjack Tournament|Adam|OK|
+|June Blackjack Tournament|John|OK|
+|June Blackjack Tournament|Bob|OK|
+
+!|Start level for tournament|June Blackjack Tournament|
+
+!|Set player tournament balance|
+|Tournament name|Player|Balance|
+|June Blackjack Tournament|Adam|9|
+|June Blackjack Tournament|John|10|
+|June Blackjack Tournament|Bob|9|
+
+Check that a tournament can end mid-level if there's only 1 player left
+
+!|Process table player removal for|June Blackjack Tournament|
+
+!|Check tournament status for|June Blackjack Tournament|is|Finished|

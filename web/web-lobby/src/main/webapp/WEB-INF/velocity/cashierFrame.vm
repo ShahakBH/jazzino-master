@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body class="buy-chips-popup">
+	#parse("partials/cashier.vm")
+</body>
+</html>

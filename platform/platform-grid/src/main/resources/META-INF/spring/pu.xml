@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:os-core="http://www.openspaces.org/schema/core"
+       xmlns:os-events="http://www.openspaces.org/schema/events"
+       xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.openspaces.org/schema/core http://www.openspaces.org/schema/core/openspaces-core.xsd
+        http://www.openspaces.org/schema/events http://www.openspaces.org/schema/events/openspaces-events.xsd
+        http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/remoting/openspaces-remoting.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.2.xsd
+           http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics-3.0.xsd">
+
+    <bean class="com.yazino.logging.JULLoggingForwarder"
+          init-method="initialise"/>
+
+    <context:annotation-config/>
+
+    <import resource="classpath*:/META-INF/yazino-properties.xml"/>
+
+    <import resource="classpath*:/META-INF/spring/datasource.xml"/>
+    <import resource="classpath*:/META-INF/spring/gamehost.xml"/>
+    <import resource="classpath*:/META-INF/spring/avatar-tokeniser.xml"/>
+
+    <import resource="classpath*:/META-INF/spring/event-service-account.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-tournament.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-leaderboard.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-table.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-player.xml"/>
+
+    <bean id="timeSource" class="com.yazino.game.api.time.SystemTimeSource"/>
+    <bean id="randomizer" class="com.yazino.game.api.SimpleRandomizer"/>
+
+    <os-core:giga-space-context/>
+
+    <os-core:annotation-support/>
+    <os-events:annotation-support/>
+
+    <os-core:context-loader id="primarySpaceContext"
+                            giga-space="gigaSpace"
+                            active-when-primary="true"
+                            location="classpath:/META-INF/spring/primary-space.xml"/>
+
+    <os-core:space id="space"
+                   url="${strata.gigaspaces.local.space}"
+                   register-for-space-mode-notifications="true">
+        <os-core:properties>
+            <props>
+                <prop key="space-config.engine.memory_usage.enabled">false</prop>
+                <!-- Use ALL IN CACHE -->
+                <prop key="space-config.engine.cache_policy">1</prop>
+                <prop key="cluster-config.groups.group.repl-policy.policy-type">partial-replication</prop>
+
+                <!-- 300 * 2000ms = 10m to restart the cluster -->
+                <prop key="space-config.proxy-settings.connection-retries">${strata.gigaspaces.proxy-retries}</prop>
+            </props>
+        </os-core:properties>
+    </os-core:space>
+
+    <os-core:giga-space id="gigaSpace"
+                        space="space"
+                        tx-manager="spaceTransactionManager"/>
+    <os-core:giga-space id="globalGigaSpace"
+                        space="space"
+                        clustered="true"/>
+
+    <os-core:local-tx-manager id="spaceTransactionManager"
+                              space="space"/>
+
+    <bean id="dataSourceTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource"
+                  ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
+
+    <context:component-scan base-package="com.yazino.platform.audit"/>
+    <context:component-scan base-package="com.yazino.platform.gamehost"/>
+    <context:component-scan base-package="com.yazino.platform.grid"/>
+    <context:component-scan base-package="com.yazino.platform.messaging"/>
+    <context:component-scan base-package="com.yazino.platform.metrics"/>
+    <context:component-scan base-package="com.yazino.platform.model"/>
+    <context:component-scan base-package="com.yazino.platform.persistence"/>
+    <context:component-scan base-package="com.yazino.platform.plugin"/>
+    <context:component-scan base-package="com.yazino.platform.processor"/>
+    <context:component-scan base-package="com.yazino.platform.repository"/>
+    <context:component-scan base-package="com.yazino.platform.service"/>
+    <context:component-scan base-package="com.yazino.platform.event.gifting"/>
+    <context:component-scan base-package="com.yazino.novomatic.cgs"/>
+
+    <bean id="auditPropertiesConverter"
+          class="org.springframework.amqp.rabbit.support.DefaultMessagePropertiesConverter"/>
+
+    <bean class="com.yazino.platform.event.player.PlayerLevelEventServiceConfiguration"/>
+
+    <os-remoting:annotation-support/>
+
+    <os-remoting:service-exporter id="serviceExporter"/>
+
+    <bean id="threadPoolFactory" class="com.yazino.platform.util.concurrent.JavaThreadPoolFactory"/>
+
+    <ehcache:annotation-driven cache-manager="ehCacheManager"/>
+
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="shared" value="true"/>
+    </bean>
+
+    <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"
+          destroy-method="destroy">
+        <property name="locateExistingServerIfPossible" value="true"/>
+    </bean>
+
+    <bean class="net.sf.ehcache.management.ManagementService"
+          init-method="init"
+          destroy-method="dispose">
+        <constructor-arg ref="ehCacheManager"/>
+        <constructor-arg ref="mbeanServer"/>
+        <constructor-arg value="false"/>
+        <constructor-arg value="false"/>
+        <constructor-arg value="true"/>
+        <constructor-arg value="true"/>
+    </bean>
+
+    <metrics:metric-registry id="metrics" />
+
+    <metrics:annotation-driven metric-registry="metrics" />
+
+    <metrics:reporter type="jmx" metric-registry="metrics" />
+
+    <bean id="exchangeDeclarer"
+          class="com.yazino.platform.messaging.ExchangeDeclarer"
+          init-method="declare">
+        <constructor-arg index="0" value="${strata.rabbitmq.host}"/>
+        <constructor-arg index="1" value="${strata.rabbitmq.port}"/>
+        <constructor-arg index="2" value="${strata.rabbitmq.virtualhost}"/>
+        <constructor-arg index="3" value="${strata.rabbitmq.topic}"/>
+        <constructor-arg index="4" value="${strata.rabbitmq.username}"/>
+        <constructor-arg index="5" value="${strata.rabbitmq.password}"/>
+    </bean>
+
+    <bean id="documentDispatcherConnectionFactory"
+          class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <constructor-arg index="0" value="${strata.rabbitmq.host}"/>
+        <property name="username" value="${strata.rabbitmq.username}"/>
+        <property name="password" value="${strata.rabbitmq.password}"/>
+        <property name="virtualHost" value="${strata.rabbitmq.virtualhost}"/>
+    </bean>
+
+    <bean id="playerRabbitMQRoutedPublishers"
+          class="com.yazino.platform.messaging.publisher.SpringAMQPRoutedTemplates">
+        <constructor-arg index="0" value="strata.rabbitmq.host"/>
+        <constructor-arg index="1">
+            <bean class="com.yazino.platform.messaging.publisher.ConnectionFactoryFactory">
+                <constructor-arg index="0" value="${strata.rabbitmq.port}"/>
+                <constructor-arg index="1" value="${strata.rabbitmq.virtualhost}"/>
+                <constructor-arg index="2" value="${strata.rabbitmq.username}"/>
+                <constructor-arg index="3" value="${strata.rabbitmq.password}"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <bean class="com.yazino.platform.messaging.publisher.CloneableRabbitTemplate">
+                <property name="encoding" value="UTF-8"/>
+                <property name="exchange" value="${strata.rabbitmq.topic}"/>
+                <property name="connectionFactory">
+                    <bean class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+                        <constructor-arg index="0" value="${strata.rabbitmq.host}"/>
+                        <property name="username" value="${strata.rabbitmq.username}"/>
+                        <property name="password" value="${strata.rabbitmq.password}"/>
+                        <property name="virtualHost" value="${strata.rabbitmq.virtualhost}"/>
+                    </bean>
+                </property>
+            </bean>
+        </constructor-arg>
+        <constructor-arg ref="yazinoConfiguration"/>
+    </bean>
+
+    <bean id="documentDispatcher" class="com.yazino.platform.messaging.dispatcher.ZlibDocumentDispatcher">
+        <constructor-arg>
+            <bean class="com.yazino.platform.messaging.dispatcher.RabbitMQDocumentDispatcher">
+                <constructor-arg ref="playerRabbitMQRoutedPublishers"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="spaceGlobalDocumentDispatcher"
+          class="com.yazino.platform.messaging.dispatcher.GigaspaceDocumentDispatcher">
+        <constructor-arg ref="globalGigaSpace"/>
+    </bean>
+
+    <bean id="partitionedLoader"
+          class="com.yazino.platform.persistence.PartitionedIterableLoader">
+        <constructor-arg>
+            <list>
+                <ref bean="playerTrophyDao"/>
+                <ref bean="clientDao"/>
+                <ref bean="trophyLeaderboardDao"/>
+                <ref bean="systemMessageDao"/>
+                <ref bean="tableInviteDao"/>
+                <ref bean="tableDao"/>
+                <ref bean="tournamentDao"/>
+                <ref bean="tournamentSummaryDao"/>
+                <ref bean="recurringTournamentDefinitionDao"/>
+                <ref bean="giftDao"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <bean id="profanityFilter" class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="openGraphLevelPrefixes" class="com.yazino.platform.processor.statistic.level.OpenGraphLevelPrefixes">
+        <constructor-arg>
+            <util:map id="openGraphLevelPrefixMap" map-class="java.util.HashMap">
+                <entry key="SLOTS" value="wd"/>
+                <entry key="BLACKJACK" value="bj"/>
+                <entry key="HIGH_STAKES" value="hs"/>
+            </util:map>
+        </constructor-arg>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="playerGameStatisticConsumerRepository"/>
+        <property name="targetMethod" value="addConsumer"/>
+        <property name="arguments">
+            <bean class="com.yazino.platform.processor.tournament.GameTournamentStatisticConsumer"/>
+        </property>
+    </bean>
+
+    <!-- We set up our own metrics reporter to cope with backup spaces -->
+
+    <bean class="com.yazino.metrics.reporter.MetricsClient"/>
+
+    <bean id="metricsConnectionConfigBuilder" class="org.apache.http.config.ConnectionConfig" factory-method="custom">
+        <property name="bufferSize" value="${metrics.aggregation.socket-buffer-size}"/>
+    </bean>
+
+    <bean id="metricsSocketConfigBuilder" class="org.apache.http.config.SocketConfig" factory-method="custom">
+        <property name="tcpNoDelay" value="${metrics.aggregation.tcp-no-delay}"/>
+    </bean>
+
+    <bean id="metricsRequestConfigBuilder" class="org.apache.http.client.config.RequestConfig" factory-method="custom">
+        <property name="socketTimeout" value="${metrics.aggregation.socket-timeout}" />
+        <property name="connectTimeout" value="${metrics.aggregation.connection-timeout}" />
+    </bean>
+
+    <bean id="metricsHttpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="defaultRequestConfig">
+            <bean factory-bean="metricsRequestConfigBuilder" factory-method="build" />
+        </property>
+        <property name="defaultConnectionConfig">
+            <bean factory-bean="metricsConnectionConfigBuilder" factory-method="build"/>
+        </property>
+        <property name="defaultSocketConfig">
+            <bean factory-bean="metricsSocketConfigBuilder" factory-method="build"/>
+        </property>
+        <property name="maxConnPerRoute" value="${metrics.aggregation.max-threads-per-route}"/>
+        <property name="maxConnTotal" value="${metrics.aggregation.max-threads}"/>
+    </bean>
+
+    <bean id="metricsHttpClient" factory-bean="metricsHttpClientBuilder" factory-method="build"/>
+
+    <bean id="novomaticRequestService" class="com.yazino.platform.gamehost.external.NovomaticGameRequestService"/>
+</beans>

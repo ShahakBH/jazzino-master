@@ -1,0 +1,331 @@
+/*  HTML5 Reset :: style.css
+-------------------------------------------------------------------------------*/
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video   
+{
+    margin: 0;  
+    padding: 0; 
+    border: 0;  
+    outline: 0; 
+    font-size: 100%;    
+    vertical-align: baseline;   
+    background: transparent;
+    font-weight: normal;
+}
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+/*  we use a lot of ULs that aren't bulleted.   
+    don't forget to restore the bullets within content. */
+ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before, 
+blockquote:after, 
+q:before, 
+q:after {content: ''; content: none;}
+body
+{
+    background-color: #ffffff;
+    margin-top: auto;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* tables still need cellspacing="0" in the markup */
+table {border-collapse: collapse; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle; border: medium none; height: 18px;}
+
+pre 
+{
+    white-space: pre; /* CSS2 */
+    white-space: pre-wrap; /* CSS 2.1 */    
+    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */  
+    word-wrap: break-word; /* IE */
+}
+    
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {
+    border: 1px solid #CCC;
+    width: 150px;
+    padding: 1px;
+    color: #E1E1E1;
+}
+.input-label{
+    width: 200px;
+}
+
+table {font-size: inherit; font: 100%;}
+
+/* Accessible focus treatment
+    people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active {outline: none;}
+
+small {font-size: 85%;}
+
+strong, th {font-weight: bold;}
+
+td, td img {vertical-align: top;}
+
+/* Make sure sup and sub don't screw with your line-heights gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,label, 
+input[type=button], 
+input[type=submit], 
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button {width: auto; overflow: visible;}
+
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover */
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+
+/* let's clear some floats */
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+.clear { clear: both;}
+
+/* FONTS */
+@font-face {
+    font-family: 'helveticaneue-lt';
+    src: url('../fonts/helveticaneueltpro-lt.eot');
+    src: url('../fonts/helveticaneueltpro-lt.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneueltpro-lt.woff') format('woff'),
+         url('../fonts/helveticaneueltpro-lt.ttf') format('truetype'),
+         url('../fonts/helveticaneueltpro-lt.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'helveticaneue-md';
+    src: url('../fonts/helveticaneueltpro-md.eot');
+    src: url('../fonts/helveticaneueltpro-md.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/helveticaneueltpro-md.woff') format('woff'),
+         url('../fonts/helveticaneueltpro-md.ttf') format('truetype'),
+         url('../fonts/helveticaneueltpro-md.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+		font-family: 'helveticaneue-lt';
+		src: url('../fonts/helveticaneueltpro-lt.svg') format('svg');
+	}
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+		font-family: 'helveticaneue-md';
+		src: url('../fonts/helveticaneueltpro-md.svg') format('svg');
+	}
+}
+
+/* GENERAL STYLES */
+html,body
+{
+	width: 100%;
+	height: 100%;
+	background-color: #010509;
+	background-image: url(../images/bg.jpg);
+	background-position: 50% 0%;
+	background-repeat: no-repeat;
+}
+
+.wrapper
+{
+	width: 900px;
+	height: 981px;
+	margin: 0px auto;
+	padding-top: 7px;
+	text-align: center;
+}
+.header
+{
+	width: 900px;
+	height: 40px;
+	position: relative;
+}
+.logo
+{
+	float: left;
+	margin-top: 0px;
+}
+.links
+{
+	float: right;
+	margin-top: 3px;
+	text-align: right;
+}
+.links a
+{
+	font-family: 'helveticaneue-lt';
+	font-size: 14px;
+	color: white;
+	text-decoration: none;
+	text-shadow: -2px 2px 3px rgba(0, 0, 0, 0.6);
+    filter: dropshadow(color=#000000, offx=-2, offy=2);
+    padding-right: 6px;
+}
+.links .hr
+{
+	width: 137px;
+	height: 14px;
+	background-image: url(../images/signin-line.png);
+    margin-top: 0px;
+}
+.wheel-deal
+{
+	position: absolute;
+	width: 551px;
+	height: 329px;
+	background-image: url(../images/wheel-deal.png);
+	left: 50%;
+	top: -28px;
+	margin-left: -275px;
+	z-index: 50;
+}
+.main-content
+{
+	width: 443px;
+	height: 489px;
+	margin: 150px auto 0px auto;
+	position: relative;
+}
+.signup-login-form
+{
+	z-index: 10;
+	position: relative;
+	background-image: url(../images/popup-window.png);
+	width: 443px;
+	height: 513px;
+	padding-top: 97px;
+}
+.inputs
+{
+	width: 212px;
+	height: 135px;
+	margin: 17px auto 7px auto;
+}
+input[type="text"],input[type="password"]
+{
+	width: 190px;
+	height: 16px;
+	display: block;
+	margin-bottom: 14px;
+	background-color: transparent;
+	line-height: 16px;
+	padding: 10px 10px;
+	border: 0px none;
+	outline: none;
+	color: black;
+	font-family: 'helveticaneue-md';
+	font-size: 15px;
+	color: #a3a3a3;
+	vertical-align: middle
+}
+input.last
+{
+	margin-bottom: 12px;
+}
+.checbox-fieldset
+{
+	width: 220px;
+	height: auto;
+	font-family: 'helveticaneue-md';
+	font-size: 13px;
+	color: white;
+	margin: 0px auto 3px auto;
+	text-align: left;
+}
+input[type="checkbox"]
+{
+	width: 30px;
+	float: left;
+	display: block;
+	border: 0px none;
+}
+.fieldset-label
+{
+	width: 185px;
+	height: auto;
+	float: left;
+	font-size: 13px;
+}
+.fieldset-label a
+{
+	color: white;
+	text-decoration: underline;
+}
+.reels
+{
+	position: absolute;
+	left: -248px;
+	top: 63px;
+	background-image: url(../images/reels.png);
+	width: 658px;
+	height: 421px;
+	z-index: 1;
+}
+.bonus-wheel
+{
+	position: absolute;
+	left: 182px;
+	top: 43px;
+	background-image: url(../images/bonus-wheel.png);
+	width: 588px;
+	height: 467px;
+	z-index: 1;
+}
+.footer
+{
+	margin-top: -13px;
+	font-family: 'helveticaneue-lt';
+	font-size: 12px;
+	color: white;
+	line-height: 22px;
+}
+.footer a
+{
+	text-decoration: none;
+}
+.submit-button
+{
+	background-image: url(../images/signup-and-play.png);
+	width: 242px;
+	height: 76px;
+	background-color: transparent;
+	border: 0px none;
+}

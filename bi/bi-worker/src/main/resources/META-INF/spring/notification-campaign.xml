@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="classpath:/META-INF/spring/campaign-context.xml"/>
+    <context:component-scan base-package="com.yazino.engagement.campaign"/>
+    <context:component-scan base-package="com.yazino.engagement.amazon"/>
+
+    <bean id="iosCampaignDeliveryAdapter" class="com.yazino.engagement.campaign.application.CampaignDeliveryAdapter">
+        <constructor-arg index="0" ref="campaignNotificationDao"/>
+        <constructor-arg index="1" ref="mobileDeviceCampaignDao"/>
+        <constructor-arg index="2" ref="gameTypeRepository"/>
+        <constructor-arg index="3" ref="campaignContentServiceImpl"/>
+        <constructor-arg index="4" ref="iosPushNotificationPublisher"/>
+        <constructor-arg index="5" type="com.yazino.engagement.ChannelType" value="IOS"/>
+    </bean>
+
+    <bean id="androidCampaignDeliveryAdapter" class="com.yazino.engagement.campaign.application.CampaignDeliveryAdapter">
+        <constructor-arg index="0" ref="campaignNotificationDao"/>
+        <constructor-arg index="1" ref="mobileDeviceCampaignDao"/>
+        <constructor-arg index="2" ref="gameTypeRepository"/>
+        <constructor-arg index="3" ref="campaignContentServiceImpl"/>
+        <constructor-arg index="4" ref="androidPushNotificationPublisher"/>
+        <constructor-arg index="5" type="com.yazino.engagement.ChannelType" value="GOOGLE_CLOUD_MESSAGING_FOR_ANDROID"/>
+    </bean>
+
+    <bean id="facebookRequestCampaignDeliveryAdapter" class="com.yazino.engagement.campaign.application.CampaignDeliveryAdapter">
+        <constructor-arg index="0" ref="campaignNotificationDao"/>
+        <constructor-arg index="1" ref="mobileDeviceCampaignDao"/>
+        <constructor-arg index="2" ref="gameTypeRepository"/>
+        <constructor-arg index="3" ref="campaignContentServiceImpl"/>
+        <constructor-arg index="4" ref="facebookPushNotificationPublisher"/>
+        <constructor-arg index="5" type="com.yazino.engagement.ChannelType" value="FACEBOOK_APP_TO_USER_REQUEST"/>
+    </bean>
+
+    <bean id="facebookNotificationCampaignDeliveryAdapter" class="com.yazino.engagement.campaign.application.CampaignDeliveryAdapter">
+        <constructor-arg index="0" ref="campaignNotificationDao"/>
+        <constructor-arg index="1" ref="mobileDeviceCampaignDao"/>
+        <constructor-arg index="2" ref="gameTypeRepository"/>
+        <constructor-arg index="3" ref="campaignContentServiceImpl"/>
+        <constructor-arg index="4" ref="facebookPushNotificationPublisher"/>
+        <constructor-arg index="5" type="com.yazino.engagement.ChannelType" value="FACEBOOK_APP_TO_USER_NOTIFICATION"/>
+    </bean>
+
+    <bean id="emailVisionDeliveryAdapter" class="com.yazino.engagement.campaign.application.EmailCampaignUploaderAdapter"/>
+
+
+    <util:list id="campaignDeliveryAdapters" value-type="com.yazino.engagement.campaign.application.ChannelCampaignDeliveryAdapter">
+        <ref bean="iosCampaignDeliveryAdapter"/>
+        <ref bean="androidCampaignDeliveryAdapter"/>
+        <ref bean="facebookNotificationCampaignDeliveryAdapter"/>
+        <ref bean="facebookRequestCampaignDeliveryAdapter"/>
+        <ref bean="emailVisionDeliveryAdapter"/>
+        <ref bean="amazonCampaignDeliveryService"/>
+    </util:list>
+
+    <bean id="httpClientFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+        <property name="readTimeout" value="200"/>
+        <property name="connectTimeout" value="200"/>
+    </bean>
+
+    <bean id="amazonRestOperations" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="httpClientFactory"/>
+    </bean>
+
+</beans>

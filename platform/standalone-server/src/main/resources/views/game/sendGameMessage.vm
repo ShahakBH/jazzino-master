@@ -1,0 +1,28 @@
+#parse("includes/header.vm")
+<section id="content">
+    <div class="create">
+        <h2>Send Game Message</h2>
+        <form method="POST" action="?">
+            #springBind("sendGameMessage")
+
+            <fieldset>
+                <legend>Details</legend>
+
+                <label for="type">Message Type:</label>
+                #springFormInput("sendGameMessage.type" "")
+
+                <label for="playerIds">Player IDs:</label>
+                #springFormInput("sendGameMessage.playerIds" "")
+
+                <label for="tableMessage">Table?</label>
+                #springFormCheckbox("sendGameMessage.tableMessage", "")
+
+                <label for="body">Content:</label>
+                #springFormTextarea("sendGameMessage.body" "")
+
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+

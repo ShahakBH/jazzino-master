@@ -1,0 +1,8 @@
+hosts:
+    dseeto-centos.london.yazino.com:
+        roles:
+            - all
+        params:
+            senet.web.content: https://$ENVIRONMENT.london.yazino.com:8143/web-content
+            strata.server.lobby.ssl.content: https://$ENVIRONMENT.london.yazino.com:8143/web-content
+            senet.web.application-content: https://$ENVIRONMENT.london.yazino.com:8143/client-content 

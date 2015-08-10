@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+
+    <mvc:resources mapping="/crossdomain.xml" location="/crossdomain.xml" order="0"/>
+    <mvc:resources mapping="/BingSiteAuth.xml" location="/BingSiteAuth.xml" order="0"/>
+    <mvc:resources mapping="/icon-offline.png" location="/icon-offline.png" order="0"/>
+    <mvc:resources mapping="/icon-online.png" location="/icon-online.png" order="0"/>
+    <mvc:resources mapping="/button-inviteNow.png" location="/button-inviteNow.png" order="0"/>
+    <mvc:resources mapping="/button-inviteNowDisabled.png" location="/button-inviteNowDisabled.png" order="0"/>
+    <mvc:resources mapping="/index.jsp" location="/index.jsp" order="0"/>
+    <mvc:resources mapping="/sitemap.xml" location="/sitemap.xml" order="0"/>
+    <mvc:resources mapping="/xd_receiver.htm" location="/xd_receiver.htm" order="0"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <context:component-scan base-package="com.yazino.web.api"/>
+    <context:component-scan base-package="com.yazino.web.config"/>
+    <context:component-scan base-package="com.yazino.web.controller"/>
+    <context:component-scan base-package="com.yazino.web.data"/>
+    <context:component-scan base-package="com.yazino.web.form"/>
+    <context:component-scan base-package="com.yazino.web.payment"/>
+    <context:component-scan base-package="com.yazino.web.session"/>
+    <context:component-scan base-package="com.yazino.web.service"/>
+    <context:component-scan base-package="com.yazino.web.util"/>
+    <context:component-scan base-package="com.yazino.web.domain"/>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <import resource="classpath*:/view-aspects.xml"/>
+
+    <import resource="classpath:/META-INF/spring/worldpay.xml"/>
+    <import resource="classpath:/META-INF/spring/web-shared.xml"/>
+    <import resource="classpath:/META-INF/spring/payment-option-service.xml"/>
+    <import resource="classpath:/META-INF/spring/event-service-player.xml"/>
+    <import resource="classpath:/META-INF/spring/event-service-client-log.xml"/>
+    <import resource="classpath*:/META-INF/spring/player-profile-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/invitation-query-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/authentication-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/bonus-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/grid-services.xml"/>
+    <import resource="classpath:META-INF/spring/reference-data.xml"/>
+    <import resource="classpath*:/META-INF/spring/payment-state-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/reference-service.xml"/>
+    <import resource="classpath:META-INF/spring/invitation-service.xml"/>
+    <import resource="classpath:META-INF/spring/payment-service.xml"/>
+
+    <import resource="classpath:META-INF/spring/creditcard-lobby-spring.xml"/>
+    <import resource="classpath:META-INF/spring/itunes-spring.xml"/>
+
+    <import resource="classpath:META-INF/spring/facebook-configuration-spring.xml"/>
+    <import resource="classpath:META-INF/spring/google-checkout-spring.xml"/>
+    <import resource="classpath:META-INF/spring/opengraph-mappings.xml"/>
+    <import resource="classpath:META-INF/spring/security-spring.xml"/>
+
+    <bean class="com.yazino.spring.security.WhitelistBeanPostProcessor"/>
+
+    <bean id="environmentPropertiesInterceptor" class="com.yazino.web.interceptor.EnvironmentPropertiesInterceptor">
+        <constructor-arg>
+            <map>
+                <!--anything added here will be made available to ALL webapps. -->
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="referrerInterceptor"
+          class="com.yazino.web.interceptor.RefererInterceptor">
+        <constructor-arg index="1">
+            <list>
+                <value>/game-server</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/api/**"/>
+            <bean class="com.yazino.web.interceptor.PerformanceTrackingInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="secureRedirectionInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="authenticatedUserInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.CommonPropertiesInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.DailyAwardInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="referrerInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.ProfileInformationInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.GameConfigurationInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.CommonModelAttributeInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="environmentPropertiesInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="webEnvironmentPropertiesInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="webReloadablePropertiesInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yazino.web.interceptor.OpenGraphPropertiesInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/tracking/**"/>
+            <bean class="com.yazino.web.interceptor.ThroughputLimitingInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="velocityNoLayoutViewResolverWrapper"
+          class="com.yazino.spring.mvc.RenderPerformanceTrackingViewResolver">
+        <constructor-arg>
+            <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+                <property name="order" value="1"/>
+                <property name="contentType" value="text/html; charset=UTF-8"/>
+                <property name="viewNames">
+                    <list>
+                        <value>partials/inviteFriendsViaFacebook</value>
+                        <value>partials/closeInviteFriendsDialog</value>
+                        <value>partials/social-flow/layout</value>
+                        <value>partials/publishCurrent</value>
+                        <value>partials/publishOriginal</value>
+                        <value>partials/playerProfileMain</value>
+                        <value>partials/resetPasswordPanel</value>
+                        <value>partials/loginPanel</value>
+                        <value>partials/loginRedirection</value>
+                        <value>blocked</value>
+                        <value>sendInvitations</value>
+                        <value>sentInvitations</value>
+                        <value>playerSearch</value>
+                        <value>robots</value>
+                        <value>closeCashier</value>
+                        <value>cashierFrame</value>
+                        <value>paypal</value>
+                        <value>privateTableFacebookFriendsInvite</value>
+                        <value>privateTableFacebookFriendsInviteSent</value>
+                        <value>playGameInPopUp</value>
+                        <value>achievements-overlay</value>
+                        <value>mobileRegistration</value>
+                        <value>registration</value>
+                        <value>do-not-allow</value>
+                        <value>public/mobileRegistration</value>
+                        <value>public/mobileRegistration</value>
+                        <value>parature/auth</value>
+                        <value>parature/login</value>
+                        <value>parature/partials/loginForm</value>
+                        <value>payment/*</value>
+                        <value>channel</value>
+                        <value>json/version</value>
+                        <value>api/*</value>
+                        <value>fbog/*</value>
+                        <value>fbredirect/*</value>
+                        <value>loadBalancerStatus</value>
+                        <value>facebookLoginRedirect</value>
+                    </list>
+                </property>
+                <property name="suffix" value=".vm"/>
+                <property name="cache" value="true"/>
+                <property name="exposeRequestAttributes" value="true"/>
+                <property name="exposeSessionAttributes" value="true"/>
+                <property name="exposeSpringMacroHelpers" value="true"/>
+                <property name="dateToolAttribute" value="dateTool"/>
+                <property name="numberToolAttribute" value="numberTool"/>
+                <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <bean id="velocityViewResolverWrapper"
+          class="com.yazino.spring.mvc.RenderPerformanceTrackingViewResolver">
+        <property name="order" value="4"/>
+        <constructor-arg>
+            <bean class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+                <property name="contentType" value="text/html; charset=UTF-8"/>
+                <property name="suffix" value=".vm"/>
+                <property name="layoutUrl" value="layouts/autoSelectLayout.vm"/>
+                <property name="cache" value="true"/>
+                <property name="exposeRequestAttributes" value="true"/>
+                <property name="exposeSessionAttributes" value="true"/>
+                <property name="exposeSpringMacroHelpers" value="true"/>
+                <property name="dateToolAttribute" value="dateTool"/>
+                <property name="numberToolAttribute" value="numberTool"/>
+                <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean name="/service/session-factory"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="sessionRegistrar"/>
+        <property name="serviceInterface" value="com.yazino.web.session.SessionFactory"/>
+    </bean>
+
+    <bean id="connectionConfigBuilder" class="org.apache.http.config.ConnectionConfig" factory-method="custom">
+        <property name="bufferSize" value="8192"/>
+    </bean>
+
+    <bean id="socketConfigBuilder" class="org.apache.http.config.SocketConfig" factory-method="custom">
+        <property name="tcpNoDelay" value="false"/>
+    </bean>
+
+    <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig" factory-method="custom">
+        <property name="socketTimeout" value="20000" />
+        <property name="connectTimeout" value="15000" />
+    </bean>
+
+    <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="defaultRequestConfig">
+            <bean factory-bean="requestConfigBuilder" factory-method="build" />
+        </property>
+        <property name="defaultConnectionConfig">
+            <bean factory-bean="connectionConfigBuilder" factory-method="build"/>
+        </property>
+        <property name="defaultSocketConfig">
+            <bean factory-bean="socketConfigBuilder" factory-method="build"/>
+        </property>
+        <property name="maxConnPerRoute" value="500"/>
+        <property name="maxConnTotal" value="600"/>
+    </bean>
+
+    <bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build"/>
+    <bean id="amazonHttpClient" factory-bean="httpClientBuilder" factory-method="build"/>
+
+    <bean id="httpInvokerRequestExecutor"
+          class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor">
+        <property name="readTimeout" value="10000"/>
+        <property name="httpClient" ref="httpClient"/>
+    </bean>
+
+    <bean id="webEnvironmentPropertiesInterceptor"
+          class="com.yazino.web.interceptor.EnvironmentPropertiesInterceptor">
+        <constructor-arg>
+            <map>
+                <entry key="radiumApplicationId2" value="${strata.server.lobby.radium.2.hashedId}"/>
+                <entry key="showRadium" value="${strata.server.lobby.radium.show}"/>
+                <entry key="showMaudau" value="${strata.server.lobby.maudau.show}"/>
+                <entry key="facebookPermissions" value="${facebook.permissions}"/>
+                <entry key="facebookOpenGraphObjectsHost" value="${facebook.openGraphObjectsHost}"/>
+                <entry key="launchTournamentPage" value="${senet.web.host}/tournament/"/>
+                <entry key="launchPage" value="${senet.web.host}/table/"/>
+                <entry key="batchSize" value="${strata.web.friendSelector.batchSize}"/>
+                <entry key="googleApiKey" value="${strata.google.contacts-api.apiKey}"/>
+                <entry key="googleClientId" value="${strata.google.contacts-api.clientId}"/>
+                <entry key="googleScope" value="${strata.google.contacts-api.scope}"/>
+                <entry key="getBuddiesPageSize" value="${strata.buddyList.pageSize}"/>
+                <entry key="showMotiveTrackingPixel" value="${strata.showMotiveTrackingPixel}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="webReloadablePropertiesInterceptor"
+          class="com.yazino.web.interceptor.ReloadableEnvironmentPropertiesInterceptor">
+        <constructor-arg>
+            <map>
+                <entry key="gaKey" value="strata.lobby.gakey"/>
+                <entry key="gaKey2" value="strata.lobby.gakey2"/>
+                <entry key="messagingPort" value="strata.rabbitmq.port"/>
+                <entry key="messagingVirtualHost" value="strata.rabbitmq.virtualhost"/>
+                <entry key="lightstreamerSecureHost" value="lightstreamer.secure-host"/>
+                <entry key="lightstreamerSecurePort" value="lightstreamer.secure-port"/>
+                <entry key="gameServer" value="senet.web.command"/>
+                <entry key="secureCommandUrl" value="strata.web.secure-command"/>
+                <entry key="supportLoggedInLink" value="external.support.loggedin.link"/>
+                <entry key="supportLoggedOutLink" value="external.support.loggedout.link"/>
+                <entry key="assetUrl" value="senet.web.content"/>
+                <entry key="secureAssetUrl" value="strata.server.lobby.ssl.content"/>
+                <entry key="clientUrl" value="senet.web.application-content"/>
+                <entry key="permanentContentUrl" value="senet.web.permanent-content"/>
+                <entry key="facebookRequestPermissionsPerGame" value="facebook.requestPermissionsPerGame"/>
+                <entry key="challengeEnabled" value="strata.web.challengeEnabled"/>
+                <entry key="dailyAwardInstantAcknowledge" value="topup.serverside.instantAcknowledge"/>
+            </map>
+        </constructor-arg>
+        <constructor-arg ref="yazinoConfiguration"/>
+    </bean>
+
+    <bean id="sessionStatusCache"
+          factory-bean="ehCacheManager"
+          factory-method="getEhcache">
+        <constructor-arg value="sessionStatusCache"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="mappedHandlers">
+            <set>
+                <ref bean="exceptionHandler"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="${velocity.files}"/>
+
+        <property name="velocityProperties">
+            <props>
+                <prop key="velocimacro.library"/>
+                <!-- Development Only Properties -->
+                <prop key="file.resource.loader.cache">${velocity.cache}</prop>
+                <prop key="velocimacro.library.autoreload">false</prop>
+                <prop key="exposeSpringMacroHelpers">true</prop>
+                <prop key="velocimacro.permissions.allowInline">true</prop>
+                <prop key="velocimacro.permissions.allow.inline.to.replace.global">true</prop>
+                <prop key="velocimacro.library">
+                    /velocity/macros/messageMethod.vm,
+                    /velocity/macros/generateLinkTagForMainCta.vm,
+                    /velocity/macros/content.vm
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--suppress SpringBeanConstructorArgInspection -->
+    <bean id="profanityFilter"
+          class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="facebookClientFactory"
+          class="com.yazino.web.domain.facebook.FacebookClientFactoryImpl"
+          factory-method="getInstance"/>
+
+    <bean id="facebookHttpClient" class="strata.server.lobby.api.facebook.FacebookHttpClientFactoryBean"/>
+
+    <bean id="lobbySessionCache"
+          class="com.yazino.web.session.LobbySessionCache" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="referrerSessionCache" class="com.yazino.web.session.ReferrerSessionCache" scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="playerFriendsCache"
+          class="com.yazino.web.util.PlayerFriendsCache"
+          scope="session">
+        <aop:scoped-proxy/>
+    </bean>
+
+    <bean id="cashierConfiguration" class="com.yazino.web.domain.CashierConfigurationContainer">
+        <constructor-arg>
+            <util:list>
+                <bean class="com.yazino.web.domain.CashierConfiguration">
+                    <property name="cashierId" value="paypal"/>
+                    <property name="cashierUrl" value="${strata.server.lobby.paypal}"/>
+                    <property name="enabled" value="${strata.server.lobby.paypal.enabled}"/>
+                </bean>
+                <bean class="com.yazino.web.domain.CashierConfiguration">
+                    <property name="cashierId" value="creditcard"/>
+                    <property name="cashierUrl" value="${strata.server.lobby.creditcard}"/>
+                    <property name="enabled" value="${strata.server.lobby.creditcard.enabled}"/>
+                </bean>
+                <bean class="com.yazino.web.domain.CashierConfiguration">
+                    <property name="cashierId" value="trialpay"/>
+                    <property name="cashierUrl" value="${strata.server.lobby.trialpay}"/>
+                    <property name="enabled" value="${strata.server.lobby.trialpay.enabled}"/>
+                </bean>
+                <bean class="com.yazino.web.domain.CashierConfiguration">
+                    <property name="cashierId" value="facebook"/>
+                    <property name="cashierUrl" value="${strata.server.lobby.facebook}"/>
+                    <property name="enabled" value="${strata.server.lobby.facebook.enabled}"/>
+                </bean>
+            </util:list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="buyChipsPromotionService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="${strata.server.lobby.promotion}/service/buyChipsPromotionService"/>
+        <property name="serviceInterface" value="strata.server.lobby.api.promotion.BuyChipsPromotionService"/>
+    </bean>
+
+    <bean id="giftingPromotionService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="${strata.server.lobby.promotion}/service/giftingPromotionService"/>
+        <property name="serviceInterface" value="strata.server.lobby.api.promotion.GiftingPromotionService"/>
+    </bean>
+
+    <bean id="commonPropertiesHelper" class="com.yazino.web.util.CommonPropertiesHelper">
+        <property name="viewAspectConfigurations" ref="viewAspectConfigurations"/>
+    </bean>
+
+    <bean id="secureRedirectionInterceptor"
+          class="com.yazino.web.interceptor.SecureRedirectionInterceptor">
+        <constructor-arg index="1">
+            <list>
+                <value>/command/</value>
+                <value>/api/1.0</value>
+                <value>/publicCommand/</value>
+                <value>/payment/</value>
+                <value>/fbog/</value>
+                <value>/game-server/</value>
+                <value>/crossdomain.xml</value>
+                <value>/BingSiteAuth.xml</value>
+                <value>/index.jsp</value>
+                <value>/sitemap.xml</value>
+                <value>/xd_receiver.htm</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000"/>
+    </bean>
+
+    <bean id="paratureRequestConfigBuilder" class="org.apache.http.client.config.RequestConfig" factory-method="custom">
+        <property name="socketTimeout" value="5000" />
+        <property name="connectTimeout" value="5000" />
+    </bean>
+
+    <bean id="paratureHttpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="defaultRequestConfig">
+            <bean factory-bean="paratureRequestConfigBuilder" factory-method="build" />
+        </property>
+        <property name="maxConnPerRoute" value="20"/>
+        <property name="maxConnTotal" value="20"/>
+    </bean>
+
+    <bean id="supportUserService" class="com.yazino.web.parature.service.ParatureSupportUserService">
+        <constructor-arg>
+            <bean factory-bean="paratureHttpClientBuilder" factory-method="build" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="registrationsPerIpCache"
+          factory-bean="ehCacheManager"
+          factory-method="getEhcache">
+        <constructor-arg value="registrationsPerIpCache"/>
+    </bean>
+
+    <util:map id="facebookAppToUserRequestProcessors"
+              key-type="strata.server.lobby.api.facebook.FacebookAppToUserRequestType">
+        <entry key="Engagement" value-ref="engagementAppToUserRequestProcessor"/>
+        <entry key="LegacyEngagement" value-ref="legacyEngagementAppToUserRequestProcessor"/>
+    </util:map>
+
+    <bean id="radiumValidationService" class="com.yazino.web.payment.radium.RadiumValidationService">
+        <constructor-arg index="0">
+            <util:map map-class="java.util.HashMap">
+                <entry key="${strata.server.lobby.radium.1.appId}" value="${strata.server.lobby.radium.1.secretkey}"/>
+                <entry key="${strata.server.lobby.radium.2.appId}" value="${strata.server.lobby.radium.2.secretkey}"/>
+                <entry key="${strata.server.lobby.radium.3.appId}" value="${strata.server.lobby.radium.3.secretkey}"/>
+            </util:map>
+        </constructor-arg>
+        <constructor-arg value="${strata.server.lobby.radium.subnetAddress}"/>
+    </bean>
+
+    <task:scheduled-tasks scheduler="sessionStatusRepositoryRefresher">
+        <task:scheduled ref="sessionStatusRepository" method="refresh"
+                        fixed-delay="${strata.web.session_status_refresh_delay}"/>
+    </task:scheduled-tasks>
+
+    <task:scheduler id="sessionStatusRepositoryRefresher" pool-size="1"/>
+
+    <util:map id="productServices"
+              key-type="com.yazino.platform.Platform"
+              value-type="com.yazino.web.payment.ProductService">
+        <entry key="FACEBOOK_CANVAS">
+            <bean class="com.yazino.web.payment.ProductService">
+                <constructor-arg type="com.yazino.platform.Platform" value="FACEBOOK_CANVAS"/>
+                <constructor-arg type="com.yazino.platform.community.PaymentPreferences$PaymentMethod" value="FACEBOOK"/>
+                <constructor-arg type="com.yazino.web.payment.PaymentOptionIdTransformer" ref="facebookPaymentOptionHelper"/>
+            </bean>
+        </entry>
+        <entry key="ANDROID">
+            <bean class="com.yazino.web.payment.ProductService">
+                <constructor-arg type="com.yazino.platform.Platform" value="ANDROID"/>
+                <constructor-arg type="com.yazino.platform.community.PaymentPreferences$PaymentMethod" value="GOOGLE_CHECKOUT"/>
+                <constructor-arg type="com.yazino.web.payment.PaymentOptionIdTransformer" ref="androidPaymentOptionIdTransformer"/>
+            </bean>
+        </entry>
+        <entry key="AMAZON">
+            <bean class="com.yazino.web.payment.ProductService">
+                <constructor-arg type="com.yazino.platform.Platform" value="AMAZON"/>
+                <constructor-arg type="com.yazino.platform.community.PaymentPreferences$PaymentMethod" value="AMAZON"/>
+                <constructor-arg type="com.yazino.web.payment.PaymentOptionIdTransformer" ref="androidPaymentOptionIdTransformer"/>
+            </bean>
+        </entry>
+        <entry key="IOS">
+            <bean class="com.yazino.web.payment.ProductService">
+                <constructor-arg type="com.yazino.platform.Platform" value="IOS"/>
+                <constructor-arg type="com.yazino.platform.community.PaymentPreferences$PaymentMethod" value="ITUNES"/>
+                <constructor-arg type="com.yazino.web.payment.PaymentOptionIdTransformer" ref="iosPaymentOptionIdTransformer"/>
+            </bean>
+        </entry>
+    </util:map>
+
+    <bean id="playerRabbitMQRoutedPublishers"
+          class="com.yazino.platform.messaging.publisher.SpringAMQPRoutedTemplates">
+        <constructor-arg index="0" value="strata.rabbitmq.host"/>
+        <constructor-arg index="1">
+            <bean class="com.yazino.platform.messaging.publisher.ConnectionFactoryFactory">
+                <constructor-arg index="0" value="${strata.rabbitmq.port}"/>
+                <constructor-arg index="1" value="${strata.rabbitmq.virtualhost}"/>
+                <constructor-arg index="2" value="${strata.rabbitmq.username}"/>
+                <constructor-arg index="3" value="${strata.rabbitmq.password}"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <bean class="com.yazino.platform.messaging.publisher.CloneableRabbitTemplate">
+                <property name="encoding" value="UTF-8"/>
+                <property name="exchange" value="${strata.rabbitmq.topic}"/>
+                <property name="connectionFactory" ref="documentDispatcherConnectionFactory"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg index="3" ref="yazinoConfiguration"/>
+    </bean>
+
+    <bean id="documentDispatcherConnectionFactory"
+          class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <constructor-arg index="0" value="strata.rabbitmq.host"/>
+        <property name="username" value="${strata.rabbitmq.username}"/>
+        <property name="password" value="${strata.rabbitmq.password}"/>
+        <property name="virtualHost" value="${strata.rabbitmq.virtualhost}"/>
+    </bean>
+
+</beans>

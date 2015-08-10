@@ -1,0 +1,6 @@
+<% @lobby_nodes.each do |lobby_node| %>
+	<% @export_paths.each do |path| %>
+<%=path%> <%=lobby_node[:private_ip]%>(rw,no_root_squash)
+	<% end %>
+<% end %>
+

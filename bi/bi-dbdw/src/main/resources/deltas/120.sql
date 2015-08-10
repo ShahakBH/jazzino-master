@@ -1,0 +1,245 @@
+DROP VIEW IF EXISTS bi_verification_status_per_10_mins#
+CREATE VIEW bi_verification_status_per_10_mins AS
+	SELECT
+		CONCAT(DAY(rr.AUDIT_TIME),'/',MONTH(rr.AUDIT_TIME),'/',YEAR(rr.AUDIT_TIME),' ',HOUR(rr.AUDIT_TIME),':',MINUTE(rr.AUDIT_TIME) DIV 10,'0') AS TIME_PERIOD,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				)
+			)
+		) AS FB_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				)
+			)
+		) AS FB_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				)
+			)
+		) AS FB_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				)
+			)
+		) AS FB_NOT_PLAYED_NOT_VERIFIED
+		FROM rpt_recent_registrations rr
+		JOIN PLAYER_DEFINITION pd USING (ACCOUNT_ID)
+		JOIN LOBBY_USER lu USING (USER_ID)
+		GROUP BY CONCAT(DAY(rr.AUDIT_TIME),MONTH(rr.AUDIT_TIME),YEAR(rr.AUDIT_TIME),HOUR(rr.AUDIT_TIME),MINUTE(rr.AUDIT_TIME) DIV 10)
+		ORDER BY rr.AUDIT_TIME DESC#
+		
+DROP VIEW IF EXISTS bi_verification_status_per_hour#
+CREATE VIEW bi_verification_status_per_hour AS
+	SELECT
+		CONCAT(DAY(rr.AUDIT_TIME),'/',MONTH(rr.AUDIT_TIME),'/',YEAR(rr.AUDIT_TIME),' ',HOUR(rr.AUDIT_TIME),':00') AS TIME_PERIOD,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				)
+			)
+		) AS FB_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				)
+			)
+		) AS FB_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				)
+			)
+		) AS FB_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				)
+			)
+		) AS FB_NOT_PLAYED_NOT_VERIFIED
+		FROM rpt_recent_registrations rr
+		JOIN PLAYER_DEFINITION pd USING (ACCOUNT_ID)
+		JOIN LOBBY_USER lu USING (USER_ID)
+		GROUP BY CONCAT(DAY(rr.AUDIT_TIME),MONTH(rr.AUDIT_TIME),YEAR(rr.AUDIT_TIME),HOUR(rr.AUDIT_TIME))
+		ORDER BY rr.AUDIT_TIME DESC#
+		
+DROP VIEW IF EXISTS bi_verification_status_per_day#
+CREATE VIEW bi_verification_status_per_day AS
+	SELECT
+		CONCAT(DAY(rr.AUDIT_TIME),'/',MONTH(rr.AUDIT_TIME),'/',YEAR(rr.AUDIT_TIME)) AS TIME_PERIOD,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				),
+				0
+			)
+		) AS YAZINO_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				),
+				0
+			)
+		) AS YAZINO_NOT_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),
+					0
+				)
+			)
+		) AS FB_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),
+					0
+				)
+			)
+		) AS FB_PLAYED_NOT_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0)
+				)
+			)
+		) AS FB_NOT_PLAYED_VERIFIED,
+		SUM(
+			IF(rr.RPX='YAZINO',
+				0,
+				IF(rr.PLAYED>0,
+					0,
+					IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1)
+				)
+			)
+		) AS FB_NOT_PLAYED_NOT_VERIFIED
+		FROM rpt_recent_registrations rr
+		JOIN PLAYER_DEFINITION pd USING (ACCOUNT_ID)
+		JOIN LOBBY_USER lu USING (USER_ID)
+		GROUP BY CONCAT(DAY(rr.AUDIT_TIME),MONTH(rr.AUDIT_TIME),YEAR(rr.AUDIT_TIME))
+		ORDER BY rr.AUDIT_TIME DESC#

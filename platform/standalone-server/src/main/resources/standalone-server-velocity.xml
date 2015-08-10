@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="${standalone-server.internal.velocity.location}"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="velocimacro.library"/>
+                <!-- Development Only Properties -->
+                <prop key="file.resource.loader.cache">false</prop>
+                <prop key="velocimacro.library.autoreload">false</prop>
+                <prop key="exposeSpringMacroHelpers">true</prop>
+                <prop key="velocimacro.permissions.allowInline">true</prop>
+                <prop key="velocimacro.permissions.allow.inline.to.replace.global">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="velocityViewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="order" value="1"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="suffix" value=".vm"/>
+        <property name="layoutUrl" value="layout/default.vm"/>
+        <property name="cache" value="false"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="dateToolAttribute" value="dateTool"/>
+        <property name="numberToolAttribute" value="numberTool"/>
+        <property name="allowSessionOverride" value="true"/>
+    </bean>
+
+</beans>

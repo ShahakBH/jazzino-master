@@ -1,0 +1,7 @@
+!3 Invitations can be accepted or rejected - the examples 
+below demonstrate what happens when player B has invited player A to become friends 
+
+|invitation actions|
+|invitation action by A|B appears to A after action?|A appears to B after action?|
+|reject friend|not friend|not friend|
+|accept friend|friend|friend|

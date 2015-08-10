@@ -1,0 +1,29 @@
+{
+    "recommendations": {
+    },
+    "license": "Apache 2.0",
+    "recipes": {
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "description": "Configures zsh",
+    "platforms": {
+    },
+    "version": "1.0.0",
+    "providing": {
+    },
+    "maintainer": "Yazino",
+    "replacing": {
+    },
+    "name": "motd",
+    "maintainer_email": "staff@yazino.com",
+    "groupings": {
+    },
+    "attributes": {
+    },
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n"
+  }

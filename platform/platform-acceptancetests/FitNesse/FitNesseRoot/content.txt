@@ -1,0 +1,5 @@
+!define COLLAPSE_SETUP {true}
+!define TEST_RUNNER {com.neuri.trinidad.transactionalrunner.TransactionalFitServer}
+!define COMMAND_PATTERN {java  -Dspring.context=classpath:spring.xml -cp %p %m -v}
+!path ../target/test-classes
+!path lib/*.jar

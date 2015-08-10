@@ -1,0 +1,91 @@
+<html>
+<head>
+#if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+    window.publishToFeed = function(p) {
+        FB.api('/me/feed',
+            'post',
+            {
+                actions: p.actions,
+                link: p.link,
+                name: p.name,
+                picture: p.picture,
+                description: p.description,
+                access_token: window.accessToken
+            },
+            function (response) {
+                if (!response || response.error) {
+                    if (console && console.debug) {
+                        console.debug('Error trying to send news item to feed');
+                    }
+                } else {
+                    if (console && console.debug) {
+                        console.debug('Submitted to News Feed. Post ID: ' + response.id);
+                    }
+                }
+            });
+    };
+
+    function checkPublishStreamPermission() {
+        if (window.accessToken) {
+            FB.api({
+                method: 'fql.query',
+                query: 'select publish_stream from permissions where uid = me()'
+            },
+                function (r) {
+                    if (r && r.length > 0 && r[0].publish_stream === '1') {
+                        window.hasPublishStreamPermission = true;
+                    } else {
+                        window.hasPublishStreamPermission = false;
+                    }
+                });
+        } else {
+            window.hasPublishStreamPermission = false;
+        }
+    }
+
+    var publishInit = function() {
+        window.accessToken = null;
+        var curLoc = window.location;
+
+        FB.init({
+            appId: '$facebookApplicationId',
+            channelUrl: '${hostUrl.replaceFirst("^https?://", "//")}/channel.html',
+            status: true, ## check login status
+            cookie: true, ## enable cookies to allow the server to access the session
+            oauth: true
+        });
+
+        FB.getLoginStatus(function (response) {
+            if (response.authResponse) {
+                window.accessToken = response.authResponse.accessToken;
+                checkPublishStreamPermission();
+            }
+            FB.Event.subscribe('auth.authResponseChange', checkPublishStreamPermission);
+        });
+    };
+    var fbInitialiser;
+    fbInitialiser = function () {
+        if (typeof FB === 'undefined') {
+            setTimeout(fbInitialiser, 100);
+        } else {
+            publishInit();
+        }
+    };
+    setTimeout(fbInitialiser, 10);
+    ##the following does not work in FF
+    ## window.fbAsyncInit = function() {
+    ##};
+</script>
+</body>
+</html>

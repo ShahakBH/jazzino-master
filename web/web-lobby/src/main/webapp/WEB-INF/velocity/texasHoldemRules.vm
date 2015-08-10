@@ -1,0 +1,176 @@
+<div id="how-to-play" class="TEXAS_HOLDEM">
+	<div id="how-to-play-area">
+		<div id="grey-window">
+			<div id="grey-window-head"><h3 class="font-grey-window-head">TEXAS HOLD'EM - HOW TO PLAY & RULES</h3></div>
+			<div id="grey-window-center">
+				<div id="grey-window-body">
+					<div class="block1">
+						<div class="float-right-col">
+							<div id="sign-up">
+								#if(!$lobbySession)
+								   #generateLinkTagForMainCta("texasHoldem")
+								#end
+							</div>
+							<div id="back-to-games">
+                                <a href="${request.contextPath}/texasHoldem" class="font-how-to-play-back-game uppercase">BACK TO TEXAS HOLD'EM</a>
+							</div>
+						</div>
+						<div class="float-left-col">
+							<h4 class="color-TEXAS_HOLDEM-2 font-compnonlogged-texthead">HOW TO PLAY texas hold'em at
+								yazino</h4>
+
+							<div class="paragraph1 font-compnonlogged-1">
+								<p class="pre-line">Texas Hold'em is the most popular version of poker around.
+									It is played against other players on the table and involves
+									the use of strategy, psychology, bluffing, gambling and luck.
+									The goal is to build the best possible five-card hand out of
+									your two pocket cards and five community cards, and win as
+									much as possible from other players.
+									Learn Poker at Yazino and become a shark against the pros!
+									Read on to learn how to play Texas Hold'em poker at Yazino.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="block2 font-compnonlogged-2">
+						<div class="float-right-col">
+							<img src="$assetUrl/images/gloss/how-to-play-texas-image-1.png" alt="#">
+							<img src="$assetUrl/images/gloss/how-to-play-texas-image-2.png" alt="#" class="texas-image-2">
+							<img src="$assetUrl/images/gloss/how-to-play-texas-image-3.png" alt="#" class="texas-image-3">
+							<img src="$assetUrl/images/gloss/how-to-play-texas-image-4.png" alt="#" class="texas-image-4">
+						</div>
+						<div class="left-col">
+							<div class="paragraph1">
+								<p class="bold">How do I start playing?</p>
+
+								<p>Once you have chosen a table, a window will popup and the game will load. Available
+									seats are the square panels showing 'Join'. Clicking any of these squares will
+									reserve that seat for you whilst you select how much you want to bring to the table
+									in the Buy-In menu. Once you have selected an amount to buy-in with, you will be
+									placed in your selected seat and the camera will adjust your position to the central
+									seat, so all other players are around you. You cannot play Texas Hold'em on more
+									than one seat per table. </p>
+							</div>
+							<div class="paragraph2">
+								<p>The game will start as long as there are at least 2 players at the table. If you join
+									whilst a game is in progress, you can opt to pay the big blind early and join the
+									game in the next round by checking the 'Post BB Early to Join' button, otherwise
+									you'll have to wait until it's your turn to post the big blind to join.</p>
+							</div>
+						</div>
+					</div>
+					<div class="block3 font-compnonlogged-2 float-left-col">
+						<h4 class="font-how-to-play-headline drop bold">TEXAS HOLD'EM POKER RULES</h4>
+
+						<div>
+							<div class="left-col">
+								<div class="paragraph1">
+									<p>A player is assigned as the dealer, and this is indicated by the dealer button
+										(D) placed on the table in front of that player. The dealer button moves
+										clockwise around the table for each game.</p>
+								</div>
+								<div class="paragraph2">
+									<p>The 2 players to the left of the dealer post blind bets. The player directly to
+										the dealer's left puts out the 'Small Blind' (SB), while the next player to the
+										left puts out the 'Big Blind' (BB). Blind bets have to be placed at the start of
+										each game, and before any cards are dealt. If any player opts to sit out or
+										fails to make an action when it's their turn to post a 'blind', they will remain
+										sitting out until the 'I'm Back' button is pressed. To rejoin the game the
+										player must either wait until it's his/her turn to post the big blind or select
+										the 'Pay Missed Blinds' button to join earlier than that.</p>
+								</div>
+								<div class="paragraph2">
+									<p>After the blinds are in place two 'pocket cards' are dealt to each player face
+										down, and only you will be able to see what your cards are. The action falls on
+										the player to the left of the big blind, who can either call, raise or fold.
+										Betting continues clockwise around the table. Each player has a certain amount
+										of time to take their turn, indicated by the timer around your picture. If any
+										player fails to take their turn in time, they will automatically fold their
+										hand.</p>
+								</div>
+								<div class="paragraph2">
+									<p>After all players have had a chance to call and bet, the first 3 of the community
+										cards are dealt face up in the centre of the table, which are called the flop.
+										Community cards are used by everyone playing on the table in combination with
+										their own cards to make the best hand. Following the flop, another round of
+										betting starts from the player to the dealer's left.</p>
+								</div>
+								<div class="paragraph2">
+									<p>The fourth community card is then dealt face up next to the flop. This is called
+										the turn. Another round of betting occurs before the fifth and final community
+										card is dealt, which is called the river.</p>
+								</div>
+								<div class="paragraph2">
+									<p>A final round of betting occurs, and then the remaining players show their cards
+										in the 'showdown'. The person with the best 5 card hand by combining their
+										pocket cards with the community cards wins.</p>
+								</div>
+								<div class="paragraph2">
+									<p>If 2 or more players have the same winning hands, the pot is split equally
+										between them.</p>
+								</div>
+								<div class="paragraph2">
+									<p class="bold2">Buy-Ins and Bettings</p>
+
+									<p>Yazino currently only offers No Limit poker. However other types are planned to
+										be added in due course.</p>
+								</div>
+								<div class="paragraph2">
+									<p>No Limit games have a minimum and maximum buy-in, which is the minimum and
+										maximum amount of chips you can bring to the table when you take your seat. When
+										you join a seat, it is reserved for 30 seconds to allow you to decide how much
+										you want to buy-in with.</p>
+								</div>
+								<div class="paragraph2">
+									<p>During a betting round in a 'No Limit' game, there is no limit to the maximum bet
+										or raise that you can make; as long as it's within the balance you have at the
+										table at that time. There is a minimum bet which is equivalent to the big
+										blind.</p>
+								</div>
+								<div class="paragraph2">
+									<p>Minimum raises must be at least as much as the previous bet or raise in the same
+										betting round. If you call a bet but don't have enough chips to cover it, you
+										will go 'All-In' and the pot will be split so you can only win whatever your
+										share of the total pot is.</p>
+								</div>
+								<div class="paragraph2">
+									<p class="bold">Time-outs</p>
+
+									<p>Player's will be marked as 'Away' if their timer runs out before making an
+										action. Whilst 'Away' they will still place blinds but automatically fold their
+										hands. Normal play can be resumed by pressing the 'I'm Back' button. If any
+										player stays 'Away' for 3 consecutive hands, they will automatically lose their
+										seat.</p>
+								</div>
+								<div class="paragraph2">
+									<p class="bold">Card Deck and Hand Ranks</p>
+
+									<p>A single 52 card deck is used in Texas Hold'em. All suits have an equal value,
+										and aces are the highest card, and 2's the lowest.</p>
+								</div>
+								<div class="paragraph2">
+									<p><span class="bold">Texas Hold'em rules</span> for hand ranks are the same as in
+										any other version of poker. Your hand is made up using the 5 best cards out of
+										the 2 pocket cards you have plus the 5 community cards on the table. The value
+										of 'Your Hand' is displayed above the dealer chat on the table, and the rankings
+										of each category can be viewed by pressing the '?' button on the table. Learning
+										poker hand ranks will prove very useful while playing Texas Hold'em.</p>
+								</div>
+								<div class="paragraph2">
+									<p>The minimum buy-in for the game is 10 big blinds and the maximum is 50 big
+										blinds.</p>
+								</div>
+								<div class="paragraph2">
+									<p>Malfunction voids all pays and plays.</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="clr_b"></div>
+				</div>
+			</div>
+			<div id="grey-window-bottom"></div>
+		</div>
+	</div>
+</div>

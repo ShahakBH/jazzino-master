@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="classpath*:META-INF/yazino-properties.xml"/>
+
+    <import resource="classpath*:META-INF/spring/mobile-ws-ios.xml"/>
+
+    <context:component-scan base-package="com.yazino.mobile"/>
+
+    <bean id="resourceLoader" class="org.springframework.core.io.FileSystemResourceLoader"/>
+
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>
+        <property name="resourceLoader" ref="resourceLoader"/>
+    </bean>
+
+    <bean id="defaultResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="order" value="1"/>
+        <property name="suffix" value=".json.vm"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="contentType" value="application/json; charset=UTF-8"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/>
+    </bean>
+
+    <bean id="notFoundResolver"
+          class="com.yazino.mobile.ws.views.StaticViewResolver">
+        <constructor-arg>
+            <bean class="com.yazino.mobile.ws.views.StatusCodeResponseView">
+                <constructor-arg value="404"/>
+                <property name="contentType" value="application/json; charset=UTF-8"/>
+            </bean>
+        </constructor-arg>
+        <property name="order" value="2"/>
+    </bean>
+
+    <bean id="facebookConfig" class="com.yazino.mobile.ws.config.FacebookConfig">
+        <property name="applicationIds" ref="facebookApplicationIds"/>
+    </bean>
+
+    <bean id="facebookApplicationIds" class="com.yazino.mobile.ws.spring.PatternMatchingPropertyMap">
+        <constructor-arg value="facebook\.(.*)\.application\.id"/>
+    </bean>
+
+    <bean id="gamesConfig" class="com.yazino.mobile.ws.config.GamesConfig">
+        <property name="commandHost" value="${mobile.command.host}"/>
+        <property name="defaultHost" value="${mobile.host}"/>
+    </bean>
+
+    <bean id="resourceConfig" class="com.yazino.mobile.ws.config.ResourceConfig">
+        <property name="contentUrl" value="${senet.web.content}"/>
+        <property name="baseUrl" value="${mobile.resource.host}"/>
+    </bean>
+
+</beans>

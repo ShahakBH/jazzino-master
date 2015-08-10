@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    var YAZINO = YAZINO || {};
+    YAZINO.configuration = YAZINO.configuration || YAZINO.configurationFactory();
+
+    YAZINO.configuration.set("baseUrl",  '${hostUrl}');
+    #if($hostName)
+        YAZINO.configuration.set("hostName",  '${hostName}');
+    #end
+    YAZINO.configuration.set("externalLobbyUrl",  '#if($facebookConnect)${facebookAppUrlRoot}/${facebookAppName}#else${hostUrl}#end');
+    YAZINO.configuration.set("amqpHost",  '${messagingHost}');
+    YAZINO.configuration.set("amqpVirtualHost", '${messagingVirtualHost}');
+    YAZINO.configuration.set("lightstreamerSecureHost", '${lightstreamerSecureHost}');
+    YAZINO.configuration.set("lightstreamerSecurePort", ${lightstreamerSecurePort});
+    YAZINO.configuration.set("contentUrl",  '#qualifyUrl(${assetUrl})');
+    YAZINO.configuration.set("clientUrl",  '#qualifyUrl($clientUrl)');
+    YAZINO.configuration.set("permanentContentUrl",  '#qualifyUrl(${permanentContentUrl})');
+    YAZINO.configuration.set("commandUrl",  '${gameServer}');
+    YAZINO.configuration.set("secureCommandUrl",  '${secureCommandUrl}');
+    YAZINO.configuration.set("nextTournamentUrl",  '/tournaments/next');
+    YAZINO.configuration.set("tournamentScheduleUrl",  '/tournaments/schedule');
+    YAZINO.configuration.set("lobbyInformationUrl",  '/lobbyInformation');
+    YAZINO.configuration.set("facebookAppName",  '$facebookAppName');
+    YAZINO.configuration.set("facebookApplicationId",  '$facebookApplicationId');
+    YAZINO.configuration.set("facebookConnect",  #if($facebookConnect)true#{else}false#end);
+    YAZINO.configuration.set("facebookCanvasActionsAllowed",  #if($facebookCanvasActionsAllowed)true#{else}false#end);
+    YAZINO.configuration.set("facebookAppsEnabled",   #if($facebookAppsEnabled)${facebookAppsEnabled}#{else}false#end);
+    YAZINO.configuration.set("facebookPublishStream",  false);
+    YAZINO.configuration.set("facebookLoginUrl",  '${facebookLoginUrl}');
+    YAZINO.configuration.set("facebookPermissions",  '${facebookPermissions}');
+    YAZINO.configuration.set("callbackUrl",  '${facebookOpenGraphObjectsHost}');
+    #if($facebookAccessToken)
+        YAZINO.configuration.set("facebookAccessToken",  '${facebookAccessToken}');
+    #end
+    YAZINO.configuration.set("launchPage",  '$!{launchPage}');
+    YAZINO.configuration.set("tournamentLaunchPage",  '$!{launchTournamentPage}');
+    YAZINO.configuration.set("onCanvas",  #if($canvas)true#{else}false#end);
+    YAZINO.configuration.set("inGame",  #if($swfName)true#{elseif}($gameConfiguration && ${gameConfiguration.getProperty('usesFlashLobby')} == 'true')true#{else}false#end);
+    YAZINO.configuration.set("playerId",  '$!{lobbySession.playerId}');
+    YAZINO.configuration.set("playerName",  '$esc.javascript($!{lobbySession.playerName})');
+    YAZINO.configuration.set("requestTopUp",  #if($requestTopUp)true#{else}false#end);
+    YAZINO.configuration.set("gameType",  '$!{gameType}');
+    YAZINO.configuration.set("gameTypes", {blackjack: 'BLACKJACK', texasholdem: 'TEXAS_HOLDEM', slots: 'SLOTS', roulette: 'ROULETTE'});
+    YAZINO.configuration.set("getBuddiesPageSize",  '$!{getBuddiesPageSize}');
+
+    #if(${topUpResult})
+        YAZINO.configuration.set('dailyAward', ${topUpResult});
+    #end
+    #if(${dailyAwardInstantAcknowledge})
+        YAZINO.configuration.set('dailyAward.instantAcknowledge', ${dailyAwardInstantAcknowledge})
+    #end
+
+</script>

@@ -1,0 +1,68 @@
+<div class="login block">
+    <h3>SIGN UP </h3>
+
+    <div id="sign-up-body">
+        <div class="error">
+            #springBind("registration")
+            #springShowErrors("<br>" "")
+        </div>
+
+        <form method="POST" action="?" enctype="multipart/form-data" style="position: static">
+            <input type="hidden" name="gameReferrer" value="${gameReferrer}">
+            <input type="hidden" name="avatarURL" value="$!{assetUrl}/images/gloss/friend-bar-none-photo.png">
+            <div class="left-col">
+                <p>Display Name <span>*</span></p>
+
+                <p>Email <span>*</span></p>
+
+                <p>Password <span>*</span></p>
+            </div>
+            <div class="mid-col">
+                <p>#springFormInput("registration.displayName" '')</p>
+
+                #springBind("registration.email")
+                <p><input type="email" id="${status.expression}" name="${status.expression}" value="$!status.value" /></p>
+
+                <p>#springFormInput("registration.password" 'autocapitalize="none" autocorrect = "off"')</p>
+            </div>
+            <div class="right-col">
+                <p>#showRegistrationFieldStatus("registration.displayName" true)</p>
+
+                <p>#showRegistrationFieldStatus("registration.email" true)</p>
+
+                <p>#showRegistrationFieldStatus("registration.password" false)</p>
+            </div>
+
+            <div class="bottom-div">
+
+
+                <div style="clear:both; height: 5px;"></div>
+
+                <div id="termsAndSignup">
+
+                    #springBind("registration.termsAndConditions")
+                    <p class="errorContainer" #if ($status.error) style="display:block;" #end>
+                        #showRegistrationFieldStatus("registration.termsAndConditions" false)
+                    </p>
+
+
+                    <span class="check">
+                        <input type="checkbox" id="termsAndConditions" name="termsAndConditions" style="opacity:1" #if($registration.termsAndConditions) checked="on" #end>
+                    </span>
+                    I agree to the
+                    <a href="#" title="Terms of Service" onclick="YAZINO.util.popupWindow('/legal/termsOfService', 'termsOfService');">
+                        <span class="bold">Terms of Service</span>
+                    </a> and
+                    <a href="#" title="Privacy Policy" onclick="YAZINO.util.popupWindow('/legal/privacy', 'privacy');">
+                        <span class="bold">Privacy Policy</span>
+                    </a>
+
+
+                    <button type="submit" class="sign-up">SIGN UP</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="sign-up-bottom"></div>
+</div>

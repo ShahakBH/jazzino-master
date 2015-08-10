@@ -1,0 +1,29 @@
+<div id="system-error">
+    <h1>Oops!</h1>
+    <h2>Something has gone wrong. Sorry!</h2>
+    <p>We'll be taking a look at this as soon as we can. </p>
+</div>
+
+#if ($!debug && $!debug == "true")
+<div class="stacktrace">
+    <h3>Debug Information</h3>
+    <ul>
+        <li><strong>Handler:</strong> $handler</li>
+        <li><strong>Request URL:</strong> $requestUrl</li>
+        <li><strong>User Agent:</strong> $userAgent</li>
+        <li><strong>Stack Trace:</strong>
+            <pre>$!message</pre>
+        </li>
+    </ul>
+</div>
+#end
+
+<script>
+    (function (currentLocation, outputElem) {
+        var newPara = document.createElement('p');
+        if (currentLocation.indexOf('/player') > -1) {
+            newPara.innerHTML = '<a href="/player?partial=1">Click here to go back to the player profile page</a>';
+        }
+        outputElem.appendChild(newPara);
+    }(window.location.href, document.getElementById('system-error')));
+</script>

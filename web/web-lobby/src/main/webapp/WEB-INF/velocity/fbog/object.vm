@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ${appName}: http://ogp.me/ns/fb/${appName}#">
+    <meta property="fb:app_id" content="${appId}"/>
+    <meta property="og:type" content="${appName}:${objectType}"/>
+    <meta property="og:url" content="${facebookOpenGraphObjectsHost}/fbog/${objectType}/${objectId}"/>
+    <meta property="og:title" content="${objectTitle}"/>
+    <meta property="og:image" content="${assetUrl}/images/fb/fb_og_object_${objectImg}.png"/>
+    <meta property="og:description" content="${objectDesc}"/>
+    #if ($!{objectArticle} != "")
+    <meta property="og:determiner" content="${objectArticle}"/>
+    #end
+</head>
+<body>
+<script type="text/javascript">
+    window.top.location.href = "http://apps.facebook.com/${appName}/?ref=$!{ref}";
+</script>
+</body>
+</html>

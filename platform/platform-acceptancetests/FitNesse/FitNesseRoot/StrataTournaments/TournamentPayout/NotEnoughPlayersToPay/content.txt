@@ -1,0 +1,44 @@
+!3 Not enough players to pay out: We won’t set up tables where min players < no. of players paid out (however, if we happen to, we can just ‘not’ pay out ranks with no players)
+
+!2 Setup
+
+!|Number of players is|2|
+
+!3 Minimum Prize Pool
+!|Minimum Prize Pool is |40000| 
+
+!|Payout for tournament|
+|Rank|Payout|
+|1|.5|
+|2|.3|
+|3|.2|
+
+!3 Entry Fee Prize Pool
+!|Entry fee is|1000|
+ 
+!2 Examples
+
+!|Final rank for tournament|
+|Player|Ending Chips|
+|Adam|2|
+|Bill|1|
+
+The payouts are as follows:
+!|Payouts3|
+|Number of Players|2|
+|rank|actual payout?|
+|1|20000|
+|2|12000|
+
+TODO the following rows cannot currently be checked because the payout calculator
+returns a map of player payouts from which it is not possible to infer ranks that
+are not actually paid out. 
+!-|3|8000|
+|4|0|-!
+
+!|Payouts|
+|Player|Payout?|
+|Adam|20,000|
+|Bill|12,000|
+
+No other payouts are made.

@@ -1,0 +1,32 @@
+# rsyslog v3 config file
+# client version
+# by mlukasik Monday, 24 September 2012
+
+
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imklog   # provides kernel logging support (previously done by rklogd)
+$ModLoad immark  # provides --MARK-- message capability
+
+#### GLOBAL DIRECTIVES ####
+
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+
+#### RULES ####
+
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+authpriv.*                                              /var/log/secure
+mail.*                                                  -/var/log/maillog
+cron.*                                                  /var/log/cron
+*.emerg                                                 *
+uucp,news.crit                                          /var/log/spooler
+local7.*                                                /var/log/boot.log
+
+$WorkDirectory /var/lib/rsyslog # where to place spool files
+$ActionQueueFileName fwdRule1   # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 10g    # 10GB space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on   # save messages to disk on shutdown
+$ActionQueueType LinkedList     # run asynchronously
+$ActionResumeRetryCount -1      # infinite retries if host is down
+
+*.* @@rck-prd-mon1.local.yazino.com:514

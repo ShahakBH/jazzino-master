@@ -1,0 +1,55 @@
+{
+	"name": "isanchez-centos",
+	"chef_type": "node",
+	"json_class": "Chef::Node",
+	"run_list": [
+		"role[all-in-one]"
+	],
+	"normal": {
+		"environment": "isanchez-centos",
+	    "ssh": {
+	        "harden": "false"
+		},
+		"monitoring": {
+			"suppress": true
+		},
+		"security": {
+			"denyhosts": false
+		},
+	    "gigaspaces": {
+	        "java": {
+	            "max_mem": "768m"
+	        },
+	        "gsm_hosts": [
+	            "isanchez-centos.london.yazino.com"
+	        ],
+	        "lookup_group": "isanchez-centos",
+	        "zones": [
+	            "table",
+	            "account"
+	        ],
+			"host_ip": "isanchez-centos.london.yazino.com"
+	    },
+	    "postgresql": {
+    		"password": {
+    			"postgres": "password"
+    		},
+    		"config": {
+    			"listen_addresses": "0.0.0.0"
+    		}
+    	},
+	    "rabbitmq": {
+	        "nodename": "isanchez-centos",
+	        "host_entries": [
+	            "127.0.0.1 isanchez-centos"
+	        ],
+	        "erlang_cookie": "isanchez-centos-maggie",
+	        "vhosts": [
+	            "isanchez-centos.london.yazino.com"
+	        ]
+	    },
+	    "jetty": {
+	        "debug" : true
+	    }
+	}
+}

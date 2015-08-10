@@ -1,0 +1,61 @@
+#	$OpenBSD: sshd_config,v 1.73 2005/12/06 22:38:28 reyk Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This config is controlled via the ssh_authorized_keys Chef recipe.
+
+Port <%= @ssh_port %>
+AddressFamily any
+
+Protocol 2
+#ListenAddress 0.0.0.0
+
+X11Forwarding yes
+
+TCPKeepAlive no
+ClientAliveInterval 60
+ClientAliveCountMax 3
+
+UsePrivilegeSeparation yes
+
+SyslogFacility AUTHPRIV
+
+LoginGraceTime 60
+<% if @ssh_users.include? 'root' %>
+PermitRootLogin yes
+<% else %>
+PermitRootLogin no
+<% end %>
+MaxAuthTries 3
+
+<% if @ssh_harden == true && !@ssh_users.empty? %>
+AllowUsers <%= @ssh_users.join ' ' %>
+<% end %>
+
+UsePAM yes
+PasswordAuthentication yes
+ChallengeResponseAuthentication no
+
+<% if @ssh_harden == true %>
+UseLogin no
+GSSAPIAuthentication no
+<% else %>
+
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+<% end %>
+
+IgnoreRhosts yes
+HostbasedAuthentication no
+IgnoreUserKnownHosts yes
+
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL
+
+PrintLastLog yes
+
+Banner /etc/ssh/ssh_banner
+
+Subsystem	sftp	/usr/libexec/openssh/sftp-server

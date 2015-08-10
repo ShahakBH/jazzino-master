@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="paymentOptionService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${bi.worker.url}/service/payment-option"/>
+        <property name="serviceInterface"
+                  value="com.yazino.bi.payment.PaymentOptionService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${bi.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

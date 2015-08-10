@@ -1,0 +1,98 @@
+<div id="home">
+    #parse("includes/header.vm")
+    <ul>
+        <li>
+            <h2>Game</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/game/play">
+                        <img src="${request.contextPath}/assets/images/logo-small.png" width="48" height="48" />
+                        Play
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/players/list">
+                        <img src="${request.contextPath}/assets/images/people.png" width="48" height="48" />
+                        Player Sessions
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/game/sendGameMessage">
+                        <img src="${request.contextPath}/assets/images/log.png"/>
+                        Send Game Message
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>Under the hood</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/logs/gameStatus">
+                        <img src="${request.contextPath}/assets/images/zoom.png"/>
+                        Game Status
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/logs/fullTableStatus">
+                        <img src="${request.contextPath}/assets/images/question.png"/>
+                        Table Status
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/logs/gameHost">
+                        <img src="${request.contextPath}/assets/images/log.png"/>
+                        Game Server Requests
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/logs/documents">
+                        <img src="${request.contextPath}/assets/images/log.png"/>
+                        Game Messages
+                    </a>
+                </li>
+                <li class="disabled">
+##                    <a href="${request.contextPath}/transactions">
+                        <img src="${request.contextPath}/assets/images/log.png"/>
+                        Chip Transactions
+##                    </a>
+                </li>
+                <li class="disabled">
+##                    <a href="${request.contextPath}/javascriptAPICalls">
+                        <img src="${request.contextPath}/assets/images/log.png" />
+                        Javascript Calls
+##                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>Settings</h2>
+            <ul>
+                <li>
+                    <a href="${request.contextPath}/config/properties">
+                        <img src="${request.contextPath}/assets/images/settings.png"/>
+                        Server Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/config/rabbit">
+                        <img src="${request.contextPath}/assets/images/settings.png"/>
+                        RabbitMQ Test
+                    </a>
+                </li>
+                <li>
+                    <a href="${request.contextPath}/config/variation">
+                        <img src="${request.contextPath}/assets/images/settings.png"/>
+                        Game Variation
+                    </a>
+                </li>
+                 <li>
+                    <a href="${request.contextPath}/config/flashvars">
+                        <img src="${request.contextPath}/assets/images/settings.png"/>
+                        Additional Flashvars
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

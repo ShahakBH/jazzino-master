@@ -1,0 +1,35 @@
+<div id="share">  #*  For CSS neophytes (which probably includes me, since I'm writing it): These are in 'reverse order' because we are using float:right; *#
+    <ul>
+#if(!$canvas)
+        <li>
+            <g:plusone size="medium" annotation="none" href="http://www.yazino.com"></g:plusone>
+        </li>
+#end
+        <li>
+            #parse("partials/shareFacebook.vm")
+        </li>
+#if(!$canvas)
+        <li>
+        #* Twitter: To generate this: https://twitter.com/goodies/tweetbutton *#
+            <a href="https://twitter.com/share" class="twitter-share-button"
+               data-text="Play in-sync social games with friends at @yazino."
+               data-count="none">Tweet</a>
+        </li>
+#end
+    </ul>
+    <ul>
+        <li class="label">
+            share this:
+        </li>
+    </ul>
+    <div class="lobbyInformationWidget">
+        <span class="bold">Online Now:</span>
+        <span class="onlineFriends">?</span>/<span class="totalFriends">?</span>&nbsp;<span
+            class="font-friend-panel-2">Friends</span>
+        <span>|</span>
+        <span class="onlinePlayers">$!{lobbyInformation.onlinePlayers}</span>&nbsp;<span
+        class="font-friend-panel-2">Players</span>
+        <span class="activeTables">$!{lobbyInformation.activeTables}</span>&nbsp;<span
+            class="font-friend-panel-2">Tables</span>
+    </div>
+</div>

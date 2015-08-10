@@ -1,0 +1,149 @@
+DROP TRIGGER IF EXISTS account_actions#
+
+DROP PROCEDURE IF EXISTS account_inserts#
+CREATE PROCEDURE account_inserts(IN account_id_val INT(11), IN tsstarted_val DATETIME, IN platform_val VARCHAR(64), IN start_page_val VARCHAR(2048))
+BEGIN
+	DECLARE user_id_val BIGINT(20) DEFAULT 0;
+	declare maxUserId BIGINT(20) DEFAULT 0;
+	
+	SELECT MAX(USER_ID) INTO @maxUserId FROM rpt_recent_registrations;
+	
+	IF @maxUserId > 0 THEN
+		INSERT IGNORE INTO rpt_recent_registrations(USER_ID,AUDIT_TIME,RPX,EXTERNAL_ID,ACCOUNT_ID,FIRST_NAME)
+    	SELECT USER_ID,TSREG,RPX_PROVIDER,IF(RPX_PROVIDER='YAZINO',USER_ID,EXTERNAL_ID),account_id_val,FIRST_NAME
+    		FROM strataprod.LOBBY_USER
+    		WHERE USER_ID > @maxUserId;
+    ELSE
+    	INSERT IGNORE INTO rpt_recent_registrations(USER_ID,AUDIT_TIME,RPX,EXTERNAL_ID,ACCOUNT_ID,FIRST_NAME)
+    	SELECT USER_ID,TSREG,RPX_PROVIDER,EXTERNAL_ID,account_id_val,FIRST_NAME
+    		FROM strataprod.LOBBY_USER
+    		ORDER BY USER_ID DESC LIMIT 200;
+    END IF;
+
+	SELECT USER_ID INTO @user_id_val FROM strataprod.PLAYER WHERE ACCOUNT_ID = account_id_val ORDER BY USER_ID DESC LIMIT 1;
+
+	UPDATE rpt_recent_registrations SET PLATFORM = platform_val, START_PAGE = start_page_val WHERE USER_ID = @user_id_val AND PLATFORM = '';
+
+  	INSERT INTO PLAYER_ACCOUNT_INFO(ACCOUNT_ID, REGISTRATION_PLATFORM)
+      VALUES (account_id_val,platform_val)
+      ON DUPLICATE KEY
+      UPDATE REGISTRATION_PLATFORM = 
+        IF(REGISTRATION_PLATFORM IS NULL,VALUES(REGISTRATION_PLATFORM),REGISTRATION_PLATFORM);
+        
+    INSERT IGNORE INTO rpt_activity_by_account_id(ACCOUNT_ID, AUDIT_DATE, PLATFORM)
+      VALUES(account_id_val,DATE(tsstarted_val),IF(platform_val='','UNKNOWN',platform_val)),
+      (account_id_val,DATE(tsstarted_val),'');
+      
+    INSERT IGNORE INTO rpt_activity_by_account_id_weekly(ACCOUNT_ID, AUDIT_DATE, PLATFORM)
+      VALUES(account_id_val,last_day_of_week(tsstarted_val),IF(platform_val='','UNKNOWN',platform_val)),
+      (account_id_val,last_day_of_week(tsstarted_val),'');
+
+    INSERT IGNORE INTO rpt_activity_by_account_id_monthly(ACCOUNT_ID, AUDIT_DATE, PLATFORM)
+      VALUES(account_id_val,last_day(tsstarted_val),IF(platform_val='','UNKNOWN',platform_val)),
+      (account_id_val,last_day(tsstarted_val),'');
+END#
+
+CREATE TRIGGER account_actions
+AFTER INSERT ON ACCOUNT_SESSION
+FOR EACH ROW
+BEGIN
+  DECLARE player_id_val BIGINT(20) DEFAULT 0;
+
+  CALL account_inserts(NEW.ACCOUNT_ID,NEW.TSSTARTED,NEW.PLATFORM,NEW.START_PAGE);
+END
+#
+
+DROP VIEW IF EXISTS mm_logins#
+-- CREATE VIEW mm_logins AS
+-- SELECT l.RPX_PROVIDER PARTNER_ID,l.EXTERNAL_ID EXTERNAL_ID,l.USER_ID USER_ID,
+--   s.IP_ADDRESS IP_ADDRESS,
+--   s.referer SOURCE,s.tsstarted LOGIN_TIME
+-- FROM ACCOUNT_SESSION s
+-- JOIN strataprod.PLAYER p ON s.ACCOUNT_ID=p.ACCOUNT_ID
+-- JOIN strataprod.LOBBY_USER l ON l.USER_ID=p.USER_ID
+-- ORDER BY s.tsstarted#
+
+DROP VIEW IF EXISTS mm_chips#
+-- CREATE VIEW mm_chips AS
+-- SELECT l.RPX_PROVIDER PARTNER_ID,l.EXTERNAL_ID EXTERNAL_ID,l.USER_ID USER_ID,a.BALANCE BALANCE
+-- FROM strataprod.ACCOUNT a
+-- JOIN strataprod.PLAYER p ON a.ACCOUNT_ID=p.ACCOUNT_ID
+-- JOIN strataprod.LOBBY_USER l ON l.USER_ID=p.USER_ID#
+
+DROP VIEW IF EXISTS mm_external_transactions#
+-- CREATE VIEW mm_external_transactions AS
+-- select
+-- 	ET.AUTO_ID AS AUTO_ID,lu.RPX_PROVIDER AS PARTNER_ID,lu.EXTERNAL_ID AS EXTERNAL_ID,P.USER_ID AS USER_ID,ET.GAME_TYPE AS GAME_TYPE,
+-- 	ET.AMOUNT_CHIPS AS AMOUNT_CHIPS,ET.AMOUNT AS AMOUNT,ET.CURRENCY_CODE AS CURRENCY_CODE,ET.TRANSACTION_TYPE AS TRANSACTION_TYPE,
+-- 	ET.MESSAGE_TIMESTAMP AS TIMESTAMP,ET.EXTERNAL_TRANSACTION_STATUS
+-- from EXTERNAL_TRANSACTION ET
+-- join strataprod.PLAYER P
+-- left join strataprod.LOBBY_USER lu ON P.USER_ID=lu.USER_ID
+-- where EXTERNAL_TRANSACTION_STATUS='SUCCESS' AND (P.ACCOUNT_ID = ET.ACCOUNT_ID)
+-- #
+
+DROP VIEW IF EXISTS mm_last_levels#
+-- CREATE VIEW mm_last_levels AS
+-- SELECT
+--   lu.RPX_PROVIDER AS PARTNER_ID, lu.EXTERNAL_ID AS EXTERNAL_ID,p.USER_ID AS USER_ID,p.LEVEL AS LEVEL,lp.LAST_PLAYED AS LAST_PLAYED
+-- FROM
+--   mm_last_played lp
+--   JOIN strataprod.PLAYER p
+--   JOIN strataprod.LOBBY_USER lu
+-- WHERE
+--   lp.PLAYER_ID=p.PLAYER_ID AND p.USER_ID=lu.USER_ID AND NOT p.LEVEL IS NULL
+-- #
+
+DROP VIEW IF EXISTS mm_total_invites#
+-- CREATE VIEW mm_total_invites AS
+-- SELECT
+--   lu.RPX_PROVIDER AS PARTNER_ID, lu.EXTERNAL_ID AS EXTERNAL_ID,p.USER_ID AS USER_ID,
+--   i.STATUS AS STATUS,unix_timestamp(i.CREATED_TS) AS CREATED_TS,unix_timestamp(i.UPDATED_TS) AS UPDATED_TS
+-- FROM
+--   INVITATIONS i
+--   JOIN strataprod.PLAYER p
+--   JOIN strataprod.LOBBY_USER lu
+-- WHERE
+--   i.PLAYER_ID=p.PLAYER_ID AND p.USER_ID=lu.USER_ID
+-- ORDER BY i.PLAYER_ID
+-- #
+
+DROP VIEW IF EXISTS mm_initial_games#
+-- CREATE VIEW mm_initial_games AS
+-- SELECT lu.RPX_PROVIDER AS PARTNER_ID, lu.EXTERNAL_ID AS EXTERNAL_ID,p.USER_ID AS USER_ID,lp.GAME_TYPE AS GAME_TYPE, lp.LAST_PLAYED AS LAST_TS
+-- FROM
+--   LAST_PLAYED lp
+--   JOIN strataprod.PLAYER p
+--   JOIN strataprod.LOBBY_USER lu
+-- WHERE lp.PLAYER_ID=p.PLAYER_ID AND p.USER_ID=lu.USER_ID
+-- #
+
+DROP VIEW IF EXISTS mm_leaderboard_state#
+-- CREATE VIEW mm_leaderboard_state AS
+-- SELECT
+--   lu.RPX_PROVIDER AS PARTNER_ID, lu.EXTERNAL_ID AS EXTERNAL_ID,p.USER_ID AS USER_ID,lastBoard.GAME_TYPE AS GAME_TYPE,lbp.LEADERBOARD_POSITION AS BOARD_GRADE
+-- FROM
+--   mm_last_leaderboard lastBoard
+--   JOIN strataprod.LEADERBOARD_PLAYER lbp
+--   JOIN strataprod.PLAYER p
+--   JOIN strataprod.LOBBY_USER lu
+-- WHERE
+--   lastBoard.LEADERBOARD_ID=lbp.LEADERBOARD_ID AND lbp.PLAYER_ID=p.PLAYER_ID AND p.USER_ID=lu.USER_ID
+-- #
+
+DROP VIEW IF EXISTS mm_tournaments_participation#
+-- CREATE VIEW mm_tournaments_participation AS
+-- SELECT
+--   lu.RPX_PROVIDER AS PARTNER_ID, lu.EXTERNAL_ID AS EXTERNAL_ID,p.USER_ID AS USER_ID,tvt.GAME_TYPE AS GAME_TYPE,
+--   unix_timestamp(ts.TOURNAMENT_FINISHED_TS) AS LAST_TIMESTAMP
+-- FROM
+--   strataprod.TOURNAMENT_SUMMARY ts
+--   JOIN strataprod.TOURNAMENT_PLAYER tp
+--   JOIN strataprod.TOURNAMENT t
+--   JOIN strataprod.TOURNAMENT_VARIATION_TEMPLATE tvt
+--   JOIN strataprod.PLAYER p
+--   JOIN strataprod.LOBBY_USER lu
+-- WHERE
+--   ts.TOURNAMENT_ID=tp.TOURNAMENT_ID AND tp.TOURNAMENT_ID=t.TOURNAMENT_ID AND t.TOURNAMENT_VARIATION_TEMPLATE_ID=tvt.TOURNAMENT_VARIATION_TEMPLATE_ID
+--   AND tp.PLAYER_ID=p.PLAYER_ID AND p.USER_ID=lu.USER_ID
+-- #

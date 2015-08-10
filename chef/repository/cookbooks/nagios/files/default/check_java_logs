@@ -1,0 +1,109 @@
+#!/bin/bash
+
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+WARNING_THRESHOLD=${WARNING_THRESHOLD:="1"}
+CRITICAL_THRESHOLD=${CRITICAL_THRESHOLD:="5"}
+
+LOG_LEVEL="ERROR"
+
+print_usage() {
+    echo "Usage: $0 -w <warning count=$WARNING_THRESHOLD> -c <critical count=$CRITICAL_THRESHOLD> -l <log level=$LOG_LEVEL>  (-d <log dir> -i <log includes> [-n <number of files>] [-e <log excludes>] | -f <log file)"
+    exit $STATE_UNKNOWN
+}
+
+MD5=md5sum
+if [ "$(uname)" == "Darwin" ]; then
+    MD5=md5
+fi
+ARG_HASH=$(echo "$@" | $MD5 | awk '{print $1}')
+DELTA_FILE="/tmp/last-log-delta-$ARG_HASH"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -w | --warning)
+            shift
+            WARNING_THRESHOLD=$1
+            ;;
+        -c | --critical)
+            shift
+            CRITICAL_THRESHOLD=$1
+            ;;
+        -i | --include)
+            shift
+            LOG_INCLUDE=$1
+            ;;
+        -e | --exclude)
+            shift
+            LOG_EXCLUDE=$1
+            ;;
+        -d | --dir)
+            shift
+            LOG_DIR=$1
+            ;;
+        -f | --file)
+            shift
+            LOG_FILE=$1
+            ;;
+        -l | --level)
+            shift
+            LOG_LEVEL=$1
+            ;;
+        -n | --number)
+            shift
+            NUMBER_FILES=$1
+            ;;
+        *)  echo "Unknown argument: $1"
+            print_usage
+            exit $STATE_UNKNOWN
+            ;;
+        esac
+shift
+done
+
+if [ -z "$LOG_FILE" ]; then
+    if [ -z "$LOG_DIR" -o -z "$LOG_INCLUDE" ]; then
+        echo "Both log dir and includes are required"
+        print_usage
+    elif [ -z "$LOG_DIR" -a -z "$LOG_INCLUDE" ]; then
+        echo "No log file or directory with includes specified"
+        print_usage
+    fi
+fi
+
+LOG_COUNT=0
+if [ -n "$LOG_FILE" ]; then
+    LOG_COUNT=$(grep -c " $LOG_LEVEL " "$LOG_FILE")
+elif [ -n "$NUMBER_FILES" ]; then
+    LOG_FILE=$LOG_INCLUDE
+    LOG_COUNT=$(cat `ls $LOG_DIR/$LOG_INCLUDE | sort -r | head -n $NUMBER_FILES` | grep " $LOG_LEVEL " -c)
+else
+    LOG_FILE=$LOG_INCLUDE
+    LOG_COUNT=$(grep -R -c --include "$LOG_INCLUDE" --exclude "$LOG_EXCLUDE" " $LOG_LEVEL " "$LOG_DIR" | awk -F: '{ s+=$2 } END { print s }')
+fi
+
+EXIT_CODE=$STATE_OK
+STATUS=OK
+
+LAST_COUNT=0
+if [ -f "$DELTA_FILE" ]; then
+    LAST_COUNT=$(cat "$DELTA_FILE")
+fi
+
+DELTA=$(echo $LOG_COUNT - $LAST_COUNT | bc)
+
+if [ $DELTA -gt $CRITICAL_THRESHOLD ]; then
+    EXIT_CODE=$STATE_CRITICAL
+    STATUS=CRITICAL
+elif [ $DELTA -gt $WARNING_THRESHOLD ]; then
+    EXIT_CODE=$STATE_WARNING
+    STATUS=WARNING
+fi
+
+echo "$LOG_COUNT" > "$DELTA_FILE"
+
+echo "LOG CHECK $STATUS: file=$LOG_FILE level=$LOG_LEVEL delta=$DELTA count=$LOG_COUNT|count=$LOG_COUNT delta=$DELTA"
+exit $EXIT_CODE

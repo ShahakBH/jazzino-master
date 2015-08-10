@@ -1,0 +1,78 @@
+#set($redirectTo='/roulette/play')
+<div id="how-to-play" class="ROULETTE game-home">
+    <div id="how-to-play-area">
+        <div class="content_head"><h3 class="font-grey-window-head">ROULETTE</h3></div>
+        <div class="content_delimiter"></div>
+        <div class="content">
+            <div class="content_left roulette_logo"></div>
+            <div class="content_right">
+                <div class="content_right_top" id="content_right_top">
+                    #generateLinkTagForMainCta("roulette" $redirectTo)
+                    <div class="block1 techno-float">
+                        <div class="float-left-col">
+                            <h4 class="color-ROULETTE font-compnonlogged-texthead">PLAY Roulette ONLINE with a new
+                                spin</h4>
+
+                            <div class="paragraph font-compnonlogged-1">
+                                <p class="pre-line">This is the first ever massively multiplayer Roulette game,
+                                    now on <a href="http://www.facebook.com/Yazino" class="link1">Facebook</a> and <a
+                                            href="http://www.yazino.com" class="link1">www.yazino.com</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="float-right-col">
+                            <div id="sign-up">
+                                #if (!$lobbySession)
+                                    <a href="#" class="font-sign-up sign-up-roulette"></a>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr_b"></div>
+                </div>
+                <div class="content_right_middle font-compnonlogged-2" id="content_right_middle">
+                    <div class="paragraph">
+                        <p class="bold">What to look out for:</p>
+
+                        <div class="middle_block">
+                            <ul class="mark_roulette">
+                                <li><p class="pre-line">We give you control of the wheel so you can spin as soon
+                                    as everyone's ready.</p></li>
+                            </ul>
+                        </div>
+                        <div class="middle_block">
+                            <ul class="mark_roulette">
+                                <li><p class="pre-line">There are lots of ways to bet to make things more
+                                    competitive with neighbour bets and a whole selection
+                                    of call bets to choose from.</p></li>
+                            </ul>
+                        </div>
+                        <div class="clr_l"></div>
+                    </div>
+                </div>
+                <div class="content_right_main">
+                    <div class="content_right_main_left_overview font-compnonlogged-2" id="content_right_main_left">
+                        <div class="paragraph">
+                            <p class="pre-line">And like all games on Yazino, with Roulette you choose who you want to
+                                play with and then sit around the same table as them. Roulette is one of
+                                the easiest casino games to learn so come and play Roulette for fun.
+                                There's no download needed - find a game, invite your friends and chip
+                                in together now!</p>
+                        </div>
+                        <div class="paragraph">
+                            <p>Take a look at <a href="${request.contextPath}/rules/roulette"
+                                                 class="underborder font-compnonlogged-2">Roulette rules</a>
+                            </p>
+                        </div>
+                        <div class="content_right_main_left_overview_block1"></div>
+                    </div>
+                    <div class="content_right_main_right">
+                        <div class="content_right_roulette_overview_block1"></div>
+                    </div>
+                    <div class="clr_b"></div>
+                </div>
+            </div>
+        </div>
+        <div class="content_foot"></div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+#!/bin/sh
+
+# =======================================================================
+# === CHECK THIS OUT
+# =======================================================================
+# JAVA_HOME must point to your Java Development Kit installation
+JAVA_HOME="<%= @java_home %>"
+
+# =======================================================================
+# === CHECK THIS OUT
+# =======================================================================
+# JAVA_OPTS should contain any Java Virtual Machine options. Here are some tips:
+# 1) Always use the "-server" option.
+# 2) Give more RAM to the server process, especially with heavy traffic, by specifying a min and max "heap"
+#    E.g.: If you have 4 GB and the box is dedicated to Lightstreamer, you might set 1 GB min heap and 3 GB max
+#    heap with these options: "-Xms1G -Xmx3G"
+# 3) Choose a better "garbage collector" if you want to reduce latency. An option that often gives good results is:
+#    "-XX:+UseConcMarkSweepGC". Only if you are using a very recent version of Java 7, you might prefer to try:
+#    "-XX:+UseG1GC". Many other tuning options are available (please see Oracle docs).
+JAVA_OPTS="<%= @java_opts %>"
+
+echo "Java environment:"
+echo "JAVA_HOME = \"${JAVA_HOME}\""
+echo "JAVA_OPTS = \"${JAVA_OPTS}\""
+echo
+
+# =======================================================================
+# === CHECK THIS OUT
+# =======================================================================
+# In order to serve many concurrent user connections,
+# the limits on the available file descriptors should be released;
+# these limits also apply to the open sockets
+
+FD_HARD_LIMIT=`ulimit -Hn`
+
+# if running as root, you may be able to increase the hard limit:
+#
+# ulimit -Hn unlimited
+# FD_HARD_SET=$?
+# FD_HARD_LIMIT=`ulimit -Hn`
+# if [ $FD_HARD_SET -ne 0 ]; then
+#     echo "Warning: could not enlarge maximum file descriptor limit"
+#     echo "ensure that the current limit is suitable: " $FD_HARD_LIMIT
+# fi
+
+echo Setting file descriptor limit to $FD_HARD_LIMIT
+
+ulimit -Sn $FD_HARD_LIMIT
+FD_SOFT_SET=$?
+FD_SOFT_LIMIT=`ulimit -Sn`
+if [ $FD_SOFT_SET -ne 0 ]; then
+    echo "Warning: could not enlarge current file descriptor limit"
+    echo "ensure that the current limit is suitable: " $FD_SOFT_LIMIT
+fi
+
+# Dump current ulimit and sysctl values
+echo "Configured file descriptors, soft limit: $(ulimit -Sn)"
+echo "Configured file descriptors, hard limit: $(ulimit -Hn)"
+fs_file=$(/sbin/sysctl -a 2> /dev/null | grep ^fs.file)
+if [ -n "${fs_file}" ]; then
+	echo "Configured sysctl fs.file.* values:"
+	echo "${fs_file}"
+fi
+echo
+
+# ---------------------------------------------------------------------------
+
+# up two dirs there is LS_HOME
+_LS_HOME=$(dirname "${0}")
+if [ "${_LS_HOME}" = "." ]; then
+    # in the same dir
+    _LS_HOME=$(dirname "${PWD}")
+elif [ -z "$(echo ${_LS_HOME} | grep "^/" 2> /dev/null)" ]; then
+    # relative dir to target
+    _LS_HOME="${PWD}"
+else
+    # absolute path
+    _LS_HOME=$(dirname "${_LS_HOME}")
+fi
+LS_HOME=$(dirname "${_LS_HOME}")
+
+echo "Lightstreamer Server directory:"
+echo "LS_HOME = \"${LS_HOME}\""
+echo
+
+# Inherited from environment, write current PID to
+# given file path (declared as WRITE_PID).
+# This is useful for init scripts unable to figure
+# out the pid by themselves (OpenBSD) and only
+# works when Lightstreamer starts.
+WRITE_PID="${WRITE_PID:-}"
+
+if [ "$1" = "run" -o "$1" = "background" ] ; then
+
+   echo Starting Lightstreamer Server...
+   echo Please check logs for detailed information.
+   class=com.lightstreamer.LS
+
+elif [ "$1" = "stop" -o "$1" = "restart" ] ; then
+
+   echo Stopping Lightstreamer Server...
+   class=com.lightstreamer.LS_Stop
+
+else
+
+   echo "Usage:  LS.sh ( command )"
+   echo "commands:"
+   echo "  run               Start Lightstreamer Server in foreground"
+   echo "  background        Start Lightstreamer Server in background"
+   echo "  stop              Stop Lightstreamer Server"
+   echo "  restart           Stop Lightstreamer Server and start a new instance in background"
+   exit 1
+
+fi
+
+
+# Configuration file
+args=$LS_HOME/conf/lightstreamer_conf.xml
+
+# Classpath
+cpath="$LS_HOME/lib/lightstreamer.jar:$LS_HOME/lib/ls-adapter-interface.jar:$LS_HOME/lib/ls-monitor.jar:$LS_HOME/lib/*"
+
+# Launch command
+command="$JAVA_HOME/bin/java $JAVA_OPTS -cp $cpath $class $args"
+minimal_command="$JAVA_HOME/bin/java -cp $cpath $class $args"
+
+write_pid() {
+   if [ -n "${WRITE_PID}" ]; then
+      echo $$ > "${WRITE_PID}"
+   fi
+}
+
+if [ "$1" = "restart" ] ; then
+
+   # call command and wait
+   eval $command
+   # now start a new Server
+   write_pid
+   exec $0 background
+
+elif [ "$1" = "run" ] ; then
+
+   # leave control to command
+   write_pid
+   exec $command
+
+elif [ "$1" = "stop" ] ; then
+
+   # leave control to command
+   exec $minimal_command
+
+elif [ "$1" = "background" ] ; then
+
+   # call command in a separate window and leave
+   touch "$LS_HOME"/logs/LS.out
+   write_pid
+   exec $command >> "$LS_HOME"/logs/LS.out 2>&1 &
+
+fi

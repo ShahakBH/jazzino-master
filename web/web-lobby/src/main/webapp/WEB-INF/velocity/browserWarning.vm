@@ -1,0 +1,51 @@
+<div id="browser-warning">
+
+    <h1><span>Supported</span> Browsers</h1>
+
+    <!--[if lt IE 8]>
+    <h2>Browser Upgrade Recommended</h2>
+    <p>
+        <strong>You are using an unsupported browser.</strong>
+    </p>
+    <![endif]-->
+
+    <p>
+        We support modern versions of the following browsers<sup><a href="#fn1" id="r1">1</a></sup>:
+    </p>
+    <ul>
+        <li><a href="http://windows.microsoft.com/ie" title="Download Internet Explorer">Internet Explorer 8</a> and
+            above
+        </li>
+        <li><a href="http://chrome.google.com/" title="Download Google Chrome" target="_blank">Google Chrome</a></li>
+        <li><a href="http://www.mozilla.org/firefox" title="Download Mozilla Firefox" target="_blank">Mozilla Firefox
+            4</a> and above
+        </li>
+        <li><a href="http://www.apple.com/safari/" title="View more information about Apple Safari" target="_blank">Safari
+            5</a> and above
+        </li>
+    </ul>
+
+    <p>
+        Other browsers may work, but we cannot guarantee all functionality will work correctly.
+    </p>
+
+    <h2>To use Yazino, enable cookies and JavaScript</h2>
+
+    <p>
+        You must have cookies<sup><a href="#fn1" id="r2">2</a></sup> and JavaScript turned on to use Yazino.
+        These features should all be enabled by default.
+    </p>
+
+    <section class="footnotes">
+        <p id="fn1"><a href="#r1">1.</a> <strong>browser:</strong>
+            A browser is an application you can use to visit websites. Google Chrome, Firefox, Internet Explorer and
+            Safari are all examples of browsers.</p>
+        <p id="fn2"><a href="#r2">2.</a> <strong>cookie:</strong>
+            A cookie is a small files we use to remember information about you. For example, we use a cookie to
+            allow returning users to automatically log in.</p>
+    </section>
+
+</div>
+
+
+

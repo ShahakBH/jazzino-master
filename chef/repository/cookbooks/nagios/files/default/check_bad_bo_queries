@@ -1,0 +1,22 @@
+#!/bin/sh
+# Simple check to see if Back Office is running any nasty queries taking over 60 seconds to complete
+USER=root
+PASSWORD=
+
+if [ -n "$1" ]; then
+    USER=$1
+fi
+
+if [ -n "$2" ]; then
+    PASSWORD=$2
+fi
+
+if [ -n "$PASSWORD" ]; then
+    PASSWORD=-p$PASSWORD
+fi
+
+mysqladmin -u $USER $PASSWORD processlist | awk 'BEGIN{FS="|";} $3 ~ "strataprod" && $6 ~ "Query" { if ( $7>60) print "mysql pid " $2 " running for " $7 " seconds. Executing: " $9 ; exit 1}'
+
+echo "OK - no long running queries"
+
+exit 0

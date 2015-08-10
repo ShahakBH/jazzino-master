@@ -1,0 +1,76 @@
+#content-job {
+    overflow: hidden;
+    font-size: 12px;
+    padding-bottom: 100px;
+}
+
+#content-job-text {
+    width: 455px;
+    float: left;
+    padding-left: 35px;
+    padding-right: 15px
+}
+
+#content-job #content-job-text h1{
+    font-size: 24px;
+    margin-top: 24px;
+    font-weight: bold;
+    color: #a0a0a0;
+}
+
+#content-job #content-job-text h1 strong {
+    font-weight: bold;
+    color: #777777;
+}
+
+#content-job #content-job-text .featureArticle {
+    font-size: 15px;
+}
+
+#content-job #content-job-text #content-job-info {
+    padding-top: 23px;
+    padding-bottom: 35px;
+    color: #a0a0a0;
+    line-height: 17px;
+    position: relative;
+}
+
+#content-job #content-job-text #content-job-info h2 {
+    padding-top: 67px;
+    color: #e71f1f;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+#content-job #content-job-text #content-job-info .featurePara {
+    font-size:16px;
+}
+
+#content-job #content-job-text #content-job-info .descriptionOfWork {
+    width: 354px;
+}
+
+#content-job #content-job-text #content-job-info p {
+    padding-top: 10px;
+}
+
+#content-job #content-job-gallery {
+    width: 420px;
+    float: left;
+}
+
+#content-job .location {
+    font-weight: bold;
+}
+
+#content-job a {
+    color: #e71f1f;
+}
+
+#content-job ul {
+    padding-top: 10px;
+}
+
+#content-job ul strong {
+    font-weight: bold;
+}

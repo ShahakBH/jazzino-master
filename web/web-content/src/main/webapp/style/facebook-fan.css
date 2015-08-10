@@ -1,0 +1,12 @@
+.fan_box .name_block, .fan_box .profileimage {
+	display: none;
+}
+
+.fan_box {
+	width: 121px;
+}
+
+.fan_box .connect_action, .fan_box .connect_top, .fan_box .connect_button {
+	padding: 0;
+	margin: 0;
+}

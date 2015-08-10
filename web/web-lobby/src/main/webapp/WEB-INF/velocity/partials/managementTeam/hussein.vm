@@ -1,0 +1,51 @@
+<div id="management-team-area">
+    <h3>Hussein Chahine</h3>
+    <h4>FOUNDER & CEO</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/hussein-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/wheelDeal">
+                <div class="game-slots"></div>
+            </a>
+            <a href="/texasHoldem">
+                <div class="game-texas-holdem"></div>
+            </a>
+
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>
+        Hussein is the driving force behind Yazino, a company built on the belief that the next generation
+        of social games will be based around real-time synchronous experiences where friends and
+        like-minded people can play, compete, and socialise anytime, from anywhere in the world.
+    </p>
+
+    <p>
+        Holding a degree in Mathematics and Computing from Kingston University, he has always been
+        passionate about IT and innovation. In the late 1990s he was part of the FICS Group, helping to
+        build Europe's first Internet banking service. Hussein then joined Reef, where he created enterprise
+        CMS solutions for e-commerce.
+    </p>
+
+    <p>
+        In 2000 he joined Digital Mobility, a telecoms-focused start-up which launched a WAP-based
+        service to provide senior executives with "any time, any place" access to a range of mobile
+        banking, stock trading, news, travel.
+    </p>
+
+    <p>
+        In 2003 Hussein founded Signature Technologies, a UK company that delivers innovative IT
+        solutions for clients including UPS, the Daily Mail Group, iii.co.uk, AbsolutePoker.com and
+        StanJames.com.
+    </p>
+
+    <p>
+        Hussein's IT innovation track record together with his experience at Signature Technologies
+        inspired him to found Yazino in 2009.
+    </p>
+
+</div>

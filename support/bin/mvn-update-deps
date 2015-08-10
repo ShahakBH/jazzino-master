@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+
+require 'rexml/document'
+require 'rexml/xpath'
+
+include REXML
+
+INDENT=4
+
+def update_path(pom_document, path, group_id, artifact_id, new_version)
+    changed = false
+    pom_document.elements.each(path) do |dependency|
+        if dependency.elements['groupId'].text == group_id \
+                && dependency.elements['artifactId'].text == artifact_id \
+                && dependency.elements['version']
+            dependency.elements['version'].text = new_version
+            changed = true
+        end
+    end
+    changed
+end
+
+def update_pom(pom_file, group_id, artifact_id, new_version)
+    pom_document = Document.new(File.new(pom_file))
+
+    if update_path(pom_document, '/project/dependencyManagement/dependencies/dependency', group_id, artifact_id, new_version) \
+            || update_path(pom_document, '/project/dependencies/dependency', group_id, artifact_id, new_version)
+        File.open(pom_file, 'w') {|file| xml_formatter.write(pom_document, file)}
+    end
+end
+
+def xml_formatter
+    formatter = REXML::Formatters::Pretty.new(INDENT)
+    formatter.compact = true
+    formatter
+end
+
+def update_all_poms_under(directories_to_scan, group_id, artifact_id, new_version)
+    directories_to_scan.each do |base_dir|
+        Dir.foreach(base_dir) do |file|
+            next if file == '.' || file == '..'
+            update_pom("#{base_dir}/#{file}", group_id, artifact_id, new_version) if file =~ /^pom.xml$/
+            update_all_poms_under(["#{base_dir}/#{file}"], group_id, artifact_id, new_version) if File.directory?("#{base_dir}/#{file}")
+        end
+    end
+end
+
+if ARGV.size < 4
+    puts "Usage: #{__FILE__} <group ID> <artifact ID> <new version> <directories to scan>"
+    exit 1
+end
+
+directories_to_scan = []
+(3..ARGV.length - 1).each {|i| directories_to_scan << ARGV[i].strip}
+
+update_all_poms_under(directories_to_scan, ARGV[0], ARGV[1], ARGV[2])
+exit(0)

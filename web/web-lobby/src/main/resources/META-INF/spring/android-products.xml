@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <util:map id="chipBundles"
+              key-type="java.lang.String"
+              value-type="java.util.LinkedHashMap">
+        <entry key="TEXAS_HOLDEM" value-ref="pokerChipProducts"/>
+        <entry key="SLOTS" value-ref="slotsChipProducts"/>
+        <entry key="BLACKJACK" value-ref="blackjackChipProducts"/>
+    </util:map>
+
+    <util:map id="slotsChipProducts"
+              map-class="java.util.LinkedHashMap"
+              key-type="java.lang.String"
+              value-type="com.yazino.web.payment.chipbundle.ChipBundle">
+        <entry key="5000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd3_buys_5k"/>
+                <property name="chips" value="5000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-7500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd3_buys_7.5k_p50"/>
+                <property name="chips" value="7500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-10000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd3_buys_10k_p100"/>
+                <property name="chips" value="10000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-12500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd3_buys_12.5k_p150"/>
+                <property name="chips" value="12500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd3_buys_15k_p200"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd8_buys_15k"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-22500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd8_buys_22.5k_p50"/>
+                <property name="chips" value="22500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd8_buys_30k_p100"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-37500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd8_buys_37.5k_p150"/>
+                <property name="chips" value="37500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd8_buys_45k_p200"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd15_buys_30k"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd15_buys_45k_p50"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-60000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd15_buys_60k_p100"/>
+                <property name="chips" value="60000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-75000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd15_buys_75k_p150"/>
+                <property name="chips" value="75000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-90000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd15_buys_90k_p200"/>
+                <property name="chips" value="90000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd30_buys_70k"/>
+                <property name="chips" value="70000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-105000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd30_buys_105k_p50"/>
+                <property name="chips" value="105000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-140000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd30_buys_140k_p100"/>
+                <property name="chips" value="140000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-175000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd30_buys_175k_p150"/>
+                <property name="chips" value="175000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-210000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd30_buys_210k_p200"/>
+                <property name="chips" value="210000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd70_buys_200k"/>
+                <property name="chips" value="200000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd70_buys_300k_p50"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-400000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd70_buys_400k_p100"/>
+                <property name="chips" value="400000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-500000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd70_buys_500k_p150"/>
+                <property name="chips" value="500000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd70_buys_600k_p200"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd90_buys_300k"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-450000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd90_buys_450k_p50"/>
+                <property name="chips" value="450000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd90_buys_600k_p100"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-750000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd90_buys_750k_p150"/>
+                <property name="chips" value="750000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-900000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="slots_usd90_buys_900k_p200"/>
+                <property name="chips" value="900000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+    </util:map>
+    <util:map id="blackjackChipProducts"
+              map-class="java.util.LinkedHashMap"
+              key-type="java.lang.String"
+              value-type="com.yazino.web.payment.chipbundle.ChipBundle">
+        <entry key="5000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd3_buys_5k"/>
+                <property name="chips" value="5000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-7500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd3_buys_7.5k_p50"/>
+                <property name="chips" value="7500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-10000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd3_buys_10k_p100"/>
+                <property name="chips" value="10000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-12500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd3_buys_12.5k_p150"/>
+                <property name="chips" value="12500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd3_buys_15k_p200"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="2.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd8_buys_15k"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-22500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd8_buys_22.5k_p50"/>
+                <property name="chips" value="22500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd8_buys_30k_p100"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-37500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd8_buys_37.5k_p150"/>
+                <property name="chips" value="37500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd8_buys_45k_p200"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="7.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd15_buys_30k"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd15_buys_45k_p50"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-60000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd15_buys_60k_p100"/>
+                <property name="chips" value="60000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-75000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd15_buys_75k_p150"/>
+                <property name="chips" value="75000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-90000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd15_buys_90k_p200"/>
+                <property name="chips" value="90000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="14.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd30_buys_70k"/>
+                <property name="chips" value="70000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-105000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd30_buys_105k_p50"/>
+                <property name="chips" value="105000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-140000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd30_buys_140k_p100"/>
+                <property name="chips" value="140000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-175000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd30_buys_175k_p150"/>
+                <property name="chips" value="175000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-210000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd30_buys_210k_p200"/>
+                <property name="chips" value="210000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="29.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd70_buys_200k"/>
+                <property name="chips" value="200000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd70_buys_300k_p50"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-400000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd70_buys_400k_p100"/>
+                <property name="chips" value="400000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-500000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd70_buys_500k_p150"/>
+                <property name="chips" value="500000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd70_buys_600k_p200"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="69.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd90_buys_300k"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-450000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd90_buys_450k_p50"/>
+                <property name="chips" value="450000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd90_buys_600k_p100"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-750000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd90_buys_750k_p150"/>
+                <property name="chips" value="750000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-900000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="blackjack_usd90_buys_900k_p200"/>
+                <property name="chips" value="900000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="89.99"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+    </util:map>
+    <util:map id="pokerChipProducts"
+              map-class="java.util.LinkedHashMap"
+              key-type="java.lang.String"
+              value-type="com.yazino.web.payment.chipbundle.ChipBundle">
+        <entry key="5000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd3_buys_5k"/>
+                <property name="chips" value="5000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="3"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-7500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd3_buys_7.5k_p50"/>
+                <property name="chips" value="7500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="3"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-10000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd3_buys_10k_p100"/>
+                <property name="chips" value="10000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="3"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-12500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd3_buys_12.5k_p150"/>
+                <property name="chips" value="12500"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="3"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="5000-15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd3_buys_15k_p200"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="5000"/>
+                <property name="price" value="3"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd8_buys_15k"/>
+                <property name="chips" value="15000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="8"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-22500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd8_buys_22.5k_p50"/>
+                <property name="chips" value="22500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="8"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd8_buys_30k_p100"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="8"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-37500">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd8_buys_37.5k_p150"/>
+                <property name="chips" value="37500"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="8"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="15000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd8_buys_45k_p200"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="15000"/>
+                <property name="price" value="8"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd15_buys_30k"/>
+                <property name="chips" value="30000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="15"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-45000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd15_buys_45k_p50"/>
+                <property name="chips" value="45000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="15"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-60000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd15_buys_60k_p100"/>
+                <property name="chips" value="60000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="15"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-75000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd15_buys_75k_p150"/>
+                <property name="chips" value="75000"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="price" value="15"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="30000-90000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd15_buys_90k_p200"/>
+                <property name="chips" value="90000"/>
+                <property name="price" value="15"/>
+                <property name="defaultChips" value="30000"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd30_buys_70k"/>
+                <property name="chips" value="70000"/>
+                <property name="price" value="30"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-105000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd30_buys_105k_p50"/>
+                <property name="chips" value="105000"/>
+                <property name="price" value="30"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-140000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd30_buys_140k_p100"/>
+                <property name="chips" value="140000"/>
+                <property name="price" value="30"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-175000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd30_buys_175k_p150"/>
+                <property name="chips" value="175000"/>
+                <property name="price" value="30"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="70000-210000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd30_buys_210k_p200"/>
+                <property name="chips" value="210000"/>
+                <property name="defaultChips" value="70000"/>
+                <property name="price" value="30"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd70_buys_200k"/>
+                <property name="chips" value="200000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="70"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd70_buys_300k_p50"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="70"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-400000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd70_buys_400k_p100"/>
+                <property name="chips" value="400000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="70"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-500000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd70_buys_500k_p150"/>
+                <property name="chips" value="500000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="70"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="200000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd70_buys_600k_p200"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="200000"/>
+                <property name="price" value="70"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd90_buys_300k"/>
+                <property name="chips" value="300000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="90"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-450000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd90_buys_450k_p50"/>
+                <property name="chips" value="450000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="90"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-600000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd90_buys_600k_p100"/>
+                <property name="chips" value="600000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="90"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-750000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd90_buys_750k_p150"/>
+                <property name="chips" value="750000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="90"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+        <entry key="300000-900000">
+            <bean class="com.yazino.web.payment.chipbundle.ChipBundle">
+                <property name="productId" value="texasholdem_usd90_buys_900k_p200"/>
+                <property name="chips" value="900000"/>
+                <property name="defaultChips" value="300000"/>
+                <property name="price" value="90"/>
+                <property name="currency" value="USD"/>
+            </bean>
+        </entry>
+    </util:map>
+</beans>

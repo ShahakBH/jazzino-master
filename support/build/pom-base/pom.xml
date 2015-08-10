@@ -1,0 +1,80 @@
+<project xsi:schemaLocation='http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd'
+         xmlns='http://maven.apache.org/POM/4.0.0'
+         xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yazino</groupId>
+    <artifactId>pom-base</artifactId>
+    <packaging>pom</packaging>
+
+    <version>1.0.0</version>
+
+    <name>Yazino Base POM</name>
+    <description>
+        A base POM for all Yazino projects, providing links to our
+        Maven repository.
+    </description>
+
+    <organization>
+        <name>Yazino Technologies</name>
+        <url>http://www.yazino.com/</url>
+    </organization>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://issues.london.yazino.com/</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>teamcity</system>
+        <url>http://teamcity.london.yazino.com/</url>
+    </ciManagement>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://46.101.41.217:8081/artifactory/repo</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>http://46.101.41.217:8081/artifactory/repo</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>http://46.101.41.217:8081/artifactory/repo</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>snapshots</id>
+            <url>http://46.101.41.217:8081/artifactory/repo</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>signtechno-repo</id>
+            <name>signtechno-repo-releases</name>
+            <url>http://46.101.41.217:8081/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>signtechno-repo</id>
+            <name>signtechno-repo-snapshots</name>
+            <url>http://46.101.41.217:8081/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

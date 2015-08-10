@@ -1,0 +1,106 @@
+#set($quote = '"')
+#if ($readonly)
+    #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+#end
+
+#if (!$readonly)
+<form method="post" action="${request.contextPath}/game/configuration/save">
+    #if ($gameConfiguration.gameId)
+        #springFormHiddenInput( 'gameConfiguration.gameId' '' )
+    #end
+    #springFormHiddenInput( 'gameConfiguration.shortName' "class=${quote}shortName${quote}" )
+    #foreach ($gameConfigurationProperty in $gameConfiguration.properties)
+        #set($index = $velocityCount - 1)
+        #springFormHiddenInput( "gameConfiguration.properties[${index}].propertyId" "" )
+        #springFormHiddenInput( "gameConfiguration.properties[${index}].gameId" "" )
+        #springFormHiddenInput( "gameConfiguration.properties[${index}].propertyName" "class=${quote}propertyName-${index}${quote}" )
+        #springFormHiddenInput( "gameConfiguration.properties[${index}].propertyValue" "class=${quote}propertyValue-${index}${quote}" )
+    #end
+#end
+
+    <fieldset>
+        <legend>Details</legend>
+        <label for="gameId">Game ID:</label>
+        <input id="gameId" type="text" value='${gameConfiguration.gameId}' readonly="readonly" />
+        <label for="displayName">Display Name:</label>
+        <input id="displayName" name="displayName" type="text" value='${gameConfiguration.displayName}' $!{formoptions} />
+        <label for="shortName">Short Name:</label>
+        <input id="shortName" type="text" value='${gameConfiguration.shortName}' readonly="readonly" />
+        <label for="aliases">Aliases:</label>
+        <input id="aliases" name="aliases" type="text" value='${gameConfiguration.aliases}' $!{formoptions} />
+        <label for="order">Order:</label>
+        <input id="order" name="order" type="text" value='${gameConfiguration.order}' $!{formoptions} />
+    </fieldset>
+
+#if (!$readonly)
+    <input type="submit" value="Submit"/>
+</form>
+#end
+
+#if (!$readonly)
+<form method="post" enctype="multipart/form-data" action="${request.contextPath}/game/upload">
+    <fieldset>
+        <legend>Upload Game</legend>
+        <p>
+            #springBind("uploadedFileForm.*")
+            <label for="fileData">Game JAR:</label>
+            <input id="fileData" name="fileData" type="file" />
+            <input type="hidden" name="name" value="${gameConfiguration.gameId}"/>
+            <input type="submit" value="Upload" />
+        </p>
+    </fieldset>
+</form>
+#end
+
+
+<fieldset>
+    <legend>Game Configuration Properties</legend>
+    #if ($gameConfiguration.properties.isEmpty())
+        <p>No properties are defined</p>
+    #end
+
+    #if (!$readonly || !$gameConfiguration.properties.isEmpty())
+    <table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Value</th>
+        #if(!$readonly)
+            <th>Action</th>
+        #end
+    </tr>
+    </thead>
+    <tbody>
+    #foreach ($gameConfigurationProperty in $gameConfiguration.properties)
+        #set($index = $velocityCount - 1)
+        <tr>
+            <td><input id="propertyName-${index}" type="text" value='${gameConfigurationProperty.propertyName}' ${formoptions} /></td>
+            <td><input id="propertyValue-${index}" size="" type="text" value='${gameConfigurationProperty.propertyValue}' ${formoptions} /></td>
+        #if (!$readonly)
+            <td>
+                <form method="post" action="${request.contextPath}/game/configuration/property/delete/${gameConfigurationProperty.propertyId}">
+                    #springFormHiddenInput( 'gameConfiguration.gameId' '' )
+                    <input class="inline-form-submit delete" type="submit" value="Delete"
+                           onclick="return confirm('Are you sure you want to delete property \'${gameConfigurationProperty.propertyName}\'?');"/>
+                </form>
+            </td>
+        #end
+        </tr>
+    #end
+
+    ## add property
+    #if (!$readonly)
+    <form method="post" action="${request.contextPath}/game/configuration/property/add">
+        <tr>
+            #springFormHiddenInput( 'gameConfiguration.gameId' '' )
+            <td>#springFormInput( 'gameConfigurationProperty.propertyName' "" )</td>
+            <td>#springFormInput( 'gameConfigurationProperty.propertyValue' "" )</td>
+            <td><input type="submit" value="Add" /></td>
+        </tr>
+    </form>
+    #end
+
+    </tbody>
+    </table>
+    #end
+</fieldset>

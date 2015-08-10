@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+    <Get name="ThreadPool">
+      <Set name="minThreads"><%= @min_threads %></Set>
+      <Set name="maxThreads"><%= @max_threads %></Set>
+      <Set name="idleTimeout" type="int"><Property name="threads.timeout" default="<%= @idle_timeout %>"/></Set>
+      <Set name="detailedDump"><%= @detailed_dump %></Set>
+    </Get>
+
+    <Call name="addBean">
+      <Arg>
+        <New class="org.eclipse.jetty.util.thread.ScheduledExecutorScheduler"/>
+      </Arg>
+    </Call>
+
+    <New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+      <Set name="secureScheme">https</Set>
+      <Set name="securePort"><Property name="jetty.secure.port" default="<%= @ssl_port %>" /></Set>
+      <Set name="outputBufferSize"><%= @output_buffer_size %></Set>
+      <Set name="requestHeaderSize"><%= @request_header_size %></Set>
+      <Set name="responseHeaderSize"><%= @response_header_size %></Set>
+      <Set name="sendServerVersion">true</Set>
+      <Set name="sendDateHeader">false</Set>
+      <Set name="headerCacheSize"><%= @header_cache_size %></Set>
+
+      <Call name="addCustomizer">
+        <Arg><New class="org.eclipse.jetty.server.ForwardedRequestCustomizer"/></Arg>
+      </Call>
+    </New>
+
+    <Set name="handler">
+      <New id="Handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+        <Set name="handlers">
+         <Array type="org.eclipse.jetty.server.Handler">
+           <Item>
+             <New id="Contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection"/>
+           </Item>
+           <Item>
+             <New id="DefaultHandler" class="org.eclipse.jetty.server.handler.DefaultHandler"/>
+           </Item>
+         </Array>
+        </Set>
+      </New>
+    </Set>
+
+    <Set name="stopAtShutdown">true</Set>
+    <Set name="stopTimeout">5000</Set>
+    <Set name="dumpAfterStart"><Property name="jetty.dump.start" default="false"/></Set>
+    <Set name="dumpBeforeStop"><Property name="jetty.dump.stop" default="false"/></Set>
+
+    <Call name="setAttribute">
+      <Arg>org.eclipse.jetty.server.Request.maxFormContentSize</Arg>
+      <Arg><%= @max_form_content_size %></Arg>
+    </Call>
+
+</Configure>

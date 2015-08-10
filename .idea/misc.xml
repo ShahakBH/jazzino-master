@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/bi/bi-operations" />
+    <file type="web" url="file://$PROJECT_DIR$/bi/bi-promotion" />
+    <file type="web" url="file://$PROJECT_DIR$/bi/bi-worker" />
+    <file type="web" url="file://$PROJECT_DIR$/platform/control-centre" />
+    <file type="web" url="file://$PROJECT_DIR$/platform/platform-worker" />
+    <file type="web" url="file://$PROJECT_DIR$/support/lib/metrics" />
+    <file type="web" url="file://$PROJECT_DIR$/web/mobile-ws" />
+    <file type="web" url="file://$PROJECT_DIR$/web/web-content" />
+    <file type="web" url="file://$PROJECT_DIR$/web/web-facebookpages" />
+    <file type="web" url="file://$PROJECT_DIR$/web/web-lobby" />
+    <file type="web" url="file://$PROJECT_DIR$/web/web-marketingpages" />
+    <file type="web" url="file://$PROJECT_DIR$/web/web-redirector" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/bi/pom.xml" />
+        <option value="$PROJECT_DIR$/web/pom.xml" />
+        <option value="$PROJECT_DIR$/support/lib/pom.xml" />
+        <option value="$PROJECT_DIR$/support/build/pom-base/pom.xml" />
+        <option value="$PROJECT_DIR$/support/build/pom-java/pom.xml" />
+        <option value="$PROJECT_DIR$/support/build/pom-flash/pom.xml" />
+        <option value="$PROJECT_DIR$/support/build/checkstyle-loose/pom.xml" />
+        <option value="$PROJECT_DIR$/game-api/pom.xml" />
+        <option value="$PROJECT_DIR$/platform/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,11 @@
+<div id="http-error">
+	<h1>We're not allowed to do that!</h1>
+
+	<p>
+		We're sorry to hear you haven't allowed us the permissions we require to run.
+	</p>
+	<p>
+		Please come back soon!
+	</p>
+</div>
+

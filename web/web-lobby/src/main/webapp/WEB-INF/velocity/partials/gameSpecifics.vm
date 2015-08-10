@@ -1,0 +1,20 @@
+#set($gameTitles = {
+	"BLACKJACK": "Blackjack",
+	"TEXAS_HOLDEM": "Texas Hold'em",
+	"ROULETTE": "Roulette",
+	"SLOTS": "Slots",
+	"HIGH_STAKES": "High Stakes"
+})
+
+#set($stakeDescriptions = {
+	"BLACKJACK": "Stake:",
+	"TEXAS_HOLDEM": "What's your blind?",
+	"ROULETTE": "What's your stake?",
+	"SLOTS": "What's your coin size?",
+	"HIGH_STAKES": "What's your coin size?"
+})
+
+#set($publicTournamentPages = {
+	"BLACKJACK": "/tournaments/blackJack",
+	"TEXAS_HOLDEM": "/tournaments/texasHoldem"
+})

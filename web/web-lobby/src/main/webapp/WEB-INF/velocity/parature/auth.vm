@@ -1,0 +1,21 @@
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById("signin").submit();
+    }
+</script>
+<form id="signin" name="Customer_Support" method="post" action="${target}">
+    <input type="hidden" name="sessEmail" value="${adminEmail}">
+    <input type="hidden" name="sessID" value="${sessID}">
+    <input type="hidden" name="cFname" value="${cFname}">
+    <input type="hidden" name="cLname" value="${cLname}">
+    <input type="hidden" name="cEmail" value="${cEmail}">
+    <input type="hidden" name="cUname" value="${cUname}">
+    <input type="hidden"/>
+</form>
+</body>
+</html>

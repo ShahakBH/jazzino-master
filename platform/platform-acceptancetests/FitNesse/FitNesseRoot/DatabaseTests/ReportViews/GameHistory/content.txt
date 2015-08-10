@@ -1,0 +1,65 @@
+|insert|ACCOUNT|
+|BALANCE|ACCOUNT_ID?|
+|10000.00|>>theKingsTableAccount|
+|20050|>>drJonesTableAccount|
+|300|>>normalUserAccountA|
+|500|>>normalUserAccountB|
+|400000|>>drJones|
+|100000|>>theKing|
+
+|insert|TABLE_INFO|
+|GAME_VARIATION_TEMPLATE_ID|CURRENT_STATUS|GAME_ID|GAME_TYPE|TABLE_NAME|TABLE_ACCOUNT_ID|STATUS|TSCREATED|TS|TABLE_ID?|
+|1|null|23|BLACKJACK|The Kings Table|<<theKingsTableAccount|O|2009-03-10 15:53:54.0|2009-03-13 12:42:37.0|>>theKingsTable|
+|2|null|225|BLACKJACK|Dr Jones Table|<<drJonesTableAccount|C|2009-03-10 15:54:14.0|2009-03-13 15:26:49.0|>>drJonesTable|
+
+|insert|AUDIT_TABLE_INFO|
+|AUDIT_LABEL|HOSTNAME|AUDIT_TS|DBWRITE_TS|TABLE_ID|GAME_STATUS|GAME_ID|GAME_TYPE|GAME_INCREMENT|TABLE_STATUS|
+|Game Init Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:17.0|2009-03-17 17:41:37.0|<<theKingsTable|Game Status In XML|1.0|BLACKJACK|1|O|
+|Betting Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:18.0|2009-03-17 17:41:38.0|<<theKingsTable|Game Status In XML|1.0|BLACKJACK|5|O|
+|Playing Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:21.0|2009-03-17 17:41:41.0|<<theKingsTable|Game Status In XML|1.0|BLACKJACK|9|O|
+|Complete Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:27.0|2009-03-17 17:41:49.0|<<theKingsTable|Game Status In XML|1.0|BLACKJACK|10|O|
+|Settled Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:28.0|2009-03-17 17:41:50.0|<<theKingsTable|Game Status In XML|1.0|BLACKJACK|11|O|
+|Game Init Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:49:26.0|2009-03-18 10:40:45.0|<<drJonesTable|Game Status In XML|2.0|BLACKJACK|15|O|
+|Betting Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:51:26.0|2009-03-18 10:43:45.0|<<drJonesTable|Game Status In XML|2.0|BLACKJACK|17|O|
+|Playing Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:53:26.0|2009-03-18 10:46:45.0|<<drJonesTable|Game Status In XML|2.0|BLACKJACK|18|O|
+|Complete Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:56:26.0|2009-03-18 10:49:45.0|<<drJonesTable|Game Status In XML|2.0|BLACKJACK|19|O|
+|Settled Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:57:26.0|2009-03-18 10:49:55.0|<<drJonesTable|Game Status In XML|2.0|BLACKJACK|21|O|
+|Game Init Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:17.0|2009-03-19 17:41:37.0|<<theKingsTable|Game Status In XML|6.0|BLACKJACK|30|O|
+|Betting Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:18.0|2009-03-19 17:41:39.0|<<theKingsTable|Game Status In XML|6.0|BLACKJACK|34|O|
+|Playing Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:21.0|2009-03-19 17:41:41.0|<<theKingsTable|Game Status In XML|6.0|BLACKJACK|35|O|
+|Complete Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:27.0|2009-03-19 17:41:49.0|<<theKingsTable|Game Status In XML|6.0|BLACKJACK|36|O|
+|Settled Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:28.0|2009-03-19 17:41:50.0|<<theKingsTable|Game Status In XML|6.0|BLACKJACK|37|O|
+
+|insert|AUDIT_CLOSED_GAME|
+|AUDIT_LABEL|HOSTNAME|AUDIT_TS|DBWRITE_TS|TABLE_ID|GAME_ID|GAME_INCREMENT|OBSERVABLE_STATUS|INTERNAL_STATUS|
+|Settled Game 1 The Kings Table|mc34.signtechno.com|2009-03-17 18:50:28.0|2009-03-17 17:41:50.0|<<theKingsTable|1|11|Observable Status In XML|Internal Status In XML|
+|Settled Game 2 Dr Jones Table|mc34.signtechno.com|2009-03-18 11:57:26.0|2009-03-18 10:49:55.0|<<drJonesTable|2|21|Observable Status In XML|Internal Status In XML|
+|Settled Game 6 The Kings Table|mc34.signtechno.com|2009-03-19 18:50:28.0|2009-03-19 17:41:50.0|<<theKingsTable|6|37|Observable Status In XML|Internal Status In XML|
+
+This test checks the grouping of audit tables into a game history. The MIN_AUDIT_TS -> AUDIT_TS represents the start to a finish of a round. The games state, I.e. cards and so on is derived from the XML data in the status fields.
+
+|commit|
+
+|connect|db.signtechno.com|senettestdw|senettestdw|senettestdw|
+
+|execute procedure|ETL_ON_EVENT_PROCESS_CLOSED_GAMES|
+
+!|Query| select * from GAME_HISTORY|
+|GAME_TYPE|GAME_VARIATION_TEMPLATE_ID|TABLE_ID|TABLE_NAME|GAME_ID|OBSERVABLE_GAME_STATUS|INTERNAL_GAME_STATUS|
+|BLACKJACK|1|<<theKingsTable|The Kings Table|1|Observable Status In XML|Internal Status In XML|
+|BLACKJACK|2|<<drJonesTable|Dr Jones Table|2|Observable Status In XML|Internal Status In XML|
+|BLACKJACK|1|<<theKingsTable|The Kings Table|6|Observable Status In XML|Internal Status In XML|
+
+|rollback|
+
+|connect|db.signtechno.com|senettest|senettest|senettest|
+
+|execute|delete from AUDIT_CLOSED_GAME  where TABLE_ID in (@theKingsTable,@drJonesTable)|
+
+|execute|delete from AUDIT_TABLE_INFO where TABLE_ID in (@theKingsTable,@drJonesTable)|
+
+|execute|delete from TABLE_INFO where TABLE_ID in (@theKingsTable,@drJonesTable)|
+
+|execute|delete from ACCOUNT where ACCOUNT_ID in (@theKingsTableAccount,@drJonesTableAccount,@normalUserAccountA, @normalUserAccountB,@drJones,@theKing)|
+
+|commit|

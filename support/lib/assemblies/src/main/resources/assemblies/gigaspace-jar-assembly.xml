@@ -1,0 +1,30 @@
+<assembly>
+	<id>gigaspace-jar-assembly</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/**</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+		<dependencySet>
+			<scope>runtime</scope>
+			<outputDirectory>lib</outputDirectory>
+			<useProjectArtifact>false</useProjectArtifact>
+			<excludes>
+				<exclude>cglib:*</exclude>
+				<exclude>com.gigaspaces:*</exclude>
+				<exclude>org.apache.geronimo.specs:geronimo-jta_1.0.1B_spec</exclude>
+				<exclude>javax.transaction:*</exclude>
+				<exclude>org.springframework:*</exclude>
+			</excludes>
+		</dependencySet>
+	</dependencySets>
+</assembly>

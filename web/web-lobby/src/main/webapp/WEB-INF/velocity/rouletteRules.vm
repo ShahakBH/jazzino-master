@@ -1,0 +1,220 @@
+<div id="how-to-play" class="ROULETTE">
+	<div id="how-to-play-area">
+		<div id="grey-window">
+			<div id="grey-window-head"><h3 class="font-grey-window-head">ROULETTE - HOW TO PLAY & RULES</h3></div>
+			<div id="grey-window-center">
+				<div id="grey-window-body">
+					<div class="block1">
+						<div class="float-right-col">
+							<div id="sign-up">
+								#if (!$lobbySession)
+									#generateLinkTagForMainCta("roulette")
+								#end
+							</div>
+							<div id="back-to-games">
+                                <a href="${request.contextPath}/roulette" class="font-how-to-play-back-game uppercase">Back to roulette</a>
+							</div>
+						</div>
+						<div class="float-left-col">
+							<h4 class="color-ROULETTE-2 font-compnonlogged-texthead">How To Play Roulette AT YAZINO</h4>
+
+							<div class="paragraph1 font-compnonlogged-1"><p class="pre-line">Are you lucky enough to
+								guess where the ball will land?
+								Take a chance and play Roulette online free at Yazino.</p>
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
+					<div class="block2 font-compnonlogged-2">
+						<div class="float-right-col">
+							<img src="$assetUrl/images/gloss/how-to-play-image-4.png" alt="#">
+							<img src="$assetUrl/images/gloss/how-to-play-image-5.png" alt="#" class="roul-2">
+							<img src="$assetUrl/images/gloss/how-to-play-image-6.png" alt="#" class="roul-3">
+							<img src="$assetUrl/images/gloss/how-to-play-image-7.png" alt="#" class="roul-4">
+						</div>
+						<div class="left-col">
+							<div class="paragraph1">
+								<p class="bold">Play Roulette!</p>
+
+								<p>Start to play live Roulette by joining a table and sit at an available seat by
+									clicking any 'Join' button. You will be assigned a chip colour, which will be
+									indicated by the border around your name panel.</p>
+							</div>
+							<div class="paragraph2">
+								<p class="bold">How do I place a bet?</p>
+
+								<p>Once you're sitting at a seat, you need to choose the amount to bet. Select a chip
+									value in the bottom left (above your balance), to choose how much to bet for each
+									click you make on the table. </p>
+							</div>
+							<div class="paragraph3">
+								<p> Bets can be placed by clicking on numbers (any number including the zero) in the
+									table layout or around the outside. Repeated clicks keep adding chips of the
+									selected value to the live Roulette table. Bets can also be placed if another player
+									has already bet in a spot you want to bet on. This is why each player is given a
+									specifically coloured chip to avoid confusion. </p>
+							</div>
+							<div class="paragraph4">
+								<p>If you make a mistake, the last chip placed can be cleared by pressing the 'Undo'
+									button, or all chips can be cleared by pressing the 'Clear' button. Also any
+									individual chips can be cleared by holding down the SHIFT key and clicking any chip
+									you placed on the table. Once you are happy and have placed your bets, please
+									confirm your bet by clicking the 'Spin' button. </p>
+
+								<p>The countdown timer around your picture shows how long you have left to place your
+									bets. If you don't confirm your bet (by clicking 'Spin') on time, the spin will
+									start automatically and any chips you had placed on the table when the timer runs
+									out will be confirmed as your bet.</p>
+							</div>
+							<div class="paragraph5">
+								<p class="bold">The Spin</p>
+
+								<p>Once all players have confirmed their bet by clicking 'Spin', or the timer to place
+									bets runs out, no more bets are allowed. When the ball drops and comes to rest on a
+									slot, a marker is placed on the winning number on the live Roulette table and all
+									losing bets are cleared off the table. The bets that win are the ones that are on or
+									around the number that comes up. Also the bets on the outside of the layout win if
+									the winning number is within their coverage. </p>
+							</div>
+							<div class="paragraph6">
+								<p class="bold">Roulette rules</p>
+
+								<p>Learn Roulette in the easiest possible way on Yazino! Don't get confused with the
+									lines of numbers on the table. Take a look at the roulette rules and types of bets
+									you can make to learn roulette and win at the same time!</p>
+
+								<p>In Roulette, the aim is to predict where the ball will land after each spin on a
+									rotating wheel. Bets can be placed on either a specific number, a range of numbers,
+									the colours red or black, or whether the number is odd or even.</p>
+
+								<p>The rules of Roulette played at Yazino are identical to those of European Roulette, or
+									single-zero Roulette, with a wheel consisting of 37 numbered pockets from 0 to 36.
+									Betting on a single number has payout odds of 35 to 1, which means if you bet 1 chip
+									on a single number (straight up bet) and the ball lands on it, you will win another
+									35 chips back. Full payout odds for each bet can be viewed by pressing the 'Game
+									Rules' button in the dashboard at the bottom of the table screen. You can play
+									roulette Yazino by yourself, or with up to 3 other players on the table with
+									you. </p>
+							</div>
+							<div class="paragraph7">
+								<p>If the rules of roulette seem confusing, just have a go at our game and take a quick
+									look at roulette rules whilst you play and enjoy learning roulette in the best way
+									possible on the internet.</p>
+							</div>
+						</div>
+					</div>
+					<div class="block3 font-compnonlogged-2">
+						<h4 class="font-how-to-play-headline drop bold">types of bets</h4>
+
+						<div>
+							<div class="left-col">
+								<div class="paragraph1">
+									<p class="bold">Inside Bets</p>
+									<ul>
+										<li><span class="italic">Straight up:</span> a single number bet. The chip is
+											placed entirely on the middle of a number square.
+										</li>
+										<li><span class="italic">Split:</span> a bet on two adjoining numbers, either on
+											the vertical or horizontal(as in 18-21 or 5-8). The chip is placed on the
+											line between these numbers.
+										</li>
+										<li><span class="italic">Street:</span> a bet on three numbers on a single
+											horizontal line. The chip is placed on the edge of the line of a number at
+											the end of the line (either the left or right).
+										</li>
+										<li><span class="italic">Corner:</span> a bet on four numbers in a square layout
+											(as in 32-33-35-36).
+										</li>
+										<li>The chip is placed at the horizontal and vertical intersection of the lines
+											between the four numbers.
+										</li>
+										<li><span class="italic">Line:</span> a bet on two adjoining streets, with the
+											chip placed at the corresponding intersection, as if in-between where two
+											street bets would be placed.
+										</li>
+									</ul>
+								</div>
+								<div class="paragraph2">
+									<p class="bold">Outside Bets</p>
+									<ul>
+										<li><span class="italic">High / Low:</span> a bet on one of the highest eighteen
+											numbers coming up (19 to 36), or the lowest (1 to 18).
+										</li>
+										<li><span class="italic">Red / Black:</span> a bet on the colour of the Roulette
+											slot.
+										</li>
+										<li><span class="italic">Even / Odd:</span> a bet on an even or odd number.</li>
+										<li>Dozen: a bet on the first (1-12), second (13-24), or third (25-36) of twelve
+											numbers.
+										</li>
+										<li><span class="italic">Column:</span> a bet on all 12 numbers on any of the
+											three vertical lines (such as 1-4-7-10 on down to 34). The chip is placed on
+											the 2 to 1 box below the final number in this string.
+										</li>
+									</ul>
+								</div>
+								<div class="paragraph3">
+									<p class="bold">Call Bets</p>
+
+									<p>Call bets are series of different numbers in roulette that have special names
+										attached to them. The series are based on the way certain numbers lie next to
+										each other on the roulette wheel.</p>
+									<ul>
+										<li><span class="italic">Voisins du Zero (Neighbours of zero):</span> A bet on
+											the seventeen numbers that surround the 0 on the roulette wheel: 0, 2, 3, 4,
+											7, 12, 15, 18, 19, 21, 22, 25, 26, 28, 29, 32, and 35
+										</li>
+										<li><span class="italic">Tiers du Cylindre (Third of the wheel):</span> A bet on
+											the twelve numbers that are situated on the opposite side of the wheel from
+											the 0: 5, 8, 10, 11, 13, 16, 23, 24, 26, 27, 30, and 33.
+										</li>
+										<li><span class="italic">Orphelins (Orphans):</span> A bet on the eight
+											remaining Roulette numbers that are not included in either the Voisins or
+											the Tiers: 1, 6, 9, 14, 17, 20, 31, and 34. Chevals splits the bet between 2
+											numbers wherever possible, whilst Plein places a straight up bet on each
+											number.
+										</li>
+										<li><span class="italic">Finales en Plein:</span> This is a bet on all numbers
+											ending in a particular digit. For example, Finales en Plein 6 is a bet on 6,
+											16, 26, and 36.
+										</li>
+										<li><span class="italic">Finales a Cheval:</span> This is a split bet on all
+											numbers ending in either of two digits. For example, Finales a Cheval 2/5 is
+											a bet on 2 & 5, 12 & 15, 22 & 25, and 32 & 35.
+										</li>
+										<li><span class="italic">Jeu 0 ("Zero game"):</span> This is a bet on all the
+											numbers closest to zero: 0, 3, 12, 15, 26, 32, 35.
+										</li>
+										<li><span class="italic">Jeu 7/9:</span> This is a bet on all numbers with 7, 8
+											or 9 as the last digit: 7, 8, 9, 17, 18, 19, 27, 28, 29.
+										</li>
+									</ul>
+								</div>
+								<div class="paragraph4">
+									<p class="bold">Neighbour Bets</p>
+
+									<p>A Neighbour bet covers a number on the wheel and other numbers on both sides of
+										it, depending on the chosen number of neighbours. For example, a bet on 8 and
+										his three neighbours will place a bet on 8, as well as 3 numbers on each side of
+										8 on the wheel (36, 11, 30, 23, 10, 5).</p>
+								</div>
+								<div class="paragraph5">
+									<p class="bold">Table Rules</p>
+
+									<p>Tables have different minimum & maximum limits for the amounts that can be placed
+										on the inside & outside fields, as well as a maximum bet limit for all bets on
+										the table. These limits can be viewed by pressing the 'Game Rules' button in the
+										dashboard at the bottom of the table screen. </p>
+								</div>
+								<div class="paragraph6">
+									<p>Malfunction voids all pays and plays.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="grey-window-bottom"></div>
+		</div>
+	</div>
+</div>

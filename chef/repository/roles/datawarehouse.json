@@ -1,0 +1,17 @@
+{
+  "name": "datawarehouse",
+  "description": "Database machine",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[base]",
+    "recipe[nfs::client]",
+    "recipe[limits]",
+    "recipe[postgresql::server]",
+    "recipe[scheduled_tasks::database-cleanup]"
+  ]
+}

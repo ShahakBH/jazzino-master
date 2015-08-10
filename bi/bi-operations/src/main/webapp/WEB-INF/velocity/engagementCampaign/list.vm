@@ -1,0 +1,243 @@
+    #set($pageTitle = "Application to User Requests")
+
+    #parse('partials/includes.vm')
+    <script>
+        $(document).ready(function() {
+            $("#notifications").tablesorter({
+                // pass the headers argument and assing a object
+                headers: {
+                    10: {sorter: false},
+                    11: {sorter: false},
+                    12: {sorter: false},
+                    13: {sorter: false},
+                    14: {sorter: false}
+                },
+                sortList: [[8,1]] // initial sort on sent
+            });
+        });
+    </script>
+<div class="main">
+
+
+<h1>Create Application To User Requests</h1>
+
+<form action="#springUrl('/engagementCampaign')" method="post">
+
+    #springBind("engagementCampaign.*")
+    #if($status.errors.hasErrors())
+        <div class="errors">
+            #foreach($f in $status.errors.fieldErrors)
+                #springBind("engagementCampaign.${f.field}")
+                #foreach($e in $status.errorMessages)
+                    <p>${e}</p>
+                #end
+            #end
+        </div>
+    #end
+
+    <table>
+        <col width="15%"/>
+        <col width="85%"/>
+        <tr>
+            <td>Title:</td>
+            <td>
+                #springFormInput("engagementCampaign.title" "size='45' maxLength='256'")
+            </td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td>
+                #springFormInput("engagementCampaign.description" "size='100' maxLength='256'")
+            </td>
+        </tr>
+        <tr>
+            <td>Message:</td>
+            <td>
+                #springFormInput("engagementCampaign.message" "size='100' maxLength='100'")
+            </td>
+        </tr>
+        <tr>
+            <td>Tracking Ref:</td>
+            <td>
+                #springFormInput("engagementCampaign.trackingReference" "size='100' maxLength='100'")
+            </td>
+        </tr>
+        <tr>
+            <td>Scheduled Date:</td>
+            <td>
+                #springFormInput("engagementCampaign.scheduled" "size='20' maxLength='16'") <i>yyyy/mm/dd hh:mm</i>
+            </td>
+        </tr>
+        <tr>
+            <td>Expiry Date:</td>
+            <td>
+                #springFormInput("engagementCampaign.expires" "size='20' maxLength='16'") <i>yyyy/mm/dd hh:mm</i>
+            </td>
+        </tr>
+        <tr>
+            <td>Channel Type:</td>
+            <td>
+                #springFormRadioButtons("engagementCampaign.channelType" $platformMap "<br/>")
+            </td>
+        </tr>
+    </table>
+
+    <div class="buttons">
+        <input class="save" type="submit" name="save" value="Create"/>
+    </div>
+</form>
+
+
+<h1>Application To User Messages</h1>
+
+    #if($request.getParameter("msg"))
+    <div class="errors">
+        $request.getParameter("msg")
+    </div>
+    #end
+
+<div class="list">
+    <table id="notifications" class="tablesorter">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Message sent to players</th>
+            <th>Tracking Data</th>
+            <th>Created</th>
+            <th>Scheduled</th>
+            <th>Expires</th>
+            <th>Sent</th>
+            <th>Target Client</th>
+            <th>Target<br/>count</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>CSV should be one of these Formats<br/>
+                FACEBOOK: Game Type, Player Id, External Id
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            #if($list.isEmpty($engagementCampaigns))
+            <tr style="height:25px">
+                <td colspan="11">None created yet!&nbsp;&nbsp;&nbsp;You can create a app request above: Enter a title,
+                    description and message. Click 'Create'.
+                </td>
+            </tr>
+            <tr style="height:25px">
+                <td colspan="11">You can then decide which players should receive the requests.</td>
+            </tr>
+            #end
+
+            #set ($rowCount = 0)
+            #foreach($engagementCampaign in $engagementCampaigns)
+                #set($rowCount=$rowCount+1)
+                    <tr style="height:25px" class=#if($rowCount % 2 == 0)  "odd" #else "even" #end>
+            <td>$engagementCampaign.id</td>
+            <td>$engagementCampaign.title</td>
+            <td>$engagementCampaign.description</td>
+            <td>$engagementCampaign.message</td>
+            <td>#if($engagementCampaign.trackingReference)$engagementCampaign.trackingReference#end </td>
+            <td>${dateTool.format('yyyy/MM/dd - HH:mm',$engagementCampaign.created.toDate())}</td>
+            <td>#if($engagementCampaign.scheduled)${dateTool.format('yyyy/MM/dd - HH:mm',$engagementCampaign.scheduled.toDate())}#end</td>
+            <td>#if($engagementCampaign.expires)${dateTool.format('yyyy/MM/dd - HH:mm',$engagementCampaign.expires.toDate())}#end</td>
+            <td>
+                #if($engagementCampaign.sent)
+                    ${dateTool.format('yyyy/MM/dd - HH:mm',$engagementCampaign.sent.toDate())}
+                #end
+                #if(!$engagementCampaign.sent)
+                    <div class="future">Yet to be sent</div>
+                #end
+            </td>
+            <td>
+                $engagementCampaign.channelType.description
+            </td>
+            <td>
+                $engagementCampaign.targetCount
+            </td>
+            <td>
+                <a href=#springUrl("/engagementCampaign/delete/${engagementCampaign.id}")>Delete</a>
+            </td>
+            <td>
+                #if($engagementCampaign.targetCount > 0)
+                    <a href=#springUrl("/engagementCampaign/showTargets/${engagementCampaign.id}?pageNumber=1")>Show
+                        targets</a>
+                #end
+            </td>
+            <td>
+                #if(!$engagementCampaign.sent)
+                    <a href=#springUrl("/engagementCampaign/send?id=$engagementCampaign.id")>Send</a>
+                #end
+            </td>
+            <td>
+                #if(!$engagementCampaign.sent)
+                    <form action=#springUrl("/engagementCampaign/addTargets") method=
+                    "POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="text/csv"/>
+                    <input type="submit" value="Upload targets file"/>
+                    <input type="hidden" name="id" value="$engagementCampaign.id"/>
+                    <input type="hidden" name="channelType" value="$engagementCampaign.channelType"/>
+                    </form>
+                #end
+            </td>
+
+
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
+    #if($engagementCampaignId)
+    <h1>Targets for Engagement Campaign id: $engagementCampaignId</h1>
+
+    <div class="list">
+        <table class="report">
+            <thead>
+            <tr>
+                <th colspan="10"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                #set($col = 0)
+                #set($row = 0)
+                #foreach($target in $targets)
+
+                    #if ($col == 0)
+                            <tr class=#if($row % 2 == 0)  "odd" #else "even" #end>
+                        #set($row = $row + 1)
+                    #end
+
+                <td>
+                    $target.gameType,$target.playerId
+                    #if($target.externalId),$target.externalId#end
+                </td>
+
+                    #if ($col == 9)
+                    </tr>
+                        #set($col = 0)
+                    #else
+                        #set($col = $col + 1)
+                    #end
+                #end
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="paginateButtons">
+        #if($pagesAvailable > 0)
+            <span class="currentStep">page $pageNumber of $pagesAvailable</span>
+            #if($pageNumber!=1)
+                #set($previousPage = $pageNumber - 1)
+                    <a href="#springUrl("/engagementCampaign/showTargets/${engagementCampaign.id}?pageNumber=$previousPage")>Previous</a>
+                #end
+                #if($pageNumber!=$pagesAvailable)
+                    #set($nextPage = $pageNumber + 1)
+                    <a href="#springUrl("/engagementCampaign/showTargets/${engagementCampaign.id}?pageNumber=$nextPage")>Next</a>
+        #end
+        #end
+    </div>
+    #end

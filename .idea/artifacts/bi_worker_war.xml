@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bi-worker:war">
+    <output-path>$PROJECT_DIR$/bi/bi-worker/target</output-path>
+    <root id="archive" name="bi-worker-2.7.22-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bi-worker:war exploded" />
+    </root>
+  </artifact>
+</component>

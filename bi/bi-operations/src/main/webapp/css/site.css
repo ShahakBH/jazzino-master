@@ -1,0 +1,1161 @@
+/* общий вид селекта включая стрелку справа */
+/* Russian for: Abandon all hope ye who enter here */
+
+html * {
+    margin: 0;
+    font-family: helvetica neue, helvetica, verdana, arial, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #333;
+    font: 12px helvetica neue, helvetica, verdana, arial, sans-serif;
+}
+
+div#content {
+    margin: 0 10px 10px 10px;
+}
+
+a:hover, a:active {
+    color: #e71f1f;
+    text-decoration: underline;
+}
+
+a, a:link, a:visited, .negative {
+    color: blue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: purple;
+}
+
+h1 {
+    color: #e71f1f;
+    font-weight: normal;
+    font-size: 16px;
+    margin: 2px 0 15px 0;
+}
+
+h1.error {
+    color: red;
+}
+
+article>h2{
+    margin-top: 4em;
+}
+h2 {
+    color: #006dba;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 2em 0 .5em 0;
+}
+
+ul {
+    padding-left: 15px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+p.info {
+    display: inline-block;
+    background-color: #dcecee;
+    border: 1px solid #b6b6b6;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+table p {
+    margin-bottom: 0;
+}
+
+input, select, textarea {
+    margin: 2px 0;
+}
+
+select {
+    padding: 2px 2px 2px 0;
+}
+
+textarea {
+    width: 250px;
+    height: 150px;
+    vertical-align: top;
+}
+
+article.main {
+    float: left;
+    margin: 0 15px 10px 15px;
+}
+
+/* NAVIGATION MENU */
+
+div.version {
+    font-size: 10px;
+    padding: 2px 5px;
+    color: #999;
+    text-align: right;
+}
+
+nav {
+    background-color: rgb(249, 249, 249);
+    border-width: 1px;
+    border-color: rgb(240, 240, 240);
+    border-style: solid none solid none;
+    margin-top: 0;
+    padding: 3px 6px;
+    height: 27px;
+}
+
+nav div.info {
+    font-size: 12px;
+    text-align: right;
+    top: 5px;
+    margin-right: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+@media only screen and (max-device-width: 480px) {
+    nav div.info {
+        display: none;
+    }
+
+    div.version {
+        display: none;
+    }
+}
+
+nav ul {
+    list-style: none;
+    position: relative;
+    z-index: 5;
+}
+
+nav ul img {
+    padding: 2px;
+}
+
+nav > ul > li > a:link, nav > ul > li > a:visited {
+    font-size: 13px;
+    font-weight: bold;
+    color: #666;
+    display: block;
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+nav ul ul {
+    z-index: 10;
+    display: none;
+    position: absolute;
+    top: 24px;
+    left: 5px;
+    width: 200px;
+    border: 1px solid rgb(240, 240, 240);
+    background-color: rgb(249, 249, 249);
+    padding: 0;
+    margin: 0;
+}
+
+nav > ul > li {
+    position: relative;
+    float: left;
+}
+
+nav > ul > li:hover > ul {
+    display: block;
+}
+
+nav ul ul li {
+    padding: 0;
+    margin: 0;
+}
+
+nav ul ul li a {
+    padding: 5px;
+    display: block;
+}
+
+nav > ul > li > a:hover {
+    padding: 4px;
+    border: 1px solid rgb(249, 249, 249);
+    background-color: rgb(240, 240, 240);
+}
+
+nav ul ul li a:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.menuButton, nav li {
+    padding: 0 5px;
+}
+
+.menuButton a, nav li a {
+    color: #333;
+    padding: 4px 6px;
+}
+
+.menuButton a.list.selected, nav li a.list.selected {
+    color: #666;
+}
+
+.menuButton a.home, nav a.home {
+    background: url(../images/skin/house.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+.menuButton a.cancel, nav a.cancel {
+    background: url(../images/skin/cancel.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+.menuButton a.list, nav a.list {
+    background: url(../images/skin/database_table.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+.menuButton a.create, nav a.create {
+    background: url(../images/skin/database_add.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+li.homeNav {
+    padding: 5px;
+}
+
+li.homeNav a:link, a:visited {
+    text-decoration: underline;
+}
+
+#ui-datepicker-div {
+    display: none;
+}
+
+/* MESSAGES AND ERRORS */
+
+div.errors {
+    background: #fff3f3;
+    border: 1px solid red;
+    color: #cc0000;
+    margin: 10px 0 5px 0;
+    padding: 5px 0 5px 5px;
+}
+
+div.errors ul {
+    list-style: none;
+    padding: 0;
+}
+
+table {
+    border: 1px solid rgb(249, 249, 249);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    border: 0;
+}
+
+td, th {
+    line-height: 12px;
+    padding: 4px 6px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: bold;
+    padding: 2px 6px;
+}
+
+td.errors select {
+    border: 1px solid red;
+}
+
+td.errors input {
+    border: 1px solid red;
+}
+
+td.right, th.right {
+    text-align: right;
+}
+
+th.asc a, th.desc a {
+    background: no-repeat right;
+}
+
+th.header {
+    cursor: pointer;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding: 0 18px 0 5px;
+    border-right: 1px solid rgb(249, 249, 249);
+    border-bottom: 1px solid rgb(249, 249, 249);
+}
+
+th.headerSortUp {
+    background-image: url(../images/asc.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+th.headerSortDown {
+    background-image: url(../images/desc.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+td.rowSeparator {
+    color: #666;
+    font-weight: bold;
+}
+
+td.priority>img {
+    width: 11px;
+    height: 11px;
+}
+
+img.priorityDown {
+    float: right;
+}
+
+.odd {
+    background: #f7f7f7;
+}
+
+.even {
+    background: #fff;
+}
+
+.active {
+    color: darkgreen;
+}
+
+.expired {
+    color: #8b0000;
+}
+
+.future {
+    color: darkblue;
+}
+
+.noColor {
+    color: black;
+}
+
+/* LIST */
+
+.list table {
+    border-collapse: collapse;
+}
+
+/* PAGINATION */
+
+.paginateButtons {
+    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+    border: 1px solid #ccc;
+    border-top: 0;
+    color: #666;
+    font-size: 10px;
+    overflow: hidden;
+    padding: 10px 3px;
+}
+
+.paginateButtons a {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top-color: #ccc;
+    border-right-color: #aaa;
+    border-left-color: #ccc;
+    border-bottom-color: #aaa;
+    color: #666;
+    margin: 0 3px;
+    padding: 2px 6px;
+    font-weight: bold;
+}
+
+.paginateButtons span {
+    padding: 2px 3px;
+}
+
+/* DIALOG */
+
+.dialog table {
+    padding: 5px 0;
+    width: 0;
+}
+
+.prop {
+    padding: 5px;
+}
+
+.prop .name {
+    text-align: left;
+    width: 15%;
+    white-space: nowrap;
+}
+
+.prop .value {
+    text-align: left;
+    width: 85%;
+}
+
+/* ACTION BUTTONS */
+
+.buttons {
+    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
+    border: 1px solid #ccc;
+    color: #666;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.buttons input, .buttons button {
+    background: #fff;
+    border: 0;
+    color: #333;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 3px;
+    overflow: visible;
+    padding: 2px 6px;
+}
+
+.buttons input.save {
+    background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+.buttons input.create, .buttons button.create {
+    background: transparent url(../images/skin/database_add.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+.buttons input.search {
+    background: transparent url(../images/skin/search.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+.buttons input.pushNotification {
+    background: transparent url(../images/skin/envelope.gif) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+
+input.file {
+    /*background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;*/
+    padding-left: 28px;
+}
+
+div.description {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+div.control-panel {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #CCCCCC;
+    background-color: #EEEEEE;
+}
+
+div.description .divider, div.control-panel .divider {
+    margin-left: 10px;
+}
+
+td.error {
+    background-color: red;
+    color: white;
+}
+
+div.message {
+    position: relative;
+    float: right;
+    padding: 10px;
+    background-color: #95E795;
+    display: inline-block;
+    width: 50%;
+}
+
+div.message span.heading {
+    font-weight: bold;
+}
+
+.payments .message {
+    float: none;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.payments .report div {
+    margin-bottom: 5px;
+}
+
+div.targets {
+    padding: 10px;
+    width: 50%;
+    display: inline-block;
+}
+
+#search span, #search span span, #search input {
+    float: left;
+}
+
+label {
+    font-weight: bold;
+    text-align: right;
+}
+
+.report div.reportView {
+    overflow-x: scroll;
+    float: none;
+    width: auto;
+}
+
+.report form {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.report label {
+    display: block;
+    float: left;
+    padding-top: 5px;
+    padding-right: 6px;
+    width: 144px;
+    text-align: right;
+    clear: left;
+}
+
+.report input[type=radio] + label {
+    float: none;
+    width: auto;
+    display: inline;
+}
+
+.report input[type=checkbox] + label {
+    float: none;
+    width: auto;
+    display: inline;
+}
+
+.report div.actions {
+    float: none;
+    clear: left;
+    margin-left: 150px;
+}
+
+.report div {
+    float: left;
+    width: 300px;
+}
+
+.report div.panel {
+    float: none;
+    width: auto;
+}
+
+.report .compound {
+    float: left;
+    display: table;
+    width: 300px;
+}
+
+.report .compound div {
+    float: none;
+    display: table-cell;
+}
+
+.report .compound label, .report .compound input, .report .compound select {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.report .compound label {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.report input[type=submit] {
+    width: auto;
+}
+
+.report input[type=radio]:not(:first-child) {
+    margin-left: 15px;
+}
+
+.report input[type=checkbox]:not(:first-child) {
+    margin-left: 15px;
+}
+
+TABLE.dashboard TH {
+    text-align: right;
+}
+
+table.dashboard th, table.dashboard td {
+    vertical-align: top;
+}
+
+TABLE.selectionBar {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+TABLE.selectionBar TD {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    font-weight: bold;
+    text-align: center;
+}
+
+TABLE.selectionBar TD.selected {
+    background-color: #afffaf;
+}
+
+TABLE.report TD div.popup {
+    color: #4fcf4f;
+    cursor: pointer;
+}
+
+.detail {
+    font-weight: normal;
+    font-size: x-small;
+}
+
+.negative {
+    color: #af0000;
+}
+
+.errorMessage {
+    color: #D8000C;
+    background-color: #FFBABA;
+    font-weight: bold;
+    border: 1px solid;
+    margin: 5px 0px;
+    padding: 2px 2px 2px 2px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.okMessage {
+    color: #0000ff;
+}
+
+TABLE.adReport {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+TABLE.adReport TD, TABLE.adReport TH {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+TABLE.adReport TR TD {
+    background-color: #afffaf;
+}
+
+TABLE.adReport TR.exCampaign TD {
+    background-color: #ffafaf;
+}
+
+TABLE.adReport TR.service TD {
+    background-color: #afffff;
+}
+
+TABLE.adReport TR.noBuyers TD {
+    background-color: #dfffaf;
+}
+
+TABLE.adReport TR.noRegs TD {
+    background-color: #ffffaf;
+}
+
+TABLE.adReport TR.extern TD {
+    background-color: #ffafff;
+}
+
+TABLE.adReport TR TD.numbers {
+    text-align: right;
+}
+
+TABLE.adReport TR.grandTotal TD {
+    background-color: #0000af;
+    color: #ffff00;
+    font-weight: bold;
+}
+
+TABLE.adReport TR.total TD {
+    background-color: #afafff;
+    font-weight: bold;
+}
+
+TABLE.adReport TR.subTotal TD {
+    background-color: #cfcfff;
+    font-weight: bold;
+}
+
+TABLE.report TR TH {
+    text-align: left;
+}
+
+TABLE.report TR TD.integer, TABLE.report TR TD.dollar,
+TABLE.report TR TD.pound, TABLE.report TR TD.euro,
+TABLE.report TR TD.double, TABLE.report TR TD.percentage {
+    text-align: right;
+}
+
+TABLE.report TR TD.totals_integer, TABLE.report TR TD.totals_dollars,
+TABLE.report TR TD.totals_pounds, TABLE.report TR TD.totals_euros,
+TABLE.report TR TD.totals_double, TABLE.report TR TD.totals_percentage {
+    font-weight: bold;
+    background-color: #ffdfaf;
+    text-align: right;
+}
+
+TABLE.report TR TD.totals_string {
+    font-weight: bold;
+    background-color: #ffdfaf;
+}
+
+TABLE.report TR TD.twitter_string {
+    background-color: #FFE4E1;
+}
+
+TABLE.report TR TD.twitter_integer, TABLE.report TR TD.twitter_double,
+TABLE.report TR TD.twitter_percentage, TABLE.report TR TD.twitter_pounds {
+    background-color: #FFE4E1;
+    text-align: right;
+}
+
+TABLE.report TR TD.og_string {
+    background-color: #FFFFE0;
+}
+
+TABLE.report TR TD.og_integer, TABLE.report TR TD.og_double,
+TABLE.report TR TD.og_percentage, TABLE.report TR TD.og_pounds {
+    background-color: #FFFFE0;
+    text-align: right;
+}
+
+TABLE.report TR TD.custom_string {
+    background-color: #7FFFD4;
+}
+
+TABLE.report TR TD.custom_integer, TABLE.report TR TD.custom_double,
+TABLE.report TR TD.custom_percentage, TABLE.report TR TD.custom_pounds {
+    background-color: #7FFFD4;
+    text-align: right;
+}
+
+TABLE.report TR TD.maudau_string {
+    background-color: #D3D3D3;
+}
+
+TABLE.report TR TD.maudau_integer, TABLE.report TR TD.maudau_double,
+TABLE.report TR TD.maudau_percentage, TABLE.report TR TD.maudau_pounds {
+    background-color: #D3D3D3;
+    text-align: right;
+}
+
+TABLE.report TR TD.promos_string {
+    background-color: #90EE90;
+}
+
+TABLE.report TR TD.promos_integer, TABLE.report TR TD.promos_double,
+TABLE.report TR TD.promos_percentage, TABLE.report TR TD.promos_pounds {
+    background-color: #90EE90;
+    text-align: right;
+}
+
+TABLE.report TR TD.emails_string {
+    background-color: #87CEFA;
+}
+
+TABLE.report TR TD.emails_integer, TABLE.report TR TD.emails_double,
+TABLE.report TR TD.emails_percentage, TABLE.report TR TD.emails_pounds {
+    background-color: #87CEFA;
+    text-align: right;
+}
+
+TABLE.report TR TD.organic_string {
+    background-color: #ffdfff;
+}
+
+TABLE.report TR TD.organic_integer, TABLE.report TR TD.organic_double,
+TABLE.report TR TD.organic_percentage, TABLE.report TR TD.organic_pounds {
+    background-color: #ffdfff;
+    text-align: right;
+}
+
+TABLE.report TR TD.ios_string {
+    background-color: #008080;
+}
+
+TABLE.report TR TD.ios_integer, TABLE.report TR TD.ios_double,
+TABLE.report TR TD.ios_percentage, TABLE.report TR TD.ios_pounds {
+    background-color: #008080;
+    text-align: right;
+}
+
+TABLE.report TR TD.android_string {
+    background-color: #00FF00;
+}
+
+TABLE.report TR TD.android_integer, TABLE.report TR TD.android_double,
+TABLE.report TR TD.android_percentage, TABLE.report TR TD.android_pounds {
+    background-color: #00FF00;
+    text-align: right;
+}
+
+TABLE.report TR TD.nonad_string {
+    background-color: #dfffff;
+}
+
+TABLE.report TR TD.nonad_integer, TABLE.report TR TD.nonad_double,
+TABLE.report TR TD.nonad_percentage, TABLE.report TR TD.nonad_pounds {
+    background-color: #dfffff;
+    text-align: right;
+}
+
+TABLE.report TR TD.subtotals_string {
+    font-weight: bold;
+    background-color: #ffffff;
+}
+
+TABLE.report TR TD.subtotals_integer, TABLE.report TR TD.subtotals_double,
+TABLE.report TR TD.subtotals_percentage, TABLE.report TR TD.subtotals_pounds {
+    font-weight: bold;
+    background-color: #ffffff;
+    text-align: right;
+}
+
+.negative {
+    font-weight: normal;
+}
+
+TABLE.report {
+    border-spacing: 0;
+    empty-cells: show;
+    color: #3d3d3d;
+}
+
+table.dashboard {
+    width: 873px;
+    padding-top: 0;
+    padding-right: 0;
+    color: #3d3d3d;
+    empty-cells: show;
+    border-spacing: 0;
+    margin: 10px 0;
+    border: none;
+}
+
+table.dashboard table {
+    border: 0 none;
+    border-radius: 0;
+    width: auto;
+}
+
+table.selectionBar  tr td.selected {
+    margin-top: 5px;
+    font-weight: bold;
+    padding: 0 13px;
+}
+
+TABLE.selectionBar {
+    border: 0 none;
+}
+
+TABLE.selectionBar  tr TD {
+    border: #ffffff solid 1px;
+    outline: #acacac solid 1px;
+}
+
+select, select option {
+    margin-top: 5px;
+    border: 1px solid #ADADAD;
+}
+
+select option:hover {
+    background-color: #e6e6e6 !important;
+}
+
+table.dashboard tr.table-select th.first-child {
+    border-right: #c5c4c4 solid 1px;
+}
+
+table.dashboard td, table.dashboard th {
+    padding: 5px;
+}
+
+table.dashboard tr:first-child td, table.dashboard tr:first-child th {
+    padding-top: 14px;
+}
+
+table.dashboard tr.table-select {
+    background-color: #e3e2e2;
+}
+
+table.dashboard tr.table-select.last td, table.dashboard tr.table-select.last th {
+    padding-bottom: 10px;
+    border-bottom: #f0f0f0 solid 1px;
+    margin-bottom: 10px;
+}
+
+table.dashboard tr.table-select.last + tr td, table.dashboard tr.table-select.last + tr th {
+    border-top: #d1d0d0 solid 1px;
+    padding-top: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+form select {
+    border: 1px solid #ADADAD;
+    display: block;
+    width: 141px;
+}
+
+form select {
+    background-position: left top;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+form select > option {
+    border: #adadad 1px;
+    border-style: none solid solid none;
+}
+
+form select > option:first-child {
+    border: #adadad 1px;
+    border-style: solid solid solid none;
+}
+
+#reportOption {
+    width: 260px;
+}
+
+#promotionsSelected {
+    width: 550px;
+}
+
+input[type="text"] {
+    margin-right: 2px;
+}
+
+table.report tr {
+    height: auto;
+}
+
+table.report tr th {
+    padding: 3px;
+}
+
+table {
+    border: 1px solid #CECECE;
+    border-spacing: 0;
+    empty-cells: show;
+    margin: 0 auto;
+    clear: left;
+}
+
+table.report tbody tr:nth-child(2n) {
+    background-color: rgb(244, 246, 250);
+}
+
+table.report thead tr {
+    background-color: rgb(249, 249, 249) !important;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+table.report tbody td {
+    border-collapse: collapse;
+    border: 1px solid rgb(249, 249, 249);
+}
+
+table.report thead tr:first-child {
+    background-color: rgb(240, 240, 240) !important;
+    border: 1px solid rgb(225, 225, 225);
+}
+
+hr {
+    display: none;
+}
+
+form div#cuselFrame-pageSize {
+    margin-bottom: -11px;
+}
+
+span.vertical-center, span {
+    line-height: 24px;
+    color: #515151;
+}
+
+span.vertical-center {
+    position: relative;
+    /*top: -10px;*/
+}
+
+.search input, .search select {
+    float: left;
+}
+
+.search input[type=text] {
+    width: 200px;
+}
+
+.search select {
+    clear: left;
+}
+
+.searchResult {
+    padding-top: 20px;
+    clear: both;
+}
+
+.resultList tbody td {
+    border-collapse: collapse;
+    border: 1px solid rgb(239, 239, 239);
+}
+
+.resultList thead tr:first-child {
+    background-color: rgb(239, 239, 239) !important;
+    border: 1px solid rgb(225, 225, 225);
+}
+
+.resultList th {
+    padding: 6px;
+}
+
+.resultList img {
+    width: 26px;
+    height: 26px;
+}
+
+.resultList tr.paging td {
+    padding: 0 6px;
+}
+
+.resultList tr.paging td {
+    text-align: right;
+}
+
+.resultList thead tr,
+.resultList tfoot tr {
+    background-color: rgb(249, 249, 249) !important;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 4px 0;
+}
+
+.resultList tbody tr:nth-child(2n+1) {
+    background-color: rgb(244, 246, 250);
+}
+
+.warn {
+    color: red;
+}
+
+.dialogue {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    opacity: 0.9;
+    width: 300px;
+    z-index: 20;
+}
+
+.dialogue .upArrow {
+    opacity: 0.9;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    margin-left: 10px;
+}
+
+.dialogue .content {
+    background-color: black;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.dialogue .message {
+    width: 280px;
+    background: none;
+    color: white;
+    font-weight: bold;
+}
+
+.dialogue .message.warn {
+    color: pink;
+    float: none;
+    position: static;
+    padding: 4px 0;
+}
+
+.dialogue textarea {
+    height: 50px;
+    width: 280px;
+}
+
+.dialogue .buttons {
+    overflow: visible;
+    background: none;
+    border: none;
+    text-align: right;
+}
+
+.spinner {
+    height: 36px;
+    font-size: 18px;
+}
+
+.spinner img {
+    position: relative;
+    top: 12px;
+}
+
+.resolveDialogue {
+    border: 1px solid black;
+    background-color: white;
+    padding: 8px;
+    display: none;
+    position: absolute;
+    width: 300px;
+}
+
+.resolveDialogue textarea {
+    width: 292px;
+}
+
+.resolveDialogue .controls {
+    background: none;
+    text-align: right;
+    margin: 8px 0;
+}
+

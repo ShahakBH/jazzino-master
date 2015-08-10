@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+    <task:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc.xml"/>
+
+    <bean id="dwSimpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+        <constructor-arg ref="dwDataSource"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dwDataSource"/>
+    </bean>
+
+    <bean class="strata.server.worker.audit.AuditConsumerConfig"/>
+
+    <bean id="facebookClientFactory" class="com.yazino.engagement.facebook.FacebookClientFactory"
+          factory-method="getInstance"/>
+
+    <bean id="webrequestor" class="com.restfb.DefaultWebRequestor"/>
+
+    <bean id="gcmSender" class="com.google.android.gcm.server.Sender">
+        <constructor-arg name="key" value="${google-cloud-messaging.api-key}"/>
+    </bean>
+
+    <import resource="classpath:/META-INF/spring/ehcache-spring.xml"/>
+    <import resource="classpath:/META-INF/spring/shared-context.xml"/>
+    <import resource="classpath:/META-INF/spring/emailvision.xml"/>
+    <import resource="classpath:/META-INF/spring/async-email-service.xml"/>
+    <import resource="classpath:/META-INF/spring/player-profile-service.xml"/>
+    <import resource="classpath:/META-INF/spring/facebook-configuration-spring.xml"/>
+    <import resource="classpath:/META-INF/spring/yaps-context.xml"/>
+    <import resource="classpath:/META-INF/spring/notification-campaign.xml"/>
+
+    <context:component-scan base-package="strata.server.worker.audit.persistence"/>
+    <context:component-scan base-package="strata.server.worker.audit.consumer"/>
+    <context:component-scan base-package="strata.server.worker.audit.playedtracking"/>
+    <context:component-scan base-package="com.yazino.platform.event.played"/>
+    <context:component-scan base-package="strata.server.worker.event.persistence"/>
+    <context:component-scan base-package="strata.server.worker.event.consumer"/>
+    <context:component-scan base-package="senet.server.crm"/>
+    <context:component-scan base-package="com.yazino.android"/>
+    <context:component-scan base-package="com.yazino.messaging"/>
+    <context:component-scan base-package="com.yazino.bi.payment"/>
+    <context:component-scan base-package="com.yazino.bi.messaging"/>
+    <context:component-scan base-package="com.yazino.payment.worldpay.fx"/>
+    <context:component-scan base-package="com.yazino.payment.worldpay.emis"/>
+    <context:component-scan base-package="strata.server.worker.tracking"/>
+    <context:component-scan base-package="com.yazino.engagement">
+        <context:exclude-filter type="regex" expression="com.yazino.engagement.campaign.*"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.yazino.bi.tracking"/>
+    <context:component-scan base-package="com.yazino.bi.aggregator"/>
+    <context:component-scan base-package="com.yazino.bi.opengraph"/>
+    <context:component-scan base-package="com.yazino.bi.cleanup"/>
+
+    <bean name="paymentOptionServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="paymentOptionService"/>
+        <property name="serviceInterface" value="com.yazino.bi.payment.PaymentOptionService"/>
+    </bean>
+
+    <bean id="yazinoConfiguration"
+          class="com.yazino.configuration.YazinoConfiguration"
+          destroy-method="shutdown"/>
+
+    <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create"/>
+
+    <bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build"/>
+
+</beans>

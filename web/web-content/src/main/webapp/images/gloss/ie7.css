@@ -1,0 +1,19 @@
+	/* IE 7 Hacks */
+#nav li {
+	float: expression(nextSibling == null ? 'right' : 'left'); 
+	}
+#inf li {
+	float: expression(nextSibling == null ? 'left' : 'right'); 
+	}
+	/* IE 7 Debugs */
+#nav .ie7_debug_nav_1:hover{
+	background: url('i/head.png') top right;
+	}
+#nav .ie7_debug_nav_1:hover a{
+	padding-bottom: 10px;
+	}
+#log .log input[type=checkbox] {
+	margin-top: -4px;
+	margin-left: -4px;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=00); /* IE 5.5+*/
+	}

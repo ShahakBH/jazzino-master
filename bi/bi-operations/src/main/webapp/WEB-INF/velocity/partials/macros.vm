@@ -1,0 +1,175 @@
+#macro( mapToHtmlTable $map $styleClass)
+<table class="${styleClass}">
+    #foreach($key in $map.keySet())
+        <tr>
+            <td>$key </td>
+            <td>$map.get($key)</td>
+        </tr>
+    #end
+</table>
+<br/><br/>
+#end
+
+#**
+ * springFormCheckboxes
+ *
+ * Show checkboxes. Ported from Spring 3.1, added labels.
+ *
+ * @param path the name of the field to bind to
+ * @param options a map (value=label) of all the available options
+ * @param separator the html tag or other character list that should be used to
+ *    separate each option.  Typically '&nbsp;' or '<br>'
+ * @param attributes any additional attributes for the element (such as class
+ *    or CSS styles or size
+ *#
+#macro( springFormCheckboxesWithLabels $path $options  $separator $attributes )
+    #springBind($path)
+    #foreach($option in $options.keySet())
+            <input id="${status.expression}-${foreach.count}"
+                   type="checkbox" name="${status.expression}" value="${option}"
+        #foreach($item in $status.actualValue)
+            #if($item == $option) checked="checked" #end
+        #end
+        ${attributes} #springCloseTag()
+    <label for="${status.expression}-${foreach.count}">${options.get($option)}</label>
+        ${separator}
+    #end
+<input type="hidden" name="_${status.expression}" value="on"/>
+#end
+
+#macro( springFormDateTimeLocalInput $path $attributes )
+    #springBind($path)
+    #if($!status.value)
+        #set($dateValue = $dateTool.format("yyyy-MM-dd'T'HH:mm", $status.actualValue))
+    #else
+        #set($dateValue = "")
+    #end
+<input type="datetime-local" name="${status.expression}" value="$!dateValue" class="dateTimePicker" ${attributes}#springCloseTag()
+#end
+
+#macro( springFormDateInput $path $attributes )
+    #springBind($path)
+    #if($!status.value)
+        #set($dateValue = $dateTool.format("yyyy-MM-dd", $status.actualValue))
+    #else
+        #set($dateValue = "")
+    #end
+<input type="date" name="${status.expression}" value="$!dateValue" class="datePicker" ${attributes}#springCloseTag()
+#end
+
+#macro( springFormRadioLabelledButtons $path $options $attributes )
+    #springBind($path)
+    #foreach($option in $options.keySet())
+            <input type="radio" name="${status.expression}" value="${option}" id="${status.expression}-${option}"
+        #if("$!status.value" == "$option")
+                   checked="checked"
+        #end
+        ${attributes}
+        #springCloseTag()
+    <label for="${status.expression}-${option}">${options.get($option)}</label>
+    #end
+#end
+
+#macro( springFormLabelledCheckboxes $path $options $attributes )
+    #springBind($path)
+    #foreach($option in $options.keySet())
+            <input type="checkbox" name="${status.expression}" value="${option}" id="${status.expression}-${option}"
+        #foreach($item in $status.value)
+            #if($item == $option) checked="checked" #end
+        #end
+        ${attributes} #springCloseTag()
+    <label for="${status.expression}-${option}">${options.get($option)}</label>
+    #end
+<input type="hidden" name="_${status.expression}" value="on"/>
+#end
+
+
+## Generates URLs of the forum baseUrl/pageNumber
+#macro( pagingOnUrl $startPosition $pageSize $totalSize $baseUrl $params )
+    #set($currentPage = ($startPosition / $pageSize) + 1)
+    #set($maxPage = ($totalSize / $pageSize) + 1)
+
+<div class="paging">
+    #if ($currentPage && $currentPage != 1)
+        <a href="${baseUrl}/1$!params" title="Go to first page">&lt;&lt;</a>
+    #else
+        <span class="disabled">&lt;&lt;</span>
+    #end
+
+    #if ($currentPage && $currentPage > 1)
+        #set($destPage = $currentPage - 1)
+        <a href="${baseUrl}/$destPage$!params" title="Go to previous page">&lt;</a>
+    #else
+        <span class="disabled">&lt;</span>
+    #end
+
+    #set($start = $currentPage - 4)
+    #set($end = $currentPage + 4)
+    #foreach ($i in [$start..$end])
+        #if ($i == $currentPage)
+            <strong>$currentPage</strong>
+        #elseif ($i > 0 && $i <= $maxPage)
+            <a href="${baseUrl}/$i$!params" title="Go to page $i">$i</a>
+        #end
+    #end
+
+    #if ($currentPage && $currentPage < $maxPage)
+        #set($destPage = $currentPage + 1)
+        <a href="${baseUrl}/$destPage$!params" title="Go to next page">&gt;</a>
+    #else
+        <span class="disabled">&gt;</span>
+    #end
+
+    #if ($currentPage && $currentPage != $maxPage)
+        <a href="${baseUrl}/$maxPage$!params" title="Go to last page">&gt;&gt;</a>
+    #else
+        <span class="disabled">&gt;&gt;</span>
+    #end
+</div>
+#end
+
+## Generates URLs of the forum baseUrl?firstRecord=recordNumber&pageSize=pageSize
+#macro( paging $startPosition $pageSize $totalSize $baseUrl $params )
+    #set($currentPage = ($startPosition / $pageSize) + 1)
+    #set($maxPage = ($totalSize / $pageSize) + 1)
+
+<div class="paging">
+    #if ($currentPage && $currentPage != 1)
+        <a href="${baseUrl}&firstRecord=0&pageSize=${pageSize}$!params" title="Go to first page">&lt;&lt;</a>
+    #else
+        <span class="disabled">&lt;&lt;</span>
+    #end
+
+    #if ($currentPage && $currentPage > 1)
+        #set($destPage = ($currentPage - 2) * $pageSize)
+        <a href="${baseUrl}&firstRecord=${destPage}&pageSize=${pageSize}$!params" title="Go to previous page">&lt;</a>
+    #else
+        <span class="disabled">&lt;</span>
+    #end
+
+    #set($start = $currentPage - 4)
+    #set($end = $currentPage + 4)
+    #foreach ($i in [$start..$end])
+        #if ($i == $currentPage)
+            <strong>$currentPage</strong>
+        #elseif ($i > 0 && $i <= $maxPage)
+            #set($destPage = ($i - 1) * $pageSize)
+            <a href="${baseUrl}&firstRecord=${destPage}&pageSize=${pageSize}$!params" title="Go to page $i">$i</a>
+        #end
+    #end
+
+    #if ($currentPage && $currentPage < $maxPage)
+        #set($destPage = $currentPage * $pageSize)
+        <a href="${baseUrl}&firstRecord=${destPage}&pageSize=${pageSize}$!params" title="Go to next page">&gt;</a>
+    #else
+        <span class="disabled">&gt;</span>
+    #end
+
+    #if ($currentPage && $currentPage != $maxPage)
+        #set($destPage = ($maxPage - 1) * $pageSize)
+        <a href="${baseUrl}&firstRecord=${destPage}&pageSize=${pageSize}$!params" title="Go to last page">&gt;&gt;</a>
+    #else
+        <span class="disabled">&gt;&gt;</span>
+    #end
+</div>
+#end

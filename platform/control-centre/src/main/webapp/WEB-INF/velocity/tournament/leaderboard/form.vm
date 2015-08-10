@@ -1,0 +1,161 @@
+<form method="post" action="${request.contextPath}/tournament/leaderboard/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+        #set($cbformoptions = "$!formoptions disabled=${quote}disabled${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($leaderboard.id)
+            #springFormHiddenInput( 'leaderboard.id' '' )
+        #end
+
+        <label for="name">Name:</label>
+        #springFormInput( 'leaderboard.name' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'leaderboard.name' )
+        #springShowErrors( '' 'error' )
+
+        <label for="gameType">Game Type:</label>
+        #if ($readonly || $leaderboard.id)
+            #springFormHiddenInput( 'leaderboard.gameType' '' )
+            <input type="text" name="gameTypeName" id="gameType"
+                   value="${gameTypes.get($leaderboard.gameType)}" readonly="readonly">
+        #else
+            #springFormSingleSelect( 'leaderboard.gameType' $gameTypes "$!formoptions required=${quote}required${quote}" )
+            #springBind( 'leaderboard.gameType' )
+            #springShowErrors( '' 'error' )
+        #end
+
+        <label for="startDate">Start:</label>
+        #springFormDateInput( 'leaderboard.startDate' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'leaderboard.startDate' )
+        #springShowErrors( '' 'error' )
+
+        <label for="endDate">End:</label>
+        #springFormDateInput( 'leaderboard.endDate' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'leaderboard.endDate' )
+        #springShowErrors( '' 'error' )
+
+        <label for="leaderboard">Cycle:</label>
+        <div class="grouped day-period">
+            #if ($readonly)
+                <span>$leaderboard.cycle</span>
+            #else
+                #springFormInput( 'leaderboard.cycle.days' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+                <label for="cycle.days">d</label>
+                #springFormInput( 'leaderboard.cycle.hours' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+                <label for="cycle.hours">h</label>
+                #springFormInput( 'leaderboard.cycle.minutes' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+                <label for="cycle.minutes">m</label>
+            #end
+            #springBind( 'leaderboard.cycle' )
+            #springShowErrors( '' 'error' )
+        </div>
+
+        <label for="pointBonus">Point Bonus:</label>
+        #springFormInput( 'leaderboard.pointBonus' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'leaderboard.pointBonus' )
+        #springShowErrors( '' 'error' )
+
+        #springFormCheckbox( 'leaderboard.enabled' "$!cbformoptions" )
+        <label for="enabled">Enabled</label>
+        #springBind( 'leaderboard.enabled' )
+        #springShowErrors( '' 'error' )
+    </fieldset>
+
+    <fieldset>
+        <legend>Positions</legend>
+
+        #if ($leaderboard.id)
+        #if (!$readonly)
+            <a href="javascript:void(0)" class="addRow" title="Add a new Position" data-tableId="positionTable"
+               data-templateId="positionTemplate">Add Position</a>
+        #end
+
+        <table id="positionTable">
+            <thead>
+            <tr>
+                <th>Position</th>
+                <th>Points</th>
+                <th>Payout</th>
+                <th>Trophy</th>
+                #if (!$readonly)
+                    <th>Actions</th>
+                #end
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ($position in $leaderboard.positions)
+                <tr>
+                    #set($index = $foreach.count - 1)
+                    <td>
+                        #springFormInput( "leaderboard.positions[$index].position" "$!formoptions required=${quote}required${quote}" )
+                    </td>
+                    <td>
+                        #springFormInput( "leaderboard.positions[$index].awardPoints" "$!formoptions required=${quote}required${quote}" )
+                    </td>
+                    <td>
+                        #springFormInput( "leaderboard.positions[$index].awardPayout" "$!formoptions required=${quote}required${quote}" )
+                    </td>
+                    <td>
+                    #if ($readonly)
+                        <input type="text" name="leaderboard.positions[$index].trophyId" readonly="readonly"
+                                #if ($leaderboard.positions[$index].trophyId.underlying()) value="${trophies.get($leaderboard.positions[$index].trophyId.underlying())}" #end>
+                    #else
+                        #springFormSingleSelect( "leaderboard.positions[$index].trophyId" $trophies "$!formoptions required=${quote}required${quote}" )
+                    #end
+                    </td>
+                    #if (!$readonly)
+                        <td><a href="javascript:void(0)" class="removeRow" title="Remove this Position">Delete</a></td>
+                    #end
+                </tr>
+                #end
+                #if ($leaderboard.positions.size() == 0 && $readonly)
+                <tr>
+                    <td colspan="4">No positions defined</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+
+        #elseif (!$readonly)
+            <p>Positions may be edited once the leaderboard has been created.</p>
+        #end
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>
+
+#if (!$readonly)
+<div class="templates">
+    <table>
+        <tbody>
+        <tr id="positionTemplate">
+            <td>
+                <input id="positions[0].position" required="required" name="positions[0].position" value="1">
+            </td>
+            <td>
+                <input id="positions[0].awardPoints" required="required" name="positions[0].awardPoints" value="0">
+            </td>
+            <td>
+                <input id="positions[0].awardPayout" required="required" name="positions[0].awardPayout" value="0">
+            </td>
+            <td>
+                <select id="positions[0].trophyId" required="required" name="positions[0].trophyId">
+                    #foreach($option in $trophies.keySet())
+                        <option value="${option}">${trophies.get($option)}</option>
+                    #end
+                </select>
+            </td>
+            <td><a href="javascript:void(0)" class="removeRow" title="Remove this Position">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+#end

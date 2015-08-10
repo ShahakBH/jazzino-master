@@ -1,0 +1,25 @@
+set_unless[:firewall] = true
+set_unless[:gigaspaces][:roles] = ['gsc', 'lus']
+set_unless[:gigaspaces][:gsc_count] = 1
+set_unless[:gigaspaces][:gsm_count] = 1
+set_unless[:gigaspaces][:lookup_group] = node[:environment]
+set_unless[:gigaspaces][:logback_file] = "/etc/senet/logback-gigaspaces.xml"
+set_unless[:gigaspaces][:gc_type] = "cms"
+set_unless[:gigaspaces][:directory] = "/opt/gigaspaces"
+set_unless[:gigaspaces][:lookup_locators] = ['localhost']
+set_unless[:gigaspaces][:java][:min_mem] = "256m"
+set_unless[:gigaspaces][:java][:max_mem] = "2048m"
+set_unless[:gigaspaces][:java][:gsm_min_heap] = "32m"
+set_unless[:gigaspaces][:java][:gsm_max_heap] = "128m"
+set_unless[:gigaspaces][:java][:lus_min_heap] = "32m"
+set_unless[:gigaspaces][:java][:lus_max_heap] = "128m"
+set_unless[:gigaspaces][:host_ip] = "0.0.0.0"
+set_unless[:gigaspaces][:zones] = []
+set_unless[:gigaspaces][:licence] = 'dev'
+set_unless[:gigaspaces][:grid_networks] = ['10.9.8.0/24']
+set_unless[:gigaspaces][:lrmi][:max_threads] = 128
+set_unless[:gigaspaces][:lrmi][:selector_threads] = 4
+set_unless[:gigaspaces][:lrmi][:thread_timeout] = 300000
+set_unless[:gigaspaces][:gsc_debug] = false
+# [0] office LAN
+set_unless[:gigaspaces][:web_ui][:whitelist] = ['151.237.239.34']

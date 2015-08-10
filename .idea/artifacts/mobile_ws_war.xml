@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mobile-ws:war">
+    <output-path>$PROJECT_DIR$/web/mobile-ws/target</output-path>
+    <root id="archive" name="mobile-ws-2.2.34-SNAPSHOT.war">
+      <element id="artifact" artifact-name="mobile-ws:war exploded" />
+    </root>
+  </artifact>
+</component>

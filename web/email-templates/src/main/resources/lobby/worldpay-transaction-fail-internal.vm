@@ -1,0 +1,44 @@
+<style>
+body {
+ 	font-family: Helvetica, Arial, sans-serif;
+ 	font-size: 10pt;
+ 	color: black;
+ 	background-color: white;
+}
+
+.footer {
+ 	color: rgb(120, 120, 120);
+ 	font-size: 8pt;
+}
+</style>
+<h2>An attempted WorldPay chip purchase failed</h2>
+<p>
+	Amount: $!{currencyCode}$!{money}.00
+</p>
+<p>
+	Date/Time: $!{date} $!{time}
+</p>
+<p>
+	Card Number: $!{cardNumberObscured}
+</p>
+<p>
+	Failure: $!{message}
+</p>
+<p>
+	ResponseCode :$!{purchaseResponseCode}
+</p>
+<p>
+	Internal Transaction Id :$!{internalTransactionId}
+</p>
+<p>
+	External Transaction Id :$!{externalTransactionId}
+</p>
+<p>
+	Trace:
+</p>
+<p>
+	$!{trace}
+</p>
+<p class="footer">
+    &copy; 2012 Yazino, Island House, Grande Rue, St Martins, Guernsey, GY4 6RU
+</p>

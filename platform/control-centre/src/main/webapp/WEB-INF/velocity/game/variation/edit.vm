@@ -1,0 +1,19 @@
+#set ($location = "Edit Game Variation")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/variation/list">List Variations</a></li>
+        <li><a href="${request.contextPath}/game/variation/show/${gameVariation.id}">Cancel Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Edit Game Variation ${gameVariation.id}</h2>
+
+        #parse("game/variation/form.vm")
+    </div>
+</section>

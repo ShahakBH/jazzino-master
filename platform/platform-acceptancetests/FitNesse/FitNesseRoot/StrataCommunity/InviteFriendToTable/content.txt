@@ -1,0 +1,44 @@
+
+You can only invite a friend to a table only if:
+You are: 
+- Online
+- Sitting at a table (i.e. not spectating)
+They are:
+- A Friend
+- Online
+- Not sitting or spectating at the same table as you
+
+
+!|Players|
+|Name|Online|
+|Melissa|Y|
+|Sameer|Y|
+|Nadia|Y|
+|Martin|Y|
+|Tom|N|
+
+!|Friends|
+|Player A|Player B|
+|Melissa|Sameer|
+|Melissa|Nadia|
+|Melissa|Tom|
+
+!|Players at tables|
+|Table name|Players|Spectators|
+|European 1|Melissa|Nadia|
+|European 2|Nadia, Martin|Melissa|
+|Atlantic 1|Melissa, Martin||
+|Atlantic 2|Melissa, Sameer||
+
+!|Melissa|can|Invite to Tables|
+|Player|Tables|
+|Sameer|European 1, Atlantic 1|
+|Nadia|Atlantic1, Atlantic 2|
+|Martin||
+|Tom||
+
+!|Friend|Online|Friend sitting or spectating at table as you|Invite friend to table?|
+|Y|Y|Y|N|
+|Y|N|N|N|
+|N|Y|Y|N|
+|Y|Y|N|Y|

@@ -1,0 +1,38 @@
+<div id="fb-root"></div>
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+
+    function handlePopupsWhenIE(info, swfElement) {
+        if (info.state == 'opened') { // facebook popup opened
+            swfElement.addClass('hideObject').removeClass('showObject');
+        } else { // facebook popup closed
+            swfElement.addClass('showObject').removeClass('hideObject');
+        }
+    }
+
+    /* if this has the hide object class on it then it has intentionally been paused */
+    function showGameUnlessHidden(swfElement) {
+        if (!swfElement.hasClass('hideObject')) {
+            swfElement.addClass('showObject').removeClass('hideObject');
+        }
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '${facebookApplicationId}',
+            channelUrl: '${hostUrl.replaceFirst("^https?://", "//")}/channel.html',
+            status: true,
+            xfbml: true,
+            hideFlashCallback: function (info) {
+                /* A Facebook window, e.g. chat is open is this being exe'd */
+                var swfElement = jQuery('.game object');
+                if (/*@cc_on!@*/0) {
+                    handlePopupsWhenIE(info, swfElement);
+                    return;
+                }
+                showGameUnlessHidden(swfElement);
+            },
+            frictionlessRequests: true
+        });
+    };
+</script>

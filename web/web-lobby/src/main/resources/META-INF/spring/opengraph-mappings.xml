@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="facebookOGResources" class="com.yazino.web.domain.facebook.FacebookOGResources">
+        <constructor-arg>
+            <map>
+                <entry key="wd_level_1">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 1"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 2 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_2">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 2"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 2 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_3">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 3"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value=""/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_4">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 4"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just gained Level 4 on the reels, try your luck now in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_5">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 5"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scored Level 5 on Wheel Deal! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_6">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 6"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Get hot on my heels and head to the reels, I just gained Level 6!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_7">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 7"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 7 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_8">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 8"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Can you reach the top? I got to Level 8 in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_9">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 9"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just gained Level 9 on the reels, try your luck now in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_10">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 10"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scored Level 10 on Wheel Deal! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_11">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 11"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Get hot on my heels and head to the reels, I just gained Level 11!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_12">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 12"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 12 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_13">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 13"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Can you reach the top? I got to Level 13 in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_14">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 14"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just gained Level 14 on the reels, try your luck now in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_15">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 15"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scored Level 15 on Wheel Deal! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_16">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 16"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Get hot on my heels and head to the reels, I just gained Level 16!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_17">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 17"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 17 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_18">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 18"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Can you reach the top? I got to Level 18 in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_19">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 19"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just gained Level 19 on the reels, try your luck now in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_20">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 20"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scored Level 20 on Wheel Deal! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_21">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 21"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Get hot on my heels and head to the reels, I just gained Level 21!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_22">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 22"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 22 on the reels! Race me now in Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_23">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 23"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Can you reach the top? I got to Level 23 in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_24">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 24"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just gained Level 24 on the reels, try your luck now in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_level_25">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 25"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scored Level 25 on Wheel Deal! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_fivek">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="5,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm spinning around with 5,000 chips, give Slots Wheel Deal a whirl and join me now!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_twentyk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="20,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm running reels with 20,000 chips, give Slots Wheel Deal a whirl and join me now!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_fiftyk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="50,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I've just reeled in a 50,000 chip jackpot! Give Slots Wheel Deal a whirl and join me now!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_hundredk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="100,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm spinning around with 100,000 chips, give Slots Wheel Deal a whirl and join me now!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_halfmil">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="500,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm ruling the reels with 500,000 chips, give Slots Wheel Deal a whirl and join me now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_fourkind">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Four of a Kind"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="I'm feeling fantastic with Four of a Kind in Slots Wheel Deal. Want to win? Give it a spin!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_fivekind">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Five of a Kind"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="Give me five! I won with Five of a Kind. Try your hand now and find your fortune in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+                <entry key="wd_fivecars">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Five Cars"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm speeding ahead with Five Cars on Slots Wheel Deal. Come race me at the reels?"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_threelines">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="3 Lines"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Three is the magic number! I just won on 3 Lines on Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+                <entry key="wd_fourlines">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="4 Lines"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just won on 4 Lines. Want to beat me? Get hot on my heels and head to the reels!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_fivelines">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="5 Lines"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Bet you can't beat me! I won on 5 Lines in one spin on Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_lineseven">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Line 7"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Think you can beat me? I just won on lucky Line 7 on Slots Wheel Deal. Have a go if you dare!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_linethirteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Line 13"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="13 is lucky for some 'cause I just won! Try your luck and get spinning in Slots Wheel Deal now."/>
+                    </bean>
+                </entry>
+                <entry key="wd_linetwenty">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Line 20"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won on Line 20, race me to the reels now if you think you're ready!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_wild">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Wild Card"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="Wild about winning? Come play Slots Wheel Deal and see if you can score a Wild Card, too!"/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_twintop">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Twin Top Wheel"/>
+                        <property name="article" value="the"/>
+                        <property name="description"
+                                  value="I won on the Twin Top bonus wheel in Slots Wheel Deal. Join me on the double if you're game?"/>
+                    </bean>
+                </entry>
+                <entry key="wd_fourway">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="4-Way Wheel"/>
+                        <property name="article" value="the"/>
+                        <property name="description"
+                                  value="I just won on the 4-Way bonus wheel in Slots Wheel Deal. Race me to the reels!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_tripletto">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Tripletto Wheel"/>
+                        <property name="article" value="the"/>
+                        <property name="description"
+                                  value="Race to the reels! I just won on the Tripletto bonus wheel. Join me now!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_quattro">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Quattro Wheel"/>
+                        <property name="article" value="the"/>
+                        <property name="description"
+                                  value="I just won on the Quattro bonus wheel in Slots Wheel Deal. Want a win on the wheels? Give it a spin!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_ultimo">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Ultimo Wheel"/>
+                        <property name="article" value="the"/>
+                        <property name="description"
+                                  value="I'm running reels in Wheel Deal! I won on the Ultimo bonus wheel. Come and play."/>
+                    </bean>
+                </entry>
+
+                <entry key="wd_unlocktwintop">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Twin Top Wheel"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I rule! I've unlocked the Twin Top bonus wheel on Slots Wheel Deal. Join me now."/>
+                    </bean>
+                </entry>
+                <entry key="wd_unlockfourway">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="4-Way Wheel"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just unlocked the 4-Way bonus wheel in Slots Wheel Deal. Come and have a spin!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_unlocktripletto">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Tripletto Wheel"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Dare to join me? I've just unlocked the Tripletto bonus wheel in Slots Wheel Deal!"/>
+                    </bean>
+                </entry>
+                <entry key="wd_unlockquattro">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Quattro Wheel"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm ruling the reels! I've unlocked the Quattro bonus wheel in Slots Wheel Deal."/>
+                    </bean>
+                </entry>
+                <entry key="wd_unlockultimo">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Ultimo Wheel"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just unlocked the Ultimo bonus wheel, the ultimate prize in Wheel Deal. Come join me at the reels!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_2">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 2"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just climbed to Level 2 in Blackjack. Can you beat me?"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_3">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 3"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Brilliant! I made it to Level 3 in Blackjack, come and play!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_4">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 4"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scoredLevel 4 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_5">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 5"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I made a move in Blackjack and made it to Level 5!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_6">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 6"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I gained Level 6 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_7">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 7"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just climbed to Level 7 in Blackjack. Can you beat me?"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_8">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 8"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Brilliant! I made it to Level 8 in Blackjack, come and play!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_9">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 9"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scoredLevel 9 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_10">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 10"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I made a move in Blackjack and made it to Level 10!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_11">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 11"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I gained Level 11 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_12">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 12"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just climbed to Level 12 in Blackjack. Can you beat me?"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_13">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 13"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Brilliant! I made it to Level 13 in Blackjack, come and play!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_14">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 14"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I scoredLevel 14 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_15">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 15"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I made a move in Blackjack and made it to Level 15!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_16">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 16"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I gained Level 16 in Blackjack! Place your bets to beat me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_level_17">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 17"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just climbed to Level 17 in Blackjack. Can you beat me?"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_fivek">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="5,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I boosted my balance with 5,000 chips! Take to the tables and give Blackjack a try."/>
+                    </bean>
+                </entry>
+                <entry key="bj_twentyfivek">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="25,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won 25,000 chips in Blackjack! Take a seat at the table now."/>
+                    </bean>
+                </entry>
+                <entry key="bj_fiftyk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="50,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won 50,000 brilliant chips in Blackjack. Bet you to beat me?"/>
+                    </bean>
+                </entry>
+                <entry key="bj_hundredk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="100,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just scored 100,000 sparkling chips in Blackjack! Try your hand at the table now."/>
+                    </bean>
+                </entry>
+                <entry key="bj_hundredfiftyk">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="150,000 Chips"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Bet you can't beat me! I just won 150,000 super-shiny chips in Blackjack. Want to play?"/>
+                    </bean>
+                </entry>
+
+
+                <entry key="bj_blackjack">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Blackjack"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="I scored a Blackjack in Blackjack. Place your bets now!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_acejack">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Jack and Ace"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="I just got a Jack and Ace in Blackjack. Can you beat me?"/>
+                    </bean>
+                </entry>
+                <entry key="bj_acejackspades">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Jack and Ace of Spades"/>
+                        <property name="article" value="a"/>
+                        <property name="description"
+                                  value="I just got a Jack and Ace of Spades in Blackjack. Take a seat at the table now."/>
+                    </bean>
+                </entry>
+
+
+                <entry key="bj_doubleeleven">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on an 11"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I doubled up on 11 in Blackjack and won. Play me now!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doubletwelve">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 12"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won by doubling up on 12 in Blackjack. Want to win? Come and play!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doublethirteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 13"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm a winner! I doubled up on 13 in Blackjack and won. Play me now!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doublefourteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 14"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won by doubling up on 14 in Blackjack. Can you do better?"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doublefifteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 15"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I'm a winner! I doubled up on 15 in Blackjack and won. Come and play!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doublesixteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 16"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I doubled up on 16 in Blackjack and won. Can you do better?"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doubleseventeen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 17"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won by doubling up on 17 in Blackjack. Play me!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doubleeighteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on an 18"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won by doubling up on 18 in Blackjack. Let's play!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doublenineteen">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 19"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I doubled up on 19 in Blackjack and won. Come and play!"/>
+                    </bean>
+                </entry>
+                <entry key="bj_doubletwenty">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Doubling Up on a 20"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I made a bold move in Blackjack. I doubled up on 20 and won! Play me!"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_compfirst">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="1st in a Tournament"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Yes! I finished in 1st place in a Blackjack Tournament, can you beat me in the next one?"/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_compsecond">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="2nd in a Tournament"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I came 2nd in a Blackjack tournament! Think you can do better? Join me at the table."/>
+                    </bean>
+                </entry>
+
+                <entry key="bj_compthird">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="3rd in a Tournament"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I came 3rd in a Blackjack tournament. Try your hand at a table now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_2">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 2"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 2 on High Stakes slots. Come and play!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_3">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 3"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I gained Level 3 on High Stakes slots. Join me in a game now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_4">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 4"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Super! I got to Level 4 in High Stakes slots. Come have some fun!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_5">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 5"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 5 in High Stakes slots. Spin the reels!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_6">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 6"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I gained Level 6 on High Stakes slots! Join me at the reels now."/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_7">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 7"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I reached lucky Level 7 on High Stakes slots. Play now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_8">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 8"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I got to Level 8 on High Stakes slots! Head to the reels and join me now."/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_9">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 9"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I reached Level 9 on High Stakes slots. Race me to the top!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_10">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 10"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just reached Level 10! Come play High Stakes slots with me."/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_11">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 11"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Hooray! I reached level 11 on High Stakes slots. Join me now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_12">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 12"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I got to Level 12 on High Stakes slots! Come and have some fun!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_13">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 13"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Wahey! I'm at Level 13 on High Stakes slots. Play now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_14">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 14"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I just climbed to Level 14! Come join me on High Stakes slots."/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_15">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 15"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I reached level 15 on High Stakes slots. Can you beat me?"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_16">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 16"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Hooray! I'm at Level 16 on High Stakes slots. Play now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_level_17">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="LEVEL 17"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="Phew! I made it to Level 17 on High Stakes slots. Come play at the reels!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_demo">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Miss Demolition"/>
+                        <property name="article" value=""/>
+                        <property name="description"
+                                  value="I won as Miss Demolition on High Stakes slots. Join me at the reels!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_insider">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Mr Insider"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I won as Mr Insider on High Stakes slots. Come join the fun!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_distraccion">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="La Distraccion"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I won as La Distraccion on High Stakes slots. Where will you rank?"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_geekster">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="The Geekster"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I won as The Geekster on High Stakes slots. Come play with me!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_burglar">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="The Cat Burglar"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I won as The Cat Burglar on High Stakes slots. Join the crew!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_boss">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="The Boss"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I won as The Boss on High Stakes slots! Where will you rank?"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_littlecracker">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="2 Digits"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I guessed 2 digits of the safe code on High Stakes slots. Can you crack it? Play now!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_cracker">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="3 Digits"/>
+                        <property name="article" value=""/>
+                        <property name="description" value="I guessed 3 digits of the code on High Stakes slots. Play now to see if you can crack the safe!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_finalcrack">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Safe"/>
+                        <property name="article" value="the"/>
+                        <property name="description" value="Yes! I cracked the Safe on High Stakes slots. Can you crack it? Come play!"/>
+                    </bean>
+                </entry>
+
+                <entry key="hs_earnchips">
+                    <bean class="com.yazino.web.domain.facebook.FacebookOGResource">
+                        <property name="title" value="Chips"/>
+                        <property name="article" value="the"/>
+                        <property name="description" value="Earn Chips Yo!"/>
+                    </bean>
+                </entry>
+
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

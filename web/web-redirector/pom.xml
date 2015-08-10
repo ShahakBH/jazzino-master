@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yazino</groupId>
+        <artifactId>web</artifactId>
+        <version>2.2.34-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>web-redirector</artifactId>
+
+    <packaging>war</packaging>
+    <name>Yazino Web: Redirector Web App</name>
+    <description>
+        This very simple application redirects users from yazino.com to www.yazino.com.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yazino</groupId>
+            <artifactId>logging</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <context:annotation-config/>
+
+    <util:list id="tableRequestHandlers">
+        <bean id="forceNewGameProcessor" class="com.yazino.platform.processor.table.handler.ForceNewGameHandler"/>
+        <bean id="tableCommandProcessor" class="com.yazino.platform.processor.table.handler.TableCommandHandler"/>
+        <bean id="tableEventProcessor" class="com.yazino.platform.processor.table.handler.TableEventHandler"/>
+        <bean id="transactionResultProcessor" class="com.yazino.platform.processor.table.handler.TransactionResultHandler"/>
+        <!--<bean id="tableClosingProcessor" class="senet.server.host.gs.table.TableClosingHandler" autowire="byName"/>-->
+        <!--<bean id="tableController" class="senet.server.host.gs.table.TableControlHandler" autowire="byName"/>-->
+        <!--<bean id="testAlterGamehandler" class="senet.server.host.gs.table.TestAlterGameHandler" autowire="byName"/>-->
+    </util:list>
+
+    <bean id="playerDetailsService" class="com.yazino.platform.test.InMemoryPlayerDetailsService"/>
+    <bean id="gameRequestService" class="senet.server.host.local.InMemoryNovomaticGameRequestService"/>
+
+    <import resource="classpath:/META-INF/spring/gamehost.xml"/>
+</beans>

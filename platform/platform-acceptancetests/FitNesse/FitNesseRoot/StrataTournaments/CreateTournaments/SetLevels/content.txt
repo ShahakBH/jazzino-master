@@ -1,0 +1,19 @@
+At each level, you can specify the game variation template to use, 
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|senet.server.tournament.CreateTournamentLevelsForTournamentTemplate|
+|Template Name|Level|Game Variation Template|Length in seconds|Time until next level in seconds|
+|Blackjack Tournament|1|Atlantic City Regular|600|0|
+|Blackjack Tournament|2|Atlantic City Regular|600|0|
+|Blackjack Tournament|3|Atlantic City Regular|600|120|
+|Blackjack Tournament|4|Atlantic City Regular|600|0|
+|Blackjack Tournament|5|Atlantic City Regular|600|0|
+|Blackjack Tournament|6|Atlantic City Regular|900|240|
+|Blackjack Tournament|7|Atlantic City Regular|900|0|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+!|Tournament Template|Blackjack Tournament|got|7|Levels added|

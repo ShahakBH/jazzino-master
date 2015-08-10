@@ -1,0 +1,1 @@
+alter table rpt_registrations_by_date_source_and_platform modify column REGISTRATION_PLATFORM varchar(20) not null#

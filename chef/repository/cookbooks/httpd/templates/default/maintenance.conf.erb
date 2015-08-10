@@ -1,0 +1,82 @@
+Listen <%= @httpd_ssl_port %>
+
+<VirtualHost *:<%= @httpd_port %>>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    <Directory "/var/www/html">
+        RewriteEngine On
+        <% if @httpd_port == 80 %>
+        RewriteCond %{HTTP_HOST} :<%= @jetty_port %>$
+        <% end %>
+        RewriteCond %{REQUEST_FILENAME} !maintenance
+        RewriteCond %{REQUEST_FILENAME} !content
+        RewriteCond %{REQUEST_FILENAME} !crossdomain.xml
+        RewriteCond %{REQUEST_URI} !/command/loadBalancerStatus
+        RewriteCond %{REQUEST_URI} !/jetty-monitor/load-balancer
+        RewriteCond %{HTTP_ACCEPT} text/html
+        RewriteRule .* /maintenance/ [L]
+
+        RewriteCond %{REQUEST_FILENAME} !maintenance
+        RewriteCond %{REQUEST_FILENAME} !content
+        RewriteCond %{REQUEST_FILENAME} !crossdomain.xml
+        RewriteCond %{REQUEST_URI} !/command/loadBalancerStatus
+        RewriteCond %{REQUEST_URI} !/jetty-monitor/load-balancer
+        RewriteCond %{HTTP_ACCEPT} application/json
+        RewriteRule .* /maintenance/maintenance.json [L]
+
+        <FilesMatch "\.(html|htm)$">
+            Header set Cache-Control "max-age=0, must-revalidate"
+        </FilesMatch>
+    </Directory>
+
+    <Directory "/var/www/html/maintenance">
+        DirectoryIndex maintenance.html
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:<%= @httpd_ssl_port %>>
+    SSLEngine On
+
+    SSLCertificateFile <%= @ssl_certificate_directory %>/apache.crt
+    SSLCertificateKeyFile <%= @ssl_certificate_directory %>/apache.key
+    SSLCertificateChainFile <%= @ssl_certificate_directory %>/apache-bundle.crt
+
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    <Directory "/var/www/html">
+        RewriteEngine On
+        <% if @httpd_ssl_port == 443 %>
+        RewriteCond %{HTTP_HOST} :<%= @jetty_ssl_port %>$
+        <% end %>
+        RewriteCond %{REQUEST_FILENAME} !maintenance
+        RewriteCond %{REQUEST_FILENAME} !content
+        RewriteCond %{REQUEST_FILENAME} !crossdomain.xml
+        RewriteCond %{REQUEST_URI} !/command/loadBalancerStatus
+        RewriteCond %{REQUEST_URI} !/jetty-monitor/load-balancer
+        RewriteCond %{HTTP_ACCEPT} text/html
+        RewriteRule .* /maintenance/ [L]
+
+        RewriteCond %{REQUEST_FILENAME} !maintenance
+        RewriteCond %{REQUEST_FILENAME} !content
+        RewriteCond %{REQUEST_FILENAME} !crossdomain.xml
+        RewriteCond %{REQUEST_URI} !/command/loadBalancerStatus
+        RewriteCond %{REQUEST_URI} !/jetty-monitor/load-balancer
+        RewriteCond %{HTTP_ACCEPT} application/json
+        RewriteRule .* /maintenance/maintenance.json [L]
+
+
+        <FilesMatch "\.(html|htm)$">
+            Header set Cache-Control "max-age=0, must-revalidate"
+        </FilesMatch>
+    </Directory>
+
+    <Directory "/var/www/html/maintenance">
+        DirectoryIndex maintenance.html
+    </Directory>
+</VirtualHost>

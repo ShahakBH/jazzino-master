@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# A script to allow running the deployment scripts from a branch
+
+BASE_DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <branch to run from|--latest-artefact|--live-release> <deployment options>"
+    exit 1
+fi
+
+BRANCH=$1
+shift
+
+declare -a deploy_args
+for arg in "$@"; do deploy_args+=( "$arg" ); done
+
+GIT_REPO='git@github.com:yazino/support.git'
+
+if [ "$BRANCH" == "--live-release" ]; then
+    DEPLOYED_ARTEFACT=$(ruby -I$BASE_DIR/../lib $BASE_DIR/../lib/get_deployed.rb production)
+    if [ $? -ne 0 ]; then
+        echo "Could not get deployed artefact from production; exiting. Output was: $DEPLOYED_ARTEFACT"
+        exit 1
+    fi
+
+    ARTEFACT_DETAILS=$($BASE_DIR/../../release/bin/get-artefact-details $DEPLOYED_ARTEFACT)
+    if [ $? -ne 0 ]; then
+        echo "Could not get artefact details for $DEPLOYED_ARTEFACT from release server; exiting. Output was: $ARTEFACT_DETAILS"
+        exit 1
+    fi
+
+    LATEST_ARTEFACT=$(echo "$ARTEFACT_DETAILS" | awk '{print $1}')
+    BRANCH=$(echo "$ARTEFACT_DETAILS" | awk '{print $2}')
+    deploy_args+=( "--deploy=$LATEST_ARTEFACT" )
+
+elif [ "$BRANCH" == "--latest-artefact" ]; then
+    ARTEFACT_DETAILS=$($BASE_DIR/../../release/bin/get-latest-artefact)
+    if [ $? -ne 0 ]; then
+        echo "Could not get latest artefact from release server; exiting. Output was: $ARTEFACT_DETAILS"
+        exit 1
+    fi
+
+    LATEST_ARTEFACT=$(echo "$ARTEFACT_DETAILS" | awk '{print $1}')
+    BRANCH=$(echo "$ARTEFACT_DETAILS" | awk '{print $2}')
+
+elif [[ "$BRANCH" =~ (.+[[:digit:]]+)\.[[:digit:]]+ ]]; then
+    BRANCH="${BASH_REMATCH[1]}"
+fi
+
+TEMP=$TMPDIR
+if [ -z "$TEMP" ]; then
+    TEMP=/tmp
+fi
+
+if [ ! -d "$TEMP" ]; then
+    echo "Cannot find temporary dir, tried \$TMPDIR and /tmp"
+    exit 1
+fi
+
+echo "Retrieving deployment scripts from branch $BRANCH"
+
+TIMESTAMP=$(date '+%d%m%YT%H%M%S')
+WORK_DIR="$TEMP/release-$TIMESTAMP"
+mkdir -p $WORK_DIR
+pushd $WORK_DIR > /dev/null
+
+OUTPUT=$(git clone $GIT_REPO support 2>&1)
+if [ $? -ne 0 ]; then
+    echo "Clone failed; exiting. Output was: $OUTPUT"
+    exit 1
+fi
+
+cd support
+OUTPUT=$(git checkout $BRANCH 2>&1)
+if [ $? -ne 0 ]; then
+    echo "Failed to switch to branch $BRANCH; exiting. Output was: $OUTPUT"
+    exit 1
+fi
+
+cd deployment
+echo "Invoking deployment script in $(pwd) with arguments: ${deploy_args[@]}"
+echo "-----------------------------------------------------------------------------"
+bin/deploy "${deploy_args[@]}"
+SUCCESS=$?
+echo "-----------------------------------------------------------------------------"
+
+popd > /dev/null
+if [ $SUCCESS -eq 0 -a -d "$WORK_DIR" ]; then
+    echo "Cleaning up branch deployment scripts from $(pwd)"
+    rm -rf $WORK_DIR
+fi
+
+exit $SUCCESS

@@ -1,0 +1,109 @@
+
+<script type="text/javascript" src="${assetUrl}/javascript/jquery.cycle.all.v2.9996.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('#home-page-features')
+        .after('<div id="home-page-features-nav">')
+        .cycle({
+            fx:      'fade',
+            speed:   500,   ## Defines the number of millisecs it will take to transition from one slide to the next.
+            timeout: 5000,  ## How many millisecs will elapse between the start of each transition.
+            pause:   1,     ## Pause on hover
+            pager:   '#home-page-features-nav',
+            pagerAnchorBuilder: function(index, el) {  ## overrides default anchor which displays numerics
+                return '<a href="#">&nbsp;</a>';
+            }
+        });
+
+    $.getJSON("/public/lobbyInformation", function(data) {
+        $('.playerCountTextNumber').text(data.onlinePlayers);
+    });
+
+    $('#div-welcome-to-yazino .right-arrow').click(function() {
+		if ($(this).parents('#div-welcome-to-yazino').hasClass('closed')) {
+			$(this).parents('#div-welcome-to-yazino').addClass('opened').removeClass('closed');
+			$('.body', $(this).parents('#div-welcome-to-yazino')).slideDown('slow');
+		} else if ($(this).parents('#div-welcome-to-yazino').hasClass('opened')) {
+			$(this).parents('#div-welcome-to-yazino').addClass('closed').removeClass('opened');
+			$('.body', $(this).parents('#div-welcome-to-yazino')).slideUp('slow');
+		}
+	});
+
+});
+
+</script>
+
+#parse("partials/gameSpecifics.vm")
+
+<div id="index-area">
+    <h3>
+        #generateLinkTagForMainCta("slots")
+    </h3>
+    <div id="home-page-features">
+        <div class="feature first">
+            <a href="/login?gameType=slots" title="Join Yazino" class="iFramePopUp" data-lightboxWidget-class="loginDialog">
+                <img src="$assetUrl/images/home-page-features/1_YazinoBrand.png" />
+            </a>
+
+        </div>
+
+        <div class="feature">
+            <img src="$assetUrl/images/home-page-features/2_Like.png" />
+            <span class="facebookLikeHome">
+                #parse("partials/shareFacebook.vm")
+            </span>
+        </div>
+
+        <div class="feature">
+            <a href="/friends" title="Yazino friends">
+                <img src="$assetUrl/images/home-page-features/3_Friends.png" />
+            </a>
+        </div>
+
+        <div class="feature">
+            <img src="$assetUrl/images/home-page-features/4_Achievements.png" />
+        </div>
+
+        <div class="feature">
+            <a href="/tournaments/blackjack">
+                <img src="$assetUrl/images/home-page-features/5_Tournament.png" />
+            </a>
+        </div>
+
+    </div>
+
+    #parse("partials/onlinePlayerCount.vm")
+
+
+    <div id="div-welcome-to-yazino" class="closed">
+        <div class="head">
+            <div class="head-inner">
+                <div class="right-arrow"></div>
+                <h3>Welcome to Yazino, specialists in in-sync social games.</h3>
+            </div>
+        </div>
+        <div class="body" style="width: 935px;">
+            <p>
+All of our games are multiplayer and played in real-time. We are dedicated to making sure that our gamers can enjoy a
+vast range of games with their friends. We've taken your favourite casino games and made them
+truly social, adding innovative chat features and customised, friends-only tables to all of our online
+games. Players can choose from popular games such as Blackjack, Roulette, Texas Hold 'Em
+and Slots. When a friend logs in, players are able to invite them to a
+private table to play games together. Private tables, in-game chat, and other social features ensure
+that the opportunity to have fun is truly unique from any other online casino or gaming sites.
+            </p>
+
+            <p style="padding-top: 10px; padding-bottom: 10px; ">
+Yazino develops innovative social games, which use real-time multiplayer technology - an
+approach we call 'in-sync gaming'. Yazino players are able to compete with each other in a fun
+environment where they can invite their friends, chat, or simply play with a network of like-minded
+people to create new levels of real-time social interaction and friendly competition between
+people. Try our games at Yazino.com, on Facebook or on your iPhone and iPad - whenever you
+feel a desire for some friendly competition.
+            </p>
+        </div>
+    </div>
+
+</div>
+

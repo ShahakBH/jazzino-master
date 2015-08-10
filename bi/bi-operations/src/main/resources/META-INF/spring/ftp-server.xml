@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:integration="http://www.springframework.org/schema/integration"
+       xmlns:integration-ftp="http://www.springframework.org/schema/integration/ftp"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans            http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/integration      http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+       http://www.springframework.org/schema/integration/ftp  http://www.springframework.org/schema/integration/ftp/spring-integration-ftp-2.0.xsd">
+
+    <bean id="ftpSessionFactory" class="org.springframework.integration.ftp.session.DefaultFtpSessionFactory">
+        <property name="host" value="${cdn.host}"/>
+        <property name="port" value="${cdn.port}"/>
+        <property name="username" value="${cdn.username}"/>
+        <property name="password" value="${cdn.password}"/>
+        <property name="clientMode" value="#{ T(org.apache.commons.net.ftp.FTPClient).PASSIVE_LOCAL_DATA_CONNECTION_MODE }" />
+    </bean>
+
+    <integration:channel id="messageChannel"/>
+
+    <integration-ftp:outbound-channel-adapter id="ftpOutboundChannelAdapter"
+        channel="messageChannel"
+        remote-directory="${cdn.remote.directory}"
+        session-factory="ftpSessionFactory"/>
+
+</beans>
+
+
+

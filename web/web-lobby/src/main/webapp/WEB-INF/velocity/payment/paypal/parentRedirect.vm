@@ -1,0 +1,45 @@
+#* @vtlvariable name="assetUrl" type="java.lang.String" *#
+#* @vtlvariable name="hostUrl" type="java.lang.String" *#
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="${assetUrl}/javascript/jquery-1.8.3.min.js"></script>
+    <script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+#if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+<script>
+    $(document).ready(function() {
+        var date = new Date();
+
+        #if($isError)
+                parent.location = "/payment/paypal/error";
+                top.dg.closeFlow();
+        #else
+
+        $('#wait_header', parent.document).html("Almost there!");
+        $('#wait_text', parent.document).html("Paypal is stacking your chips.");
+        $('#paypal_please_wait', parent.document).removeClass("awaiting");
+        $('#paypal_please_wait', parent.document).addClass("stacking");
+        $('body', parent.document).append("<div id='blanked' class='dialogMask'></div>");
+
+        window.setTimeout(function() {
+            if (top.dg.isOpen() === true) {
+                parent.location = "/payment/paypal/complete?paymentOptionId=${paymentOptionId}&promoId=$!{promoId}&token=${token}&PayerID=${PayerID}";
+                top.dg.closeFlow();
+            }
+        }, 250);
+                #end
+    });
+    </script>
+</head>
+<body></body>
+</html>
+
+

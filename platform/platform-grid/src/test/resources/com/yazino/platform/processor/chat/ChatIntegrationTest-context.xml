@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:os-core="http://www.openspaces.org/schema/core"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.openspaces.org/schema/core http://www.openspaces.org/schema/core/openspaces-core.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="propertiesConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
+
+    <os-core:space id="space" url="/./processorSpace" lookup-groups="chat-integration-test"/>
+
+    <os-core:local-tx-manager id="transactionManager" space="space"/>
+
+    <os-core:giga-space id="gigaSpace" space="space" tx-manager="transactionManager"/>
+    <os-core:giga-space id="globalGigaSpace" space="space" clustered="true"/>
+
+    <bean class="com.yazino.platform.grid.Routing"/>
+
+    <bean id="documentDispatcher" class="com.yazino.platform.messaging.dispatcher.MemoryDocumentDispatcher"/>
+
+    <bean id="chatRepository" class="com.yazino.platform.repository.chat.GigaspacesChatRepository">
+        <constructor-arg ref="gigaSpace"/>
+    </bean>
+    <bean id="profanityService" class="com.yazino.platform.test.DummyProfanityService"/>
+    <bean id="profanityFilter" class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="chatMessageWorker" class="com.yazino.platform.processor.chat.ChatMessageWorker"/>
+
+    <bean id="hostDocumentPublisher" class="com.yazino.platform.messaging.host.ImmediateHostDocumentPublisher"/>
+
+    <bean id="destinationFactory" class="com.yazino.platform.messaging.destination.DestinationFactory"/>
+    <bean id="chatChannelAggregateWorker" class="com.yazino.platform.processor.chat.ChatChannelAggregateWorker"/>
+
+    <bean id="chatChannelWorker" class="com.yazino.platform.processor.chat.ChatChannelWorker"/>
+
+    <bean id="playerRepository"
+          class="com.yazino.platform.test.InMemoryPlayerRepository"/>
+
+    <alias name="playerRepository" alias="playerRepository"/>
+
+    <bean id="playerSessionRepository"
+          class="com.yazino.platform.repository.session.InMemoryPlayerSessionRepository"/>
+
+    <bean id="chatMessageProcessor" class="com.yazino.platform.processor.chat.ChatMessageProcessor"/>
+
+    <bean id="addParticipantsProcessor" class="com.yazino.platform.processor.chat.AddParticipantProcessor"/>
+
+    <bean id="leaveChannelProcessor" class="com.yazino.platform.processor.chat.LeaveChannelProcessor"/>
+
+    <bean id="publishChannelProcessor" class="com.yazino.platform.processor.chat.PublishChannelProcessor"/>
+
+</beans>

@@ -1,0 +1,46 @@
+#* @vtlvariable name="transactionId" type="java.lang.String" *#
+#* @vtlvariable name="status" type="java.lang.String" *#
+<div class="paymentResponse">
+	<h1>Payment#if($status=="SUCCESS") Successful#elseif($status=="ERROR") Failed#elseif($status=="CANCELLED")
+		Cancelled#end</h1>
+
+	<div class="box">
+		<div class="tl"></div>
+		<div class="tr"></div>
+
+		#if($status=="SUCCESS")
+
+		<p>
+			Thank you - your account has been credited (transaction ID: $!{transactionId}). Chip in and play now together!
+		</p>
+
+		#elseif($status=="ERROR")
+
+		<p>
+			Due to an error, your transaction could not be completed. Please contact us at
+			<a href="mailto:contact@yazino.com">contact@yazino.com</a>.
+		</p>
+
+		<p>
+			The reported error was: $!{error}.
+		</p>
+
+		#elseif($status=="CANCELLED")
+
+		<p>
+			Your payment was cancelled and you will not be charged.
+		</p>
+
+		#else
+
+		<p>
+			An unknown error has occurred. Please contact us at
+			<a href="mailto:contact@yazino.com">contact@yazino.com</a>.
+		</p>
+
+		#end
+
+		<div class="bl"></div>
+		<div class="br"></div
+	</div>
+</div>

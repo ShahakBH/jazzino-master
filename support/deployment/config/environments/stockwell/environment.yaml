@@ -1,0 +1,4 @@
+hosts:
+    stockwell.london.yazino.com:
+        roles:
+            - all

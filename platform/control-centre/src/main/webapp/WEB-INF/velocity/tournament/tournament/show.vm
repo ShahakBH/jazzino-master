@@ -1,0 +1,24 @@
+#set ($location = "Show Tournament")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/tournament/list">List Tournaments</a></li>
+        #if ($tournament.canCancel())
+        <li><a href="${request.contextPath}/tournament/tournament/cancel/${tournament.id}"
+               class="action-named" data-action="Cancel" data-id="${tournament.id}"
+               data-type="tournament">Cancel</a></li>
+        #end
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Tournament ${tournament.id}</h2>
+
+        #set($readonly = "true")
+        #parse("tournament/tournament/form.vm")
+    </div>
+</section>

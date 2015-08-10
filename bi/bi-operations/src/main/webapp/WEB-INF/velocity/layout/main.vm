@@ -1,0 +1,27 @@
+#parse('partials/macros.vm')
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            #if($!{pageTitle})
+                $!{pageTitle}
+            #else
+                BI Operations
+            #end
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0">
+        #parse('partials/includes.vm')
+        <script type="text/javascript">
+            YAZINO = {};
+            YAZINO.config = {};
+            YAZINO.config.baseUrl = '#springUrl('/')';
+        </script>
+    </head>
+    <body>
+        #parse('partials/header.vm')
+        <div id="content">
+        ${screen_content}
+        </div>
+        #parse('partials/postScripts.vm')
+    </body>
+</html>

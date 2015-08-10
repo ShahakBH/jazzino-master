@@ -1,0 +1,61 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var toggleOptions = function () {
+            if ($("input[name='paymentTransactionReportType']:checked").val() == 'all') {
+                $("#txn").hide();
+                $("#all").show();
+            } else {
+                $("#all").hide();
+                $("#txn").show();
+            }
+        };
+
+        $("input[name='paymentTransactionReportType']").change(toggleOptions);
+
+        toggleOptions();
+    });
+</script>
+
+<h1>Transaction Report</h1>
+
+<p>Reports are limited to latest 5000 matching transactions.</p>
+
+<div class="report">
+    <form class="formattedReport" method="POST" data-action="#springUrl('/report/paymentTransaction')">
+        <label for="paymentTransactionReportType">Find:</label>
+
+        <div>#springFormRadioLabelledButtons("command.paymentTransactionReportType" $searchOptions '')</div>
+
+        <div id="all" class="panel">
+            <label for="fromDate">Date from:</label>
+
+            <div class="compound">
+                <div>#springFormInput("command.fromDate" "class='fromDatePickable'")</div>
+                <div><label for="toDate">to</label></div>
+                <div>#springFormInput("command.toDate" "class='toDatePickable'")</div>
+            </div>
+            <label for="txnStatus">Status:</label>
+
+            <div>#springFormSingleSelect("command.txnStatus" $transactionStatuses,  "id='txnStatus'")</div>
+            <label for="paymentMethod">Payment method:</label>
+
+            <div>#springFormSingleSelect("command.paymentMethod" $paymentMethods "")</div>
+            <label for="currnecyCode">Currency:</label>
+
+            <div>#springFormSingleSelect("command.currencyCode" $currencyCodes "id='currencyCode'")</div>
+        </div>
+        <div id="txn" class="panel">
+            <label for="transactionId">Internal/external ID:</label>
+            <div>#springFormInput("command.transactionId" 'size="30"')</div>
+        </div>
+        <label for="reportFormat">Format:</label>
+        <div>#springFormSingleSelect("command.reportFormat" $reportFormats "id='reportFormat'")</div>
+        <div class="actions">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    #if($reportData)
+        #parse("partials/report.vm")
+    #end
+</div>

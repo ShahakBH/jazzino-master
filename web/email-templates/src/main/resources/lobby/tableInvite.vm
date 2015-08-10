@@ -1,0 +1,44 @@
+<style>
+body {
+ 	font-family: Helvetica, Arial, sans-serif;
+ 	font-size: 10pt;
+ 	color: black;
+ 	background-color: white;
+}
+
+.footer {
+ 	color: rgb(120, 120, 120);
+ 	font-size: 8pt;
+}
+
+.quote {
+	padding-left: 20px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+</style>
+<p>Hello $!recipientName,</p>
+
+<p>$!senderName is inviting you to play at $!tableName, their private $!gameType table at <a href="http://yazino.com/">Yazino.com</a>.</p>
+
+#if($!{userMessage} && $!{userMessage} != "")
+	<p>$!senderName says:</p>
+	<p class="quote">&ldquo;$!{userMessage}&rdquo;</p>
+#end
+
+<p>Click <a href="$!privateTablesUrl">here</a> to play or copy and paste the URL below into your web browser.</p>
+
+<p>$!privateTablesUrl</p>
+
+<p>If you have any questions, please contact us at contact@yazino.com or visit <a href="http://support.yazino.com">http://support.yazino.com</a>.</p>
+
+<p>We'll see you soon at Yazino. The Social Casino.</p>
+
+<p>Regards,<br>
+Your Yazino Team
+</p>
+
+<p class="footer">
+    &copy; 2012 Yazino, Island House, Grande Rue, St Martins, Guernsey, GY4 6RU
+</p>

@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	<!--
+	$(document).ready(function() {
+		$("#email").focus();
+	});
+	//-->
+</script>
+
+<form method="POST" action="/login">
+	<div id="login-form" class="yazino-login">
+		<div class="tl"></div>
+		<div class="tr"></div>
+
+		<table class="layout">
+			<tr>
+				<td></td>
+				<td>
+					<h3>Login Now to Begin Playing</h3>
+
+					<p class="error">
+						#springBind("loginForm")
+						#springShowErrors("<br>" "")
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th>Email&nbsp;address</th>
+				<td>#springFormInput("loginForm.email" 'size="30"') #springShowErrors("<br>" '')</td>
+			</tr>
+			<tr>
+				<th>Password</th>
+				<td>#springFormPasswordInput("loginForm.password" 'size="30"') #springShowErrors("<br>" '')</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit" class="button-login"></button>
+				</td>
+			</tr>
+		</table>
+
+		<div class="bl"></div>
+		<div class="br"></div>
+	</div>
+
+	#springFormHiddenInput("loginForm.redirectTo" "")
+</form>

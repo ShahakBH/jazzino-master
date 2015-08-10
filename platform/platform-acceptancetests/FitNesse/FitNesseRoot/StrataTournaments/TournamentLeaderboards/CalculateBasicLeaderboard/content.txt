@@ -1,0 +1,21 @@
+!3 Calculate basic leaderboard position, where some players have the same rank
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|2|for template|Blackjack Tournament|with min stake|20|
+
+!|Chips at end of level|1|
+|Player|Chips|
+|Anna|1000|
+|Bill|800|
+|Cara|800|
+|Dave|500|
+|Elle|400|
+
+If players have the same chips, they will have the same rank
+!|Check leaderboard|
+|Rank|Player|
+|1|Anna|
+|2|Bill|
+|2|Cara|
+|4|Dave|
+|5|Elle|

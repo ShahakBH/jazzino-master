@@ -1,0 +1,1 @@
+alter table player_level add FOREIGN KEY(PLAYER_ID) REFERENCES LOBBY_USER(PLAYER_ID);

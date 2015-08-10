@@ -1,0 +1,11 @@
+set_unless[:vm] = false
+set_unless[:firewall] = true
+set_unless[:sysctl][:keepalive_time] = 120
+set_unless[:sysctl][:keepalive_interval] = 30
+set_unless[:sysctl][:close_wait] = 10
+set_unless[:sysctl][:fin_wait] = 10
+set_unless[:sysctl][:syn_recv] = 15
+set_unless[:sysctl][:syn_sent] = 15
+set_unless[:sysctl][:time_wait] = 15
+set_unless[:sysctl][:max_connections] = 50000
+set_unless[:sysctl][:swappiness] = 10 # CentOS default is 60

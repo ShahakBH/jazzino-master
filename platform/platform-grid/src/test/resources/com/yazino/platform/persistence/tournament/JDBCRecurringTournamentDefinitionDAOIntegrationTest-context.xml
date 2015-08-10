@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-autowire="byType">
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+    <import resource="classpath:META-INF/spring/datasource.xml"/>
+
+    <tx:annotation-driven transaction-manager="jdbcTransactionManager"/>
+
+    <bean id="jdbcTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="defaultTimeout" value="10000"/>
+    </bean>
+
+    <bean id="recurringTournamentDefinitionDAO"
+          class="com.yazino.platform.persistence.tournament.JDBCRecurringTournamentDefinitionDAO">
+        <constructor-arg ref="jdbcTemplate"/>
+    </bean>
+
+</beans>

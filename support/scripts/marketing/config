@@ -1,0 +1,14 @@
+#!/bin/sh
+
+REDSHIFT_HOST=redshift.yazino.com
+REDSHIFT_PORT=5439
+REDSHIFT_USER=readonly
+REDSHIFT_PASSWORD='0range Paper Tiger'
+REDSHIFT_DB=prod
+
+DBDW_HOST=ovh-prd-dbdw1.yazino.com
+DBDW_PRODSCHEMA=strataprod
+DBDW_DBDWSCHEMA=strataproddw
+DBDW_PORT=3306
+DBDW_USER=readonly
+DBDW_PASSWORD=readonly-s1gn4tur3

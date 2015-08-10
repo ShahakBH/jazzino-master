@@ -1,0 +1,207 @@
+.tabs-header {
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    border: none;
+    clear: left;
+}
+
+.tab-body {
+    clear: left;
+}
+
+.tabs-header .tab {
+    margin-right: 5px;
+    float: left;
+    border: 1px solid rgb(150, 150, 150);
+    position: relative;
+    bottom: -1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(249, 249, 249);
+}
+
+.tabs-header .tab {
+    padding: 8px;
+    display: block;
+    cursor: pointer;
+}
+
+.tabs-header .tab.selected {
+    padding: 8px;
+    border-bottom: 1px solid white;
+    background-color: white;
+}
+
+.tab-body {
+    border-top: 1px solid rgb(150, 150, 150);
+    padding-top: 10px;
+}
+
+.tab-body .tab-content {
+    display: none;
+}
+
+.tab-body .tab-content.selected {
+    display: block;
+}
+
+.tab-body table {
+    margin-top: 10px;
+    clear: left;
+}
+
+.tab-body .paging {
+    clear: both;
+}
+
+.player-details .avatar {
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 1px solid #EAEAEA;
+    margin: 8px;
+}
+
+.player-details h1 {
+    font-size: 18px;
+    margin: 8px 0 3px 0;
+    padding: 0;
+}
+
+.player-details .alert {
+    font-size: 14px;
+    line-height: 16px;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    margin-top: 4px;
+    margin-left: 6px;
+    border-radius: 4px;
+    border: 1px solid red;
+    display: block;
+    float: left;
+}
+
+.player-details .alert-blocked {
+    background-color: orange;
+    border-color: orange;
+}
+
+.player-details .alert-closed {
+    background-color: #8b0000;
+    border-color: #8b0000;
+}
+
+.player-details .alert-insider {
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+}
+
+.player-details h1 input {
+    margin-left: 15px;
+}
+
+.player-details h1 .player-id {
+    color: #006dba;
+    padding: 0 0 0 10px;
+}
+
+.player-details .summary-details {
+    height: 30px;
+}
+
+.player-details .summary-details div {
+    float: left;
+}
+
+.player-details .balance img {
+    position: relative;
+    top: 5px;
+}
+
+.player-details form {
+    display: inline;
+}
+
+.player-details .balance {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.player-details .balance .adjustment {
+    font-weight: normal;
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.player-details .info {
+    color: #777777;
+    text-align: right;
+    font-style: italic;
+}
+
+.player-details div.attributes,
+.player-details div.purchases,
+.player-details div.levels {
+    float: left;
+    margin: 10px 50px 0 0;
+}
+
+.player-details div.attributes table {
+    border: none;
+}
+
+
+.player-details div.purchases tbody tr:nth-child(2n),
+.player-details div.levels tbody tr:nth-child(2n) {
+    background-color: rgb(244, 246, 250);
+}
+
+.player-details div thead tr {
+    background-color: rgb(249, 249, 249) !important;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 4px 0;
+}
+
+.player-details div th,
+.player-details div td {
+    padding: 6px;
+}
+
+.player-details tbody th {
+    text-align: right;
+}
+
+.player-details div thead th {
+    text-align: center;
+}
+
+.player-details .actions {
+    margin-top: 8px;
+    background-color: rgb(249, 249, 249) !important;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0;
+}
+
+.player-details .actions .message {
+    padding: 0 8px;
+    font-style: italic;
+    display: none;
+}
+
+.player-details .actions input {
+    margin-left: 6px;
+}
+
+.player-details .actions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.player-details .actions li {
+    display: inline-block;
+    padding: 6px 8px;
+    margin: 0 6px 0 0;
+    border-right: 1px solid rgb(240, 240, 240);
+}

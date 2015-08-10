@@ -1,0 +1,136 @@
+<div id="content-job">
+    <div id="content-job-text">
+        <h1>
+            GOT <strong>SKILLS?</strong>
+        </h1>
+
+        <div id="content-job-info">
+            <p class="featurePara">Think you have what it takes to be part of the team leading the
+                way in in-sync games? Then drop us a line at <a href="mailto:jobs@yazino.com">jobs@yazino.com</a>.</p>
+
+            <h2>What's it like to work at Yazino?</h2>
+
+            <p class="descriptionOfWork">We're an eclectic group of international techies, designers,
+                innovators, producers, geeks, artists, code junkies, pilates fans,
+                and musicians. Most of all we're passionate about games.
+                Check out some of our people and our office to get a look inside.</p>
+
+            <h2>We're always on the lookout for great talent in the following areas:</h2>
+            <ul>
+                <li>
+                    <strong>Analytics / Business Intelligence</strong>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Design</strong>
+                </li>
+                <li>
+                    Animator
+                </li>
+                <li>
+                    Graphic Designer
+                </li>
+                <li>
+                    Interactive Designer
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Development</strong>
+                </li>
+                <li>
+                    Flash/Flex Developer
+                </li>
+                <li>
+                    Game Developer
+                </li>
+                <li>
+                    Game Platform Developer
+                </li>
+                <li>
+                    iOS/Android Developer
+                </li>
+                <li>
+                    Web Developer
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Marketing &amp; Communications</strong>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Player Support</strong>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Product Management</strong>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Production</strong>
+                </li>
+                <li>
+                    Game Producer
+                </li>
+                <li>
+                    Web Producer
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>Quality Assurance</strong>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <strong>System Administration</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="content-job-gallery">
+        <a href="$!assetUrl/images/jobs/1.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/1.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-left:168px;"/></a><br>
+        <a href="$!assetUrl/images/jobs/2.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/2.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-left:84px; margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/3.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/3.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/4.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/4.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/5.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/5.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a><br>
+        <a href="$!assetUrl/images/jobs/6.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/6.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/7.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/7.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/8.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/8.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a>
+        <a href="$!assetUrl/images/jobs/9.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/9.png"
+                                                                                width="81" height="81" alt=""
+                                                                                style="margin-top:3px;"/></a><br>
+        <a href="$!assetUrl/images/jobs/10.jpg" rel="prettyPhoto[gallery1]"><img src="$!assetUrl/images/jobs/10.png"
+                                                                                 width="81" height="81" alt=""
+                                                                                 style="margin-left:168px; margin-top:3px;"/></a>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            jQuery(document).ready(function () {
+                $("#content-job-gallery a[rel^='prettyPhoto']").prettyPhoto();
+            });
+        })();
+    </script>
+</div>

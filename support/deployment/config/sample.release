@@ -1,0 +1,5 @@
+# This is a sample release file, which allows you to override the version of one or more components.
+# You can invoke it as a deployment target, e.g.
+#   bin/deploy -e=wherever -d=config/sample.release strata.server.host.account
+versions:
+  strata.server.host.account: 2.0.9999

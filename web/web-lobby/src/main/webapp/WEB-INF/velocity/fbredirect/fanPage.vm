@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yazino - Redirecting to Fan Page...</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="$!assetUrl/style/partial/facebook-splash.css" type="text/css"/>
+    <script type="text/javascript">
+        window.top.location.href = '$targetUrl';
+    </script>
+</head>
+<body class="$!gameType">
+<div class="header">
+    <img src="$!assetUrl/images/facebook-splash/logo.png" alt="Yazino"/>
+</div>
+<p>
+    <strong>Redirecting you to <a href="$!targetUrl">our Fan Page...</a></strong>
+</p>
+</body>
+</html>

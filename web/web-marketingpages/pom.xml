@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yazino</groupId>
+        <artifactId>web</artifactId>
+        <version>2.2.34-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>web-marketingpages</artifactId>
+
+    <packaging>war</packaging>
+    <name>Yazino Web: Marketing Pages</name>
+    <description>
+        This package contains HTML pages pushed to the CDN for marketing purposes.
+    </description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <stopKey>gameserverjetty</stopKey>
+                    <systemProperties>
+                        <force>true</force>
+                        <systemProperty>
+                            <name>strata.development</name>
+                            <value>true</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>jetty.keystore</name>
+                            <value>${project.build.directory}/jetty-ssl.keystore</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8085</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>jetty.https.port</name>
+                            <value>8185</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <jettyXml>src/jetty/jetty.xml,src/jetty/jetty-http.xml,src/jetty/jetty-ssl.xml,src/jetty/jetty-https.xml</jettyXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>keytool-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>clean</id>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>genkey</id>
+                        <goals>
+                            <goal>generateKeyPair</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+                    <dname>cn=www.yazino.com</dname>
+                    <keypass>jettypass</keypass>
+                    <storepass>jettypass</storepass>
+                    <alias>jetty</alias>
+                    <keyalg>RSA</keyalg>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

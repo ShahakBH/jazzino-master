@@ -1,0 +1,12 @@
+#if($partial)
+<!DOCTYPE html>
+<html>
+<head class="headless">
+    <title>#springMessageText("meta.${viewName}.title" "Yazino - Let's Play!")</title>
+    <meta charset="utf-8"/>
+    #parse("partials/glossStyle.vm")
+    #parse("partials/preScripts.vm")
+</head>
+<body class="headless">
+    #parse("partials/fb_init.vm")
+#end

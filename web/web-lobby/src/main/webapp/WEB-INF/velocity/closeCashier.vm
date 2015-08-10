@@ -1,0 +1,14 @@
+#if ($development)
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+<script type="text/javascript" src="$!{assetUrl}/javascript/yazino-core.min.js"></script>
+#end
+<script>
+    var parent_location = window.parent.location.toString();
+    if(parent_location.indexOf("lobby/games") > -1 || parent_location.indexOf("apps.facebook.com") > -1) {
+        window.parent.location = window.parent.location;
+    } else {
+        window.parent.clearPaymentsOverlay();
+    }
+</script>

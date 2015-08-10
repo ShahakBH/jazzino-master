@@ -1,0 +1,122 @@
+#* @vtlvariable name="gameConfiguration" type="com.yazino.platform.table.GameConfiguration" *#
+## properties are defined within Control Centre
+#set($buyInAmount = $!{gameConfiguration.getProperty('buyInAmount')})
+#set($stakes = $!{gameConfiguration.getProperty('stakes')})
+#set($numberOfPlayers = $!{gameConfiguration.getProperty('numberOfPlayers')})
+#set($subTypes = $!{gameConfiguration.getProperty('gameType')})
+#set($gameSpeeds = $!{gameConfiguration.getProperty('gameSpeed')})
+
+#set($defaultTemplateName = $!{gameConfiguration.getProperty('defaultTemplateName')})
+#set($minimumStakes = $!{gameConfiguration.getProperty('minimumStakes')})
+#set($minimumBalanceFactor = $!{gameConfiguration.getProperty('minimumBalanceFactor')})
+#set($variationNames = $!{gameConfiguration.getProperty('variationNames')})
+
+
+#if($buyInAmount)
+<div id="stake-selector">
+    Buy In:
+        <span class="buyin-amount">
+            <img src="${assetUrl}/images/gloss/yazinoChipLobby.png"/> $buyInAmount
+        </span>
+</div>
+#end
+
+#if($numberOfPlayers)
+<div id="number-of-players">
+    Number of players: &nbsp;&nbsp;&nbsp; $numberOfPlayers
+</div>
+#end
+
+#if($stakes)
+<div class="slider-region">
+    <div class="slide-area">
+        <div class="control-limiter">
+            <a class="slide-control">
+            <span class="info-popup">
+                <div class="ico-chip"></div>
+                <span>Your Stake:</span>
+                <span class="value-sector stake"></span>
+            </span>
+            </a>
+        </div>
+    </div>
+</div>
+#end
+
+#if ($subTypes || $gameSpeeds)
+#if($subTypes)
+<div class="variant">Game Type:</div>
+<div class="control-bt variant">
+    #foreach($subType in $subTypes.split(","))
+        #if($velocityCount == 1)
+            <a class="current $subType.replace(" ","").toLowerCase()">$subType</a>
+        #else
+            <a class="$subType.replace(" ","").toLowerCase()">$subType</a>
+        #end
+    #end
+</div>
+#end
+#if($gameSpeeds)
+<div class="speed">Speed:</div>
+<div class="control-bt speed">
+    #foreach($gameSpeed in $gameSpeeds.split(","))
+        #if($velocityCount == 1)
+            <a class="current $gameSpeed.replace(" ","").toLowerCase()">$gameSpeed</a>
+        #else
+            <a class="$gameSpeed.replace(" ","").toLowerCase()">$gameSpeed</a>
+        #end
+    #end
+</div>
+#end
+#end
+
+
+<script>
+
+YAZINO.configuration.set('gameConfig.gameName', "$!{gameConfiguration.displayName}");
+#if($defaultTemplateName)
+    YAZINO.configuration.set('gameConfig.defaultTemplateName', "$defaultTemplateName");
+#else
+    YAZINO.configuration.set('gameConfig.defaultTemplateName', $!{gameConfiguration.gameId};
+#end
+
+YAZINO.configuration.set('gameConfig.minimumStakes', [$minimumStakes]);
+
+#if($minimumBalanceFactor)
+    YAZINO.configuration.set('gameConfig.minimumBalanceFactor', $minimumBalanceFactor);
+#end
+
+#if($variationNames)
+    YAZINO.configuration.set('gameConfig.variationNames', "$variationNames");
+#end
+    YAZINO.configuration.set('gameConfig.variationDescriptions', [
+    #foreach($variation in $gameConfiguration.getProperty('variationDescriptions').split(","))
+        #if($velocityCount > 1)
+            ,
+        #end
+        "$variation"
+    #end
+]);
+#if($subTypes)
+    YAZINO.configuration.set('gameConfig.variants', {
+    #foreach($subType in $subTypes.split(","))
+        #if($velocityCount > 1)
+            ,
+        #end
+        $subType.trim().replace(" ","").toLowerCase(): "$subType.trim()"
+    #end
+});
+    YAZINO.configuration.set('gameConfig.inverseVariants', {
+    #foreach($subType in $subTypes.split(","))
+        #if($velocityCount > 1)
+        ,
+        #end
+        "$subType.trim()": "$subType.trim().replace(' ','').toLowerCase()"
+    #end
+});
+#else
+YAZINO.configuration.set('gameConfig.variants', {});
+YAZINO.configuration.set('gameConfig.inverseVariants', {});
+#end
+
+</script>

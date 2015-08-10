@@ -1,0 +1,213 @@
+<form method="post" action="${request.contextPath}/tournament/recurring/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($cbformoptions = "$!formoptions disabled=${quote}disabled${quote}")
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($definition.id)
+            #springFormHiddenInput( 'definition.id' '' )
+        #end
+
+        #springFormHiddenInput( 'definition.partnerId' '' )
+
+        <label for="tournamentName">Name:</label>
+        #springFormInput( 'definition.tournamentName' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'definition.tournamentName' )
+        #springShowErrors( '' 'error' )
+
+        <label for="tournamentDescription">Description:</label>
+        #springFormTextarea( 'definition.tournamentDescription' "$!formoptions" )
+        #springBind( 'definition.tournamentDescription' )
+        #springShowErrors( '' 'error' )
+
+        <label for="variationId">Variation:</label>
+        #if ($readonly)
+            <input name="variationId" type="hidden" value="$definition.variationId">
+            <input id="variationId" name="variationIdDisplay" type="text" readonly="readonly"
+                   value="$variations.get($definition.variationId.underlying)">
+        #else
+            #springFormSingleSelect( 'definition.variationId' $variations "$!formoptions required=${quote}required${quote}" )
+            #springBind( 'definition.variationId' )
+            #springShowErrors( '' 'error' )
+        #end
+
+        <label for="initialSignupTime">Initial Sign-up Time:</label>
+        #springFormDateTimeLocalInput( 'definition.initialSignupTime' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'definition.initialSignupTime' )
+        #springShowErrors( '' 'error' )
+
+        <label for="signupPeriod">Sign-up Period:</label>
+        <div class="grouped day-period">
+        #if ($readonly)
+        <span>$definition.signupPeriod</span>
+        #else
+        #springFormInput( 'definition.signupPeriod.days' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.days">d</label>
+        #springFormInput( 'definition.signupPeriod.hours' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.hours">h</label>
+        #springFormInput( 'definition.signupPeriod.minutes' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.mins">m</label>
+        #end
+        #springBind( 'definition.signupPeriod' )
+        #springShowErrors( '' 'error' )
+        </div>
+
+        <label for="frequency.days">Frequency:</label>
+        <div class="grouped day-period">
+        #if ($readonly)
+        <span>$definition.frequency</span>
+        #else
+        #springFormInput( 'definition.frequency.days' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.days">d</label>
+        #springFormInput( 'definition.frequency.hours' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.hours">h</label>
+        #springFormInput( 'definition.frequency.minutes' "$!formoptions required=${quote}required${quote} size=${quote}3${quote}" )
+            <label for="signupPeriod.mins">m</label>
+        #end
+        #springBind( 'definition.frequency' )
+        #springShowErrors( '' 'error' )
+        </div>
+
+        #springFormCheckbox( 'definition.enabled' "$!cbformoptions" )
+        <label for="enabled">Enabled</label>
+        #springBind( 'definition.enabled' )
+        #springShowErrors( '' 'error' )
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Exclusion Periods</legend>
+
+        #if (!$readonly)
+            <a href="javascript:void(0)" class="addRow" title="Add a new Exclusion Period" data-tableId="exclusionTable"
+               data-templateId="exclusionTemplate">Add Exclusion Period</a>
+        #end
+
+        <table id="exclusionTable">
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>From</th>
+                <th>To</th>
+                #if (!$readonly)
+                    <th>Actions</th>
+                #end
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ($exclusionPeriod in $definition.exclusionPeriods)
+                <tr>
+                    #set($index = $foreach.count - 1)
+                    <td>
+                        #if ($!readonly)
+                        $days.get($definition.exclusionPeriods[$index].day)
+                        #else
+                        #springFormSingleSelect( "definition.exclusionPeriods[$index].day" $days "$!formoptions
+                            required=${quote}required${quote}" )
+                        #springBind( "definition.exclusionPeriods[$index].day" )
+                        #springShowErrors( '' 'error' )
+                        #end
+                    </td>
+                    <td>
+                        <div class="grouped">
+                        #if ($!readonly)
+                            $number.format('00',${definition.exclusionPeriods[$index].fromHour}):$number.format('00',${definition.exclusionPeriods[$index].fromMinute})
+                        #else
+                        #springFormSingleSelect( "definition.exclusionPeriods[$index].fromHour" $hoursOfDay
+                            "$!formoptions required=${quote}required${quote}" )
+                        #springBind( "definition.exclusionPeriods[$index].fromHour" )
+                        #springShowErrors( '' 'error' )
+                        #springFormSingleSelect( "definition.exclusionPeriods[$index].fromMinute" $minutesOfHour
+                            "$!formoptions required=${quote}required${quote}" )
+                        #springBind( "definition.exclusionPeriods[$index].fromMinute" )
+                        #springShowErrors( '' 'error' )
+                        #end
+                        </div>
+                    </td>
+                    <td>
+                        <div class="grouped">
+                        #if ($!readonly)
+                            $number.format('00',${definition.exclusionPeriods[$index].toHour}):$number.format('00',${definition.exclusionPeriods[$index].toMinute})
+                        #else
+                            #springFormSingleSelect( "definition.exclusionPeriods[$index].toHour" $hoursOfDay
+                            "$!formoptions required=${quote}required${quote}" )
+                            #springBind( "definition.exclusionPeriods[$index].toHour" )
+                            #springShowErrors( '' 'error' )
+                            #springFormSingleSelect( "definition.exclusionPeriods[$index].toMinute" $minutesOfHour
+                            "$!formoptions required=${quote}required${quote}" )
+                            #springBind( "definition.exclusionPeriods[$index].toMinute" )
+                            #springShowErrors( '' 'error' )
+                        #end
+                        </div>
+                    </td>
+                    #if (!$readonly)
+                        <td><a href="javascript:void(0)" class="removeRow" title="Remove this Exclusion Period">Delete</a></td>
+                    #end
+                </tr>
+                #end
+                #if ($definitions.exclusionPeriods.size() == 0 && $readonly)
+                <tr>
+                    <td colspan="4">No exclusion periods defined</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>
+
+#if (!$readonly)
+<div class="templates">
+    <table>
+        <tbody>
+        <tr id="exclusionTemplate">
+            <td>
+                <select id="exclusionPeriods[0].day" required="required" name="exclusionPeriods[0].day">
+                    #foreach($option in $days.keySet())
+                        <option value="${option}">${days.get($option)}</option>
+                    #end
+                </select>
+            </td>
+            <td>
+                <div class="grouped">
+                    <select id="exclusionPeriods[0].fromHour" required="required" name="exclusionPeriods[0].fromHour">
+                        #foreach($option in $hoursOfDay.keySet())
+                            <option value="${option}">${hoursOfDay.get($option)}</option>
+                        #end
+                    </select>
+                    <select id="exclusionPeriods[0].fromMinute" required="required" name="exclusionPeriods[0].fromMinute">
+                        #foreach($option in $minutesOfHour.keySet())
+                            <option value="${option}">${minutesOfHour.get($option)}</option>
+                        #end
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div class="grouped">
+                    <select id="exclusionPeriods[0].toHour" required="required" name="exclusionPeriods[0].toHour">
+                        #foreach($option in $hoursOfDay.keySet())
+                            <option value="${option}">${hoursOfDay.get($option)}</option>
+                        #end
+                    </select>
+                    <select id="exclusionPeriods[0].toMinute" required="required" name="exclusionPeriods[0].toMinute">
+                        #foreach($option in $minutesOfHour.keySet())
+                            <option value="${option}">${minutesOfHour.get($option)}</option>
+                        #end
+                    </select>
+                </div>
+            </td>
+            <td><a href="javascript:void(0)" class="removeRow" title="Remove this Exclusion Period">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+#end

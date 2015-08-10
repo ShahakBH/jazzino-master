@@ -1,0 +1,21 @@
+#* @vtlvariable name="numberTool" type="org.apache.velocity.tools.generic.NumberTool" *#
+<style>
+body {
+ 	font-family: Helvetica, Arial, sans-serif;~
+ 	font-size: 10pt;
+ 	color: black;
+ 	background-color: white;
+}
+
+.footer {
+ 	color: rgb(120, 120, 120);
+ 	font-size: 8pt;
+}
+</style>
+<p>
+    User $!{displayName} (IDL $!{playerId} ), has had their transaction with Radium cancelled and so it has been charged back to us
+</p>
+<p>
+    THe amount refunded was $!numberTool.format('###,###', $!currency) (Dollars, most likely) and $!numberTool.format('###,###', $!chips) chips need to be refunded.
+    The ID for this transaction was $!{internalTransactionId}
+</p>

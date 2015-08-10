@@ -1,0 +1,97 @@
+#set($pageTitle = "Campaigns")
+#set ($baseUrl = "${request.contextPath}/campaigns?")
+<h1>Current Campaigns</h1>
+<script>
+
+    $.tablesorter.addParser({
+        id: "customDate",
+        is: function (s) {
+            //return false;
+            //use the above line if you don't want table sorter to auto detect this parser
+            // 2009/12/30 - 12:30 will be matched
+            return /^\d{4}\/\d{2}\/\d{2} - \d{2}[:]\d{2}/.test(s);
+        },
+        format: function (s) {
+            s = s.replace(/\-/g, " ");
+            s = s.replace(/:/g, " ");
+            s = s.replace(/\./g, " ");
+            s = s.replace(/\//g, " ");
+            s = s.split(" ");
+            return $.tablesorter.formatFloat(new Date(s[0], s[1] - 1, s[2], s[3], s[4]).getTime());
+        },
+        type: "numeric"
+    });
+
+    $(document).ready(function () {
+                $("#campaignTable").tablesorter({
+                    headers: {
+                        // use date based sorting on column 3 and 4
+                        2: { sorter: 'customDate' },
+                        3: { sorter: 'customDate' }
+                    }
+                });
+            }
+    );
+</script>
+
+<div class="buttons">
+    <button class="create" onclick="location.href='#springUrl('/campaigns/create')';">Create a New Campaign</button>
+</div>
+
+<br/><br/>
+
+
+#if("$!errorMessages" != "")
+<div class="error">$errorMessages</div>
+#end
+
+#if("$!successMessages" != "")
+<div class="success">$successMessages</div>
+#end
+
+#if("$!infoMap" != "")
+<div class="infoMessage">#mapToHtmlTable($infoMap)</div>
+#end
+
+#if ($campaigns && $campaigns.size() > 0)
+
+<div class="report">
+
+    <table id="campaignTable" class="report tablesorter" cellpadding="3" cellspacing="0" align="center" width="95%">
+        <thead class="fixedHeader">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Next Run</th>
+            <th>End Time</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody lass="scrollContent">
+
+            #foreach($campaign in $campaigns)
+            <tr class=#if($campaign.active)"active"#else"expired"#end>
+            <td>$campaign.campaignId</td>
+                <td>$campaign.name</td>
+                <td>${dateTool.format('yyyy/MM/dd - HH:mm',$campaign.nextRunTs.toDate())}</td>
+                <td>#if($campaign.endTime)${dateTool.format('yyyy/MM/dd - HH:mm', $campaign.endTime.toDate())}#end</td>
+                <td>
+                    <button onclick="location.href='#springUrl('/campaigns/')'+$campaign.campaignId + '/edit';">Edit Campaign</button>
+                    <button onclick="location.href='#springUrl('/campaigns/')'+$campaign.campaignId + '/duplicate';">Copy Campaign</button>
+                    <button onclick="location.href='#springUrl('/campaigns/')'+$campaign.campaignId + '/disable/'+$startPosition;">Disable Campaign</button>
+                    <button onclick="location.href='#springUrl('/campaigns/')'+$campaign.campaignId + '/addPlayers/';">Add Targets</button>
+                </td>
+            </tr>
+            #end
+        </tbody>
+
+    </table>
+    <tfoot>
+    <tr class="paging">
+        <td colspan="6">#paging( $startPosition $pageSize $totalSize $baseUrl '' )</td>
+    </tr>
+    </tfoot>
+</div>
+#else
+<p class="info">No campaigns found in DB</p>
+#end

@@ -1,0 +1,55 @@
+<script>
+
+    YAZINO.configuration.set('payment.messages', {
+        8000: { "title": "Starter Style", "valueStatus": ""},
+        10000: { "title": "Starter Style", "valueStatus": ""},
+        18000: { "title": "Clever Competitor", "valueStatus": ""},
+        21000: { "title": "Clever Competitor", "valueStatus": ""},
+        50000: { "title": "Lucky Break", "valueStatus": ""},
+        125000: { "title": "Savvy Star", "valueStatus": "Good Value"},
+        150000: { "title": "Savvy Star", "valueStatus": "Good Value"},
+        300000: { "title": "Power Player", "valueStatus": "Great Value"},
+        400000: { "title": "Power Player", "valueStatus": "Great Value"},
+        1000000: { "title": "Millionaire Maven", "valueStatus": "Best Value"}
+    });
+
+    #set($paymentMethods = ["CREDITCARD", "PAYPAL", "FACEBOOK"])
+
+    YAZINO.configuration.set('payment.packages', {
+        #foreach($paymentMethod in $paymentMethods)
+        "$paymentMethod": {
+            #foreach ( $currency in $paymentOptions.keySet())
+            "$currency": [
+                #foreach ($paymentOption in $paymentOptions.get($currency))
+                {
+                    "id": "$paymentOption.id",
+                    "numChipsPerPurchase": "$paymentOption.numChipsPerPurchase",
+                    "currencyLabel": "$paymentOption.currencyLabel",
+                    "currencyCode": "$paymentOption.currencyCode",
+                    "amountRealMoneyPerPurchase": "$paymentOption.amountRealMoneyPerPurchase",
+                    "formattedChipsPerPurchase" : "$numberTool.format('###,###', $paymentOption.numChipsPerPurchase)",
+                    "upsellMessage": "$paymentOption.upsellMessage",
+                    "paymentOptionValueStatus" : YAZINO.configuration.get('payment.messages.${paymentOption.numChipsPerPurchase}.valueStatus'),
+                    "paymentOptionPlayerTitle" : YAZINO.configuration.get('payment.messages.${paymentOption.numChipsPerPurchase}.title')
+                    #if($paymentOption.hasPromotion("$paymentMethod")),
+                    #set($promotion = $paymentOption.getPromotion("$paymentMethod"))
+                    "promoId": "$promotion.promoId",
+                    "promotionChipsPerPurchase": "$promotion.promotionChipsPerPurchase",
+                    "defaultChips": "$paymentOption.numChipsPerPurchase",
+                    "promotionHeader": "$!promotion.rolloverHeader",
+                    "promotionText": "$!promotion.rolloverText"
+                    #end
+                }#if( $foreach.hasNext ),#end
+                #end
+            ]#if( $foreach.hasNext ),#end
+            #end
+        }#if( $foreach.hasNext ),#end
+        #end
+    });
+
+    YAZINO.configuration.set('payment.trialPay.cashierUrl',
+            "${cashierConfiguration.getCashierConfiguration("trialpay").getCashierUrl()}");
+
+    YAZINO.configuration.set('payment.preferences.currency', "$!preferredCurrency");
+    YAZINO.configuration.set('payment.preferences.paymentMethod', "$!preferedPaymentType");
+</script>

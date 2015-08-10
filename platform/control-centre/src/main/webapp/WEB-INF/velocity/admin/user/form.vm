@@ -1,0 +1,45 @@
+<form method="post" action="${request.contextPath}/admin/user/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($cbformoptions = "$!formoptions disabled=${quote}disabled${quote}")
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        <label for="userName">User Name:</label>
+        #springFormHiddenInput( 'user.isNew' '' )
+        #if ($user.isNew)
+            #springFormInput( 'user.userName' "$!formoptions" )
+        #else
+            #springFormInput( 'user.userName' "$!formoptions readonly=${quote}readonly${quote}" )
+        #end
+
+        <label for="realName">Real Name:</label>
+        #springFormInput( 'user.realName' "$!formoptions" )
+
+        #if (!$readonly)
+        <label for="password">Password:</label>
+        #springFormPasswordInput( 'user.password' '' )
+
+        #springBind( 'user.password' )
+        #springShowErrors( '' 'error' )
+
+        <label for="confirmPassword">Confirm Password:</label>
+        #springFormPasswordInput( 'user.confirmPassword' '' )
+        #end
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Roles</legend>
+        #springFormCheckboxesWithLabels( 'user.roles' $roles "$!cbformoptions" )
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>

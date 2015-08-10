@@ -1,0 +1,15 @@
+{
+  "name": "Staging",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[base]",
+    "recipe[nfs::default]",
+    "recipe[nfs::server]"
+  ]
+}

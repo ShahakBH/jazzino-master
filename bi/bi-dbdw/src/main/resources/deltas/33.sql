@@ -1,0 +1,3 @@
+-- Increase the size of the REFERER field, as some Facebook URLs overflow 1000
+
+ALTER TABLE ACCOUNT_SESSION MODIFY COLUMN REFERER VARCHAR(2048) DEFAULT NULL#

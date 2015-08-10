@@ -1,0 +1,460 @@
+---
+lightstreamer-adapter:
+  config_files:
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    lobby/environment.properties,environment.properties: "/etc/senet"
+    ssl-certs/tomcat.keystore: lightstreamer:lightstreamer@/opt/lightstreamer/conf/keystore
+  log:
+    files:
+    - "/var/log/lightstreamer.log"
+  type: tar.gz
+  short_name: ls-adapter
+  group: platform
+  deploy_to:
+  - mobile
+  method: lightstreamer
+  version: 2.42.1
+  jira_group: platform
+  maven_group: com.yazino
+platform-worker:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    worker/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    worker/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-platform-worker.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  version: 2.42.1
+  short_name: worker-platform
+  group: workers
+  deploy_to:
+  - worker
+  depends_on:
+  - platform-db
+  method: jetty
+  jira_group: platform
+  maven_group: com.yazino
+platform-db:
+  type: jar
+  params:
+    db_name: strataprod
+  version: 2.42.1
+  short_name: database
+  group: db
+  deploy_to:
+  - database
+  method: database
+  jira_group: platform
+  maven_group: com.yazino
+# highstakes:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: HIGH_STAKES.jar
+#   version: 2.0.46
+#   short_name: highstakes
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+# client-content:
+#   config_files:
+#     ssl-certs/apache-bundle.crt: apache:apache@/home/content/ssl-certs/apache-bundle.crt
+#     ssl-certs/apache.key: apache:apache@/home/content/ssl-certs/apache.key
+#     ssl-certs/apache.crt: apache:apache@/home/content/ssl-certs/apache.crt
+#   type: war
+#   params:
+#     destination_dir: "/home/content/public/client-content"
+#     generated_properties:
+#       senet.web.application-content: https://$ENVIRONMENT.casino-platform.com:8143/client-content
+#   short_name: flash
+#   group: content
+#   deploy_to:
+#   - content
+#   method: apache
+#   version: 2.0.62
+#   jira_group: games-flex
+#   maven_group: com.yazino
+bi-dbdw:
+  type: jar
+  params:
+    db_name: strataproddw
+  short_name: dbdw
+  group: db
+  deploy_to:
+  - datawarehouse
+  depends_on:
+  - platform-db
+  method: database
+  version: 2.7.21
+  jira_group: bi
+  maven_group: com.yazino
+bi-reporting:
+  type: jar
+  params:
+    db_name: reporting
+    db_user: reporting
+    db_type: postgres
+    delta_location: postgres-deltas
+  short_name: reporting
+  group: db
+  deploy_to:
+  - reporting
+  method: database
+  version: 2.7.21
+  jira_group: bi
+  maven_group: com.yazino
+platform-grid:
+  config_files:
+    grid/environment.properties,environment.properties: "/etc/senet"
+    grid/gs_logging.properties: "/opt/gigaspaces/config"
+    grid/logback-gigaspaces.xml,logback-gigaspaces.xml: "/etc/senet"
+    grid/grid-sla.xml: "/etc/senet"
+  log:
+    files:
+    - "/var/log/gigaspace/current/application-gigaspace.*"
+    directories:
+    - gsrun:gsrun@/var/log/gigaspace
+  type: jar
+  params:
+    sla: "/etc/senet/grid-sla.xml"
+  version: 2.42.1
+  short_name: table
+  group: grid
+  deploy_to:
+  - gigaspaces
+  depends_on:
+  - platform-db
+  # - highstakes
+  # - roulette
+  # - blackjack
+  # - slotswheeldeal
+  # - splots
+  # - texasholdem
+  method: gigaspaces
+  jira_group: platform
+  maven_group: com.yazino
+bi-promotion:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    worker/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-bi-promotions.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  short_name: promotion
+  group: workers
+  deploy_to:
+  - worker
+  depends_on:
+  - platform-db
+  method: jetty
+  version: 2.7.21
+  jira_group: bi
+  maven_group: com.yazino
+# slotswheeldeal:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: SLOTS.jar
+#   version: 2.0.46
+#   short_name: wheeldeal
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+# splots:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: SPLOTS.jar
+#   version: 2.0.46
+#   short_name: splots
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+bi-operations:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    lobby/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-bi-operations.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  short_name: operations
+  group: backoffice
+  deploy_to:
+  - backoffice
+  depends_on:
+  - bi-dbdw
+  method: jetty
+  version: 2.7.21
+  jira_group: bi
+  maven_group: com.yazino
+metrics:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    lobby/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-metrics.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  short_name: metrics
+  group: backoffice
+  deploy_to:
+  - backoffice
+  method: jetty
+  version: 1.0.0
+  jira_group: metrics
+  maven_group: com.yazino
+# roulette:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: ROULETTE.jar
+#   version: 2.0.46
+#   short_name: roulette
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+# blackjack:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: BLACKJACK.jar
+#   version: 2.0.46
+#   short_name: blackjack
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+# games-testweb:
+#   config_files:
+#     lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+#     lobby/environment.properties,environment.properties: "/etc/senet"
+#   log:
+#     files:
+#     - "/var/log/jetty/current/application-testweb.log"
+#     - "/var/log/jetty.log"
+#     directories:
+#     - jetty:jetty@/var/log/jetty
+#   type: war
+#   short_name: testweb
+#   group: test
+#   version: 2.0.42
+#   deploy_to:
+#   - lobby
+#   depends_on:
+#   - platform-db
+#   - platform-grid
+#   method: jetty
+#   jira_group: games-test
+#   maven_group: com.yazino
+# texasholdem:
+#   type: jar
+#   params:
+#     destination_dir: "/var/yazino-games"
+#     destination_file: TEXAS_HOLDEM.jar
+#   version: 2.0.46
+#   short_name: texasholdem
+#   group: games
+#   deploy_to:
+#   - staging
+#   method: copy
+#   jira_group: games
+#   maven_group: com.yazino
+control-centre:
+  config_files:
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    lobby/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-control-centre.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  version: 2.42.1
+  short_name: controlcentre
+  group: web
+  deploy_to:
+  - lobby
+  depends_on:
+  - platform-db
+  - platform-grid
+  method: jetty
+  jira_group: platform
+  maven_group: com.yazino
+web-redirector:
+  log:
+    files:
+    - "/var/log/jetty.log"
+  type: war
+  short_name: redirector
+  group: web
+  deploy_to:
+  - lobby
+  method: jetty
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+bi-worker:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    worker/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    worker/environment.properties,environment.properties: "/etc/senet"
+    ios-certs/yazino.p12: jetty:jetty@/var/yazino/ios-certs/yazino.p12
+    ios-certs/SLOTS.p12: jetty:jetty@/var/yazino/ios-certs/SLOTS.p12
+    ios-certs/HIGH_STAKES.p12: jetty:jetty@/var/yazino/ios-certs/HIGH_STAKES.p12
+    ios-certs/BLACKJACK.p12: jetty:jetty@/var/yazino/ios-certs/BLACKJACK.p12
+    ios-certs/yazino.wheelDealForTango.p12: jetty:jetty@/var/yazino/ios-certs/yazino.wheelDealForTango.p12
+  log:
+    files:
+    - "/var/log/jetty/current/application-bi-worker.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  short_name: bi-worker
+  group: workers
+  deploy_to:
+  - worker
+  depends_on:
+  - bi-dbdw
+  method: jetty
+  version: 2.7.21
+  jira_group: bi
+  maven_group: com.yazino
+web-facebookpages:
+  config_files:
+    ssl-certs/apache-bundle.crt: apache:apache@/home/content/ssl-certs/apache-bundle.crt
+    ssl-certs/apache.key: apache:apache@/home/content/ssl-certs/apache.key
+    ssl-certs/apache.crt: apache:apache@/home/content/ssl-certs/apache.crt
+  type: war
+  params:
+    destination_dir: "/home/content/public/facebook"
+    never_timestamped: true
+  short_name: web-facebookpages
+  group: content
+  deploy_to:
+  - content
+  method: apache
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+web-marketingpages:
+  config_files:
+    ssl-certs/apache-bundle.crt: apache:apache@/home/content/ssl-certs/apache-bundle.crt
+    ssl-certs/apache.key: apache:apache@/home/content/ssl-certs/apache.key
+    ssl-certs/apache.crt: apache:apache@/home/content/ssl-certs/apache.crt
+  type: war
+  params:
+    destination_dir: "/home/content/public/marketing"
+    never_timestamped: true
+  short_name: web-marketingpages
+  group: content
+  deploy_to:
+  - content
+  method: apache
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+web-lobby:
+  config_files:
+    ssl-certs/tomcat.keystore: jetty:jetty@/opt/jetty/etc/keystore
+    lobby/logback-jetty.xml,logback-jetty.xml: "/etc/senet"
+    paypal_ec_sdk_config.properties: "/etc/senet"
+    lobby/environment.properties,environment.properties: "/etc/senet"
+  log:
+    files:
+    - "/var/log/jetty/current/application-web-lobby.log"
+    - "/var/log/jetty.log"
+    directories:
+    - jetty:jetty@/var/log/jetty
+  type: war
+  params:
+    destination_file: root.war
+  short_name: lobby
+  group: web
+  deploy_to:
+  - lobby
+  depends_on:
+  - platform-db
+  - platform-grid
+  - bi-promotion
+  - web-content
+  # - client-content
+  method: jetty
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+web-content:
+  config_files:
+    ssl-certs/apache-bundle.crt: apache:apache@/home/content/ssl-certs/apache-bundle.crt
+    ssl-certs/apache.key: apache:apache@/home/content/ssl-certs/apache.key
+    ssl-certs/apache.crt: apache:apache@/home/content/ssl-certs/apache.crt
+  type: war
+  params:
+    destination_dir: "/home/content/public/web-content"
+    generated_properties:
+      senet.web.content: https://$ENVIRONMENT.casino-platform.com:8143/web-content
+      strata.server.lobby.ssl.content: https://$ENVIRONMENT.casino-platform.com:8143/web-content
+  short_name: web-content
+  group: content
+  deploy_to:
+  - content
+  method: apache
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+email-templates:
+  type: jar
+  params:
+    destination_dir: "/var/yazino-email"
+    extract: true
+  short_name: email
+  group: content
+  deploy_to:
+  - worker
+  - backoffice
+  method: copy
+  version: 2.2.33
+  jira_group: web
+  maven_group: com.yazino
+stunnel-ssl-certs:
+  short_name: stunnelssl
+  type: noartefact
+  config_files:
+    ssl-certs/apache.key: root:root@/etc/stunnel/cert.key
+    ssl-certs/stunnel.pem: root:root@/etc/stunnel/cert-chain.pem
+  deploy_to:
+  - loadbalancer
+  method: noop

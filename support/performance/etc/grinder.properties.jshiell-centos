@@ -1,0 +1,35 @@
+grinder.script = ../yazino.py
+grinder.processes = 1
+grinder.threads = 9
+grinder.runs = 0
+grinder.logDirectory = /tmp/grinder
+grinder.numberOfOldLogs = 1
+grinder.consoleHost = belibni.london.yazino.com
+grinder.jvm.arguments = -server -Xmn256m -Xmx2048m -Djavax.net.ssl.trustStore=etc/bmc-keystore -Djavax.net.ssl.trustStorePassword=s1gn4tur3
+
+# yazino.agents in only used to calculate initial delay and sleep time
+yazino.agents = 1
+yazino.agent-region = eu-west-1
+yazino.playersOnline = 9
+yazino.maxPlayersPerTournament = 5
+yazino.useRabbitForGameMessages = False
+
+player.source-url = http://jshiell-centos.london.yazino.com/games-testweb/testPlayers
+player.passwordHash = 4gn+bHlQsXNR118FJyH3grYgfYg=
+player.password = letmein
+player.sessionDurationInSeconds = 480
+
+web.baseUrl = https://jshiell-centos.london.yazino.com/
+
+dbdw.hostname = jshiell-centos.london.yazino.com
+
+rabbit.hosts = jshiell-centos.london.yazino.com
+rabbit.virtualHost = jshiell-centos.london.yazino.com
+rabbit.username = flash
+rabbit.password = readonly
+
+lightstreamer.host.ssl = https://jshiell-centos.london.yazino.com:8091
+lightstreamer.host = http://jshiell-centos.london.yazino.com:8090
+lightstreamer.nodes = jshiell-centos.london.yazino.com
+
+log.isEnabled = True

@@ -1,0 +1,18 @@
+ * Per game type
+ * Run for a certain period of time (start & end date)
+ * Run in cycles (reset every X days)
+ * Give points at end of tournament
+  * Depends on:
+   * Tournament final positions
+   * Number of players per tournament
+  * Notify players about their new game leaderboard position
+ * Give trophies and chips at end of cycles
+  * Notify players
+ * Trophies are permanent for the player
+ * Whoever gets chips can publish the news
+
+ * You cannot change the rules for a running leaderboard (if you want to change them, you create a new leaderboard)
+ * Game leaderboard can be suspended
+ * The website will show the latest leaderboard for the current date
+
+!contents -R2 -g -p -f -h

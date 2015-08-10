@@ -1,0 +1,32 @@
+|insert|ACCOUNT|
+|BALANCE|ACCOUNT_ID?|
+|10000.00|>>theKingsTableAccount|
+|20050|>>drJonesTableAccount|
+|300|>>normalUserAccountA|
+|500|>>normalUserAccountB|
+|400000|>>drJones|
+|100000|>>theKing|
+
+|insert|PLAYER|
+|PLAYER_ID|PARTNER_ID|EXTERNAL_ID|ACCOUNT_ID|NAME|
+|<<normalUserAccountA|INTERNAL|normalUserAccountA|<<normalUserAccountA|normalUserAccountA|
+|<<normalUserAccountB|INTERNAL|normalUserAccountB|<<normalUserAccountB|normalUserAccountB|
+
+|insert|TABLE_INFO|
+|GAME_VARIATION_TEMPLATE_ID|CURRENT_STATUS|GAME_ID|GAME_TYPE|TABLE_NAME|TABLE_ACCOUNT_ID|STATUS|TSCREATED|TS|PARTNER_ID|TABLE_ID?|
+|1|null|23|BLACKJACK|The Kings Table|<<theKingsTableAccount|O|2009-03-10 15:53:54.0|2009-03-13 12:42:37.0|FACEBOOK|>>theKingsTable|
+|2|null|225|BLACKJACK|Dr Jones Table|<<drJonesTableAccount|C|2009-03-10 15:54:14.0|2009-03-13 15:26:49.0|FACEBOOK|>>drJonesTable|
+
+|insert|TABLE_PLAYER|
+|TABLE_ID|PLAYER_ID|
+|<<theKingsTable|<<normalUserAccountA|
+|<<theKingsTable|<<normalUserAccountB|
+
+This test verifies that the number of players at a table is correctly picked up by TABLE_STATUS_AND_BALANCE.
+
+!|Query| select * from TABLE_STATUS_AND_BALANCE|
+|TABLE_ID|TABLE_NAME|TABLE_STATUS_DESCRIPTION|TEMPLATE_NAME|GAME_TYPE|PLAYER_COUNT|PARTNER_ID|TABLE_BALANCE|
+|<<theKingsTable|The Kings Table|OPEN|European Blackjack|BLACKJACK|2|FACEBOOK|10000.00|
+|<<drJonesTable|Dr Jones Table|CLOSED|High Roller|BLACKJACK|0|FACEBOOK|20050.00|
+
+

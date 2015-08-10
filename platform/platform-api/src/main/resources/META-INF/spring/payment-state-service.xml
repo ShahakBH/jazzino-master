@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="paymentStateService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${platform.worker.url}/service/payment-state"/>
+        <property name="serviceInterface"
+                  value="com.yazino.platform.payment.PaymentStateService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${platform.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="androidPaymentStateService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${platform.worker.url}/service/android-payment-state"/>
+        <property name="serviceInterface"
+                  value="com.yazino.platform.payment.android.AndroidPaymentStateService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${platform.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

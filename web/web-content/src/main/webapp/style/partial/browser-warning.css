@@ -1,0 +1,75 @@
+#browser-notification {
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    background-color: #fdfe65;
+    border: 1px solid #CCC;
+}
+
+#browser-notification p {
+    padding-top: 8px;
+    padding-left: 12px;
+    float: left;
+}
+
+#browser-notification button {
+    padding: 4px;
+    margin-top: 4px;
+    margin-right: 4px;
+    float: right;
+    border: 1px solid #CCC;
+    background-color: #fdfe65;
+}
+
+#browser-notification button:hover {
+    background-color: #FEE36E;
+}
+
+#browser-warning {
+    font-size: 12px;
+    line-height: 19px;
+    color: #717171;
+}
+
+#browser-warning strong {
+    font-weight: bold;
+}
+
+#browser-warning p, #browser-warning ul, #browser-warning h1, #browser-warning h2 {
+    margin-bottom: 15px;
+}
+
+#browser-warning h1 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 18px;
+    color: #E71F1F;
+    text-transform: uppercase;
+}
+
+#browser-warning h1 span {
+    color: #A0A0A0;
+}
+
+#browser-warning h2 {
+    margin-top: 30px;
+    color: #E71F1F;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+#browser-warning ul {
+    list-style: disc;
+}
+
+#browser-warning li {
+    margin-left: 20px;
+}
+
+#browser-warning section.footnotes {
+    margin-top: 30px;
+    border-top: 1px solid #CCC;
+    padding-left: 30px;
+    padding-top: 15px;
+    color: #919191;
+}

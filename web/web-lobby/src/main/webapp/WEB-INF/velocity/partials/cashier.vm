@@ -1,0 +1,151 @@
+#* @vtlvariable name="registeredCards" type="com.yazino.web.domain.payment.RegisteredCardQueryResult" *#
+<link rel="stylesheet" href="$!assetUrl/style/gloss/payments.css" type="text/css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="$!assetUrl/style/gloss/ie7only.css" type="text/css"><![endif]-->
+
+#parse("partials/preScripts.vm")
+#parse("payment/paymentConfiguration.vm")
+#parse("payment/paymentScripts.vm")
+
+#parse("partials/external_tracking.vm")
+<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+
+#parse("partials/fb_init.vm")
+<script src="${assetUrl}/javascript/partial/fb.js"></script>
+
+<script type="text/javascript">
+    window.hideTabs = function () {
+        $('#tabs').hide();
+    };
+    $(document).ready(function () {
+        var addCardLinkElement = $("#addCardLink"),
+                paymentSelectionFormElement = $("#paymentSelection"),
+                buyButtonElement = $("#buyBtn");
+        if (addCardLinkElement.length) {
+            addCardLinkElement.click(function () {
+                paymentSelectionFormElement.submit();
+            });
+        }
+        if (buyButtonElement.length) {
+            buyButtonElement.click(function () {
+                paymentSelectionFormElement.attr("action", "complete");
+            });
+        }
+    });
+</script>
+
+
+<form id="paymentSelection" method="post" action="cashierProcess">
+    <div id="container"
+         class="$gameType cashier_overlay paymentTabsWidget trialPayWidget payPalWidget creditCardWidget facebookWidget">
+        <div id="main" class="buy-chips">
+            <div id="buy_chips_main">
+                <div id="main_body">
+                    <div id="payment_method_box" class="box paymentMethodSelectorWidget">
+                        <div id="payment_title" class="cover-upper"></div>
+                        <div id="paiment_method_body">
+                            #if($canvas)
+                        #parse("partials/facebookPaymentOptions.vm")
+                    #else
+                                #parse("partials/paymentOptions.vm")
+                            #end
+                        </div>
+                    </div>
+                    <div id="action_box" class="box">
+                        <div id="tabs" class="buy-chips"></div>
+
+                        <div id="zong_box" class="zongWidget"></div>
+
+                        <div id="action_body">
+                            <div id="paypal_please_wait" class="awaiting" style="display: none">
+                                <div id="cofirmation_Body">
+                                    <div class="cofirmation-status">
+                                        <span id="loadingIcon"></span>
+                                        <span id="wait_header" class="status">Just a moment!</span>
+                                        <span id="wait_text" class="status-desc">Contacting PayPal...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            #if(!$canvas)
+                                <div id="currency">
+                                    <select id="currency_list" name="updatedCurrency" class="currencySelectorWidget">
+                                        #foreach ($currency in $acceptedCurrencies.entrySet())
+                                            <option value="$currency.key" #if($currency.key == $preferredCurrency)
+                                                    selected="true" #end>$currency.value</option>
+                                        #end
+                                    </select>
+                                </div>
+                            #end
+                            <div id="select_chips_value" class="paymentOptionSelectorWidget">
+                                <ul id="paymentOptions">
+                                    #foreach ($count in [1..6])
+                                        <li class="">
+                                            <input type="radio" class="chips-radio"
+                                                   id="select_chips_credit_$count"
+                                                   name="paymentOption" checked="checked"
+                                                   value="$paymentOption.id">
+                                            <a class="chips-value-$count">
+                                                <span class="value-wrapper $gameType">
+                                                    <span class="chips-title-value">$count</span>
+                                                </span>
+                                                <span class="select-chips-body">
+                                                    <span class="img chips-$count">
+                                                        <span class="promotion-chips">$count</span>
+                                                    </span>
+                                                    <span class="checkbox">$count</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    #end
+                                </ul>
+                            </div>
+                            <div id="action_info">
+                                <div id="value_status" class="paymentMessageWidget">
+                                    <span class="value-status">Good value</span><br>
+                                    <span class="player-status">Savvy Star</span>
+                                    <span class="cell">$1 buys 3,000 chips</span>
+                                </div>
+                                <div id="promotion-info" class="promotionMessageWidget">
+                                    <span class="header"></span>
+                                    <span class="text"></span>
+                                </div>
+
+                                #if(!$registeredCards.creditCardDetailList.empty)
+                                    <select id="registeredCardSelection" name="registeredCardSelection"
+                                            class="creditCardElement">
+                                        #foreach($card in $registeredCards.creditCardDetailList)
+                                            <option value="$card.cardId">$card.obscuredNumber
+                                                &nbsp-&nbsp$card.expiryMonth/$card.expiryYear</option>
+                                        #end
+                                    </select>
+                                #end
+
+                                #if(!$registeredCards.creditCardDetailList.empty)
+                                    <input id="buyBtn" name="buyBtn" type="submit" class="button creditCardElement"
+                                           value="buy">
+                                    <a id="addCardLink" class="addCardLink creditCardElement" href="#">Pay with a new
+                                        card</a>
+                                #else
+                                    <input id="submitBtn" name="submitBtn" type="submit"
+                                           class="button creditCardElement" value="continue">
+                                #end
+
+                                <input id="paypalBtn" name="paypalBtn" type="submit" class="paypalButton" value="">
+                                <input id="facebookBtn" name="facebookBtn" type="button" class="button"
+                                       value="continue">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="bottom">Have questions? Contact us at <a
+                        href="http://support.yazino.com" target="_blank">support.yazino.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="promotionChips" value="">
+    <input type="hidden" name="promotionId" value="">
+    <input type="hidden" name="requestId" value="$requestId">
+    #parse("partials/glossScripts.vm")
+</form>
+

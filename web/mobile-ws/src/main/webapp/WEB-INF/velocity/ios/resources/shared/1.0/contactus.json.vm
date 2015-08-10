@@ -1,0 +1,18 @@
+{
+	"contactus": {
+        "defaults" : {
+            "facebookURLs": [
+                "http://www.facebook.com/Yazino?sk=app_124192170958476"
+            ],
+            "twitterURLs":[
+                "twitter://user?screen_name=Yazino",
+                "echofon:///user_timeline?Yazino",
+                "echofonpro:///user_timeline?Yazino",
+                "tweetie://user?screen_name=Yazino",
+                "x-birdfeed://user?screen_name=Yazino",
+                "x-seesmic://twitter_profile?twitter_screen_name=Yazino"
+            ]
+        }
+	}
+	
+}

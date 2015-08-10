@@ -1,0 +1,7 @@
+[
+  {rabbit, [
+<% if @cluster_nodes && @cluster_nodes.length > 0 %>
+      {cluster_nodes, {[<%= @cluster_nodes.collect{|s| "'#{s}'"}.join(',') %>], '<%= @cluster_type %>'},
+<% end %>
+      {heartbeat, <%= @heartbeat %>}]}
+].

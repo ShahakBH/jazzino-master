@@ -1,0 +1,138 @@
+
+#profile-area.buddyList{
+    background: #ffffff;
+}
+
+#profile-area .buddyListRoot{
+    height: 480px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #e7e7e7;
+}
+
+#profile-area .buddyListStatement{
+    margin-top:20px;
+}
+
+#profile-area .buddyListItem{
+    height: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px 10px;
+    overflow-y: hidden;
+    border: 1px solid #ddd;
+}
+
+#profile-area .buddyListItem > * {
+    float: left;
+}
+
+#profile-area .buddyListItem .avatar {
+    width: 50px;
+}
+
+#profile-area .buddyListItem .playerName,
+#profile-area .buddyListItem .playerStatus
+{
+    margin: 17px;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+#profile-area .buddyListItem .playerName{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+    width:250px;
+}
+
+#profile-area .buddyListItem .featureLink{
+    float: right;
+    margin: 13px 13px 0 0;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+#profile-area .buddyListItem .featureLink.challengeBuddy{
+    min-width: 134px
+}
+
+#profile-area .buddyListItem .featureLink .button{
+    font-size: 12px;
+    padding: 5px 10px 3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+#profile-area .buddyListItem .removeBuddy .button{
+    color: rgba(0, 0, 0, 0.65);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+#profile-area .buddyListItem .removeBuddy,
+#profile-area .buddyListItem .removeBuddy .button{
+    background-color: #bbb;
+}
+
+#profile-area .buddyListItem .removeBuddy .button{
+    border-bottom: 2px solid #aaa;
+}
+
+#profile-area .buddyListItem .removeBuddy .button:hover{
+    background-color: #ccc;
+}
+
+#profile-area .buddyListItem.pageTurn > * {
+    float: none;
+}
+#profile-area .buddyListItem.pageTurn{
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top:10px ;
+    text-align: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+#profile-area .loserContainer{
+    min-height: 442px;
+    background: #e72020 url('../../images/buddyList/noBuddyListBg.png') no-repeat center;
+    margin: 19px 20px;
+    text-rendering: optimizeLegibility;
+}
+
+#profile-area .loser {
+    padding: 260px 0 0 40px;
+    font-size: 28px;
+    color: #fff584;
+}
+
+#profile-area .loser ul{
+    list-style: disc inside;
+    font-size: 24px;
+    color: #fff;
+}
+
+#profile-area .search{
+    float: right;
+}
+
+#profile-area .search input{
+    padding: 8px;
+    margin: -6px 11px -6px 4px;
+    width: 165px;
+    border: 1px solid;
+    border-color: #dddddd;
+    color: #575757;
+    font-size: 12px;
+}
+
+#profile-area .noBuddiesMatchingSelection{
+    padding-top: 215px;
+    font-size: 14px;
+    color: #575757;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+
+}

@@ -1,0 +1,3 @@
+#macro( message $code )#springMessageText($code $code)#end
+
+#macro( jsMessage $code )$esc.javascript("#springMessageText($code $code)")#end

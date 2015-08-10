@@ -1,0 +1,18 @@
+#set($pageTitle = "Edit Campaigns")
+<h1>Edit Campaign</h1>
+
+#if("$!errorMessages" != "")
+<div class="error">$errorMessages</div>
+#end
+
+#if("$!successMessages" != "")
+<div class="success">$successMessages</div>
+#end
+
+#set($disabledStatus = "disabled='disabled'")
+
+<form class="formattedReport" method="POST" data-action="#springUrl('/campaigns/edit')">
+
+    #parse('campaigns/partials/campaignComponents.vm')
+</form>
+

@@ -1,0 +1,58 @@
+<nav>
+    <ul>
+        <li>
+            <img src="#springUrl('/images/yazino.png')" alt="Yazino">
+        </li>
+        #if($userInfo.roles.contains("ROLE_SUPPORT") || $userInfo.roles.contains("ROLE_SUPPORT_MANAGER"))
+            <li>
+                <a href="#">Support</a>
+                <ul>
+                    <li><a target="_top" href="#springUrl('/player/search')">Player Search</a></li>
+                    <li><a target="_top" href="#springUrl('/report/paymentTransaction')">Transaction Search</a></li>
+                    <li><a target="_top" href="#springUrl('/payments/pending')">Pending Settlements</a></li>
+                    <li><a target="_top" href="#springUrl('/payments/chargebacks')">Chargebacks</a></li>
+                    <li><a target="_top" href="#springUrl('/payments/disputes/open')">Disputes</a></li>
+                </ul>
+            </li>
+        #end
+        #if($userInfo.roles.contains("ROLE_MARKETING"))
+            <li>
+                <a href="#">Marketing</a>
+                <ul>
+                    <li><a href="#springUrl('/promotion/list')">Promotions</a></li>
+                    <li><a href="#springUrl('/engagementCampaign')">Application Messages</a></li>
+                    <li><a href="#springUrl('/campaigns')">Campaigns</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Tracking</a>
+                <ul>
+                    <li><a href="#springUrl('/tracking/recent')">Recent Events</a></li>
+                </ul>
+            </li>
+        #end
+        #if($userInfo.roles.contains("ROLE_ROOT"))
+            <li>
+                <a href="#">Admin</a>
+                <ul>
+                    <li><a href="#springUrl('/ratesDefinition')">Currency Rates</a></li>
+                    <li><a href="#springUrl('/userAdmin')">User Administration</a></li>
+                </ul>
+            </li>
+        #end
+    </ul>
+    <div class="info">
+        #if(!$userInfo.roles.contains('ROLE_ANONYMOUS'))
+        Logged in as <strong>$userInfo.username</strong>
+        | <a href="#springUrl('/logout')">Logout</a>
+        #end
+    </div>
+</nav>
+<div class="version">
+    Version
+    #if($userInfo.version)
+        $userInfo.version
+    #else
+        DEVELOPMENT
+    #end
+</div>

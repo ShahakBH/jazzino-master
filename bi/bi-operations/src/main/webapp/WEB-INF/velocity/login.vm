@@ -1,0 +1,26 @@
+<h1>Operations Login</h1>
+
+#if ($error)
+<div class="error">
+    $error
+</div>
+#end
+
+<p>
+    Please enter your login credentials to continue.
+</p>
+
+<div class="report">
+    <form name="login" action="${request.contextPath}/security/login" method="POST">
+        <label for="username">Username:</label>
+        <div><input id="username" type="text" name="j_username"></div>
+        <label for="password">Password:</label>
+        <div><input id="password" type="password" name="j_password"></div>
+
+        <div class="actions"><input type="submit" value="Login"></div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $('#username').focus();
+</script>

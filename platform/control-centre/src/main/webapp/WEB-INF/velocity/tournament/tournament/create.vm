@@ -1,0 +1,18 @@
+#set ($location = "Create Tournament")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/tournament/list">List Tournaments</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Create Tournament</h2>
+
+        #parse("tournament/tournament/form.vm")
+    </div>
+</section>

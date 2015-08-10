@@ -1,0 +1,88 @@
+<header class="topBar" data-ctaContext="top bar">
+    <div class="firstHalfOfHeader">
+        #parse("partials/gamesList.vm")
+    </div>
+
+    <nav class="subNav">
+        <div class="wrapper">
+
+            #if($lobbySession.playerId)
+                <article class="personal">
+                    #if ($profileInformation)
+                        <div>
+                            <div class="player friendRequestsWidget playerBalanceWidget">
+                                <img src="$!{lobbySession.pictureUrl}" alt="Your avatar"/>
+                                #set($playerName = $!profileInformation.player.name)
+                                #if ($playerName && $playerName.length() > 30)
+                                    #set($playerName = $playerName.substring(0, 30))
+                                #end
+                                <h2 class="name">$!playerName</h2>
+                                <h3 class="balance">
+                                </h3>
+
+                                <nav class="dropdown basicmenu">
+                                    <div class="wrapper">
+                                        <a href="/player" class="iFramePopUp"
+                                           data-lightboxWidget-class="profileDialog">Profile</a>
+                                        <a href="/player/invitations" class="iFramePopUp"
+                                           data-lightboxWidget-class="profileDialog">Invite Statement</a>
+                                        <a href="/player/buddyList" class="iFramePopUp"
+                                           data-lightboxWidget-class="profileDialog">Buddy List</a>
+                                        <div class="friendRequestArea">
+                                            <h4>Buddy Requests</h4>
+                                        </div>
+
+                                        #if(!$!canvas)<a href="/logout" title="Logout of Yazino" class="lastChild">Logout</a>#end
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    #end
+
+                    #parse("partials/shareFacebook.vm")
+                </article>
+
+                <article class="social">
+                    <div>
+                        <a class="invite" href="yazino:inviteFriends"><span class="button"></span>Invite Friends</a>
+                    </div>
+                #if(!$!canvas)
+                    <div>
+                        <a class="challenge" href="yazino:sendChallenge"><span class="button"></span>Send Challenge</a>
+                    </div>
+                #end
+                </article>
+
+                <article class="chips">
+                    <div>
+                        <a class="featureLink gameSpecific major buyChips" href="yazino:buyChips">
+                            <span class="button">#if ($!{hasPromotion})<img src="$!{assetUrl}/images/top-bar/buyChipsOfferSash.png" class="offer" alt="offer"/>#end
+                                <span class="chip">Get Chips</span>
+                            </span>
+                        </a>
+                    </div>
+                </article>
+
+            #else
+                <article class="descriptive">
+                    <a href="http://blog.yazino.com/" target="_blank">Blog</a>
+                    <a href="http://blog.yazino.com/press/" target="_blank">Press</a>
+                    <div>
+                        <a href="/aboutus">About</a>
+                        #if (!$canvas)
+                            <nav class="dropdown basicmenu">
+                                <div class="wrapper">
+                                    <a href="/aboutus">About Yazino</a>
+                                    <a href="/management">Management</a>
+                                    <a href="/jobs">Jobs</a>
+                                    <a href="/contactus">Contact</a>
+                                </div>
+                            </nav>
+                        #end
+                    </div>
+                </article>
+            #end
+            <div class="clear"></div>
+        </div>
+    </nav>
+</header>

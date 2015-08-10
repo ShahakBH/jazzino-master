@@ -1,0 +1,55 @@
+#!/bin/bash
+
+REPOS=( support game-api platform web bi )
+PURGE_LIST=( support/performance/etc/awssecret support/performance/keys support/deployment/config/deployment-key support/deployment/config/environments/production support/deployment/config/environments/breakmycasino support/build/bootstrap support/rackspace )
+OUTPUT_FILE="server-$(date +"%Y%m%dT%H%M").tar.bz2"
+
+echo "Checking SSH connection to GitHub"
+if ! ssh git@github.com 2>&1 | grep 'successfully authenticated' >/dev/null; then
+    echo "Cannot connect to git@github.com; please check your SSH configuration."
+    exit 1
+fi
+
+WORK_DIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'export-work-dir')
+BASE_DIR=$(cd -P -- "$(dirname -- "$0")" >/dev/null && pwd -P)
+
+
+if ! pushd $WORK_DIR 2>&1 >/dev/null; then
+    echo "Unable to change to work dir $WORK_DIR"
+    exit 1
+fi
+
+echo $(pwd)
+
+for REPO in ${REPOS[@]}; do
+    echo "Cloning $REPO"
+    if ! git clone git@github.com:/yazino/$REPO.git; then
+        echo "Git clone failed for git@github.com:/yazino/$REPO"
+        exit 1
+    fi
+    rm -rf $REPO/.git
+done
+
+for PURGE_TARGET in ${PURGE_LIST[@]}; do
+    echo "Removing file $PURGE_TARGET"
+    if [[ $PURGE_TARGET =~ '^/' ]]; then
+        echo "Purge filename starts with a /, don't be so bloody silly"
+        exit 1
+    fi
+    if ! rm -rf $PURGE_TARGET; then
+        echo "Unable to remove $PURGE_TARGET"
+        exit 1
+    fi
+done
+
+echo "Creating archive $BASE_DIR/$OUTPUT_FILE"
+if ! tar cjf $BASE_DIR/$OUTPUT_FILE .; then
+    echo "Archive creation failed for $BASE_DIR/$OUTPUT_FILE"
+    exit 1
+fi
+
+popd $WORK_DIR >/dev/null
+rm -rf $WORK_DIR
+
+echo "Complete"
+exit 0

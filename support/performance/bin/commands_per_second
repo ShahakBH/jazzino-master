@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BIN_DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+
+source $BIN_DIR/config.sh
+
+DBDW_HOSTNAME="$(grep dbdw.hostname $GRINDER_CONF | awk '{print $3}')"
+
+echo "Commands/sec for the last 10 minutes"
+echo "------------------------------------"
+
+ssh $DBDW_HOSTNAME -q "mysql -u root strataproddw -e 'select TIME(audit_ts) as TIME, count(auto_id) AS CPS from AUDIT_COMMAND where audit_ts >= now() - interval 10 second group by audit_ts;'"

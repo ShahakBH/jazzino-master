@@ -1,0 +1,10 @@
+<span class="playerCount">
+    <span class="playerCountText">
+        <span class="playerCountTextNumber">
+            &nbsp;
+        </span>
+        <span class="playerCountTextCopy">
+            players online right now
+        </span>
+    </span>
+</span>

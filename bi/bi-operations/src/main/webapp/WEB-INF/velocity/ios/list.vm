@@ -1,0 +1,211 @@
+<head>
+    <title>iOS Push notifications</title>
+    #parse('partials/includes.vm')
+    <script>
+        $(document).ready(function() {
+            $("#notifications").tablesorter({
+                headers: {
+                    // non-sortable columns
+                    7: { sorter: false },
+                    8: { sorter: false },
+                    9: { sorter: false }
+                    10: { sorter: false }
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+#parse('partials/header.vm')
+<article class="main">
+
+
+    <h1>Create iOS Push notification</h1>
+    <form action="save" method="post">
+
+        #springBind("iosPushNotification.*")
+        #if($status.errors.hasErrors())
+            <div class="errors">
+                #foreach($f in $status.errors.fieldErrors)
+                    #springBind("iosPushNotification.${f.field}")
+                    #foreach($e in $status.errorMessages)
+                        <p>${e}</p>
+                    #end
+                #end
+            </div>
+        #end
+
+        <table>
+            <col width="15%" />
+            <col width="85%" />
+            <tr>
+                <td>Title:</td>
+                <td>
+                    #springFormInput("iosPushNotification.title" "size='45' maxLength='256'")
+                </td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>
+                    #springFormInput("iosPushNotification.description" "size='45' maxLength='256'")
+                </td>
+            </tr>
+            <tr>
+                <td>Message:</td>
+                <td>
+                    #springFormInput("iosPushNotification.message" "size='100' maxLength='100'")
+                </td>
+            </tr>
+         </table>
+
+        <div class="buttons">
+            <input class="save" type="submit" name="save" value="Create" />
+        </div>
+    </form>
+
+
+
+    <h1>iOS Push notifications list</h1>
+
+    #if($request.getParameter("msg"))
+        <div class="errors">
+             $request.getParameter("msg")
+        </div>
+    #end
+
+    <div class="list">
+        <table id="notifications" class="tablesorter">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Message sent to players</th>
+                    <th>Created</th>
+                    <th>Sent</th>
+                    <th>Target<br/>count</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Each row of the upload CSV should have Game Type,Player Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                #if($list.isEmpty($notifications))
+                    <tr style="height:25px">
+                        <td colspan="11">None created yet!&nbsp;&nbsp;&nbsp;You can create a notification above: Enter a title, description and message. Click 'Create'.</td>
+                    </tr>
+                    <tr style="height:25px">
+                        <td colspan="11">You can then decide which players should receive the notifications.</td>
+                    </tr>
+                #end
+            
+                #set ($rowCount = 0)
+                #foreach($notification in $notifications)
+                    #set($rowCount=$rowCount+1)
+                    <tr style="height:25px" class=#if($rowCount % 2 == 0)  "odd" #else "even" #end>
+                        <td>$notification.id</td>
+                        <td>$notification.title</td>
+                        <td>$notification.description</td>
+                        <td>$notification.message</td>
+                        <td>${dateTool.format('yyyy/MM/dd - HH:mm',$notification.created.toDate())}</td>
+                        <td>
+                            #if($notification.sent)
+                                ${dateTool.format('yyyy/MM/dd - HH:mm',$notification.sent.toDate())}
+                            #end
+                            #if(!$notification.sent)
+                                <div class="future">Yet to be sent</div>
+                            #end
+                        </td>
+                        <td>
+                            $notification.targetCount
+                        </td>
+                        <td>
+                            <a href="delete?id=$notification.id">Delete</a>
+                        </td>
+                        <td>
+                            #if($notification.targetCount > 0)
+                                <a href="showTargets?id=$notification.id&pageNumber=1">Show targets</a>
+                            #end
+                        </td>
+                        <td>
+                            #if(!$notification.sent)
+                                <a href="push?id=$notification.id">Send</a>
+                            #end
+                        </td>
+                        <td>
+                            #if(!$notification.sent)
+                                <form action="addTargets" method="POST" enctype="multipart/form-data">
+                                    <input type="file" name="file" accept="text/csv" />
+                                    <input type="submit" value="Upload targets file" />
+                                    <input type="hidden" name="id" value="$notification.id"/>
+                                </form>
+                            #end
+                        </td>
+
+
+                    </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+
+##    <div class="buttons">
+##        <a href="pushAll.do">
+##            <input class="pushNotification" type="button" name="push" value="Send all pending push notifications"/>
+##        </a>
+##    </div>
+
+    #if($targetId)
+        <h1>Targets for notification id $targetId</h1>
+        <div class="list">
+            <table class="report">
+                <thead>
+                    <tr>
+                        <th colspan="10"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        #set($col = 0)
+                        #set($row = 0)
+                        #foreach($target in $targets)
+
+                            #if ($col == 0)
+                                <tr class=#if($row % 2 == 0)  "odd" #else "even" #end>
+                                #set($row = $row + 1)
+                            #end
+
+                            <td>$target.gameType,$target.playerId</td>
+    
+                            #if ($col == 9)
+                                </tr>
+                                #set($col = 0)
+                            #else
+                                #set($col = $col + 1)
+                            #end
+
+                        #end
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="paginateButtons">
+            #if($pagesAvailable > 0)
+                <span class="currentStep">page $pageNumber of $pagesAvailable</span>
+                #if($pageNumber!=1)
+                    #set($previousPage = $pageNumber - 1)
+                    <a href="showTargets?id=$targetId&pageNumber=$previousPage">Previous</a>
+                #end
+                #if($pageNumber!=$pagesAvailable)
+                    #set($nextPage = $pageNumber + 1)
+                    <a href="showTargets?id=$targetId&pageNumber=$nextPage">Next</a>
+                #end
+            #end
+        </div>
+    #end
+
+</body>

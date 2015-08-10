@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    #parse("partials/head.vm")
+	#parse("partials/glossStyle.vm")
+	#parse("partials/preScripts.vm")
+
+    <style type="text/css">
+        body {
+            width: 100%;
+			padding: 0;
+        }
+    </style>
+</head>
+<body class="playGameInPopUp">
+    <div id="payments_overlay">
+        <img src='$!{assetUrl}/images/gloss/window-btn-close.png' id="payments_closeButton" class='closeButton'>
+    </div>
+
+#parse("playGame.vm")
+
+#parse("partials/external_tracking.vm")
+#parse("partials/fb_init.vm")
+#parse("partials/glossScripts.vm")
+
+</body>
+</html>

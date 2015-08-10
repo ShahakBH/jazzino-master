@@ -1,0 +1,1 @@
+alter table PAYMENT_STATE modify STATE varchar(20) NOT NULL#

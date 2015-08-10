@@ -1,0 +1,35 @@
+grinder.script = ../yazino.py
+grinder.processes = 1
+grinder.threads = 350
+grinder.runs = 0
+grinder.logDirectory = /tmp/grinder
+grinder.numberOfOldLogs = 1
+grinder.consoleHost = ip-10-106-130-28.eu-west-1.compute.internal
+grinder.jvm.arguments = -server -Xmn256m -Xmx2048m -Djavax.net.ssl.trustStore=etc/bmc-keystore -Djavax.net.ssl.trustStorePassword=s1gn4tur3
+
+# yazino.agents in only used to calculate initial delay and sleep time
+yazino.agents = 49
+yazino.agent-region = eu-west-1
+yazino.playersOnline = 5000
+yazino.maxPlayersPerTournament = 200
+yazino.useRabbitForGameMessages = False
+
+player.source-url = http://www.breakmycasino.com/games-testweb/testPlayers
+player.passwordHash = 4gn+bHlQsXNR118FJyH3grYgfYg=
+player.password = letmein
+player.sessionDurationInSeconds = 480
+
+web.baseUrl = http://www.breakmycasino.com/
+
+dbdw.hostname = rck-bmc-dbdw1.breakmycasino.com
+
+rabbit.hosts = rabbit1.breakmycasino.com,rabbit2.breakmycasino.com
+rabbit.virtualHost = rabbit.breakmycasino.com
+rabbit.username = flash
+rabbit.password = readonly
+
+lightstreamer.host.ssl = https://messaging.breakmycasino.com:443
+lightstreamer.host = http://messaging.breakmycasino.com:80
+lightstreamer.nodes = rck-bmc-mobile1.breakmycasino.com,rck-bmc-mobile2.breakmycasino.com
+
+log.isEnabled = False

@@ -1,0 +1,17 @@
+<!HTML>
+<html>
+    <head>
+        <title>Control Centre</title>
+        <link rel="stylesheet" href="${request.contextPath}/style/default.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="${request.contextPath}/style/jquery-ui-1.8.16.custom.css" type="text/css" media="screen">
+    </head>
+    <body>
+        $screen_content
+
+        <script type="text/javascript" src="${request.contextPath}/javascript/jquery.min.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/javascript/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/javascript/jquery-ui-addon-timepicker.js"></script>
+        <script type="text/javascript" src="${request.contextPath}/javascript/shared.js"></script>
+    </body>
+</html>
+</html>

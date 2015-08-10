@@ -1,0 +1,5 @@
+# We mustn't block localhost
+127.0.0.1
+<% @allowed_clients.each do |host| %>
+<%= host %>
+<% end %>

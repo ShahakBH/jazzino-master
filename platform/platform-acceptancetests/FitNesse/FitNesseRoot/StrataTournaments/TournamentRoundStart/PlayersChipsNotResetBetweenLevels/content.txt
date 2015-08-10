@@ -1,0 +1,46 @@
+Check that players' chips remain the same between levels (and are not reset to starting chips)
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|Starting Chips|
+|Blackjack Tournament|BlackJack|PRESET|1000|
+
+!|Create tournament template level|1|for template|Blackjack Tournament|
+!|Create tournament template level|2|for template|Blackjack Tournament|
+!|Create tournament template level|3|for template|Blackjack Tournament|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+!|Force state for|June Blackjack Tournament|to|Registering|
+
+!|Player registers for tournament|
+|Tournament name|Player name|message?|
+|June Blackjack Tournament|Adam|OK|
+|June Blackjack Tournament|John|OK|
+|June Blackjack Tournament|Bob|OK|
+
+!|Player tournament balance|
+|Tournament name|Player name|balance?|
+|June Blackjack Tournament|Adam|1000.00|
+|June Blackjack Tournament|John|1000.00|
+|June Blackjack Tournament|Bob|1000.00|
+
+Level 1
+!|Start level for tournament|June Blackjack Tournament|
+
+!|Set player tournament balance|
+|Tournament name|Player|Balance|
+|June Blackjack Tournament|Adam|1500|
+|June Blackjack Tournament|John|1000|
+|June Blackjack Tournament|Bob|500|
+
+!|Stop level for tournament|June Blackjack Tournament|
+
+!3 Check that players' balances are not set to 1000 when the next level starts
+!|Start level for tournament|June Blackjack Tournament|
+
+!|Player tournament balance|
+|Tournament Name|Player Name|balance?|
+|June Blackjack Tournament|Adam|1500.00|
+|June Blackjack Tournament|John|1000.00|
+|June Blackjack Tournament|Bob|500.00|
+

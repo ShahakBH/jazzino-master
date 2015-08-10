@@ -1,0 +1,153 @@
+#springBind("campaignForm.campaign.*")
+
+<div class="colmask doublepage">
+
+    <div class="colleft">
+
+        <div class="col1">
+            #springFormHiddenInput("campaignForm.campaign.campaignScheduleWithName.campaignId")
+
+            <label for="name">Enabled:</label>
+
+            <div>
+                #springFormCheckbox("campaignForm.campaign.enabled")
+
+            </div>
+
+            <label for="name">Name:</label>
+
+            <div>
+                #springFormInput("campaignForm.campaign.campaignScheduleWithName.name" )
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="nextRun">Next Run Time:</label>
+
+            <div>
+                #springFormDateTimeLocalInput("campaignForm.campaign.campaignScheduleWithName.nextRunTsAsDate" "")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+
+            <label for="endTime">End Time:</label>
+
+            <div>
+                #springFormDateTimeLocalInput("campaignForm.campaign.campaignScheduleWithName.endTimeAsDate" "")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="runHours">Run Hours:</label>
+            <div>
+                #springFormInput("campaignForm.campaign.campaignScheduleWithName.runHours" "size='3' maxLength='3'")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="runHours">Run Minutes:</label>
+            <div>
+                #springFormInput("campaignForm.campaign.campaignScheduleWithName.runMinutes" "size='2' maxLength='2'")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="sqlQuery">Sql Query:</label>
+
+            <div>
+                #springFormTextarea("campaignForm.campaign.sqlQuery" "maxLength='65535' class='masterTooltip' title='Sql to return playerIds, Remember not to incude semicolon' ")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="description">Description:</label>
+
+            <div>
+                #springFormInput("campaignForm.campaign.content['description']" )
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="message">Message to be sent to users:</label>
+
+            <div>
+                #springFormInput("campaignForm.campaign.content['message']" )
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="tracking">Tracking Id:</label>
+
+            <div>
+                #springFormInput("campaignForm.campaign.content['tracking']" )
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="delayNotifications">Send Notifications at last login time:</label>
+
+            <div>
+                #springFormCheckbox("campaignForm.campaign.delayNotifications" '' "")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="channels">Notification Channels:</label>
+
+            <div>
+                #springFormCheckboxesWithLabels("campaignForm.campaign.channels" $channelMap "<br/>" "")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <label for="gameTypes">Games:</label>
+
+            <div>
+                #springFormCheckboxesWithLabels("campaignForm.campaign.gameTypes" $gameTypeMap "<br/>" "")
+                #springShowErrors("<br>" "errorMessage")<br>
+            </div>
+
+            <div id="evDiv">
+                <label for="emailTemplate">Email Vision Template:</label>
+
+                <div>
+                    #springFormInput("campaignForm.campaign.channelConfig['TEMPLATE']" )
+                    #springShowErrors("<br>" "errorMessage")<br>
+                </div>
+
+                <label for="evCriteria">Opened Email in last 120 days:</label>
+
+                <div>
+                    #springFormCheckbox("campaignForm.campaign.channelConfig['FILTER_OUT_120_DAY_UNOPENED']" '' "checked")
+                    #springShowErrors("<br>" "errorMessage")<br>
+                </div>
+            </div>
+
+
+            <div class="actions">
+                <br/>
+            ## Empty Div to  separate action buttons
+            </div>
+            <div class="actions">
+                <input type="submit" value="Submit">
+                <input type="button" onclick="location.href='#springUrl('/campaigns')';" value="Cancel">
+            </div>
+        </div>
+
+        <div class="col2">
+
+            <label for="promotionType">Promotion:</label>
+
+            <div>#springFormRadioButtons("campaignForm.promotionType" ${promoTypes} '<br>' "promo-type-chooser='promoForm' $!disabledStatus")</div>
+
+            #springShowErrors("<br>" "errorMessage")<br>
+            #if($disabledStatus == "disabled='disabled'")
+                #springFormHiddenInput("campaignForm.promotionType")
+            #end
+
+
+
+            #springShowErrors("<br>" "errorMessage")<br>
+            #parse('campaigns/partials/dailyAwardPromotion.vm')
+            #parse('campaigns/partials/buyChipsPromotion.vm')
+            #parse('campaigns/partials/giftingPromotion.vm')
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

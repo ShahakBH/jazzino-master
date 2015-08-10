@@ -1,0 +1,3 @@
+-- create or replace view PLAYER as
+-- select player_id, user_id, account_id, tscreated, is_insider, picture_location, level
+-- from strataprod.PLAYER#

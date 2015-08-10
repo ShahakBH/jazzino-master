@@ -1,0 +1,19 @@
+<title>Yazino</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script type="text/javascript" src="${assetUrl}/javascript/swfobject.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/jquery-1.10.2.min.js"></script>
+
+<link rel="stylesheet" href="$!assetUrl/style/canvas/canvas.css" type="text/css">
+
+<!--[if lt IE 9]>
+<script>
+    (function() {
+        var html5elements = "address|article|aside|audio|canvas|command|datalist|details|dialog|figure|figcaption|footer|header|hgroup|keygen|mark|meter|menu|nav|progress|ruby|section|time|video".split('|');
+        for (var i = 0; i < html5elements.length; i++) {
+            document.createElement(html5elements[i]);
+        }
+    })();
+</script>
+<![endif]-->

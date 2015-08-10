@@ -1,0 +1,33 @@
+<div id="management-team-area">
+    <h3>Melissa Tan</h3>
+    <h4>CO-FOUNDER & VICE PRESIDENT PRODUCT DEVELOPMENT</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/mel-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/blackjack">
+            <div class="game-blackjack"></div>
+            </a>
+            <a href="/texasHoldem">
+            <div class="game-texas-holdem"></div>
+            </a>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>
+        Melissa's main focus is ensuring business objectives are delivered in products. She works very closely with all
+        product managers, stakeholders and technologists to optimise and prioritise output while spearheading Yazino's
+        efforts to continuously innovate and improve its roadmap of in-sync social games.
+    </p>
+
+    <p>
+        Before joining Yazino, Melissa worked at a series of global technology consultancies in her home country of
+        Australia, including BearingPoint and Accenture, where she specialised in the telecoms sector. Her passion for
+        games and the opportunity to be part of a new approach to social gaming led to her move to the UK to be part of
+        the Yazino team.
+    </p>
+
+</div>

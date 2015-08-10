@@ -1,0 +1,12 @@
+#if ($development)
+   ## Libraries
+    <script type="text/javascript" src="${assetUrl}/javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${assetUrl}/javascript/jquery.cookie-1.0.0.js"></script>
+    <script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+   ## Our code
+    <script type="text/javascript" src="${assetUrl}/javascript/yazino-core.js"></script>
+    <script type="text/javascript" src="${assetUrl}/javascript/gloss/jquery.functions2.js"></script>
+#else
+    <script type="text/javascript" src="${assetUrl}/javascript/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${assetUrl}/javascript/yazino-core.min.js"></script>
+#end

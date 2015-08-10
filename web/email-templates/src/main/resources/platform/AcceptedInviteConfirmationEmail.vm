@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Your invitation was accepted! </title>
+</head>
+<body style="margin:0px;" bgcolor="#f2f2f2">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" width="804" bgcolor="#f2f2f2">
+		<tbody>
+			<tr><td><div><img border="0" height="23" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/header-top-padding.jpg" /></div></td></tr>
+			<tr>
+				<td>
+					<table align="center" border="0" cellpadding="0" cellspacing="0" width="700">
+						<tbody>
+							<tr>
+								<td style="line-height:0px;"><a href="http://www.yazino.com"><img alt="Yazino - Let`s Play!" border="0" height="42" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/logo.jpg" title="Yazino - Let`s Play!" /></a></td>
+								<td align="right" valign="bottom"><font face="Helvetica, Arial, sans-serif" size="1" color="#707070">Having trouble seeing this message? <a href="https://yazino.prod.maximailv3.maximiles.com/campaign/email/template/template/%NEWSLETTER_LINK%" style="text-decoration:none;"><font color="#e52525">Click here</font></a> for a better view.</font></td>
+							</tr>
+							<tr><td colspan="2" style="font-size:0px;"><img border="0" height="8" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/header-bottom-padding.jpg" /></td></tr>
+							<tr><td colspan="2" style="font-size:0px;"><a href="http://www.yazino.com"><img border="0" height="66" width="700" alt="Now you can play together" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/main-article-image.jpg" /></a></td></tr>
+							<tr bgcolor="#ffffff"><td style="border-left:#e7e7e7 1px solid;padding-left:37px;"><br/><p><font face="Helvetica, Arial, sans-serif" color="#707070" style="font-size:15px;line-height:19px;">Hi $esc.html($name),<br></br>
+							$!esc.html($!inviteeFirstName) accepted your invite. You earned <strong>5,000 chips</strong>!<br></br>
+							Join on the boards, run the reels or come together at a table now and show 'em how it's done at <a href="http://www.yazino.com" style="text-decoration: none;"><font color="#e52525">Yazino</font></a>.</font></p></td><td valign="top" align="right" style="font-size:0px;line-height:0px;border-right:#e7e7e7 1px solid;"><a href="http://www.yazino.com"><img border="0" width="350" height="152" alt="Play Now!" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/main-article-image-inner.jpg" /></a></td></tr>
+						</tbody>
+					</table>
+					<table align="center" border="0" cellpadding="0" cellspacing="0" width="700">
+						<tbody>
+							<tr><td colspan="8" style="font-size:0px;"><div><img height="32" border="0" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/play-our-games-top.jpg" /></div></td></tr>
+							<tr><td colspan="8" bgcolor="#f8f8f8" width="698" style="border-left:#e7e7e7 1px solid;border-right:#e7e7e7 1px solid;font-size:0px;"><div><img border="0" height="12" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/play-our-games-padding.jpg" /></div></td></tr>
+							<tr><td colspan="8" bgcolor="#f8f8f8" width="698" style="border-left:#e7e7e7 1px solid;border-right:#e7e7e7 1px solid;padding-left:27px;font-size:0px;"><div><img border="0" height="8" style="vertical-align:bottom;" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/play-our-games.jpg" /></div></td></tr>
+							<tr><td colspan="8" bgcolor="#f8f8f8" width="698" style="border-left:#e7e7e7 1px solid;border-right:#e7e7e7 1px solid;font-size:0px;"><div><img border="0" height="12" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/play-our-games-padding.jpg" /></div></td></tr>
+							<tr bgcolor="#f8f8f8">
+								<td style="border-left:#e7e7e7 1px solid;font-size:0px;"><a href="http://www.yazino.com/highstakes"><img border="0" alt="High Stakes" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/high-stakes.jpg" /></a></td>
+								<td style="line-height:0px;"><a href="http://www.yazino.com/blackjack"><img border="0" alt="Blackjack" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/blackjack.jpg" /></a></td>
+								<td style="line-height:0px;"><a href="http://www.yazino.com/texasholdem"><img border="0" alt="Texas Hold'em" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/texas-holdem.jpg" /></a></td>
+								<td style="line-height:0px;"><a href="http://www.yazino.com/roulette"><img border="0" alt="Roulette" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/roulette.jpg" /></a></td>
+								<td style="line-height:0px;"><a href="http://www.yazino.com/wheeldeal"><img border="0" alt="Wheel Deal" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/wheel-deal.jpg" /></a></td>
+								<td style="border-right:#e7e7e7 1px solid;line-height:0px;"><a href="http://itunes.apple.com/us/artist/advanced-games-lab-limited/id422074431"><img border="0" alt="Go Mobile" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/go-mobile.jpg" /></a></td>
+							</tr>
+							<tr><td colspan="8"><img border="0" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/play-our-games-bottom.jpg" style="vertical-align:bottom;" /></td></tr>
+						</tbody>
+					</table>
+					<table align="center" border="0" cellpadding="0" cellspacing="0" width="700">
+						<tbody>
+							<tr><td style="font-size:0px;"><div><img style="vertical-align:bottom;" border="0" height="15" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-top.jpg" /></div></td></tr>
+							<tr>
+								<td align="right">
+									<a href="http://news.yazino.com/share-on-facebook?code=%CODE_CAMPAIGN%"><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/fb.png" width="20" height="19" border="0" alt="Share on Facebook"/></a><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-top.jpg" alt="" /><a href="http://news.yazino.com/share-on-twitter?code=%CODE_CAMPAIGN%"><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/twitterLogo.png" width="27" height="19" border="0" alt="Share on Twitter"/></a><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-top.jpg" alt="" /><a href="http://www.youtube.com/yazinoletsplay"><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/youTubeLogo.png" width="46" height="18" border="0" alt="View our Youtube channel"/></a><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-top.jpg" alt="" /><a href="http://blog.yazino.com/"><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/Read-our-Blog.jpg" width="28" height="22" border="0" alt="Read our Blog"/></a><img src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-top.jpg" alt="" /></td>
+							</tr>
+							<tr>
+								<td align="center" style="font-size:0px;">
+									<font color="#707070" face="Helvetica, Arial, sans-serif" size="1"><br />.Add <a href="mailto:news@yazino.info" style="text-decoration: none;"><font color="#e52525">news@yazino.info</font></a> to your address book to make shure your emails reach you. This is an automated message from Yazino; please do not reply to<br />
+									this email. If you have questions, drop us a line at <a href="mailto:contact@yazino.com" style="text-decoration: none;"><font color="#e52525">contact@yazino.com</font></a>. If you no longer wish to receive news and updates from Yazino, <a href="mailto:unsubscribe@yazino.com" style="text-decoration: none;"><font color="#e52525">click here</font></a> to<br />
+									unsubscribe, or see our <a href="http://www.yazino.com/public/legal/privacy" style="text-decoration: none;"><font color="#e52525">privacy policy</font></a> and <a href="http://www.yazino.com/public/legal/termsOfService" style="text-decoration: none;"><font color="#e52525">terms of service</font></a>.<br />
+									&copy; 2012 Yazino, Islands House, Grand Rue, Guernsey, GY4 6RU</font>
+								</td>
+							</tr>
+							<tr><td style="font-size:0px;"><div><img style="vertical-align:bottom;" border="0" height="60" alt="" src="http://cdn.yazino.com/email-content/transactional/20120220T123000/AcceptedInviteConfirmation_FINAL/images/footer-bottom.jpg" /></div></td></tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

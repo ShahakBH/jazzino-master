@@ -1,0 +1,3 @@
+# Run cleanup job
+30 8 * * * postgres /opt/bin/cleanup-<%= @table%>.rb > /var/log/database-cleanup/cleanup-<%= @table%>.log 2>&1
+

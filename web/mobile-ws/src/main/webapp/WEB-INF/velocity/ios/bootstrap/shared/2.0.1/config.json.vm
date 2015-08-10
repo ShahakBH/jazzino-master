@@ -1,0 +1,22 @@
+#* @vtlvariable name="resources" type="com.yazino.mobile.ws.config.ResourceConfig" *#
+#* @vtlvariable name="ios" type="com.yazino.mobile.ws.ios.IOSConfig" *#
+#* @vtlvariable name="games" type="com.yazino.mobile.ws.config.GamesConfig" *#
+#* @vtlvariable name="lightstreamer" type="com.yazino.mobile.ws.config.LightstreamerConfig" *#
+#* @vtlvariable name="facebook" type="com.yazino.mobile.ws.config.FacebookConfig" *#
+#* @vtlvariable name="tapjoy" type="com.yazino.mobile.ws.config.TapjoyConfig" *#
+
+{
+    "$iosGameIdentifier" : {
+        "gameIdentifier":"${gameType}",
+        "minimumVersion":"${ios.getMinimumVersions().get($iosGameIdentifier.toLowerCase())}",
+        "latestVersion":"${ios.getLatestVersions().get($iosGameIdentifier.toLowerCase())}",
+        "facebookApplicationID":"$!facebook.getApplicationIds().get(${gameType})",
+        "host":"${games.getDefaultHost()}",
+        "lightstreamerHost":"${lightstreamer.getHost()}:${lightstreamer.getPort()}",
+		"tapjoyEarnChipsURL":"$tapjoy.getEarnChipsURLs().get($iosGameIdentifier.toLowerCase())",
+        "fileResourcesHost":"${resources.getBaseUrl()}",
+        "fileResourcesPath":"/mobile-ws/ios/$iosGameIdentifier.toLowerCase()/resources/1.0",
+        "imageResourcesHost":"${resources.getContentUrl()}",
+        "imageResourcesPath":"mobile/ios/images"
+    }
+}

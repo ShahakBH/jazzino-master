@@ -1,0 +1,263 @@
+#!/bin/bash
+#
+# gs-agent      This shell script takes care of starting and stopping the GigaSpaces Agent
+#
+# chkconfig: - 80 20
+#
+### BEGIN INIT INFO
+# Provides: gs-agent
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: Service to control the GigaSpaces Agent
+# Short-Description: start and stop gs-agent
+### END INIT INFO
+#
+
+DAEMON_HOME=/usr/sbin
+DAEMON_SCRIPT="gs-agent"
+NAME="$(basename $0)"
+DAEMON_LOG="/var/log/gs-agent.log"
+DAEMON_USER="gsrun"
+GIGASPACE_HOME=/opt/gigaspaces
+GIGASPACE_VERSION="9.7.0-10496"
+WEBUI_LOG="/var/log/gs-webui.log"
+WEBUI_WAR="$GIGASPACE_HOME/tools/gs-webui/gs-webui-${GIGASPACE_VERSION}-RELEASE.war"
+WEBUI_PORT=8081
+
+# dervied from the generic daemon script, but heavily modified
+
+if [ -z "$JAVA_HOME" -a -d /opt/java ]; then
+    export JAVA_HOME=/opt/java
+fi
+
+unset ISBOOT
+if [ "${NAME:0:1}" = "S" -o "${NAME:0:1}" = "K" ]; then
+    NAME="${NAME:3}"
+    ISBOOT="1"
+fi
+
+# For SELinux we need to use 'runuser' not 'su'
+if [ -x "/sbin/runuser" ]; then
+    SU="/sbin/runuser"
+else
+    SU="su"
+fi
+
+# Path to the launch script
+
+DAEMON_PROG="$NAME"
+DAEMON_USER="${DAEMON_USER:-root}"
+
+# Define the log file
+DAEMON_LOG="${DAEMON_LOG:-${DAEMON_HOME}/service.out}"
+RETVAL="0"
+
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function checkpid() {
+    local i
+    for i in $* ; do
+        if [ -d "/proc/${i}" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_failure() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"FAILED"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 1
+}
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_success() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"OK"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 0
+}
+
+# See how we were called.
+function start() {
+    echo -n "Starting ${DAEMON_PROG}: "
+    if [ -f "/var/lock/subsys/${NAME}" ] ; then
+        if [ -f "/var/run/${NAME}.pid" ]; then
+            read kpid < /var/run/${NAME}.pid
+                if checkpid $kpid 2>&1; then
+                    echo "$NAME process already running"
+                        return -1
+                    else
+                        echo "lock file found but no process running for"
+                        echo "pid $kpid, continuing"
+                fi
+        fi
+    fi
+
+    roll_logs
+
+    export DAEMON_PID="/var/run/${NAME}.pid"
+    touch $DAEMON_PID
+    chown ${DAEMON_USER}:${DAEMON_USER} $DAEMON_PID
+    cd $DAEMON_HOME
+    $SU $DAEMON_USER -c "sh $DAEMON_SCRIPT"  >> $DAEMON_LOG 2>&1 &
+    RETVAL="$?"
+    if [ "$RETVAL" -eq 0 ]; then
+        PID_LOOP="0"
+        PID=""
+        while [ $PID_LOOP -lt 5 -a -z "$PID" ]; do
+            sleep 1
+            PID=$(ps ax | grep 'com.gigaspaces.start.SystemBoot ' | grep 'com.gigaspaces.start.services="GSA"' | grep -v grep | awk '{print $1}')
+            PID_LOOP=$[$PID_LOOP+1]
+        done
+        if [ -z "$PID" ]; then
+            echo "failed to find PID for GSA process"
+            echo_failure
+        else
+            echo $PID > /var/run/${NAME}.pid
+            echo_success
+            touch /var/lock/subsys/${NAME}
+        fi
+    else
+        echo_failure
+    fi
+    echo
+    return $RETVAL
+}
+
+function status() {
+    RETVAL="1"
+    if [ -f "/var/run/${NAME}.pid" ]; then
+        read kpid < /var/run/${NAME}.pid
+        if checkpid $kpid 2>&1; then
+            echo "$0 is already running (${kpid})"
+            RETVAL="0"
+        else
+            echo "lock file found but no process running for pid $kpid"
+        fi
+    else
+        pid="$(ps ax | grep 'com.gigaspaces.start.SystemBoot ' | grep 'com.gigaspaces.start.services="GSA"' | grep -v grep | awk '{print $1}')"
+        if [ -n "$pid" ]; then
+            echo "$0 running (${pid}) but no PID file exists"
+            RETVAL="0"
+        else
+            echo "$0 is stopped"
+        fi
+    fi
+    return $RETVAL
+}
+
+function stop() {
+    local STOP_VERBOSE="false"
+    echo -n "Stopping $DAEMON_PROG: "
+    if [ -f "/var/lock/subsys/${NAME}" ]; then
+        RETVAL=0
+        if [ "$RETVAL" -eq "0" ]; then
+            count="0"
+            if [ -f "/var/run/${NAME}.pid" ]; then
+                read kpid < /var/run/${NAME}.pid
+                kill $kpid
+                echo_success
+            fi
+            rm -f /var/lock/subsys/$NAME /var/run/$NAME.pid
+        else
+            echo_failure
+        fi
+    fi
+    echo
+}
+
+function roll_logs() {
+    local LOG_BASE="/var/log/gs-agent"
+    local LOG_DIR="$LOG_BASE/$(date '+%Y%m%dT%H%M%S')"
+    local CURRENT_LINK="$LOG_BASE/current"
+    local APP_LINK="$GIGASPACE_HOME/logs"
+
+    # clean older log directories
+    if [ -d "$LOG_BASE" -a -h "$CURRENT_LINK" ]; then
+        find -L "$LOG_BASE" -mindepth 1 -maxdepth 1 -not -newer "$CURRENT_LINK" -not -samefile "$CURRENT_LINK" -type d | sudo xargs rm -rf
+    fi
+
+    # create new log dir
+    mkdir -p "$LOG_DIR"
+    chown gsrun:gsrun "$LOG_DIR"
+    rm -f "$APP_LINK" "$CURRENT_LINK"
+    ln -sf "$LOG_DIR" "$APP_LINK"
+    ln -sf "$LOG_DIR" "$CURRENT_LINK"
+}
+
+function stop_and_wait() {
+    if [ -f "/var/lock/subsys/${NAME}" ]; then
+        RETVAL=0
+        if [ "$RETVAL" -eq "0" ]; then
+            count="0"
+            if [ -f "/var/run/${NAME}.pid" ]; then
+                read kpid < /var/run/${NAME}.pid
+
+                stop
+
+                while [ kill -0 "$kpid" 2>/dev/null ]; do
+                    sleep 1
+                done
+            fi
+        fi
+    fi
+}
+
+function deploy_webui() {
+    local STATUS=status
+    if [ $? -eq 0 ]; then
+        source "/etc/profile.d/gs.sh"
+        echo -n "Deploying GS-WebUI (logging to $WEBUI_LOG):"
+        $SU $DAEMON_USER -c "sh $GIGASPACE_HOME/bin/gs.sh deploy -properties 'embed://web.port=$WEBUI_PORT;web.content=/' $WEBUI_WAR"  >> $WEBUI_LOG 2>&1 &
+        echo_success
+    else
+        echo -n "gs-agent is not running"
+        echo_failure
+    fi
+    echo
+}
+
+# See how we were called.
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop_and_wait
+        sleep 1
+        start
+        ;;
+    condrestart)
+        if [ -f "/var/run/${NAME}.pid" ]; then
+            stop_and_wait
+            sleep 1
+            start
+        fi
+        ;;
+    status)
+        status
+        ;;
+    deploy-webui)
+        deploy_webui
+        ;;
+    *)
+        echo "Usage: $DAEMON_PROG {start|stop|restart|status|deploy-webui}"
+        exit 1
+esac
+
+exit $RETVAL

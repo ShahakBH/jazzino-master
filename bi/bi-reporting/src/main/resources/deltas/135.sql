@@ -1,0 +1,1 @@
+ALTER TABLE GIFTS_COLLECTED ADD COLUMN collected_ts timestamp;

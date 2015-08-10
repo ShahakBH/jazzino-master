@@ -1,0 +1,53 @@
+#set ($location = "List Games")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set ($baseUrl = "${request.contextPath}/game/configuration/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/configuration/create">Add Game Configuration</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Game Configuration</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Game ID</th>
+                <th>Short Name</th>
+                <th>Display Name</th>
+                <th>Aliases</th>
+                <th>Order</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ($gameConfiguration in $gameConfigurations)
+                <tr>
+                    <td>$gameConfiguration.gameId</td>
+                    <td>$gameConfiguration.shortName</td>
+                    <td>$gameConfiguration.displayName</td>
+                    <td>$gameConfiguration.aliases</td>
+                    <td>$gameConfiguration.order</td>
+                    <td>
+                        <a href="${request.contextPath}/game/configuration/show/${gameConfiguration.gameId}" title="View configuration ${gameConfiguration.gameId}">View</a>
+                        | <a href="${request.contextPath}/game/configuration/edit/${gameConfiguration.gameId}" title="Edit configuration ${gameConfiguration.gameId}">Edit</a>
+                        | <a class="action-delete" data-id="${gameConfiguration.gameId}" data-type="game configuration"
+                             href="${request.contextPath}/game/configuration/delete/${gameConfiguration.gameId}"
+                             title="Delete configuration ${gameConfiguration.gameId}">Delete</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>

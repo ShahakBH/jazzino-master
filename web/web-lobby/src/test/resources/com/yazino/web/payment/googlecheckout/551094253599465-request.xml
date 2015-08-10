@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<notification-history-request xmlns="http://checkout.google.com/schema/2">
+    <order-numbers>
+        <google-order-number>551094253599465</google-order-number>
+    </order-numbers>
+    <notification-types>
+        <notification-type>order-state-change</notification-type>
+        <notification-type>new-order</notification-type>
+    </notification-types>
+</notification-history-request>

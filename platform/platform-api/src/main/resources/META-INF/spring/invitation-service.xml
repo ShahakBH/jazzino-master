@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+     This file is intended for inclusion by clients.
+
+     You will need to define:
+     * The configuration, as described in environment.properties
+    -->
+
+    <context:annotation-config/>
+
+    <bean class="com.yazino.platform.invitation.InvitationConfig"/>
+
+    <bean id="invitationsTemplate"
+          class="com.yazino.platform.messaging.publisher.CloneableRabbitTemplate">
+        <property name="encoding" value="UTF-8"/>
+        <property name="exchange" value="${strata.rabbitmq.invitations.exchange}"/>
+        <property name="messageConverter" ref="invitationsConverter"/>
+        <property name="messagePropertiesConverter" ref="invitationsPropertiesConverter"/>
+        <property name="queue" value="${strata.rabbitmq.invitations.queue}"/>
+        <property name="routingKey" value="${strata.rabbitmq.invitations.routing-key}"/>
+        <property name="connectionFactory" ref="invitationsConnectionFactory"/>
+    </bean>
+
+    <bean id="invitationsQueuePublishingService"
+          class="com.yazino.platform.messaging.publisher.SpringAMQPRoutedQueuePublishingService">
+        <constructor-arg index="0" value="strata.rabbitmq.invitations.host"/>
+        <constructor-arg index="1" value="${strata.rabbitmq.invitations.port}"/>
+        <constructor-arg index="2" value="${strata.rabbitmq.invitations.virtualhost}"/>
+        <constructor-arg index="3" value="${strata.rabbitmq.invitations.username}"/>
+        <constructor-arg index="4" value="${strata.rabbitmq.invitations.password}"/>
+        <constructor-arg index="5" ref="invitationsTemplate"/>
+        <constructor-arg index="6" ref="yazinoConfiguration"/>
+    </bean>
+
+    <bean id="invitationService"
+          class="com.yazino.platform.invitation.QueuePublishingInvitationService">
+        <constructor-arg ref="invitationsQueuePublishingService"/>
+    </bean>
+
+    <bean id="invitationsPropertiesConverter"
+          class="org.springframework.amqp.rabbit.support.DefaultMessagePropertiesConverter"/>
+
+</beans>

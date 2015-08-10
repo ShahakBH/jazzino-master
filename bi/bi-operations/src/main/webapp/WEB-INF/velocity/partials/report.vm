@@ -1,0 +1,27 @@
+#if("$!errorMessages" != "")
+<p class="errorMessage">$errorMessages</p>
+#end
+#if ($reportData && $reportData.size() > 0)
+<div class="reportView">
+<table class="report" cellpadding="3" cellspacing="0" align="center" width="95%">
+    <thead class="fixedHeader">
+    <tr>
+        #foreach($header in $formatter.headers($reportData) )
+            <th>$header</th>
+        #end
+    </tr>
+    </thead>
+    <tbody class="scrollContent">
+        #foreach($record in $reportData)
+        <tr>
+            #foreach($field in $formatter.fieldInfos($record))
+                <td class="$field.format.htmlClassName">$field.fieldValueFormatted</td>
+            #end
+        </tr>
+        #end
+    </tbody>
+</table>
+</div>
+#else
+<p class="info">No results matched your query.</p>
+#end

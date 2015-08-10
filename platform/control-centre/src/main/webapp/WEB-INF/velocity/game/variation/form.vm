@@ -1,0 +1,97 @@
+<form method="post" action="${request.contextPath}/game/variation/save">
+
+#set($quote = '"')
+#if ($readonly)
+    #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+#end
+
+<fieldset>
+    <legend>Details</legend>
+
+    #if ($gameVariation.id)
+    #springFormHiddenInput( 'gameVariation.id' '' )
+    #end
+
+    <label for="gameType">Game Type:</label>
+    #springFormInput( 'gameVariation.gameType' "readonly=${quote}readonly${quote}" )
+
+    <label for="name">Name:</label>
+    #springFormInput( 'gameVariation.name' "$!formoptions" )
+</fieldset>
+
+<fieldset>
+    <legend>Properties</legend>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+            #if ($gameVariation.properties.isEmpty())
+            <tr>
+                <td colspan="3">No properties are defined</td>
+            </tr>
+            #end
+            #foreach ($gameVariationProperty in $gameVariation.properties)
+            <tr>
+                #set($index = $velocityCount - 1)
+                <td>
+                    #if ($readonly)
+                        ${gameVariationProperty.name}
+                    #else
+                        <label for="value">${gameVariationProperty.name}</label>
+                    #end
+                    #if ($options.toolTip)
+                        <div class="value-tooltip">$options.toolTip</div>
+                    #end
+                </td>
+                <td>
+                    #if ($readonly)
+                        ${gameVariationProperty.value}
+                    #else
+                        #if ($gameVariationProperty.id)
+                            #springFormHiddenInput( "gameVariation.properties[${index}].id" "" )
+                        #end
+                        #springFormHiddenInput( "gameVariation.properties[${index}].name" "" )
+
+                        #set($options = $propertyOptions.get($gameVariationProperty.name).get)
+                        
+                        #set($inputclass = "")
+                        #if ($options.valueType)
+                            #set($inputclass = "valuetype-$options.valueType")
+                        #end
+                        #if ($options.required)
+                            #set($inputclass = "$inputclass validation-required")
+                        #end
+                        #set($inputattrs = "$!formoptions")
+                        #if ($inputclass)
+                            #set($inputattrs = "$inputattrs class=${quote}${inputclass}${quote}")
+                        #end
+
+                        #if (!$options.availableOptions.isEmpty())
+                            #if ($options.multiple)
+                                #springFormMultiSelectFlat( "gameVariation.properties[${index}].value" $options.availableOptions "$!formoptions" )
+                            #else
+                                #springFormSingleSelect( "gameVariation.properties[${index}].value" $options.availableOptions "$!formoptions" )
+                            #end
+                        #elseif ($options.defaultValue && $options.defaultValue.length > 20)
+                            #springFormTextarea( "gameVariation.properties[${index}].value" "$!inputattrs" )
+                        #else
+                            #springFormInput( "gameVariation.properties[${index}].value" "$!inputattrs" )
+                        #end
+                    #end
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</fieldset>
+
+#if (!$readonly)
+<input type="submit" value="Submit"/>
+#end
+
+</form>

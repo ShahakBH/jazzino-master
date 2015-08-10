@@ -1,0 +1,19 @@
+#set ($location = "Edit Trophy Leaderboard")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/leaderboard/list">List Trophy Leaderboards</a></li>
+        <li><a href="${request.contextPath}/tournament/leaderboard/show/${leaderboard.id}">Cancel Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Edit Trophy Leaderboard ${leaderboard.id}</h2>
+
+        #parse("tournament/leaderboard/form.vm")
+    </div>
+</section>

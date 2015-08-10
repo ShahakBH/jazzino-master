@@ -1,0 +1,138 @@
+#macro( insertOldStyleTable )
+<table width="90%" class="report" cellspacing="2" cellpadding="3">
+    <thead>
+    <tr>
+
+        #foreach($key in $model.dashboard.fields.keySet())
+            #if($model.dashboard.Fields.get($key))
+                #if($parameters.sortOrder == $model.dashboard.fields.get($key))
+                    #set($sortOrder=$model.dashboard.fields.get($key)+"%20DESC")
+                #else
+                    #set($sortOrder=$model.dashboard.fields.get($key))
+                #end
+            #else
+                #set($sortOrder="")
+            #end
+            <th><a href="$model.linkBuilder.getSortLink("#springUrl('/player')", $sortOrder)&search=Search">$key</a>
+            </th>
+        #end
+    </tr>
+    </thead>
+    <tbody>
+        #foreach($line in $dashboard)
+        <tr>
+            #foreach($entry in $line.entrySet())
+                #set($format=$model.dashboard.fieldTypes)
+                <td class="popup">
+                    #if($format.get($entry.key)=="Date")
+                        $dateTool.format('dd.MM.yyyy HH:mm:ss',$entry.value)
+                    #elseif($format.get($entry.key)=="SDate")
+                        <a href="#springUrl('/player/search')?search=Search&query=$model.player.playerId&dashboardToDisplay=STATEMENT&selectionDate=$dateTool.format('yyyy-MM-dd',$entry.value)&pageSize=$parameters.pageSize"
+                                >$dateTool.format('dd.MM.yyyy',$entry.value)</a>
+                    #elseif($format.get($entry.key)=="Table")
+                        #if ($!entry.value)
+                            <a href="#springUrl('/player/search')?search=Search&query=$model.player.playerId&dashboardToDisplay=GAME&tableDetail=$line.get("Table")|$line.get("Game")&pageSize=$parameters.pageSize"
+                                    >$!entry.value</a>
+                        #end
+                    #elseif($format.get($entry.key)=="Number")
+                        #if($entry.value && $entry.value < 0)
+                            <span class="negative">$!numberTool.format('###,###.##', $entry.value)</span>
+                        #else
+                            $!numberTool.format('###,###.##', $entry.value)
+                        #end
+                    #elseif($format.get($entry.key)=="StringWithPopup")
+                        #if($!entry.value.get(1))
+                            <div class="popup" onclick="alert('$esc.javascript($entry.value.get(1))')"
+                            ">
+                            $entry.value.get(0)
+                            </div>
+                        #else
+                            $entry.value.get(0)
+                        #end
+                    #else
+                        $!entry.value
+                    #end
+                </td>
+            #end
+        </tr>
+        #end
+    </tbody>
+</table>
+#end
+
+#macro( insertGameDetails )
+    #if($model.dashboard.gameDetails && $model.dashboard.gameDetails.size() > 0)
+    <table width="75%" class="report" cellspacing="2" cellpadding="3">
+        <thead>
+        <tr>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach($line in $model.dashboard.gameDetails)
+            <tr>
+                <td>$line</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #end
+#end
+
+
+#set($dashboard = $model.dashboard.results)
+#if($dashboard)
+<input type="hidden" name="firstRecord" value="$parameters.firstRecord"/>
+
+    #if($parameters.sortOrder)
+    <input type="hidden" name="sortOrder" value="$parameters.sortOrder"/>
+    #end
+
+    #if($parameters.tableDetail)
+    <input type="hidden" name="tableDetail" value="$parameters.tableDetail"/>
+    #end
+
+    #if($dashboard.size() == 0)
+    <div class="paging">
+        #if($parameters.firstRecord > 0)
+            #set($newLimit = $parameters.firstRecord - $parameters.pageSize)
+        <p align="center"><a href="$model.linkBuilder.getPageLink("#springUrl('/player/search')", $newLimit)">Previous
+            page</a>
+            #set($currentPage = $parameters.firstRecord / $parameters.pageSize + 1)
+            (p. $currentPage)
+        </p>
+        #end
+
+        <p align="center">
+            No records found.
+        </p>
+    </div>
+    #else
+    <div class="paging">
+        <p align="center">
+            #if($parameters.firstRecord > 0)
+                #set($newLimit = $parameters.firstRecord - $parameters.pageSize)
+                <a href="$model.linkBuilder.getPageLink("#springUrl('/player/search')", $newLimit)">Previous page</a>
+            #end
+            *
+            #if($dashboard.size() >= $parameters.pageSize)
+                #set($newLimit = $parameters.firstRecord + $parameters.pageSize)
+                <a href="$model.linkBuilder.getPageLink("#springUrl('/player/search')", $newLimit)">Next page</a>
+            #end
+            #set($currentPage = $parameters.firstRecord / $parameters.pageSize + 1)
+            (p. $currentPage)
+        </p>
+    </div>
+
+    <p align="center">
+        #insertOldStyleTable()
+    </p>
+    #end
+
+    #if($model.dashboard.gameDetails)
+    <p align="center">
+        #insertGameDetails()
+    </p>
+    #end
+
+#end

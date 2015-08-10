@@ -1,0 +1,60 @@
+#!/usr/bin/ruby
+
+STATUS = {}
+STATUS[:okay] = [0, "OK"]
+STATUS[:warning] = [1, "WARNING"]
+STATUS[:critical] = [2, "CRITICAL"]
+STATUS[:unknown] = [3, "UNKNOWN"]
+
+DEFAULT_PROC_FILE = '/proc/mdstat'
+
+def print_usage_and_exit
+  puts "Usage: #{__FILE__} [-h | --help] [-f=procfile | --file=procfile]"
+  exit STATUS[:unknown][0]
+end
+
+def parse_arguments(args)
+  parsed_arguments = {}
+  parsed_arguments[:file] = DEFAULT_PROC_FILE
+  args.each do |arg|
+    if arg == '-h' || arg == '--help'
+      parsed_arguments[:help] = true
+    elsif arg =~ /-f=(.*)/ || args =~ /--file=(.*)/
+      parsed_arguments[:file] = $1
+    end
+  end
+  parsed_arguments
+end
+
+arguments = parse_arguments(ARGV)
+
+print_usage_and_exit if arguments[:help]
+
+md_name = 'unknown'
+md_statuses = []
+File.open(arguments[:file], 'r').each_line do |line|
+  md_name = $1 if line =~ /^(md\d+)/
+
+  if line =~ /blocks.*\[([^0-9\/\]]+)\]/
+    current_state = $1
+    md_statuses << "#{md_name} failed [#{current_state}]" if current_state !~ /^U+$/
+  end
+
+  if line =~ /(resync|check)(?:\s*\=\s*([0-9.]+\s*%|DELAYED))?/i
+    status = $2 || "unknown"
+    md_statuses << "#{md_name} #{$1} #{status}"
+  end
+end
+
+md_status = md_statuses.join(', ')
+if md_status =~ /failed/
+  status = :critical
+elsif md_status =~ /resync \d+/
+  status = :warning
+else
+  status = :okay
+  md_status = "All arrays are okay." if md_status.length == 0
+end
+
+puts "#{STATUS[status][1]}: #{md_status}"
+exit STATUS[status][0]

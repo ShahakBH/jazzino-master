@@ -1,0 +1,134 @@
+#set($pageTitle = "Promotions - Add Players")
+
+<article class="main">
+    #parse("promotion/partials/searchOptions.vm")
+    <h1>Promotion</h1>
+    <div class="dialog" style="width=100%;">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>$page.promotion.name</td>
+            </tr>
+            <tr>
+                <td>Start Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$page.promotion.startDate.toDate())}</td>
+            </tr>
+            <tr>
+                <td>End Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$page.promotion.endDate.toDate())}</td>
+            </tr>
+            #if ($page.promotion.configuration.getConfigurationValueAsInteger("reward.chips"))
+                <tr>
+                    <td>Reward Chips:</td>
+                    <td>${page.promotion.configuration.getConfigurationValueAsInteger("reward.chips")}</td>
+                </tr>
+            #end
+            <tr>
+                <td>Maximum Rewards:</td>
+                <td>${page.promotion.configuration.getConfigurationValueAsInteger("max.rewards")}</td>
+            </tr>
+        </table>
+    </div>
+    #if ($!inputLineErrors)
+        <h1 class="error">Invalid lines</h1>
+        <div class="list">
+            <table class="report">
+            <thead>
+            <tr>
+                <th>Malformed Line</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach($lineError in $inputLineErrors)
+                    <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+                        <td>$lineError</td>
+                    </tr>
+                #end
+            </table>
+        </div>
+    #end
+    #if ($!rpxIdsNotMatched)
+        <h1 class="error">External Ids not matched</h1>
+        <div class="list">
+            <table class="report">
+            <thead>
+            <tr>
+                <th>Provider</th>
+                <th>External Id</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach($rpxCredential in $rpxIdsNotMatched)
+                    <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+                        <td>$rpxCredential.provider</td>
+                        <td>$rpxCredential.externalId</td>
+                    </tr>
+                #end
+            </table>
+        </div>
+    #end
+    #if ($!rpxIdsMatchedToManyPlayers)
+        <h1 class="error">External Ids matching more than one Player Id</h1>
+        <div class="list">
+            <table class="report">
+            <thead>
+            <tr>
+                <th>Provider</th>
+                <th>External Id</th>
+                <th>Player Ids Matched</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach($rpxCredential in $rpxIdsMatchedToManyPlayers)
+                    <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+                        <td>$rpxCredential.provider</td>
+                        <td>$rpxCredential.externalId</td>
+                        <td>$rpxCredential.matchingPlayerIds</td>
+                    </tr>
+                #end
+            </table>
+        </div>
+    #end
+    <h1>Players in Promotion</h1>
+    <div class="list">
+        <table class="report">
+        <thead>
+            <tr>
+                <th colspan="10">Player IDs&nbsp;(Total Players in promotion: $totalPlayers)</th>
+            </tr>
+        </thead>
+        <tbody>
+        #if($page.pagesAvailable == 0)
+            <tr><td colspan="3">No players in this promotion</td></tr>
+        #else
+            #set($col = 0)
+            #foreach($promotionPlayer in $page.promotionPlayers)
+                #if ($col == 0)
+                    <tr class=#if($velocityCount % 2 == 0)  "odd" #else "even" #end>
+                #end
+                <td>$promotionPlayer.playerId</td>
+                #if ($col == 9)
+                    </tr>
+                    #set($col = 0)
+                #else
+                    #set($col = $col + 1)
+                #end
+            #end
+        #end
+        </tbody>
+        </table>
+    </div>
+    <div class="paginateButtons">
+        #if($page.pagesAvailable > 0)
+            <span class="currentStep">page $page.pageNumber of $page.pagesAvailable</span>
+            #if($page.pageNumber!=1)
+                #set($previousPage = $page.pageNumber - 1)
+                <a href="nextPlayers?pageNumber=$previousPage">Previous</a>
+            #end
+            #if($page.pageNumber!=$page.pagesAvailable)
+                #set($nextPage = $page.pageNumber + 1)
+                <a href="nextPlayers?pageNumber=$nextPage">Next</a>
+            #end
+        #end
+    </div>
+</div>

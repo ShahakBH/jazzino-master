@@ -1,0 +1,16 @@
+!3 Allowed actions are based on how a player appears in the contact list or in the chat window. 
+
+|allowed actions|
+|player appears as|is online|allowed actions?|
+|not friend|true|add friend, ignore|
+|not friend|false|add friend, ignore|
+|friend|true|ignore, remove friend, private chat|
+|friend|false|ignore, remove friend|
+|ignored|true|stop ignoring|
+|ignored|false|stop ignoring|
+|ignored friend|true|stop ignoring, remove friend|
+|ignored friend|false|stop ignoring, remove friend|
+|ignored by|true||
+|ignored by|false||
+|ignored by friend|true|remove friend|
+|ignored by friend|false|remove friend|

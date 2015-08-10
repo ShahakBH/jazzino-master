@@ -1,0 +1,32 @@
+.created_table .close {
+	right: -26px;
+}
+
+#competition-pages .dialogContainer {
+	left:0px;
+}
+
+#profile-drop-menu.navigation-drop-menu {
+	right:-13px;
+}
+
+#profile-drop-menu.navigation-drop-menu .top p + p {
+    width: 22px;
+}
+
+#aboutus-drop-menu.navigation-drop-menu {
+	right:-16px;
+}
+
+#aboutus-drop-menu.navigation-drop-menu .top p + p {
+	width:27px;
+}
+#head-area{
+    width:754px;
+}
+/*#game-menu-bar .mid .table{*/
+    /*left: 18px!important;*/
+/*}*/
+#head-area>a>img{
+    top:0px;
+}

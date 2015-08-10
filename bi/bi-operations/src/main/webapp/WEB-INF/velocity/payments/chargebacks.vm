@@ -1,0 +1,84 @@
+#set($pageSize = 20)
+#set($currentPage = ($chargebacks.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/payments/chargebacks")
+
+<div class="payments">
+
+#if ($message)
+<div class="message">
+    $message
+</div>
+#end
+
+<div class="report" >
+    <form method="POST" action="$baseUrl">
+        <label for="startDate">Chargebacks from:</label>
+        <div class="compound">
+            <div>#springFormDateInput("form.startDate" "")</div>
+            <div><label for="endDate">to</label></div>
+            <div>#springFormDateInput("form.endDate" "")</div>
+        </div>
+        <label for="onlyChallengeReasons"></label>
+        <div>
+            <input type="checkbox" id="onlyChallengeReasons" name="onlyChallengeReasons" value="true" #if($form.onlyChallengeReasons)checked="checked"#end>
+            <label for="onlyChallengeReasons">Show only challengeable chargebacks</label>
+        </div>
+        <div class="actions">
+            <input type="submit" value="Search">
+        </div>
+    </form>
+</div>
+
+<table class="resultList">
+    <thead>
+        <tr>
+            <th>Reference</th>
+            <th>Internal ID</th>
+            <th>Processing Date</th>
+            <th>Transaction Date</th>
+            <th>Player</th>
+            <th>Reason</th>
+            <th>Account Number</th>
+            <th>Amount</th>
+        </tr>
+        <tr class="paging">
+            <td colspan="8">#pagingOnUrl( $chargebacks.startPosition $pageSize $chargebacks.totalSize $baseUrl '' )</td>
+        </tr>
+    </thead>
+    <tbody>
+        #if ($chargebacks.totalSize == 0)
+        <tr>
+            <td colspan="8">
+                No matching chargebacks found.
+            </td>
+        </tr>
+        #end
+        #foreach ($chargeback in $chargebacks.data)
+        <tr>
+            <td>$chargeback.reference</td>
+            <td><a href="${request.contextPath}/report/paymentTransaction/$chargeback.internalTransactionId">$chargeback.internalTransactionId</a></td>
+            <td>$dateTool.format('dd.MM.yyyy',$chargeback.processingDate.toDate())</td>
+            <td>$dateTool.format('dd.MM.yyyy',$chargeback.transactionDate.toDate())</td>
+            <td>
+                <a href="${request.contextPath}/player/$chargeback.playerId">
+                    #if ($!chargeback.displayName)
+                    $chargeback.displayName
+                    #else
+                    $!numberTool.format('#.##', $!chargeback.playerId)
+                    #end
+                </a>
+            </td>
+            <td>$chargeback.reason</td>
+            <td>$chargeback.accountNumber</td>
+            <td>$chargeback.currency.currencyCode <strong>$!numberTool.format('###,###.00', $chargeback.amount)</strong></td>
+        </tr>
+        #end
+    </tbody>
+    <tfoot>
+        <tr class="paging">
+            <td colspan="8">#pagingOnUrl( $chargebacks.startPosition $pageSize $chargebacks.totalSize $baseUrl '' )</td>
+        </tr>
+    </tfoot>
+</table>
+
+</div>

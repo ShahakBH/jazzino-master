@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Convenience for exposure to all JDBC datasources. Do please try not to use. -->
+
+    <import resource="classpath:/META-INF/spring/jdbc-marketing.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc-legacy-datawarehouse.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc-external-datawarehouse.xml"/>
+    <import resource="classpath:/META-INF/spring/jdbc-platform-replica.xml"/>
+
+</beans>

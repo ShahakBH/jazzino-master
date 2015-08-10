@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for lightstreamer-adapter" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="lightstreamer-adapter" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-worker" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-worker" />
+      </profile>
+      <profile default="false" name="Annotation profile for standalone-server" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="standalone-server" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-shared" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-shared" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-shared" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-shared" />
+      </profile>
+      <profile default="false" name="Annotation profile for logging" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="logging" />
+      </profile>
+      <profile default="false" name="Annotation profile for worldpay" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="worldpay" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-redirector" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-redirector" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-lobby" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-lobby" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="assemblies" />
+        <module name="checkstyle-loose" />
+      </profile>
+      <profile default="false" name="Annotation profile for rabbit-replayer" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="rabbit-replayer" />
+      </profile>
+      <profile default="false" name="Annotation profile for configuration" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="configuration" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-content" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-content" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-api" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-api" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-api" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-api" />
+      </profile>
+      <profile default="false" name="Annotation profile for control-centre" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="control-centre" />
+      </profile>
+      <profile default="false" name="Annotation profile for validation" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="validation" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-reporting" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-reporting" />
+      </profile>
+      <profile default="false" name="Annotation profile for game-api" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="game-api" />
+      </profile>
+      <profile default="false" name="Annotation profile for metrics" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="metrics" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-shared" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-shared" />
+      </profile>
+      <profile default="false" name="Annotation profile for email-templates" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="email-templates" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-operations" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-operations" />
+      </profile>
+      <profile default="false" name="Annotation profile for metrics-reporter" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="metrics-reporter" />
+      </profile>
+      <profile default="false" name="Annotation profile for novomatic-cgs" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="novomatic-cgs" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-acceptancetests" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-acceptancetests" />
+      </profile>
+      <profile default="false" name="Annotation profile for email-services" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="email-services" />
+      </profile>
+      <profile default="false" name="Annotation profile for test-helpers" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="test-helpers" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-dbdw" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-dbdw" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-worker" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-worker" />
+      </profile>
+      <profile default="false" name="Annotation profile for bi-promotion" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="bi-promotion" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-grid" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-grid" />
+      </profile>
+      <profile default="false" name="Annotation profile for platform-db" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="platform-db" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-facebookpages" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-facebookpages" />
+      </profile>
+      <profile default="false" name="Annotation profile for web-marketingpages" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="web-marketingpages" />
+      </profile>
+      <profile default="false" name="Annotation profile for mobile-ws" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="mobile-ws" />
+      </profile>
+      <profile default="false" name="Annotation profile for rabbitmq-exchange-declarer" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="rabbitmq-exchange-declarer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="assemblies" target="1.5" />
+      <module name="bi" target="1.7" />
+      <module name="bi-api" target="1.7" />
+      <module name="bi-dbdw" target="1.7" />
+      <module name="bi-operations" target="1.7" />
+      <module name="bi-promotion" target="1.7" />
+      <module name="bi-reporting" target="1.7" />
+      <module name="bi-shared" target="1.7" />
+      <module name="bi-worker" target="1.7" />
+      <module name="checkstyle-loose" target="1.5" />
+      <module name="configuration" target="1.7" />
+      <module name="control-centre" target="1.7" />
+      <module name="email-services" target="1.7" />
+      <module name="email-templates" target="1.7" />
+      <module name="game-api" target="1.7" />
+      <module name="lightstreamer-adapter" target="1.7" />
+      <module name="logging" target="1.7" />
+      <module name="metrics" target="1.7" />
+      <module name="metrics-reporter" target="1.7" />
+      <module name="mobile-ws" target="1.7" />
+      <module name="novomatic-cgs" target="1.7" />
+      <module name="platform" target="1.7" />
+      <module name="platform-acceptancetests" target="1.7" />
+      <module name="platform-api" target="1.7" />
+      <module name="platform-db" target="1.7" />
+      <module name="platform-grid" target="1.7" />
+      <module name="platform-shared" target="1.7" />
+      <module name="platform-worker" target="1.7" />
+      <module name="pom-base" target="1.5" />
+      <module name="pom-flash" target="1.6" />
+      <module name="pom-java" target="1.7" />
+      <module name="rabbit-replayer" target="1.7" />
+      <module name="rabbitmq-exchange-declarer" target="1.7" />
+      <module name="standalone-server" target="1.7" />
+      <module name="support-libs" target="1.5" />
+      <module name="test-helpers" target="1.7" />
+      <module name="validation" target="1.7" />
+      <module name="web" target="1.7" />
+      <module name="web-content" target="1.6" />
+      <module name="web-facebookpages" target="1.6" />
+      <module name="web-lobby" target="1.7" />
+      <module name="web-marketingpages" target="1.6" />
+      <module name="web-redirector" target="1.7" />
+      <module name="web-shared" target="1.7" />
+      <module name="worldpay" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

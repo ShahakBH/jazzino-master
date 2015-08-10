@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.yazino.platform.event.bonus"/>
+
+    <bean id="bonusService"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="${platform.worker.url}/service/bonus"/>
+        <property name="serviceInterface"
+                  value="com.yazino.platform.bonus.BonusService"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+                <property name="readTimeout" value="${platform.worker.timeout}"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

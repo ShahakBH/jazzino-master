@@ -1,0 +1,49 @@
+#set($redirectTo='/wheelDeal/play')
+<div id="how-to-play" class="SLOTS game-home">
+    <div id="how-to-play-area">
+        <div class="content_head"><h3 class="font-grey-window-head">SLOTS WHEEL DEAL</h3></div>
+        <div class="content_delimiter"></div>
+        <div class="content">
+            <img src="$assetUrl/images/games/SLOTS/logo.jpg" alt="Slots Wheel Deal logo">
+
+            <h4>
+                The world's first free,<br>
+                multiplayer, casino slot with<br>
+                the added excitement of a game<br>
+                show!
+            </h4>
+
+            <div class="links">
+                #generateLinkTagForMainCta("slots" $redirectTo)
+
+                <a href="http://itunes.apple.com/us/app/yazino-slots/id422074428" title="Download on the AppStore">
+                    <img src="$assetUrl/images/games/SLOTS/appstore-ios.png">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.slots" title="Get it on Google Play">
+                    <img src="$assetUrl/images/games/SLOTS/appstore-googleplay.png">
+                </a>
+            </div>
+
+            <p>
+                Play LIVE against millions of players! Race your Facebook and Yazino friends to collect
+                special wheel symbols at the reels, build your bonus bank, and unlock the game show style
+                bonus round. Slots Wheel Deal features HD graphics, dazzling animations, high-quality sound
+                effects, an authentic 5-reel 20-line slot machine and lots of free bonus chips every day.
+            </p>
+            <p>
+                With a single log in for mobile and web, you can win big in casino style slots with up to
+                10 other players from anywhere. Play Slots Wheel Deal now to crank up the fun and enjoy
+                5,000 free chips on your first game!
+            </p>
+
+            <div class="screenshots">
+                <img src="$assetUrl/images/games/SLOTS/screenshot-main.jpg" alt="Screenshot of main game round">
+
+                <img src="$assetUrl/images/games/SLOTS/screenshot-bonus.jpg" alt="Screenshot of bonus round">
+            </div>
+
+            <img id="presenter" src="$assetUrl/images/games/SLOTS/presenter.png" alt="Game presenter character">
+        </div>
+        <div class="content_foot"></div>
+    </div>
+</div>

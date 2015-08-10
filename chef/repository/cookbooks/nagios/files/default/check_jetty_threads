@@ -1,0 +1,90 @@
+#!/bin/bash
+
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+
+WARNING_THRESHOLD=${WARNING_THRESHOLD:="50"}
+CRITICAL_THRESHOLD=${CRITICAL_THRESHOLD:="20"}
+PORT=10098
+
+print_usage() {
+	echo "Usage: $0 -w <warning count> -c <critical count> -p <port>"
+	exit $STATE_UNKNOWN
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -w | --warning)
+            shift
+            WARNING_THRESHOLD=$1
+            ;;
+        -c | --critical)
+            shift
+            CRITICAL_THRESHOLD=$1
+            ;;
+        -p | --port)
+            shift
+            PORT=$1
+            ;;
+        *)  echo "Unknown argument: $1"
+            print_usage
+            exit $STATE_UNKNOWN
+            ;;
+        esac
+shift
+done
+
+if [ -n "$JAVA_HOME" -a -f "$JAVA_HOME/bin/java" ]; then
+	JAVA="$JAVA_HOME/bin/java"
+elif [ -d /opt/java/bin ]; then
+	JAVA=/opt/java/bin/java
+else
+	JAVA=java
+fi
+
+if [ -f "./check_jmx.jar" ]; then
+	NAGIOS=./check_jmx.jar
+elif [ -f "/usr/local/nagios/libexec/yazino/check_jmx.jar" ]; then
+	NAGIOS=/usr/local/nagios/libexec/yazino/check_jmx.jar
+elif [ -f "/usr/lib64/nagios/plugins/yazino/check_jmx.jar" ]; then
+	NAGIOS=/usr/lib64/nagios/plugins/yazino/check_jmx.jar
+elif [ -f "/usr/lib/nagios/plugins/yazino/check_jmx.jar" ]; then
+	NAGIOS=/usr/lib/nagios/plugins/yazino/check_jmx.jar	
+else
+	echo "Cannot find JMX JAR: $NAGIOS"
+	exit $STATE_UNKNOWN
+fi
+
+OPTS="-U service:jmx:rmi:///jndi/rmi://localhost:$PORT/jmxrmi -O org.eclipse.jetty.util.thread:type=queuedthreadpool,id=0"
+
+THREADS_OUT=$($JAVA -jar $NAGIOS $OPTS -A threads 2>&1)
+if [ $? -ne 0 ]; then
+	echo "Thread count failed: $THREADS_OUT"
+	exit $STATE_UNKNOWN
+fi 
+
+MAX_THREADS_OUT=$($JAVA -jar $NAGIOS $OPTS -A maxThreads 2>&1)
+if [ $? -ne 0 ]; then
+	echo "Max Threads count failed: $MAX_THREADS_OUT"
+	exit $STATE_UNKNOWN
+fi
+
+THREADS=$(echo $THREADS_OUT | awk '{print $6}')
+MAX_THREADS=$(echo $MAX_THREADS_OUT | awk '{print $6}')
+let "FREE_THREADS=MAX_THREADS-THREADS"
+
+EXIT_CODE=$STATE_OK
+STATUS=OK
+
+if [ $FREE_THREADS -lt $CRITICAL_THRESHOLD ]; then
+	EXIT_CODE=$STATE_CRITICAL
+	STATUS=CRITICAL
+elif [ $FREE_THREADS -lt $WARNING_THRESHOLD ]; then
+	EXIT_CODE=$STATE_WARNING
+	STATUS=WARNING
+fi
+
+echo "JETTY THREADS $STATUS: available=$FREE_THREADS current=$THREADS max=$MAX_THREADS | available=$FREE_THREADS;$WARNING_THRESHOLD;$CRITICAL_THRESHOLD;0;$MAX_THREADS"
+exit $EXIT_CODE

@@ -1,0 +1,29 @@
+#set($redirectTo='/highStakes/play')
+<div id="how-to-play" class="HIGH_STAKES game-home">
+    <div class="content_head"><h3 class="font-grey-window-head">HIGH STAKES</h3></div>
+    <div class="splash">
+        <div class="splash-content">
+            #generateLinkTagForMainCta("highStakes" $redirectTo)
+            <div class="rules">
+                <p class="item1">Experience a thrilling, multiplayer slots game when you compete with others<br/> in
+                    the
+                    risky
+                    and glamorous world of<br/> an international heist</p>
+
+                <p class="item2"><em>SPIN THE REELS</em> TO EARN PROMOTIONS THAT BOOST YOUR POSITION ON A WORLD-CLASS
+                    TEAM OF GEM THIEVES</p>
+
+                <p class="item3"><em>CRACK THE SAFE</em> TO UNLOCK A HUGE PRIZE IN A SPECIAL BONUS ROUND</p>
+
+                <p class="item4"><em>BECOME THE BOSS</em> TO WIN THE HIGHEST PAYOUT</p>
+            </div>
+            <div class="links">
+                #if($compact)
+                    #set($target='target="blank"')
+                #end
+                <a $!target href="${request.contextPath}/rules/highStakes" class="underborder font-compnonlogged-2">How to
+                    play</a>
+            </div>
+        </div>
+    </div>
+</div>

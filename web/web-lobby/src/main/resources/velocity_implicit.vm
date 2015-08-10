@@ -1,0 +1,23 @@
+#* @implicitly included *#
+#* @vtlvariable name="launchTournamentPage" type="java.lang.String" *#
+#* @vtlvariable name="gameServer" type="java.lang.String" *#
+#* @vtlvariable name="messagingPort" type="java.lang.Integer" *#
+#* @vtlvariable name="messagingVirtualHost" type="java.lang.String" *#
+#* @vtlvariable name="messagingHost" type="java.lang.String" *#
+#* @vtlvariable name="assetUrl" type="java.lang.String" *#
+#* @vtlvariable name="gameType" type="java.lang.String" *#
+#* @vtlvariable name="gaKey" type="java.lang.String" *#
+#* @vtlvariable name="avatar" type="com.yazino.platform.player.Avatar" *#
+#* @vtlvariable name="error" type="java.lang.String" *#
+#* @vtlvariable name="facebookAppName" type="java.lang.String" *#
+#* @vtlvariable name="facebookAppUrlRoot" type="java.lang.String" *#
+#* @vtlvariable name="faceBookLoginUrl" type="java.lang.String" *#
+#* @vtlvariable name="excludedFriendIds" type="java.lang.String" *#
+#* @vtlvariable name="facebookApplicationUrl" type="java.lang.String" *#
+#* @vtlvariable name="facebookApiKey" type="java.lang.String" *#
+#* @vtlvariable name="message" type="java.lang.String" *#
+#* @vtlvariable name="playerBalance" type="java.math.BigDecimal" *#
+#* @vtlvariable name="result" type="java.lang.String" *#
+#* @vtlvariable name="reason" type="java.lang.String" *#
+#* @vtlvariable name="tableId" type="java.lang.String" *#
+#* @vtlvariable name="launchPage" type="java.lang.String" *#

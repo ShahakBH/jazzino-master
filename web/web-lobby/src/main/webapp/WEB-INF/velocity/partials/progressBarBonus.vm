@@ -1,0 +1,11 @@
+<div id="progressBarBonus" class="progressBarBonusWidget">
+    <h1>here's your gift!</h1>
+    <p>enjoy these&nbsp;<em><span class="bonusChipAmount"></span> chips</em></p>
+    <div class="icon"></div>
+
+    <div class="buttons">
+       <a href="#" title="close popup" class="closeButton selected">SKIP</a>
+       <a href="#" title="close popup" class="dismissButton selected">CLOSE</a>
+       <a href="#" title="post news" class="postButton">POST</a>
+    </div>
+</div>

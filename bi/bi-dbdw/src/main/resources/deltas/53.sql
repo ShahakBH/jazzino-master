@@ -1,0 +1,2 @@
+alter table PROMOTION_ARCHIVE add column TYPE VARCHAR(30) after PROMO_ID#
+update PROMOTION_ARCHIVE set TYPE='DAILY_AWARD'#

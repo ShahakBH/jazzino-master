@@ -1,0 +1,419 @@
+#achievements-container .container-border {
+    border: 10px solid rgb(82, 82, 82);
+    border: 10px solid rgba(82, 82, 82, 0.7);
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    margin: 100px auto;
+    width: 835px;
+    height: 488px;
+    position: relative;
+}
+
+#achievements-container iframe {
+    width: 815px;
+    height: 447px;
+}
+
+#achievements-container .container-content {
+    padding: 0 2px;
+    width: 815px;
+    height: 442px;
+    background-color: white;
+    border-top: 8px solid white;
+    border-left: 8px solid white;
+    border-right: 8px solid white;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-topleft: 4px;
+    -webkit-top-right-border-radius: 4px;
+    -webkit-top-left-border-radius: 4px;
+    position: relative;
+}
+
+#achievements-container .container-controls {
+    background-color: white;
+    border-bottom: 8px solid white;
+    border-left: 8px solid white;
+    border-right: 8px solid white;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -webkit-bottom-right-border-radius: 4px;
+    -webkit-bottom-left-border-radius: 4px;
+    height: 28px;
+}
+
+#achievements-container .close-button {
+    background-image: url('../../images/achievements/button-close.png');
+    height: 17px;
+    padding-top: 7px;
+    width: 82px;
+    text-align: center;
+    text-decoration: none;
+    color: #575757;
+    font-weight: bold;
+    margin-right: 6px;
+    margin-top: 5px;
+    float: right;
+    text-transform: uppercase;
+}
+
+#achievements-overlay {
+    padding: 5px;
+    background-color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #575757;
+    position: relative;
+}
+
+#achievements-overlay h1 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#achievements-overlay strong {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#achievements-container .close-button:hover {
+    background-position: 0 -24px;
+}
+
+#achievements-overlay ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#achievements-overlay > ul {
+    clear: both;
+    text-align: right;
+}
+
+#achievements-overlay > ul > li {
+    float: left;
+    position: static;
+}
+
+#achievements-overlay div > p {
+    width: 208px;
+    position: absolute;
+    top: -16px;
+    left: 0;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#achievements-overlay div > p span {
+    font-weight: bold;
+}
+
+#achievements-overlay div > p span.value {
+    display: inline;
+    font-weight: bold;
+}
+
+#achievements-overlay div > p span.property {
+    display: inline;
+    font-weight: normal;
+}
+
+#achievements-overlay div > p span.property:first-child {
+    padding-left: 1px;
+}
+
+#achievements-overlay h1 {
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    font-size: 11px;
+    height: 22px;
+    width: 125px;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 12px;
+    text-transform: uppercase;
+    color: #6C6C6C;
+}
+
+#achievements-overlay h1:hover,
+#achievements-overlay h1.selected {
+    background-position: 0 -34px;
+    color: white;
+}
+
+#achievements-overlay li:first-child h1 {
+    margin-left: 299px;
+}
+
+#achievements-overlay.ROULETTE li:first-child h1,
+#achievements-overlay.SLOTS li:first-child h1,
+#achievements-overlay.HIGH_STAKES li:first-child h1{
+    margin-left: 436px;
+}
+
+#achievements-overlay .achievements-bronze h1 {
+    background-image: url('../../images/achievements/button-achievements-bronze.png');
+}
+
+#achievements-overlay .achievements-silver h1 {
+    background-image: url('../../images/achievements/button-achievements-silver.png');
+    width: 120px;
+}
+
+#achievements-overlay .achievements-gold h1 {
+    background-image: url('../../images/achievements/button-achievements-gold.png');
+}
+
+#achievements-overlay .trophy-cabinet h1 {
+    background-color: rgb(243, 243, 243);
+    background-image: url('../../images/achievements/button-cabinet.png');
+    width: 130px;
+    margin-left: 5px;
+}
+
+#achievements-overlay .trophy-cabinet span {
+    display: block;
+    height: 20px;
+    width: 100%;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 12px 0 0 0;
+}
+
+#achievements-overlay .trophy-cabinet img {
+    padding: 20px 0 18px 5px;
+}
+
+#achievements-overlay .trophy-cabinet .champion-trophy img {
+    padding-left: 0;
+}
+
+#achievements-overlay > ul > li > div {
+    width: 805px;
+    height: 395px;
+    margin: 0 8px;
+    clear: both;
+    position: absolute;
+    left: 0;
+    top: 35px;
+}
+
+#achievements-overlay div ul {
+    width: 802px;
+    max-height: 395px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-left: 1px;
+    padding-top: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#achievements-overlay .trophy-cabinet ul {
+    background: #F3F3F3 url('../../images/achievements/background-cabinet.png');
+    overflow: hidden;
+    width: 777px;
+    height: 390px;
+    border: 1px solid #CECECE;
+    border-top: 0;
+    border-left: none;
+}
+
+#achievements-overlay div li {
+    float: left;
+    text-align: center;
+}
+
+#achievements-overlay .achievements div li {
+    width: 111px;
+    height: 130px;
+    display: block;
+    background: rgb(243, 243, 243);
+    border: 1px solid #CECECE;
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+#achievements-overlay .trophy-cabinet div li {
+    padding: 0;
+}
+
+#achievements-overlay div li > * {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#achievements-overlay div li div:first-child {
+    margin-top: 1px;
+}
+
+#achievements-overlay div li > div {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#achievements-overlay .trophy-cabinet li {
+    width: 182px;
+    height: 328px;
+    padding: 0;
+}
+
+#achievements-overlay .trophy-cabinet li.champion-trophy {
+    width: 231px;
+}
+
+#achievements-overlay .trophy-cabinet li.tagline {
+    width: 795px;
+    height: 64px;
+    text-align: left;
+    font-size: 12px;
+}
+
+#achievements-overlay .trophy-cabinet li.tagline p {
+    line-height: 150%;
+    padding: 10px 15px;
+}
+
+#achievements-overlay div li a {
+    width: 68px;
+    height: 12px;
+    line-height: 12px;
+    margin: 0 auto;
+    color: white;
+    background-image: url('../../images/achievements/button-post.png');
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 9px;
+    text-decoration: none;
+    display: block;
+}
+
+#achievements-overlay .trophy-cabinet div li a {
+    background-image: url('../../images/achievements/button-post-lg.png');
+    height: 18px;
+    line-height: 18px;
+}
+
+#achievements-overlay.BLACKJACK .trophy-cabinet div li a {
+    background-position: 0 0;
+}
+
+#achievements-overlay.BLACKJACK .trophy-cabinet div li a:hover {
+    background-position: 0 -18px;
+}
+
+#achievements-overlay.ROULETTE .trophy-cabinet div li a {
+    background-position: 0 -36px;
+}
+
+#achievements-overlay.ROULETTE .trophy-cabinet div li a:hover {
+    background-position: 0 -54px;
+}
+
+#achievements-overlay.TEXAS_HOLDEM .trophy-cabinet div li a {
+    background-position: 0 -72px;
+}
+
+#achievements-overlay.TEXAS_HOLDEM .trophy-cabinet div li a:hover {
+    background-position: 0 -90px;
+}
+
+#achievements-overlay.SLOTS .trophy-cabinet div li a {
+    background-position: 0 -108px;
+}
+
+#achievements-overlay.SLOTS .trophy-cabinet div li a:hover {
+    background-position: 0 -126px;
+}
+
+#achievements-overlay.HIGH_STAKES .trophy-cabinet div li a {
+    background-position: 0 -216px;
+}
+
+#achievements-overlay.HIGH_STAKES .trophy-cabinet div li a:hover {
+    background-position: 0 -234px;
+}
+
+#achievements-overlay div li div.achievement-title-wrapper {
+    display: table;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    margin-top: 0;
+}
+
+#achievements-overlay div li div.achievement-title-wrapper div.achievement-title {
+    display: table-cell;
+    padding: 0 1px 0 1px;
+    vertical-align: middle;
+}
+
+#achievements-overlay.BLACKJACK div li {
+    background-position: 0 0;
+}
+
+#achievements-overlay.BLACKJACK div li a:hover {
+    background-position: 0 -12px;
+}
+
+#achievements-overlay.ROULETTE div li a {
+    background-position: 0 -24px;
+}
+
+#achievements-overlay.ROULETTE div li a:hover {
+    background-position: 0 -36px;
+}
+
+#achievements-overlay.TEXAS_HOLDEM div li a {
+    background-position: 0 -48px;
+}
+
+#achievements-overlay.TEXAS_HOLDEM div li a:hover {
+    background-position: 0 -60px;
+}
+
+#achievements-overlay.SLOTS div li a {
+    background-position: 0 -72px;
+}
+
+#achievements-overlay.SLOTS div li a:hover {
+    background-position: 0 -84px;
+}
+
+#achievements-overlay.HIGH_STAKES div li a {
+    background-position: 0 -144px;
+}
+
+#achievements-overlay.HIGH_STAKES div li a:hover {
+    background-position: 0 -156px;
+}
+
+#achievements-overlay .popup {
+    position: absolute;
+    display: none;
+    text-align: left;
+    top: 45px;
+    left: -6px;
+    padding: 5px;
+    width: 92px;
+    color: white;
+    font-weight: bold;
+    background-color: #2a2a2a;
+    line-height: 120%;
+    z-index: 100;
+}
+
+#achievements-overlay div:hover > .popup {
+    display: block;
+}

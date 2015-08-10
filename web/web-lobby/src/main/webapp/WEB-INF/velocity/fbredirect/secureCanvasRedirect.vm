@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yazino - Redirecting to Secure Facebook Apps</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript">
+        window.top.location.href = 'https://apps.facebook.com/$!appName';
+    </script>
+</head>
+<body>
+<p>
+    We are redirecting you to the secure version of <a href="https://apps.facebook.com/$!appName">apps.facebook.com</a>.
+</p>
+</body>
+</html>

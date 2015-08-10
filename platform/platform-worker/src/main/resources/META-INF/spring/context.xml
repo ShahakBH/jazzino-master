@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <context:annotation-config/>
+    <task:annotation-driven/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:environment.properties</value>
+                <value>file:/etc/senet/environment.properties</value>
+                <value>file:/etc/senet/environment.generated.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="overrideDefaultUser" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="overrideDefaultPassword" value="${db.password}"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="30"/>
+        <!-- Keep Idle connections for 1 minute apparently MySQL is quicker to start up connections -->
+        <property name="maxIdleTime" value="600"/>
+        <!-- Keep an active connection for a max of 4 hours -->
+        <property name="maxConnectionAge" value="1200"/>
+        <!-- Test the idle connections every 10 minutes (Yes the idle timeout is 60 but we have a min pool size.)-->
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <property name="preferredTestQuery" value="SELECT 1"/>
+        <property name="checkoutTimeout" value="5000"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="com.yazino.platform.worker.PlatformConsumerConfig"/>
+
+    <context:component-scan base-package="com.yazino.platform.event.player"/>
+    <context:component-scan base-package="com.yazino.platform.event.bonus"/>
+    <context:component-scan base-package="com.yazino.platform.event.emailvalidation"/>
+    <context:component-scan base-package="com.yazino.platform.worker"/>
+    <context:component-scan base-package="com.yazino.platform.player"/>
+    <context:component-scan base-package="com.yazino.platform.payment"/>
+    <context:component-scan base-package="com.yazino.platform.bonus"/>
+    <context:component-scan base-package="com.yazino.platform.persistence.account"/>
+    <context:component-scan base-package="com.yazino.platform.reference"/>
+    <context:component-scan base-package="com.yazino.platform.email"/>
+
+    <import resource="classpath*:/META-INF/yazino-properties.xml"/>
+
+    <import resource="classpath*:/META-INF/spring/grid-services.xml"/>
+    <import resource="classpath*:/META-INF/spring/reference-data.xml"/>
+    <import resource="classpath*:/META-INF/spring/invitation-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/invitation-consumer.xml"/>
+    <import resource="classpath*:/META-INF/spring/event-service-invitation.xml"/>
+    <import resource="classpath*:/META-INF/spring/amazon-email-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/async-email-service.xml"/>
+    <import resource="classpath*:/META-INF/spring/avatar-tokeniser.xml"/>
+    <import resource="classpath*:/META-INF/spring/brite-verify.xml"/>
+    <import resource="classpath*:/META-INF/spring/worldpay.xml"/>
+
+    <bean name="emailValidationServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service">
+            <bean class="com.yazino.platform.email.CachingEmailValidationService"/>
+        </property>
+        <property name="serviceInterface" value="com.yazino.platform.email.EmailValidationService"/>
+    </bean>
+
+    <bean name="playerProfileServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="playerProfileService"/>
+        <property name="serviceInterface" value="com.yazino.platform.player.service.PlayerProfileService"/>
+    </bean>
+
+    <bean name="playerProfileTestServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="playerProfileService"/>
+        <property name="serviceInterface" value="com.yazino.platform.player.service.PlayerProfileTestService"/>
+    </bean>
+
+    <bean name="authenticationServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="authenticationService"/>
+        <property name="serviceInterface" value="com.yazino.platform.player.service.AuthenticationService"/>
+    </bean>
+
+    <bean name="bonusServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="bonusService"/>
+        <property name="serviceInterface" value="com.yazino.platform.bonus.BonusService"/>
+    </bean>
+
+    <bean name="invitationQueryServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="invitationQueryService"/>
+        <property name="serviceInterface" value="com.yazino.platform.invitation.InvitationQueryService"/>
+    </bean>
+
+    <bean name="paymentServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="paymentService"/>
+        <property name="serviceInterface" value="com.yazino.platform.payment.PaymentService"/>
+    </bean>
+
+    <bean name="paymentStateServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="paymentStateService"/>
+        <property name="serviceInterface" value="com.yazino.platform.payment.PaymentStateService"/>
+    </bean>
+
+    <bean name="androidPaymentStateServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="androidPaymentStateService"/>
+        <property name="serviceInterface" value="com.yazino.platform.payment.android.AndroidPaymentStateService"/>
+    </bean>
+
+    <bean name="referenceServiceExporter"
+          class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="referenceService"/>
+        <property name="serviceInterface" value="com.yazino.platform.reference.ReferenceService"/>
+    </bean>
+
+    <util:list id="playerProfileUpdaters">
+        <ref bean="yazinoPlayerProfileUpdater"/>
+        <ref bean="externalPlayerProfileUpdater"/>
+    </util:list>
+
+    <bean id="profanityFilter"
+          class="com.yazino.platform.community.ProfanityFilter"/>
+
+    <bean id="pbkdf2Hasher2012"
+          class="com.yazino.platform.player.util.PBKDF2Hasher">
+        <constructor-arg index="0" value="PBKDF2"/>
+        <constructor-arg index="1" value="10000"/>
+        <constructor-arg index="2" value="8"/>
+        <constructor-arg index="3" value="160"/>
+    </bean>
+
+    <util:map id="paymentSettlementProcessors">
+        <entry key="worldpay">
+            <bean class="com.yazino.platform.payment.settlement.worldpay.WorldPayPaymentSettlementProcessor"/>
+        </entry>
+    </util:map>
+
+    <util:map id="paymentDisputeProcessors">
+        <entry key="facebook">
+            <bean class="com.yazino.platform.payment.dispute.FacebookPaymentDisputeProcessor"/>
+        </entry>
+    </util:map>
+
+    <bean id="hasherFactory"
+          class="com.yazino.platform.player.util.HasherFactory">
+        <constructor-arg>
+            <set>
+                <bean class="com.yazino.platform.player.util.MD5Hasher"/>
+                <ref bean="pbkdf2Hasher2012"/>
+            </set>
+        </constructor-arg>
+        <constructor-arg ref="pbkdf2Hasher2012"/>
+    </bean>
+
+    <bean id="testModeGuard"
+          class="com.yazino.platform.player.util.TestModeGuard" />
+
+</beans>

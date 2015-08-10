@@ -1,0 +1,1269 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "38ece453-25e3-4e79-9880-6177b5edb63a",
+			"name": "Yazino",
+			"description": "",
+			"order": [
+				"6b0873e1-3348-9e9e-a407-7c812f2ca7a1"
+			],
+			"folders": [
+				{
+					"id": "fc5d86c2-23df-9612-e4d2-1b69c196fb7a",
+					"name": "Buddies",
+					"description": "",
+					"order": [
+						"8fd2fc88-8842-02fc-1fce-1e0a1ed25358",
+						"571bea6a-7e9e-afb6-9f6d-7e28adec6ed7",
+						"2dbf6e3b-23a5-0a0b-0ef8-76c720707b8e",
+						"31c30a16-fa36-cb45-6de8-3595bf1aadca",
+						"5afc915b-69d9-72c0-d843-a6612e0d3c51",
+						"87602748-0007-fe9b-75bc-0739ac6d9250",
+						"285ea0f8-d139-427a-4090-7919e379e19c"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "0f32b1dd-b3f9-71f0-ee1e-ab2288463c3d",
+					"name": "Game",
+					"description": "",
+					"order": [
+						"508a2c77-ccdd-9689-68d0-9e5775cfc30e",
+						"93437c76-0bc5-3b59-2f01-26ed87e8e1c2"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "b3716c92-d35a-295f-40ed-60566cb0198c",
+					"name": "Gifting",
+					"description": "",
+					"order": [
+						"b3ec1665-10d6-8bcd-db74-cbc78b5f75c1",
+						"5dbb81d5-5ed7-b4aa-b4db-765a0087c527",
+						"470014ee-03fa-dd90-e4ab-4f919cb31b02",
+						"a35889f6-adc1-8398-350a-037b7d65873d"
+						"3ed62a63-9608-1cd9-470e-d659fa88e14b",
+						"44c8ba84-5b31-5892-26bf-c011883e070b",
+						"cf91eff4-d153-985a-ea77-029171516768"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "070ebe11-bd68-d166-d675-efb7d122eeb8",
+					"name": "In-App Purchases",
+					"description": "",
+					"order": [
+						"896827bd-9fed-5ee1-86d8-1a4c3065609a",
+						"ef21cc0b-9fd7-6a5b-b60c-6c335715f020",
+						"b6f5851b-1f3e-2d9b-4d71-bb88dc1f3508"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "81c49fda-2bc8-3b5a-7f4f-367be51a140a",
+					"name": "Lockout Bonus",
+					"description": "",
+					"order": [
+						"d3cd216b-9199-a34a-8da2-c5e9c3c64f34",
+						"5f483c62-29b3-82a9-6ca9-2f771b63e2bf",
+						"605be1e1-181e-b459-0b72-267bb4cc2006"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "746563ee-ffa2-e63e-b6c4-dc7675ab4043",
+					"name": "Misc",
+					"description": "",
+					"order": [
+						"8ae462d8-fb32-fc72-e341-3df3a0878e0b",
+						"97c27036-a8c6-fc4f-b1fd-e236e2160368",
+						"a87b0cc1-8b1b-35c9-46f2-0eb1bbd96051"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "8667b359-c932-4bf3-642c-3dd9ba276b05",
+					"name": "Mobile Push",
+					"description": "",
+					"order": [
+						"23cc4223-ce3e-69ee-5eaf-86d81a3e4917",
+						"04553c9d-83b2-5558-e310-90dbdf4a496d"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "1254733f-28fb-443d-d18a-be5086bc664c",
+					"name": "Session",
+					"description": "",
+					"order": [
+						"8e5e8358-9e83-214a-4392-40ff1a9eb29e",
+						"b098bc19-56f3-27d7-fb94-2d465ac3b6c2",
+						"280b2492-f96a-550e-6f69-69384b778e74",
+						"2d5a26a5-8602-aa02-d9d4-b2e2fcd95196",
+						"6b0873e1-3348-9e9e-a407-7c812f2ca7a1"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "23d759a6-0be4-d663-b3d3-e3b9ca3c843a",
+					"name": "Tournament",
+					"description": "",
+					"order": [
+						"f604916f-28a7-e0d4-07a9-04b91b3cf70d",
+						"ec49caf8-f1d9-0ad0-0c3f-1fe30d6d5a31",
+						"fd36044d-42c7-7f9a-21f8-ca8c9c84227d",
+						"bf9bb16f-397b-1614-f99b-96e21f3a150c",
+						"b41ff2f5-340d-97ab-f34e-fcd7b24d30ac",
+						"6a8f157b-5e51-39ae-373a-130f7115b145"
+					],
+					"collection_name": "Yazino",
+					"collection_id": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				}
+			],
+			"timestamp": 1381134203637,
+			"synced": false,
+			"remote_id": 0,
+			"requests": [
+				{
+					"id": "04553c9d-83b2-5558-e310-90dbdf4a496d",
+					"headers": "",
+					"url": "https://{{host}}/api/1.1/message/registration",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "gameType",
+							"value": "SLOTS",
+							"type": "text"
+						},
+						{
+							"key": "appId",
+							"value": "com.yazino.YazinoApp",
+							"type": "text"
+						},
+						{
+							"key": "deviceId",
+							"value": "test-device-id",
+							"type": "text"
+						},
+						{
+							"key": "pushToken",
+							"value": "test-device-token",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395922348710,
+					"name": "device registration",
+					"description": "Registers a mobile device for push notifications.\n\nParameters:\n\n* gameType: e.g. \"SLOTS\"\n* appId: iOS bundle or Android package name\n* deviceId: unique device identifier\n* pushToken: iOS deviceToken or Android registrationId\n\nRequires an active session. The playerId and platform (Android, iOS, or Amazon) are taken from the session.",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "23cc4223-ce3e-69ee-5eaf-86d81a3e4917",
+					"headers": "",
+					"url": "https://{{host}}/strata.server.lobby.itunes/{{mobile-client-id}}/devices",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "playerId",
+							"value": "150000360",
+							"type": "text"
+						},
+						{
+							"key": "deviceToken",
+							"value": "test-token",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395921195467,
+					"name": "iOS registration",
+					"description": "Deprecated; use /api/1.1/message/registration instead.",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "280b2492-f96a-550e-6f69-69384b778e74",
+					"headers": "",
+					"url": "https://{{host}}/public/login/{{platform}}/{{game-type}}/{{user-provider}}?useSessionCookie=true&_spring_security_remember_me=on",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068220030,
+					"name": "login",
+					"description": "Creates a user session in our server. If the _spring_security_remember_me parameter is provided, it will return a response header \"yazinoRememberMe\" which a value that can be used to recreate the session later without passing the credentials again",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "285ea0f8-d139-427a-4090-7919e379e19c",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/social/syncBuddies/{{user-provider}}",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "externalIds",
+							"value": "100003340303103",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395067778913,
+					"name": "sync buddies",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "2d5a26a5-8602-aa02-d9d4-b2e2fcd95196",
+					"headers": "",
+					"url": "https://{{host}}/public/logout/{{platform}}/{{game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068235546,
+					"name": "logout",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "2dbf6e3b-23a5-0a0b-0ef8-76c720707b8e",
+					"headers": "",
+					"url": "https://{{host}}/social/friendsSummary",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393859769591,
+					"name": "buddies summary (async)",
+					"description": "\n",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "31c30a16-fa36-cb45-6de8-3595bf1aadca",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/external/check_registered/{{friends-provider}}?externalIds=787689858, 787689858",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395067741340,
+					"name": "external friend registered?",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "3ed62a63-9608-1cd9-470e-d659fa88e14b",
+					"headers": "",
+					"url": "https://{{host}}/api/1.1/gifting/get",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "params",
+					"name": "gifting: getAllGiftTypes",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398678335036,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "44c8ba84-5b31-5892-26bf-c011883e070b",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/gifting/collectAppToUser/:promoId",
+					"pathVariables": {
+						"promoId": ""
+					},
+					"method": "POST",
+					"data": [],
+					"dataMode": "urlencoded",
+					"name": "gifting: collect AppToUser gift",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398680049578,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "470014ee-03fa-dd90-e4ab-4f919cb31b02",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.0/gifting/send",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "csvPlayerIds",
+							"value": "5",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393860095450,
+					"name": "gifting: send gift",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "508a2c77-ccdd-9689-68d0-9e5775cfc30e",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/private_table?gameType={{game-type}}&clientId={{game-client-id}}&variationName={{game-variation}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "externalIds",
+							"value": "100003340303103",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068024338,
+					"name": "find/create private table",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "571bea6a-7e9e-afb6-9f6d-7e28adec6ed7",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/social/pagedBuddyNames?pageSize=10",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan1@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393861735238,
+					"name": "buddy names",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "5afc915b-69d9-72c0-d843-a6612e0d3c51",
+					"headers": "",
+					"url": "https://{{host}}/game-server/command/community",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "request|230|ADD_FRIEND",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "",
+					"time": 1393861760902,
+					"name": "create buddy request",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "5dbb81d5-5ed7-b4aa-b4db-765a0087c527",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.0/gifting/get",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"name": "gifting: pending",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1393859825387,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "5f483c62-29b3-82a9-6ca9-2f771b63e2bf",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/bonus/collect",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "externalIds",
+							"value": "100003340303103",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"name": "collect Bonus",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398680566366,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "605be1e1-181e-b459-0b72-267bb4cc2006",
+					"headers": "",
+					"url": "https://{{host}}/games-testweb/lobby/bonus/clear",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "playerId",
+							"value": "150018725",
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"name": "Clear bonus for player",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398759414588,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "6a8f157b-5e51-39ae-373a-130f7115b145",
+					"headers": "",
+					"url": "https://{{host}}/tournaments/hallOfFame?gameType={{tournament-game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068450502,
+					"name": "leaderboard hall of fame",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "6b0873e1-3348-9e9e-a407-7c812f2ca7a1",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMjA4NTAxNTAJaXZhbnNkazoxMzg1NDc4OTIwMzk3Ojc0MWY5MTI2Mzk3NjRjNzhkNmIxZGI0OGRiYThjNmVh\n",
+					"url": "http://{{host}}/api/1.0/registration/guest/convert/{{user-provider}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068323863,
+					"name": "guest convert",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "87602748-0007-fe9b-75bc-0739ac6d9250",
+					"headers": "",
+					"url": "https://{{host}}/game-server/command/community",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "request|230|ACCEPT_FRIEND",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "",
+					"time": 1393861765141,
+					"name": "accept buddy request",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "896827bd-9fed-5ee1-86d8-1a4c3065609a",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.0/payments/products/{{platform}}?gameType={{game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "csvPlayerIds",
+							"value": "5",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068088019,
+					"name": "in-app purchase products",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "8ae462d8-fb32-fc72-e341-3df3a0878e0b",
+					"headers": "",
+					"url": "https://{{host}}/game-server/command/balance",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393859781947,
+					"name": "balance",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "8e5e8358-9e83-214a-4392-40ff1a9eb29e",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.1/configuration/{{platform}}/{{game-type}}/{{mobile-client-id}}?useRememberMe=yes",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "csvPlayerIds",
+							"value": "5",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068194934,
+					"name": "bootstrap",
+					"description": "This is supposed to be the first request done by the game client.\n\nIt supports the \"auto-login\" feature. That's done by adding a \"useRememberMe\" parameter and including the \"yazinoRememberMe\" header value obtained on previous login",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "8fd2fc88-8842-02fc-1fce-1e0a1ed25358",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/social/buddies?orderBy=NAME",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393859766104,
+					"name": "buddy list",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "93437c76-0bc5-3b59-2f01-26ed87e8e1c2",
+					"headers": "",
+					"url": "https://{{host}}/lobbyCommand/mobile/tableLocator?gameType={{game-type}}&clientId={{game-client-id}}&variationName={{game-variation}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "externalIds",
+							"value": "100003340303103",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068045147,
+					"name": "find table",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "97c27036-a8c6-fc4f-b1fd-e236e2160368",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/dailyAward/topUpResult",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "csvPlayerIds",
+							"value": "5",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393860175570,
+					"name": "daily award status",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "a35889f6-adc1-8398-350a-037b7d65873d",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.0/gifting/send/all",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [],
+					"dataMode": "params",
+					"name": "gifting: send gift to all buddies",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398679445591,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "a87b0cc1-8b1b-35c9-46f2-0eb1bbd96051",
+					"headers": "",
+					"url": "https://{{host}}/games-testweb/lobby/android/add",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "playerName",
+							"value": "bob",
+							"type": "text"
+						},
+						{
+							"key": "timeLoggedIn",
+							"value": "10:00",
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"name": "add Android Device",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1401444310656,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "b098bc19-56f3-27d7-fb94-2d465ac3b6c2",
+					"headers": "",
+					"url": "https://{{mobile-host}}/mobile-ws/ios/bootstrap/2.0.1/wheeldeal.json",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393859795793,
+					"name": "bootstrap (legacy iOS)",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "b3ec1665-10d6-8bcd-db74-cbc78b5f75c1",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/gifting/endOfGiftingPeriod",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393859758950,
+					"name": "gifting: end of gifting period",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "b41ff2f5-340d-97ab-f34e-fcd7b24d30ac",
+					"headers": "",
+					"url": "https://{{host}}/tournaments/trophyLeaderboardSummary?gameType={{tournament-game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068441272,
+					"name": "leaderboard summary",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "b6f5851b-1f3e-2d9b-4d71-bb88dc1f3508",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "https://{{host}}/api/1.0/payments/products/IOS?gameType={{game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"name": "new IOS products",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1396260689081,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "bf9bb16f-397b-1614-f99b-96e21f3a150c",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/achievement/trophies/summary/{{tournament-game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068433419,
+					"name": "leaderboard medals and trophies",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "cf91eff4-d153-985a-ea77-029171516768",
+					"headers": "",
+					"url": "https://{{host}}/games-testweb/lobby/promo/clear",
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"key": "playerId",
+							"value": "150018725",
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"name": "Clear gifting promo for player",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398759443716,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "d3cd216b-9199-a34a-8da2-c5e9c3c64f34",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/bonus/status",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "externalIds",
+							"value": "100003340303103",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"name": "get Bonus Status",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1398680545419,
+					"version": 2,
+					"responses": [],
+					"tests": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a"
+				},
+				{
+					"id": "ec49caf8-f1d9-0ad0-0c3f-1fe30d6d5a31",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/tournament/next/by-variation/{{tournament-game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068423442,
+					"name": "next by variation",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "ef21cc0b-9fd7-6a5b-b60c-6c335715f020",
+					"headers": "yazinoRememberMe: UExBWV9GT1JfRlVOCVdFQglQMTYxOTU4Mjg3CWl2YW5zZGsxOjEzOTQ2MzM0NTkxMDI6ZDFkNGQxYjUyOGFlOGFlNzkzNjBlNTI1OTFhZjQwZmY\n",
+					"url": "http://{{host}}/payment/itunes/chipPackages?playerId=150013215&gameType=com.yazino.YazinoApp&language=en",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "{{user-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{user-password}}",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1396270649094,
+					"name": "iTunes products",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "f604916f-28a7-e0d4-07a9-04b91b3cf70d",
+					"headers": "",
+					"url": "https://{{host}}/tournaments/schedule?gameType={{tournament-game-type}}",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1395068380002,
+					"name": "schedule",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				},
+				{
+					"id": "fd36044d-42c7-7f9a-21f8-ca8c9c84227d",
+					"headers": "",
+					"url": "https://{{host}}/api/1.0/tournament/162132455",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [
+						{
+							"key": "email",
+							"value": "ivan1@sdk.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					],
+					"dataMode": "params",
+					"version": 2,
+					"tests": "",
+					"time": 1393861934818,
+					"name": "tournament details",
+					"description": "",
+					"collectionId": "38ece453-25e3-4e79-9880-6177b5edb63a",
+					"responses": []
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "6b88dc6d-fa9a-3fd6-1d83-5fe9fa39c3cf",
+			"name": "Breakmycasino",
+			"values": [
+				{
+					"key": "host",
+					"value": "www.breakmycasino.com",
+					"type": "text"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.breakmycasino.com",
+					"type": "text"
+				}
+			],
+			"timestamp": 1392655329903
+		},
+		{
+			"id": "2d9a5aed-4912-1c1d-de61-7198a1d9814d",
+			"name": "Yazino",
+			"values": [
+				{
+					"key": "host",
+					"value": "www.yazino.com",
+					"type": "text",
+					"name": "host"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.yazino.com",
+					"type": "text",
+					"name": "mobile-host"
+				},
+				{
+					"key": "session-token",
+					"value": "MTc2MDUzMDMxK2RlOWZkZmEzZTQ3ZjI3YzI0OTVlNzJhZmMyZTQ4ZDQrQU5EUk9JRCtUQU5HTw==",
+					"type": "text",
+					"name": "session-token"
+				}
+			],
+			"timestamp": 1394801179541
+		},
+		{
+			"id": "302de646-f7f4-d848-1734-793184be6a3f",
+			"name": "isanchez-centos",
+			"values": [
+				{
+					"key": "host",
+					"value": "isanchez-centos.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				}
+			],
+			"timestamp": 1395067547857
+		},
+		{
+			"id": "015ecd7b-f8fc-74c6-6e72-97c125ecfcbc",
+			"name": "jrae-centos",
+			"values": [
+				{
+					"key": "host",
+					"value": "jrae-centos.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				}
+			],
+			"timestamp": 1396260439769,
+			"synced": false
+		},
+		{
+			"id": "1965d175-d769-f82f-4ede-b951c4aefb99",
+			"name": "Bank",
+			"values": [
+				{
+					"key": "host",
+					"value": "www.bank.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.bank.london.yazino.com",
+					"type": "text",
+					"name": "mobile-host"
+				}
+			],
+			"timestamp": 1396278830375
+		},
+		{
+			"id": "286e1749-1cef-460d-2dfe-f2c6f3d89088",
+			"name": "jshiell-centos",
+			"values": [
+				{
+					"key": "host",
+					"value": "jshiell-centos.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				}
+			],
+			"timestamp": 1399473624526
+		},
+		{
+			"id": "b8dd596a-7ab5-ca83-32d9-abb0ebddd99b",
+			"name": "Kennington",
+			"values": [
+				{
+					"key": "host",
+					"value": "kennington.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.kennington.london.yazino.com",
+					"type": "text",
+					"name": "mobile-host"
+				}
+			],
+			"timestamp": 1399473624526
+		},
+		{
+			"id": "ee087b2b-daa9-db60-fc57-fb2194dcb161",
+			"name": "Stockwell",
+			"values": [
+				{
+					"key": "host",
+					"value": "stockwell.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.stockwell.london.yazino.com",
+					"type": "text",
+					"name": "mobile-host"
+				}
+			],
+			"timestamp": 1401209061024
+		},
+		{
+			"id": "313acfb3-658c-87f5-9325-29edc6d42e04",
+			"name": "Borough",
+			"values": [
+				{
+					"key": "host",
+					"value": "borough.london.yazino.com",
+					"type": "text",
+					"name": "host"
+				},
+				{
+					"key": "mobile-host",
+					"value": "mobile.borough.london.yazino.com",
+					"type": "text",
+					"name": "mobile-host"
+				}
+			],
+			"timestamp": 1401721061317
+		}
+	],
+	"headerPresets": [
+		{
+			"id": "d817607c-2f3c-a4a3-a3ee-4d1535aa90e8",
+			"name": "Yazino Session",
+			"headers": [
+				{
+					"key": "Y-Session",
+					"value": "{{session_token}}",
+					"type": "text",
+					"name": "Y-Session"
+				}
+			],
+			"timestamp": 1394801060465
+		}
+	],
+	"globals": [
+		{
+			"key": "user-email",
+			"value": "ivan@sdk.com",
+			"type": "text",
+			"name": "user-email"
+		},
+		{
+			"key": "user-password",
+			"value": "password",
+			"type": "text",
+			"name": "user-password"
+		},
+		{
+			"key": "platform",
+			"value": "ANDROID",
+			"type": "text",
+			"name": "platform"
+		},
+		{
+			"key": "partner",
+			"value": "YAZINO",
+			"type": "text",
+			"name": "partner"
+		},
+		{
+			"key": "game-type",
+			"value": "SLOTS",
+			"type": "text",
+			"name": "game-type"
+		},
+		{
+			"key": "user-provider",
+			"value": "YAZINO",
+			"type": "text",
+			"name": "user-provider"
+		},
+		{
+			"key": "friends-provider",
+			"value": "FACEBOOK",
+			"type": "text",
+			"name": "friends-provider"
+		},
+		{
+			"key": "game-client-id",
+			"value": "Default Slots",
+			"type": "text",
+			"name": "game-client-id"
+		},
+		{
+			"key": "game-variation",
+			"value": "Slots All Ranges",
+			"type": "text",
+			"name": "game-variation"
+		},
+		{
+			"key": "mobile-client-id",
+			"value": "com.yazino.YazinoApp",
+			"type": "text",
+			"name": "mobile-client-id"
+		},
+		{
+			"key": "tournament-game-type",
+			"value": "BLACKJACK",
+			"type": "text",
+			"name": "tournament-game-type"
+		}
+	]
+}

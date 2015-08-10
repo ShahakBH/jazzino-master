@@ -1,0 +1,1 @@
+alter table account_session drop column session_id cascade;

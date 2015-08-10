@@ -1,0 +1,69 @@
+#* @vtlvariable name="gameConfiguration" type="com.yazino.platform.table.GameConfiguration" *#
+#* @vtlvariable name="tableDetails" type="java.util.Map" *#
+#set($tableExists = $tableDetails.containsKey($gameType))
+#set($tableDetail = $tableDetails.get($gameType))
+## control centre properties
+#set($stakes = ${gameConfiguration.getProperty('stakes')})
+#set($subTypes = ${gameConfiguration.getProperty('gameType')})
+#set($gameSpeeds = ${gameConfiguration.getProperty('gameSpeed')})
+#set($supportsAwards = ${gameConfiguration.getProperty('supportsAwards')})
+#set($supportsTrophies = ${gameConfiguration.getProperty('supportsTrophies')})
+#set($iPhoneURL = ${gameConfiguration.getProperty('iPhoneURL')})
+
+
+
+## PLAYER PROFILE - avatar, level, awards, show achievements
+<div>
+    <div id="profile-box" class="profile profileBox profileBoxWidget">
+        <div class="pictureFrame" style="background-image: url(${assetUrl}/images/gloss/champ-bar-${gameType}.png);">
+            <div class="level" style="background-image: url(${assetUrl}/images/gloss/profile-level-${gameType}.png);">
+                <span class="currentLevel">$!{levelInfo.level}</span>
+            </div>
+            <img src="#avatarImageUrl($!{profileInformation.player.pictureUrl} ${hostUrl} ${assetUrl})" alt="#" title="#" width="52" height="52" style="position:absolute"/>
+        </div>
+        <div id="level-bar">
+            <div id="level-bar-filler" style="width: $!{levelInfo.percentage}%">
+            </div>
+            <span class="currently">$!{levelInfo.level}</span>
+            <span class="max-level">$!{levelInfo.nextLevel}</span>
+        </div>
+        #if($supportsAwards)
+        <div id="awards">
+            <div class="medal">
+                $!{achievementInfo.achievements}/<span>$!{achievementInfo.totalAchievements}</span>
+            </div>
+            #if ($supportsTrophies)
+            <div class="trophies">$!{profileInformation.trophies}</div>
+            <div class="achievements">$!{profileInformation.medals}</div>
+            #end
+        </div>
+        <div id="show-achievements">
+            <a class="profile-seemore show-achievements-overlay" href="#">#message("meta.achievements.link")</a>
+        </div>
+        #end
+    </div>
+    <div id="profile-box-end"></div>
+</div>
+
+<div class="game-logo ${gameConfiguration.shortName}"></div>
+
+<div id="option-area" class="$gameConfiguration.gameId">
+
+    ## GAME OPTIONS
+    <div id="tab_game">
+        <div class="tableLauncherWidget" gameType="$!{gameConfiguration.gameId}">
+            #parse("partials/gameOptions.vm")
+            <span class="featureLink gameSpecific playNow" id="bt-play"><button class="button" class="button">PLAY NOW</button></span>
+            <a class="featureLink gameSpecific buyChips" style="display:none" id="bt-buyChips" href="yazino:buyChips"><span class="button">BUY MORE CHIPS</span></a>
+            #if ($optionsContainer == "lobby")
+                <a class="learn-link" href="${request.contextPath}/rules/$gameConfiguration.shortName">How to play</a>
+            #end
+        </div>
+    </div>
+</div>
+
+#if($iPhoneURL)
+    <a class="app-store" target="_new" href="$iPhoneURL">
+        <img src="$!{assetUrl}/images/gloss/available-to-app-store.png">
+    </a>
+#end

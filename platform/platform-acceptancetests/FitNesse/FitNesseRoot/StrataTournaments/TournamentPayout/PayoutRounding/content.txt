@@ -1,0 +1,92 @@
+Chips should be paid out in amounts that are rounded to 2 decimal places.  Rounding should be towards 0.
+
+!1 Rounding fractions resulting from sharing
+
+!2 Setup
+!|Payout for tournament|
+|Rank|Payout|
+|1|.5|
+|2|.3|
+|3|.2|
+
+!|Entry fee is|1||
+
+!|Final rank for tournament|
+|Player|Ending Chips|
+|Adam|1|
+|Bill|1|
+|Carl|1|
+
+!2 Examples
+
+!3 Rounding where 3rd decimal is less than 5
+ 
+!|Minimum prize pool is|100|
+
+!|Payouts3|
+|Number of Players|3|
+|rank|actual payout?|
+|1|50|
+|2|30|
+|3|20|
+
+!|Payouts|
+|Player|Payout?|
+|Adam|33.33|
+|Bill|33.33|
+|Carl|33.33|
+
+!3 Rounding where 3rd decimal is greater than 5
+ 
+!|Minimum prize pool is|200|
+
+!|Payouts3|
+|Number of Players|3|
+|rank|actual payout?|
+|1|100|
+|2|60|
+|3|40|
+
+!|Payouts|
+|Player|Payout?|
+|Adam|66.66|
+|Bill|66.66|
+|Carl|66.66|
+
+!3 Rounding where 3rd decimal is equal to 5
+ 
+!|Minimum prize pool is|33|
+
+!|Final rank for tournament|
+|Player|Ending Chips|
+|Adam|1|
+|Bill|1|
+|Carl|1|
+|Dave|1|
+|Elle|1|
+|Fred|1|
+|Gill|1|
+|Hall|1|
+
+!|Payouts3|
+|Number of Players|8|
+|rank|actual payout?|
+|1|16.50|
+|2|9.90|
+|3|6.60|
+|4|0|
+|5|0|
+|6|0|
+|7|0|
+|8|0|
+
+!|Payouts|
+|Player|Payout?|
+|Adam|4.12|
+|Bill|4.12|
+|Carl|4.12|
+|Dave|4.12|
+|Elle|4.12|
+|Fred|4.12|
+|Gill|4.12|
+|Hall|4.12|

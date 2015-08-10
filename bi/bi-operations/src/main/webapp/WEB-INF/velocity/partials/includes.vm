@@ -1,0 +1,17 @@
+## Include this file by using #parse('partials/includes.vm')
+
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/ui-lightness/jquery-ui-1.10.2.custom.min.css')"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/jquery-ui-timepicker-addon.css')">
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/site.css')"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/messages.css')"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/campaign.css')"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('/css/player-dashboard.css')"/>
+
+<script type="text/javascript" src="#springUrl('/js/jquery.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery-ui.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery-ui-timepicker-addon.js')"></script>
+<script type="text/javascript" src="#springUrl('/js/jquery.tablesorter.2.0.5.min.js')"></script>
+
+<script src="//connect.facebook.net/en_US/all.js"></script>
+
+<script type="text/javascript" src="#springUrl('/js/backoffice.js')"></script>

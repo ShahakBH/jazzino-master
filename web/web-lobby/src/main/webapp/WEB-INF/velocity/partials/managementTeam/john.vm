@@ -1,0 +1,26 @@
+<div id="management-team-area">
+    <h3>John Don-Wauchope</h3>
+    <h4>VICE PRESIDENT FINANCE</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/jon-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/blackjack">
+                <div class="game-blackjack"></div>
+            </a>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>John is responsible for the financial structures within Yazino, with a particular focus on providing the
+        management team with an accurate insight into the performance of the company.
+    </p>
+
+    <p>Prior to joining Yazino, John worked in a number of senior roles at Nestl&eacute;, most recently as the Category
+        Controller for the Out of Home Food and Confectionary business, where he supported the sales and marketing teams
+        with financial data on the division's sales revenues and inventory costs, and provided financial analysis and
+        forecasting for the business.</p>
+</div>
+</div>

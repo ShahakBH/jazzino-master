@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <meta charset="utf-8"/>
+    <script src="../../javascript/jquery.min.js" type="text/javascript"></script>
+    <script src="../../javascript/TeaserAccordian.js" type="text/javascript"></script>
+    <script src="//connect.facebook.net/en_US/all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            YAZINO.TeaserAccordian($('.gameTeaser'));
+
+
+            FB.init({
+                appId : '311596052192217',
+                status : true, // check login status
+                cookie : true, // enable cookies to allow the server to access the session
+                xfbml : true // parse XFBML
+            });
+
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=311596052192217";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            FB.Canvas.setSize({ width: 520, height: 1200 });
+        });
+
+    </script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div id="fb-root"></div>
+
+
+<ul class="socialMediaLinks">
+    <li class="other">
+        <a href="https://twitter.com/yazino" class="socialbtn" id="twitbtn" target="_blank">twitter</a>
+        <a href="https://pinterest.com/yazino" class="socialbtn" id="pinbtn" target="_blank">pinterest</a>
+        <a href="https://youtube.com/yazinoletsplay" class="socialbtn" id="youtbtn" target="_blank">youtube</a>
+        <a href="https://blog.yazino.com" class="socialbtn" id="blogbtn" target="_blank">blog</a>
+    </li>
+    <li class="facebook">
+        <div class="fb-like" data-href="https://www.facebook.com/Yazino" data-send="true"
+             data-layout="button_count" data-width="250" data-height="21" data-show-faces="true"></div>
+    </li>
+    <li class="clear"></li>
+    <!-- Required instead of overflow: hidden because facebook position iframe absolutely within this area -->
+</ul>
+
+<header>
+    <div class="prelikeHeader"></div>
+</header>
+
+<ul class="gameTeaser">
+
+    <li class="wheelDeal teaserItem">
+        <div class="contentMin">
+            <h3 class="contentToggler">SLOTS WHEEL DEAL</h3>
+            <h4 class="playButton">
+                <a href="https://apps.facebook.com/yazinoslotswheeldeal/?ref=FB_YazinoPlayNowTab" target="_blank">PLAY</a>
+            </h4>
+        </div>
+        <div class="contentExtra">
+            <h4>BUILD YOUR BONUS BANK AND SPIN YOUR WAY TO WIN BIG IN <strong>SLOTS WHEEL DEAL</strong></h4>
+
+            <p>Play a multiplayer, 5-reel, 20-line slot machine with game show thrills!</p>
+            <br>
+            <a href="https://itunes.apple.com/gb/app/slots-wheel-deal-free-live/id422074428?mt=8"><img src="../../images/appstore-3.png" width="150" height="45"  alt="App Store"/></a>
+            
+            <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.slots&hl=en"><img src="../../images/googleplay-4.png" width="129" height="45"  alt="Google Play"/></a>
+
+            <a href="http://www.amazon.co.uk/Slots-Wheel-Deal-free-slots/dp/B00FQISPJO"><img
+                    src="../../images/amazon-appstore.png" width="131" height="45" alt="Google Play"/></a>
+
+          <div class="fb-like" data-href="https://www.facebook.com/YazinoWheelDeal" data-send="false"
+			                 data-layout="button_count" data-width="450" data-height="21" data-show-faces="true"></div>
+      </div>
+    </li>
+
+    <li class="highStakes teaserItem">
+        <div class="contentMin">
+            <h3 class="contentToggler">HIGH STAKES SLOTS</h3>
+            <h4 class="playButton">
+                <a href="https://www.yazino.com/fb/highStakes/fb-welcome-tab" target="_blank">PLAY</a>
+            </h4>
+        </div>
+        <div class="contentExtra">
+            <h4><strong>SPIN TO WIN</strong> <b>IN THE GLAMOROUS WORLD OF AN INTERNATIONAL
+                HEIST</b></h4>
+
+            <p>Earn promotions, crack the safe, and become the boss to win the highest payout!</p>
+            <br>
+            
+              <a href="https://itunes.apple.com/gb/app/high-stakes-slots-by-yazino/id542345087?mt=8"><img src="../../images/appstore-3.png" width="150" height="45"  alt="App Store"/></a>
+              
+            <div class="fb-like" data-href="https://www.facebook.com/YazinoHighStakes" data-send="false"
+			                 data-layout="button_count" data-width="450" data-height="21" data-show-faces="true"></div>
+        </div>
+    </li>
+
+    <li class="blackjack teaserItem">
+        <div class="contentMin">
+            <h3 class="contentToggler">PHARAOH&rsquo;S TOMB BLACKJACK</h3>
+            <h4 class="playButton">
+                <a href="https://www.yazino.com/fb/blackjack/fb-welcome-tab" target="_blank">PLAY</a>
+            </h4>
+        </div>
+        <div class="contentExtra">
+            <h4>EXPERIENCE <strong>BLACKJACK</strong> LIKE YOU&rsquo;VE<br>NEVER SEEN BEFORE</h4>
+
+            <p>Be swept into the land of the pharaohs as you
+                <br>challenge friends in live tournaments!</p>
+            <br>
+            <a href="https://itunes.apple.com/gb/app/blackjack-tournaments/id542346370?mt=8"><img
+                    src="../../images/appstore-3.png" width="150" height="45" alt="App Store"/></a>
+
+            <!-- TODO update URL -->
+            <a href="about:blank"><img src="../../images/googleplay-4.png" width="129" height="45"
+                                       alt="Google Play"/></a>
+
+            <!-- TODO update URL -->
+            <a href="about:blank"><img src="../../images/amazon-appstore.png" width="131" height="45"
+                                       alt="Google Play"/></a>
+
+            <div class="fb-like" data-href="https://www.facebook.com/YazinoBlackjack" data-send="false"
+				                 data-layout="button_count" data-width="450" data-height="21" data-show-faces="true"></div>
+        </div>
+    </li>
+
+ 
+
+ 
+
+    <li class="texasHoldem teaserItem">
+        <div class="contentMin">
+            <h3 class="contentToggler">TEXAS HOLD'EM</h3>
+            <h4 class="playButton">
+                <a href="https://www.yazino.com/fb/texasHoldem/fb-welcome-tab" target="_blank">PLAY</a>
+            </h4>
+        </div>
+        <div class="contentExtra">
+            <h4>PUT ON YOUR POKER FACE - <strong>TEXAS HOLD'EM STYLE</strong></h4>
+
+            <p>Build the best possible five-card hand and join tournaments against your friends.</p>
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.poker.texholdem"><img src="../../images/googleplay-4.png" width="129" height="45"  alt="Texas Hold'em"/></a>
+
+            <div class="fb-like" data-href="https://www.facebook.com/YazinoTexasHoldEm" data-send="false"
+			                 data-layout="button_count" data-width="450" data-height="21" data-show-faces="true"></div>
+            
+        </div>
+    </li>
+
+    <li class="roulette teaserItem">
+        <div class="contentMin">
+            <h3 class="contentToggler">ROULETTE</h3>
+            <h4 class="playButton">
+                <a href="https://www.yazino.com/fb/roulette/fb-welcome-tab" target="_blank">PLAY</a>
+            </h4>
+        </div>
+        <div class="contentExtra">
+            <h4>GET LUCKY ON THE FIRST EVER <strong>MULTIPLAYER ROULETTE</strong> GAME</h4>
+
+            <p>Are you lucky enough to guess where the ball will land?</p>
+
+			<div class="fb-like" data-href="https://www.facebook.com/YazinoRoulette" data-send="false"
+			                 data-layout="button_count" data-width="450" data-height="21" data-show-faces="true"></div>
+        </div>
+    </li>
+
+</ul>
+</body>
+
+</html>

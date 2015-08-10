@@ -1,0 +1,6 @@
+maintainer       "Yazino Technologies"
+maintainer_email "chef@signtechno.com"
+license          "Limits"
+description      "Installs/Configures Limits"
+version          "0.0.1"
+name			 "limits"

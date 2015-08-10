@@ -1,0 +1,201 @@
+#* @vtlvariable name="model" type="com.yazino.bi.operations.model.PlayerDashboardModel" *#
+#* @vtlvariable name="parameters" type="strata.server.operations.model.dashboard.Parameters" *#
+#* @vtlvariable name="players" type="com.yazino.platform.player.PlayerSummary" *#
+
+
+#macro( tabHeader $tabId $tabLabel $playerId )
+    #if($model.dashboard.name == $tabId)
+    <div data-tabname="$tabId" class="tab selected">$tabLabel</div>
+    #else
+    <div data-tabname="$tabId" class="tab">$tabLabel</div>
+    #end
+#end
+
+
+#macro( insertTabBody $tabName )
+    <div data-tabname="$tabName" class="tab-content #if($model.dashboard.name == $tabName)selected#end">
+        <form action="#springUrl('/player')/$model.player.playerId/$tabName" method="POST" class="dashboard">
+            <input type="hidden" name="query" value="$parameters.query">
+            #if($tabName == "GAME")
+                #insertGameTab()
+            #elseif ($tabName == "PAYMENT")
+                #insertPaymentTab()
+            #elseif ($tabName == "STATEMENT")
+                #insertStatementTab()
+            #elseif ($tabName == "INVITE")
+                #insertInviteTab()
+            #elseif ($tabName == "STATUS")
+                #insertStatusTab()
+            #end
+        </form>
+    </div>
+#end
+
+#macro( insertStatusTab )
+    <div class="statusHistory">
+        <input type="hidden" name="playerId" value="$model.player.playerId">
+        <div class="spinner">
+            <img src="#springUrl('/images/spinner.gif')">
+            Loading...
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+#end
+
+#macro( insertGameTab )
+
+    #if($model.player.tableDetail)
+        <p>
+            <span class="detail">Table/Game: $model.player.tableDetail</span>
+        </p>
+        #parse( "partials/oldStyleTable.vm" )
+    #else
+        <div class="report">
+            #dateRangeSelector("game")
+            <label for="table">Table:</label>
+            <div>#springFormInput("parameters.table" "size='6'")</div>
+            <label for="gameType">Game Type:</label>
+            <div>#springFormSingleSelect("parameters.gameType" $gameTypes "")</div>
+            <label for="pageSize">Items/Page:</label>
+            <div>#springFormSingleSelect("parameters.pageSize" $pageSize "")</div>
+            <div class="actions">
+                <div>#filterSubmit( 'Submit' )</div>
+            </div>
+        </div>
+
+        #if($model.dashboard.name == 'GAME')
+            #parse( "partials/oldStyleTable.vm" )
+        #end
+    #end
+
+#end
+
+#macro( insertPaymentTab )
+    <div class="report">
+        #dateRangeSelector("payment")
+        <label for="provider">Provider:</label>
+        <div>#springFormInput("parameters.provider" "size='15'")</div>
+        <label for="reference">Reference:</label>
+        <div>#springFormInput("parameters.reference" "size='15'")</div>
+        <label for="externalTransactionId">External Transaction ID:</label>
+        <div>#springFormInput("parameters.externalTransactionId" "size='15'")</div>
+        <label for="pageSize">Items/Page:</label>
+        <div>#springFormSingleSelect("parameters.pageSize" $pageSize "")</div>
+        <div class="actions">
+            <div>#filterSubmit( 'Submit' )</div>
+        </div>
+    </div>
+
+    #if($model.dashboard.name == 'PAYMENT')
+        #parse( "partials/oldStyleTable.vm" )
+    #end
+#end
+
+#macro( insertStatementTab )
+    <div class="report">
+        #dateRangeSelector("statement")
+        <label for="table">Table:</label>
+        <div>#springFormInput("parameters.table" "size='6'")</div>
+        <label for="gameType">Game Type:</label>
+        <div>#springFormSingleSelect("parameters.gameType" $gameTypes "")</div>
+        <label for="transactionType">Transaction Type:</label>
+        <div>#springFormInput("parameters.transactionType" "")</div>
+        #set($boxValue = {"consolidate":"consolidate per day"})
+        <label for="statementConsolidation"></label>
+        <div>#springFormLabelledCheckboxes("parameters.statementConsolidation" $boxValue "" )</div>
+        <label for="pageSize">Items/Page:</label>
+        <div>#springFormSingleSelect("parameters.pageSize" $pageSize "")</div>
+        <div class="actions">
+            <div>#filterSubmit( 'Submit' )</div>
+        </div>
+    </div>
+
+    #if($model.dashboard.name == 'STATEMENT')
+        #parse( "partials/oldStyleTable.vm" )
+    #end
+#end
+
+#macro( insertInviteTab)
+    #if($model.dashboard.name == 'INVITE' && $model.dashboard.tabData)
+        #filterSubmit( 'Refresh Invitations' )
+        #insertTable( $model.dashboard.tabData 'invitations' )
+    #else
+        #filterSubmit( 'Load Invitations' )
+    #end
+#end
+
+#macro( dateRangeSelector $tabName )
+<label for="startDate-$tabName">Date from:</label>
+<div class="compound">
+    <div>#springFormDateTimeLocalInput("parameters.fromDate" "id='startDate-$tabName'")</div>
+    <div><label for="endDate-$tabName">to</label></div>
+    <div>#springFormDateTimeLocalInput("parameters.toDate" "id='endDate-$tabName'")</div>
+</div>
+#end
+
+#macro( filterSubmit $buttonText )
+<input type="hidden" name="dashboardToDisplay" value="$parameters.dashboardToDisplay">
+<input type="hidden" name="search" value="$buttonText">
+<input type="submit" name="submit" value="$buttonText">
+#end
+
+#macro( insertTable $tableModel $tableClass )
+    #if($tableModel.containsRows())
+    <table id="tabTable" class="$tableClass report" width="90%" class="report" cellspacing="2" cellpadding="3">
+        <thead>
+        <tr>
+            #foreach($header in $tableModel.columns)
+                <th>$header.name</th>
+            #end
+        </tr>
+        </thead>
+        <tbody>
+        #foreach($row in $tableModel.tableRows)
+            <tr>
+                #foreach($cell in $row.cells)
+                    <td>$cell.formattedValue</td>
+                #end
+            </tr>
+        #end
+        </tbody>
+    </table>
+    #else
+    No records found.
+    #end
+#end
+
+#if($model && $model.player)
+
+#parse("partials/playerDetails.vm")
+
+<div class="tabbed-pane">
+    <div class="tabs-header">
+        #tabHeader("STATEMENT" "Statement" "$model.player.playerId")
+        #tabHeader("GAME" "Games" "$model.player.playerId")
+        #tabHeader("PAYMENT" "Payment History" "$model.player.playerId")
+        #tabHeader("INVITE" "Invites" "$model.player.playerId")
+        #tabHeader("STATUS" "Status" "$model.player.playerId")
+    </div>
+
+    <div class="tab-body">
+        #insertTabBody('STATEMENT')
+        #insertTabBody('GAME')
+        #insertTabBody('PAYMENT')
+        #insertTabBody('INVITE')
+        #insertTabBody('STATUS')
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        playerDashboard.fetchAndDisplayFBNamesForInviteTable();
+
+        $("#tabTable.invitations").tablesorter();
+    });
+</script>
+
+#else
+No user existing with this ID
+#end

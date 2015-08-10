@@ -1,0 +1,197 @@
+<div class="player-details playerBalanceAdjuster playerBlocker playerCloser">
+    <input type="hidden" name="playerId" value="$model.player.playerId">
+
+    <div class="info">
+        Data may be up to one minute out of date.
+    </div>
+    <div class="avatar">
+        #if($model.player.avatarUrl.isPresent())<img src="$model.player.avatarUrl.get()">#end
+    </div>
+    <h1>
+        #if($model.player.displayName.isPresent())$model.player.displayName.get()#end
+        <span class="player-id">${model.player.playerId}</span>
+    </h1>
+
+    <div class="summary-details">
+        <div class="balance">
+            <img src="#springUrl('/images/chips.png')">
+            <span class="balance-value">$!numberTool.format('###,###.##', $model.player.balance)</span>
+        </div>
+
+        <div class="tags">
+            #if($model.player.status == "BLOCKED")
+                <span class="alert alert-blocked">Blocked</span>
+            #elseif($model.player.status == "CLOSED")
+                <span class="alert alert-closed">Closed</span>
+            #end
+
+            #if($model.player.role == "INSIDER")<span class="alert alert-insider">Insider</span>#end
+        </div>
+    </div>
+
+    <div class="actions">
+        #if($model.player.status != "CLOSED")
+        <ul>
+            <li>
+                <button class="performBlock">#if($model.player.status == "BLOCKED")
+                    Unblock#elseif($model.player.status == "ACTIVE")Block#end</button>
+                #if($model.player.status == "BLOCKED")<button class="performClose">Close</button>#end
+            </li>
+            <li>
+                <span class="adjustment">
+                    Adjust balance by <input type="text" name="adjustmentAmount">
+                    <button class="performAdjustment">Adjust</button>
+                    <span class="message"></span>
+                </span>
+            </li>
+        </ul>
+        #else
+            <ul><li>This player has been closed.</li></ul>
+        #end
+    </div>
+
+    <div class="attributes">
+        <table>
+            <tbody>
+            <tr>
+                <th>Real Name</th>
+                <td>#if($model.player.realName.isPresent())$model.player.realName.get()#end</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    #if($model.player.emailAddress.isPresent())
+                        #if($model.player.realName.isPresent())
+                            <a href="mailto:$model.player.realName.get()<$model.player.emailAddress.get()>">$model.player.emailAddress.get()</a>
+                        #else
+                            <a href="mailto:$model.player.emailAddress.get()">$model.player.emailAddress.get()</a>
+                        #end
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>
+                    #if($model.player.countryCode.isPresent())
+                        $model.player.countryCode.get()
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <th>Login Method</th>
+                <td>
+                    $!model.player.providerName
+                    #if($model.player.externalId.isPresent() && !$!model.player.providerName.equalsIgnoreCase('YAZINO'))
+                        #if($model.player.providerName.equalsIgnoreCase('FACEBOOK'))
+                            (<a href="http://www.facebook.com/profile.php?id=$model.player.externalId.get()"
+                                target="_blank">$model.player.externalId.get()</a>)
+                        #else
+                            ($!model.player.externalId.get())
+                        #end
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <th>Registered</th>
+                <td>#if($model.player.registration)$dateTool.format('dd/MM/yyyy HH:mm:ss',$model.player.registration.toDate())#end</td>
+            </tr>
+            <tr>
+                <th>Last Played</th>
+                <td>
+                    #if($model.player.lastPlayed.isPresent())
+                        $dateTool.format('dd/MM/yyyy HH:mm:ss',$model.player.lastPlayed.get().toDate())
+                    #else
+                        Unknown
+                    #end
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="purchases">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="2">Purchases</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Chips</th>
+                #if($model.player.purchasedChips)
+                    <td>$!numberTool.format('###,###.##', $model.player.purchasedChips)</td>
+                #else
+                    <td>0</td>
+                #end
+            </tr>
+                #if($model.player.purchasesByCurrency && !$model.player.purchasesByCurrency.isEmpty())
+                    #foreach($purchased in $model.player.purchasesByCurrency.entrySet())
+                    <tr>
+                        <th>$purchased.key</th>
+                        <td>$!numberTool.format('###,###.##', $purchased.value)</td>
+                    </tr>
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+
+    <div class="levels">
+        <table>
+            <thead>
+            <tr>
+                <th colspan="2">Levels</th>
+            </tr>
+            </thead>
+            <tbody>
+                #if($model.player.levelsByGame && !$model.player.levelsByGame.isEmpty())
+                    #foreach($entry in $model.player.levelsByGame.entrySet())
+                    <tr>
+                        <th>$entry.key</th>
+                        <td>$entry.value</td>
+                    </tr>
+                    #end
+                #else
+                <tr>
+                    <td colspan="2">None</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dialogue blockDialogue">
+        <div class="content">
+            <label for="blockReason">Reason:</label>
+            <textarea id="blockReason" name="blockReason" cols="20" rows="3"></textarea>
+
+            <div class="message"></div>
+            <div class="buttons">
+                <button class="cancel">Cancel</button>
+                <button class="submitBlock">Block</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialogue closeDialogue">
+        <div class="content">
+            <div>
+                A closed player account cannot be reopened.
+            </div>
+            <label for="closeReason">Reason:</label>
+            <textarea id="closeReason" name="closeReason" cols="20" rows="3"></textarea>
+
+            <div class="message"></div>
+            <div class="buttons">
+                <button class="cancel">Cancel</button>
+                <button class="submitClose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.playerBlocker').playerBlocker('#if($model.player.status == "BLOCKED")ACTIVE#elseif($model.player.status == "ACTIVE")BLOCKED#end');
+    #if($model.player.status == "BLOCKED")$('.playerCloser').playerCloser();#end
+</script>

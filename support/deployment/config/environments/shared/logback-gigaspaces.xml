@@ -1,0 +1,52 @@
+<configuration scan="true" scanPeriod="30 seconds">
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender" prudent="true">
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/gigaspace/current/application-gigaspace.%d{yyyyMMdd}.%i.log.gz</fileNamePattern>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="REMOTE" class="ch.qos.logback.classic.net.SocketAppender">
+        <RemoteHost>NOHOST</RemoteHost>
+        <Port>4560</Port>
+        <IncludeCallerData>true</IncludeCallerData>
+    </appender>
+
+    <appender name="LOGIO" class="com.yazino.lumberjack.LogIoAppender">
+        <RemoteHost>NOHOST</RemoteHost>
+        <StreamName>app-${applicationName}</StreamName>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.yazino" level="DEBUG"/>
+    <logger name="strata" level="DEBUG"/>
+    <logger name="senet" level="DEBUG"/>
+
+    <logger name="com.amazonaws.request" level="WARN"/>
+    <logger name="com.paypal" level="WARN"/>
+    <logger name="ch.qos.logback.classic" level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="REMOTE" />
+    </root>
+
+</configuration>

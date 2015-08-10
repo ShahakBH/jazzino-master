@@ -1,0 +1,74 @@
+#set ($location = "Trophies")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($trophies.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/tournament/trophy/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/trophy/create">New Trophy</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Trophies</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Game Type</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    #paging( $trophies.startPosition $pageSize $trophies.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    #paging( $trophies.startPosition $pageSize $trophies.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($trophy in $trophies.data)
+                <tr>
+                    <td>$trophy.id</td>
+                    <td>
+                        #if ($!trophy.image)
+                        <div class="thumbnail">
+                            <img class="thumbnail" src="$!assetUrl/images/news/${trophy.image}.png" alt="Trophy Image">
+                            <div>
+                                <img class="thumbnail" src="$!assetUrl/images/news/${trophy.image}.png" alt="Trophy Image">
+                            </div>
+                        </div>
+                        #end
+                    </td>
+                    <td>$trophy.name</td>
+                    <td>$trophy.gameType</td>
+                    <td>
+                        <a href="${request.contextPath}/tournament/trophy/show/${trophy.id}"
+                           title="View trophy ${trophy.id}">View</a>
+                        | <a href="${request.contextPath}/tournament/trophy/edit/${trophy.id}"
+                             title="Edit trophy ${trophy.id}">Edit</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

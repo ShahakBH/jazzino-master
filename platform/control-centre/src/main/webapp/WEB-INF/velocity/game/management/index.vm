@@ -1,0 +1,85 @@
+#set ($location = "Game Management")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="content">
+    <h2>Game Management</h2>
+
+    <div class="description">
+        <h3>Shutdown</h3>
+        <ul>
+            <li>Shutdown will deactivate all game types and stop new games being started.</li>
+            <li>Shutdown will ask all active tables to close themselves; the behaviour of this is game specific.</li>
+        </ul>
+
+        <h3>Activation/Deactivation</h3>
+        <div class="description">
+            <ul>
+                <li>Deactivating a game type will stop new games of that type being started.</li>
+                <li>Deactivating a game type will not stop games that are currently running.</li>
+            </ul>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Game Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>All Games</td>
+                <td></td>
+                <td>
+                    <a class="action-named" data-action="Activate" data-id="game types"
+                       data-type="all"
+                       href="${request.contextPath}/game/management/activate/all"
+                       title="Activate all game types">Activate</a>
+                    | <a class="action-named" data-action="Deactivate" data-id="game types"
+                           data-type="all"
+                           href="${request.contextPath}/game/management/deactivate/all"
+                           title="Deactivate all game types">Deactivate</a>
+                    | <a class="action-named" data-action="Shutdown" data-id="games"
+                       data-type="all"
+                       href="${request.contextPath}/game/management/shutdown/all"
+                       title="Shutdown all games">Shutdown</a>
+                </td>
+            </tr>
+            #foreach ($game in $games)
+            <tr>
+                <td>$game.gameType.id</td>
+                #if($game.available)
+                    <td>Available</td>
+                #else
+                    <td class="important">Unavailable</td>
+                #end
+                <td>
+                    #if(!$game.available)
+                        <a class="action-named" data-action="Activate" data-id="${game.gameType.id}"
+                           data-type="game type"
+                           href="${request.contextPath}/game/management/activate/${game.gameType.id}"
+                           title="Activate game type ${game.gameType.id}">Activate</a>
+                    #else
+                        <a class="action-named" data-action="Deactivate" data-id="${game.gameType.id}"
+                           data-type="game type"
+                           href="${request.contextPath}/game/management/deactivate/${game.gameType.id}"
+                           title="Deactivate game type ${game.gameType.id}">Deactivate</a>
+                    #end
+                    | <a class="action-named" data-action="Shutdown" data-id="${game.gameType.id}"
+                       data-type="game type"
+                       href="${request.contextPath}/game/management/shutdown/${game.gameType.id}"
+                       title="Shutdown all games of type ${game.gameType.id}">Shutdown</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</section>

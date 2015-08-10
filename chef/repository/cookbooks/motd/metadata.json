@@ -1,0 +1,29 @@
+{
+    "recommendations": {
+    },
+    "license": "Apache 2.0",
+    "recipes": {
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "description": "Installs/Configures motd",
+    "platforms": {
+    },
+    "version": "0.1.0",
+    "providing": {
+    },
+    "maintainer": "Example Com",
+    "replacing": {
+    },
+    "name": "motd",
+    "maintainer_email": "ops@example.com",
+    "groupings": {
+    },
+    "attributes": {
+    },
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES: \n\n= USAGE:\n\n"
+  }

@@ -1,0 +1,9 @@
+#parse("includes/header.vm")
+<section id="content">
+    <h2>Table Status</h2>
+    <p>Current table status is <strong>$status</strong></p>
+    #if($monitoringMessage)
+        <h2>Stacktrace:</h2>
+        <pre class="game-status">$monitoringMessage</pre>
+    #end
+</section>

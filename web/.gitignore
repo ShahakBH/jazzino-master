@@ -1,0 +1,13 @@
+target
+.DS_Store
+.idea/
+.flexLibProperties
+*project
+*actionScriptProperties
+*.metadata
+QUnitTestResults.html
+.actionScriptProperties
+.flexProperties
+*.iml
+rebel.xml
+

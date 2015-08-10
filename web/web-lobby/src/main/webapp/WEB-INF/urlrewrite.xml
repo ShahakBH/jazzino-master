@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite>
+    <rule>
+        <from>/maintenance.*$</from>
+        <set type="response-header" name="P3P">CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"</set>
+        <to>/index.jsp</to>
+    </rule>
+    <rule>
+        <from>.*</from>
+        <set type="response-header" name="P3P">CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"</set>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.radium/(.*)</from>
+        <to>/payment/radium/$1</to>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.trialpay/(.*)</from>
+        <to>/payment/trialpay/$1</to>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.itunes/mobile/(products|productIdentifiers|allProducts|chipPackages|transactionReceipt)</from>
+        <to>/payment/itunes/$1</to>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.itunes/mobile/freeChips/(.*)</from>
+        <to>/payment/flurry/$1</to>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.itunes/mobile/(pushRegistration)</from>
+        <to>/ios-push-messaging/$1</to>
+    </rule>
+    <rule><!-- to deal with spring being unable to handle @RequestMappings with periods in! -->
+        <from>/strata\.server\.lobby\.itunes/(.*/devices)</from>
+        <to>/ios-push-messaging/$1</to>
+    </rule>
+
+</urlrewrite>

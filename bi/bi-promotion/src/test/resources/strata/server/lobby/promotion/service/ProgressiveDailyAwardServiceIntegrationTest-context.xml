@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:environment.properties</value>
+                <value>classpath*:test-environment.properties</value>
+                <value>file:/etc/senet/environment.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- we must use a different tx manager for the transactional tests and a different datasource -->
+    <bean id="testTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <import resource="classpath:META-INF/spring/jdbc.xml"/>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="strata.server.lobby.promotion.persistence"/>
+
+    <bean id="jdbcBackOfficePromotionDao" class="com.yazino.promotions.MysqlPromotionDao">
+        <constructor-arg ref="activeBuyChipPromotionPaymentMethods"/>
+    </bean>
+    <util:list id="activeBuyChipPromotionPaymentMethods">
+        <util:constant static-field="com.yazino.platform.community.PaymentPreferences.PaymentMethod.CREDITCARD"/>
+        <util:constant static-field="com.yazino.platform.community.PaymentPreferences.PaymentMethod.PAYPAL"/>
+    </util:list>
+
+    <bean id="mockPlayerService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.yazino.platform.community.PlayerService"/>
+    </bean>
+
+    <bean id="mockPlayerProfileService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.yazino.platform.player.service.PlayerProfileService"/>
+    </bean>
+
+    <bean id="systemTimeSource" class="com.yazino.game.api.time.SystemTimeSource"/>
+
+    <bean id="promotionControlGroupService" class="strata.server.lobby.promotion.service.CachingPromotionControlGroupService">
+        <constructor-arg>
+            <bean class="strata.server.lobby.promotion.service.PromotionControlGroupServiceImpl" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="mockQueuePublishingService" class="org.mockito.Mockito" factory-method="mock">
+       <constructor-arg value="com.yazino.platform.messaging.publisher.QueuePublishingService"/>
+   </bean>
+
+    <bean id="underTest" class="strata.server.lobby.promotion.service.ProgressiveDailyAwardService">
+        <constructor-arg ref="mockPlayerService"/>
+        <constructor-arg ref="mockPlayerProfileService"/>
+    </bean>
+</beans>

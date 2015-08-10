@@ -1,0 +1,9 @@
+<h2>Daily Award Configuration</h2>
+<table>
+    <col width="15%" />
+    <col width="85%" />
+    <tr>
+        <td>Award Chips:</td>
+        <td>#springFormInput("promotionForm.rewardChips" "size='10'")</td>
+    </tr> 
+</table>

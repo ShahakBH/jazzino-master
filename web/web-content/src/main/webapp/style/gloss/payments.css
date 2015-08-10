@@ -1,0 +1,1257 @@
+* {
+  padding: 0;
+  margin: 0;
+font-family: Helvetica;
+}
+
+a img {
+  border: none;
+  display: block;
+}
+
+#paymentSelection #container.cashier_overlay{
+    position: relative;
+    margin:100px;
+    margin-left: -375px;
+    left:50%;
+}
+
+.buy-chips-popup #container.cashier_overlay{
+    position: relative;
+    margin:100px;
+    margin-left: -375px;
+    left:50%;
+}
+
+#buy_chips_main {
+  width: 758px;
+  height: 429px;
+  padding: 8px 23px 9px 9px;
+  background: url( ../../images/gloss/bg-main.png) no-repeat;
+  z-index: 2000;
+}
+
+#buy_chips_main .box {
+  height: 100%;
+}
+
+#main_body {
+  height: 383px;
+}
+#buy_chips_main #bottom {
+  line-height: 16px;
+  padding: 7px 0;
+  text-align: right;
+  color: #575757;
+  font-size: 11px;
+  font-family: Helvetica;
+	margin-right: 26px;
+}
+#buy_chips_main #bottom a {
+  color: #575757;
+}
+
+/* payment method box */
+#payment_method_box {
+  width: 101px;
+  float: left;
+}
+.SLOTS #payment_method_box .cover-upper{
+  height: 30px;
+  background: url('../../images/games/SLOTS/payment-cover.png');
+}
+
+.HIGH_STAKES #payment_method_box .cover-upper {
+height: 30px;
+background: url(../../images/gloss/payment-method-highStakes-cover-upper.png);
+}
+.TEXAS_HOLDEM #payment_method_box .cover-upper{
+  height: 30px;
+  background: url( ../../images/gloss/payment-method-texasHoldem-cover-upper.png);
+}
+.ROULETTE #payment_method_box .cover-upper{
+  height: 30px;
+  background: url( ../../images/gloss/payment-method-Roulette-cover-upper.png);
+}
+.BLACKJACK #payment_method_box .cover-upper{
+  height: 30px;
+  background: url( ../../images/gloss/payment-method-Blackjack-cover-upper.png);
+}
+#payment_method_box  #paiment_method_body {
+  padding: 0 2px;
+  background: url( ../../images/gloss/payment-method-cover-body.png);
+  height: 352px;
+}
+#payment_method_box  #paiment_method_body ul {
+  list-style: none;
+  padding: 6px 0 4px;
+}
+#payment_method_box  #paiment_method_body ul li {
+  width: 89px;
+  margin: 4px auto;
+  padding: 4px;
+  background: none;
+}
+
+
+.SLOTS #payment_method_box  #paiment_method_body ul li.check {
+  background: url( ../../images/gloss/payment-wheelDeal-method-list-substrate.png);
+}
+
+.HIGH_STAKES #payment_method_box  #paiment_method_body ul li.check {
+  background: url( ../../images/gloss/payment-highStakes-method-list-substrate.png);
+}
+
+.TEXAS_HOLDEM #payment_method_box  #paiment_method_body ul li.check {
+  background: url( ../../images/gloss/payment-texasHoldem-method-list-substrate.png);
+}
+.ROULETTE #payment_method_box  #paiment_method_body ul li.check {
+  background: url( ../../images/gloss/payment-Roulette-method-list-substrate.png);
+}
+.BLACKJACK #payment_method_box  #paiment_method_body ul li.check {
+  background: url( ../../images/gloss/payment-Blackjack-method-list-substrate.png);
+}
+.SLOTS #payment_method_box  #paiment_method_body ul li:hover {
+  background: url( ../../images/gloss/payment-wheelDeal-method-list-substrate.png);
+}
+.HIGH_STAKES #payment_method_box  #paiment_method_body ul li:hover {
+  background: url( ../../images/gloss/payment-highStakes-method-list-substrate.png);
+}
+.TEXAS_HOLDEM #payment_method_box  #paiment_method_body ul li:hover {
+  background: url( ../../images/gloss/payment-texasHoldem-method-list-substrate.png);
+}
+.ROULETTE #payment_method_box  #paiment_method_body ul li:hover {
+  background: url( ../../images/gloss/payment-Roulette-method-list-substrate.png);
+}
+.BLACKJACK #payment_method_box  #paiment_method_body ul li:hover {
+  background: url( ../../images/gloss/payment-Blackjack-method-list-substrate.png);
+}
+
+#payment_method_box  #paiment_method_body ul li label {
+  display: block;
+  height: 57px;
+  color: #575757;
+  font-size: 11px;
+  font-family: Helvetica;
+  text-decoration: none;
+  padding: 8px 6px;
+  cursor: pointer;
+  text-align: left;
+}
+#payment_method_box  #paiment_method_body ul li .paimentRadio {
+  position: absolute;
+  left: -9999px;
+}
+#payment_method_box  #paiment_method_body ul li .credit-cart {
+  background: url( ../../images/gloss/payment-method-credit-cart.png);
+}
+#payment_method_box  #paiment_method_body ul li .pay-pal {
+  background: url( ../../images/gloss/payment-method-PayPal.png);
+}
+#payment_method_box  #paiment_method_body ul li .facebook{
+  background: url( ../../images/gloss/payment-method-facebook.png);
+}
+#payment_method_box  #paiment_method_body ul li .trialpay {
+  background: url( ../../images/gloss/trialPayButton.png);
+}
+#payment_method_box  #paiment_method_body ul li .facebook_earn{
+  background: url( ../../images/gloss/trialPayButton.png);
+}
+
+/* action box */
+#action_box {
+  width: 632px;
+  float: left;
+}
+#action_box #tabs {
+  height: 31px;
+}
+/* TAB buy chips */
+.SLOTS .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-wheelDeal-buy-chips.png);
+}
+.SLOTS.paypal-or-mobile .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-wheelDeal-PayPal-or-byMobile-buy-chips.png);
+}
+.HIGH_STAKES .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-highStakes-buy-chips.png);
+}
+.HIGH_STAKES.paypal-or-mobile .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-highStakes-PayPal-or-byMobile-buy-chips.png);
+}
+.TEXAS_HOLDEM .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-texasHoldem-buy-chips.png);
+}
+.TEXAS_HOLDEM.paypal-or-mobile .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-texasHoldem-PayPal-or-byMobile-buy-chips.png);
+}
+.ROULETTE .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Roulette-buy-chips.png);
+}
+.ROULETTE.paypal-or-mobile .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Roulette-PayPal-or-byMobile-buy-chips.png);
+}
+.BLACKJACK .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Blackjack-buy-chips.png);
+}
+.BLACKJACK.paypal-or-mobile .buy-chips #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Blackjack-PayPal-or-byMobile-buy-chips.png);
+}
+/* TAB enter card */
+.SLOTS .enter-card #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-wheelDeal-enter-card.png);
+}
+.HIGH_STAKES .enter-card #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-highStakes-enter-card.png);
+}
+.TEXAS_HOLDEM .enter-card #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-texasHoldem-enter-card.png);
+}
+.ROULETTE .enter-card #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Roulette-enter-card.png);
+}
+.BLACKJACK .enter-card #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Blackjack-enter-card.png);
+}
+/* TAB confirmation */
+.SLOTS .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-wheelDeal-conformation.png);
+}
+.SLOTS.paypal-or-mobile .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-wheelDeal-PayPal-or-byMobile-conformation.png);
+}
+.HIGH_STAKES .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-highStakes-confirmation.png);
+}
+.HIGH_STAKES.paypal-or-mobile .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-highStakes-PayPal-or-byMobile-confirmation.png);
+}
+.TEXAS_HOLDEM .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-texasHoldem-conformation.png);
+}
+.TEXAS_HOLDEM.paypal-or-mobile .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-texasHoldem-PayPal-or-byMobile-conformation.png);
+}
+.ROULETTE .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Roulette-conformation.png);
+}
+.ROULETTE.paypal-or-mobile .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Roulette-PayPal-or-byMobile-conformation.png);
+}
+.BLACKJACK .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Blackjack-conformation.png);
+}
+.BLACKJACK.paypal-or-mobile .confirmation #action_box #tabs {
+  background: url( ../../images/gloss/action-upper-tabs-Blackjack-PayPal-or-byMobile-conformation.png);
+}
+
+#action_body {
+  background: url( ../../images/gloss/action-body-bg.png);
+  height: 327px;
+  padding: 12px;
+  position: relative;
+}
+
+/* currency method */
+#action_body #currency_list {
+  text-align: left;
+	margin-left: 447px;
+}
+#action_body #currency_list li{
+  display: inline;
+  list-style: none;
+  margin-right: 7px;
+}
+#action_body #currency_list li a{
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+  color: #575757;
+}
+.SLOTS .buy-chips #action_body #currency_list li a.choose {
+  color: #b04aae;
+}
+.HIGH_STAKES .buy-chips #action_body #currency_list li a.choose {
+  color: #084687;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #currency_list li a.choose {
+  color: #3e9bd4;
+}
+.ROULETTE .buy-chips #action_body #currency_list li a.choose {
+  color: #d81d27;
+}
+.BLACKJACK .buy-chips #action_body #currency_list li a.choose {
+  color: #76ba3a;
+}
+
+/* select chips block */
+#action_body #select_chips_value {
+  background: url( ../../images/gloss/action-select-chips-sector.png);
+  height: 190px;
+  margin: 0 auto;
+  width: 605px;
+  margin: 17px auto 0;
+}
+#action_body #select_chips_value ul {
+  list-style: none;
+}
+#action_body #select_chips_value ul li {
+  float: left;
+  width: 97px;
+  margin: 5px 0 0 3px;
+}
+#action_body #select_chips_value ul li .chips-radio {
+  display: none;
+}
+#action_body #select_chips_value ul li a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#action_body #select_chips_value .select-chips-body:hover .checkbox {
+	color: red;
+}
+
+#action_body #select_chips_value ul li.checked .select-chips-body .checkbox {
+  background-position: 0 -16px;
+  color: #d81d27;
+}
+#action_body #select_chips_value .value-wrapper.promotion {
+    display: block;
+    text-decoration: line-through;
+    color:red;
+    height:2em;
+}
+#action_body #select_chips_value .value-wrapper.promotion.ROULETTE {
+    color:black
+}
+#action_body #select_chips_value .chips-title-value {
+  height: 28px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 7px 0 0;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.SLOTS .buy-chips #action_body #select_chips_value .chips-title-value {
+  background: url( ../../images/gloss/action-select-chips-wheelDeal-value-title.png) no-repeat;
+}
+.SLOTS .buy-chips #action_body #select_chips_value ul li.checked .chips-title-value{
+  background: url( ../../images/gloss/action-select-chips-value-title-checked.png) no-repeat !important;
+}
+.HIGH_STAKES .buy-chips #action_body #select_chips_value .chips-title-value {
+  background: url( ../../images/gloss/action-select-chips-highStakes-value-title.png) no-repeat;
+}
+.HIGH_STAKES .buy-chips #action_body #select_chips_value ul li.checked .chips-title-value{
+  background: url( ../../images/gloss/action-select-chips-value-title-checked.png) no-repeat !important;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #select_chips_value .chips-title-value {
+  background: url( ../../images/gloss/action-select-chips-texasHoldem-value-title.png) no-repeat;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #select_chips_value ul li.checked .chips-title-value{
+  background: url( ../../images/gloss/action-select-chips-value-title-checked.png) no-repeat !important;
+}
+.ROULETTE .buy-chips #action_body #select_chips_value .chips-title-value {
+  background: url( ../../images/gloss/action-select-chips-Roulette-value-title.png) no-repeat;
+}
+.ROULETTE .buy-chips #action_body #select_chips_value ul li.checked .chips-title-value{
+  background: url(  ../../images/gloss/action-select-chips-value-title-checked.png) no-repeat !important;
+}
+.BLACKJACK .buy-chips #action_body #select_chips_value .chips-title-value {
+  background: url( ../../images/gloss/action-select-chips-Blackjack-value-title.png) no-repeat;
+}
+.BLACKJACK .buy-chips #action_body #select_chips_value ul li.checked .chips-title-value{
+  background: url(  ../../images/gloss/action-select-chips-value-title-checked.png) no-repeat !important;
+}
+
+#action_body #select_chips_value .select-chips-body {
+  background: url( ../../images/gloss/action-select-chips-block-body.png) no-repeat;
+  height: 145px;
+  padding: 0 5px;
+  text-align: center;
+  display: block;
+}
+
+#action_body #select_chips_value .select-chips-body .promotion-chips.selected {
+  padding-top: 13px;
+  background: url( ../../images/gloss/buychips/promoPackageValueSelected.png) no-repeat;
+    background-position: center top;
+  position: relative;
+  top: -6px;
+}
+
+#action_body #select_chips_value .select-chips-body .promotion-chips {
+  background: url( ../../images/gloss/buychips/promoPackageValue.png) no-repeat;
+  display: block;
+  padding-top: 7px;
+  width: 91px;
+  height: 37px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #7c7c7c;
+  letter-spacing: 1px;
+}
+
+/* select chips block images*/
+#action_body #select_chips_value a .select-chips-body .img {
+  height: 115px;
+  display: block;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+#action_body #select_chips_value .select-chips-body .chips-8000 {
+  background-image: url('../../images/payments/chips-1.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-10000 {
+    background-image: url('../../images/payments/chips-1.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-18000 {
+    background-image: url('../../images/payments/chips-2.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-21000 {
+    background-image: url('../../images/payments/chips-2.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-50000 {
+    background-image: url('../../images/payments/chips-3.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-125000 {
+    background-image: url('../../images/payments/chips-4.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-150000 {
+    background-image: url('../../images/payments/chips-4.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-300000 {
+    background-image: url('../../images/payments/chips-5.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-400000 {
+    background-image: url('../../images/payments/chips-5.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-1000000 {
+    background-image: url('../../images/payments/chips-6.png');
+}
+
+#action_body #select_chips_value .checked .select-chips-body .chips-8000 {
+    background-image: url('../../images/payments/chips-1-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-10000 {
+    background-image: url('../../images/payments/chips-1-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-18000 {
+    background-image: url('../../images/payments/chips-2-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-21000 {
+    background-image: url('../../images/payments/chips-2-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-50000 {
+    background-image: url('../../images/payments/chips-3-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-125000 {
+    background-image: url('../../images/payments/chips-4-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-150000 {
+    background-image: url('../../images/payments/chips-4-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-300000 {
+    background-image: url('../../images/payments/chips-5-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-400000 {
+    background-image: url('../../images/payments/chips-5-selected.png');
+}
+#action_body #select_chips_value .checked .select-chips-body .chips-1000000 {
+    background-image: url('../../images/payments/chips-6-selected.png');
+}
+
+#action_body #select_chips_value .select-chips-body .chips-8000:hover {
+    background-image: url('../../images/payments/chips-1-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-10000:hover {
+    background-image: url('../../images/payments/chips-1-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-18000:hover {
+    background-image: url('../../images/payments/chips-2-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-21000:hover {
+    background-image: url('../../images/payments/chips-2-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-50000:hover {
+    background-image: url('../../images/payments/chips-3-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-125000:hover {
+    background-image: url('../../images/payments/chips-4-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-150000:hover {
+    background-image: url('../../images/payments/chips-4-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-300000:hover {
+    background-image: url('../../images/payments/chips-5-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-400000:hover {
+    background-image: url('../../images/payments/chips-5-selected.png');
+}
+#action_body #select_chips_value .select-chips-body .chips-1000000:hover {
+    background-image: url('../../images/payments/chips-6-selected.png');
+}
+
+
+/* select chips block checker*/
+#action_body #select_chips_value .select-chips-body .checkbox {
+  display: inline;
+  color: #424242;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Helvetica;
+  background: url( ../../images/gloss/action-select-chips-block-checkbox-sprite.png) no-repeat;
+  background-position: 0 2px; /*  checked is background-position: 0 -15px; color: #d81d27; */
+  padding: 0 0 0 20px;
+}
+
+
+#action_body #action_info {
+  height: 100px;
+  position: relative;
+}
+#action_body #action_info #value_status {
+  text-align: center;
+  position: absolute;
+  width: 460px;
+  top: 40px;
+}
+#action_body #action_info #registered_cards {
+    text-align: right;
+    position: absolute;
+    width: 440px;
+    top: 20px;
+}
+#action_body #action_info .value-status {
+  font-size: 22px;
+  font-weight: bold;
+}
+#action_body #action_info #promotion-info {
+    background:  url(../../images/gloss/buychips/promoPackageDescription.png) no-repeat;
+    position: absolute;
+    bottom: 5px;
+    display: none;
+    width: 447px;
+    height: 52px;
+    font-size: 14px;
+    font-weight: bold;
+}
+#action_body #action_info #promotion-info span {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}
+
+#action_body #action_info #promotion-info .header {
+    color: #9f800b;
+}
+#action_body #action_info #promotion-info .text {
+    color: #7c7c7c;
+}
+.SLOTS .buy-chips #action_body #action_info .value-status {
+  color: #b04aae;
+}
+.HIGH_STAKES .buy-chips #action_body #action_info .value-status {
+  color: #084687;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #action_info .value-status {
+  color: #3e9bd4;
+}
+.ROULETTE .buy-chips #action_body #action_info .value-status {
+  color: #d81d27;
+}
+.BLACKJACK .buy-chips #action_body #action_info .value-status {
+  color: #76ba3a;
+}
+#action_body #action_info .player-status {
+  color: #575757;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#action_body #action_info .cell {
+  color: #8e8d8d;
+  font-size: 15px;
+	text-transform: uppercase;
+}
+
+#action_body #action_info .paypalButton {
+  background: url( ../../images/gloss/button-paypal.gif) no-repeat;
+  border: none;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+    width: 150px;
+    height: 33px;
+
+}
+
+#action_body #action_info .facebookButton {
+  background: url( ../../images/fb/fb_pay_with_fb_button.png) no-repeat;
+  border: none;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  text-align: center;
+  cursor: pointer;
+    width: 147px;
+    height: 21px;
+
+}
+
+/* button */
+#action_body #action_info .button {
+  background: none;
+  border: none;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  width: 148px;
+  height: 35px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 13px;
+	font-weight: bold;
+  text-decoration: none;
+}
+
+#action_body #action_info .addCardLink {
+    position: absolute;
+    right: 3px;
+    top: 92px;
+    font-size: 0.9em;
+}
+
+#action_body #action_info #registeredCardSelection {
+    right: 0;
+    top: 20px;
+    width: 165px;
+    position: absolute;
+}
+
+.SLOTS .buy-chips #action_body #action_info .button {
+  background: url( ../../images/gloss/button-wheelDeal-contine.png) no-repeat;
+}
+.SLOTS .buy-chips #action_body #action_info .button:hover {
+  background: url( ../../images/gloss/button-wheelDeal-contine-hover.png) no-repeat;
+}
+.SLOTS .buy-chips #action_body #action_info .buybutton {
+    background: url( ../../images/gloss/button-wheelDeal-contine.png) no-repeat;
+}
+.SLOTS .buy-chips #action_body #action_info .buybutton:hover {
+    background: url( ../../images/gloss/button-wheelDeal-contine-hover.png) no-repeat;
+}
+.HIGH_STAKES .buy-chips #action_body #action_info .button {
+  background: url( ../../images/gloss/button-highStakes-contine.png) no-repeat;
+}
+.HIGH_STAKES .buy-chips #action_body #action_info .button:hover {
+  background: url( ../../images/gloss/button-highStakes-contine-hover.png) no-repeat;
+}
+.HIGH_STAKES .buy-chips #action_body #action_info .buybutton {
+    background: url( ../../images/gloss/button-highStakes-contine.png) no-repeat;
+}
+.HIGH_STAKES .buy-chips #action_body #action_info .buybutton:hover {
+    background: url( ../../images/gloss/button-highStakes-contine-hover.png) no-repeat;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #action_info .button {
+  background: url( ../../images/gloss/button-texasHoldem-contine.png) no-repeat;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #action_info .button:hover {
+  background: url( ../../images/gloss/button-texasHoldem-contine-hover.png) no-repeat;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #action_info .buybutton {
+    background: url( ../../images/gloss/button-texasHoldem-contine.png) no-repeat;
+}
+.TEXAS_HOLDEM .buy-chips #action_body #action_info .buybutton:hover {
+    background: url( ../../images/gloss/button-texasHoldem-contine-hover.png) no-repeat;
+}
+.ROULETTE .buy-chips #action_body #action_info .button {
+  background: url( ../../images/gloss/button-Roulette-contine.png) no-repeat;
+}
+.ROULETTE .buy-chips #action_body #action_info .button:hover {
+  background: url( ../../images/gloss/button-Roulette-contine-hover.png) no-repeat;
+}
+.ROULETTE .buy-chips #action_body #action_info .buybutton {
+    background: url( ../../images/gloss/button-Roulette-contine.png) no-repeat;
+}
+.ROULETTE .buy-chips #action_body #action_info .buybutton:hover {
+    background: url( ../../images/gloss/button-Roulette-contine-hover.png) no-repeat;
+}
+.BLACKJACK .buy-chips #action_body #action_info .button {
+  background: url( ../../images/gloss/button-Blackjack-contine.png) no-repeat;
+}
+.BLACKJACK .buy-chips #action_body #action_info .button:hover {
+  background: url( ../../images/gloss/button-Blackjack-contine-hover.png) no-repeat;
+}
+.BLACKJACK .buy-chips #action_body #action_info .buybutton {
+    background: url( ../../images/gloss/button-Blackjack-contine.png) no-repeat;
+}
+.BLACKJACK .buy-chips #action_body #action_info .buybutton:hover {
+    background: url( ../../images/gloss/button-Blackjack-contine-hover.png) no-repeat;
+}
+
+/* ENTER CARD DETAILS */
+
+#action_body .information_box {
+  width: 259px;
+  height: 168px;
+  position: absolute;
+  right: 117px;
+  top: 107px;
+  z-index: 9999999999;
+}
+#action_body .close-button {
+  background: url( ../../images/gloss/button-close.png);
+  width: 17px;
+  height: 17px;
+  left: 230px;
+  position: relative;
+  top: 5px;
+  cursor: pointer;
+}
+
+/* form */
+#form_box {
+  width: 350px;
+  overflow: hidden;
+  padding: 26px 2px 2px;
+  float: left;
+}
+#form_box .formline {
+  float: left;
+  width: 100%;
+  margin-bottom: 5px;
+    height: 30px;
+}
+#form_box .formline span {
+  color: #595757;
+  font-size: 12px;
+  font-family: Helvetica;
+}
+#form_box .formline label {
+  float: left;
+  width: 125px;
+  text-align: right;
+  position: relative;
+  font-family: Helvetica;
+  font-size: 11px;
+  font-weight: bold;
+  color: #595757;
+  top: 2px; /* отступ сверху подбираем в зависимости от размера шрифта и дизайна полей */
+  margin-right: 10px;
+}
+#form_box .formline .empty {
+  width: 133px;
+  height: 1px;
+  float: left;
+}
+#form_box .formline input {
+  border: none;
+  border: 1px solid #c4c4c4;
+  width: 210px;
+  height: 16px;
+}
+#form_box .formline input#securityCode {
+  width: 62px;
+}
+#form_box .formline input#saveDetailsChecker {
+  width: 17px;
+  float: left;
+}
+#form_box .formline .question {
+  bottom: 0;
+  left: 4px;
+}
+#form_box .formline a {
+  color: #000099;
+  font-size: 10px;
+  font-family: Helvetica;
+  position: relative;
+  bottom: 2px;
+}
+#form_box .formline .whats-this.active {
+  color: #d81d27;
+}
+#form_box .formline select {
+  font-size: 11px;
+  height: 17px;
+}
+#form_box .formline select#emailAddress {
+  width: 215px;;
+}
+#form_box .formline.bottom-sector {
+  margin-top: 15px;
+}
+#form_box .formline.bottom-sector a {
+  color: #595757;
+  font-size: 11px;
+}
+#form_box .formline .secure {
+  text-align: right;
+  width: 125px;
+  float: left;
+  margin-right: 10px;
+}
+#form_box .formline .secure span {
+  text-align: right;
+  width: 33px;
+  font-size: 10px;
+  color: #d81d27;
+  line-height: 10px;
+  display: inline-block;
+}
+#form_box .formline input#form_submit {
+  border: none;
+  height: 27px;
+  width: 97px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+
+.SLOTS .enter-card #form_box .formline input#form_submit {
+  background: url( ../../images/gloss/button-wheelDeal-buyNow.png) no-repeat;
+}
+.SLOTS .enter-card #form_box .formline input#form_submit:hover {
+  background: url( ../../images/gloss/button-wheelDeal-buyNow-hover.png) no-repeat;
+}
+.HIGH_STAKES .enter-card #form_box .formline input#form_submit {
+  background: url( ../../images/gloss/button-highStakes-buyNow.png) no-repeat;
+}
+.HIGH_STAKES .enter-card #form_box .formline input#form_submit:hover {
+  background: url( ../../images/gloss/button-highStakes-buyNow-hover.png) no-repeat;
+}
+.TEXAS_HOLDEM .enter-card #form_box .formline input#form_submit {
+  background: url( ../../images/gloss/button-texasHoldem-buyNow.png) no-repeat;
+}
+.TEXAS_HOLDEM .enter-card #form_box .formline input#form_submit:hover {
+  background: url( ../../images/gloss/button-texasHoldem-buyNow-hover.png) no-repeat;
+}
+.ROULETTE .enter-card #form_box .formline input#form_submit {
+  background: url( ../../images/gloss/button-Roulette-buyNow.png) no-repeat;
+}
+.ROULETTE .enter-card #form_box .formline input#form_submit:hover {
+  background: url( ../../images/gloss/button-Roulette-buyNow-hover.png) no-repeat;
+}
+.BLACKJACK .enter-card #form_box .formline input#form_submit {
+  background: url( ../../images/gloss/button-Blackjack-buyNow.png) no-repeat;
+}
+.BLACKJACK .enter-card #form_box .formline input#form_submit:hover {
+  background: url( ../../images/gloss/button-Blackjack-buyNow-hover.png) no-repeat;
+}
+
+
+/* raise_box */
+#raise_box {
+  float: right;
+  width: 250px;
+  padding-top: 46px;
+}
+#raise_box #rise {
+  background: url( ../../images/gloss/rise-box-sector-bg.png);
+  height: 237px;
+  margin: 0 auto;
+  width: 227px;
+  padding-top: 10px;
+  position: relative;
+    overflow: hidden;
+    /*cursor: pointer;*/
+}
+
+#rise_overlay {
+    position: absolute;
+    top: 228px;
+    left: 13px;
+    background: url(../../images/gloss/rollover1pxBg.png);
+    width: 203px;
+    height: 224px;
+    color: #545454;
+}
+
+.BLACKJACK #rise_overlay .saver_text1 {
+    color: #76ba3a;
+}
+
+.ROULETTE #rise_overlay .saver_text1 {
+    color: #d72222;
+}
+
+.TEXAS_HOLDEM #rise_overlay .saver_text1 {
+    color: #3e9bd4;
+}
+
+.SLOTS #rise_overlay .saver_text1 {
+    color: #b04aae;
+}
+
+.HIGH_STAKES #rise_overlay .saver_text1 {
+    color: #084687;
+}
+
+#rise_overlay .saver_text1 {
+    position: absolute;
+    top: 137px;
+    font-size: 13px;
+    font-weight: bold;
+    left: 7px;
+    text-transform: UPPERCASE;
+}
+
+#rise_overlay .saver_text2 {
+    position: absolute;
+    top: 155px;
+    font-size: 12px;
+    left: 7px;
+    font-weight: bold;
+}
+
+#rise_overlay .upgrade_text {
+    position: absolute;
+    top: 202px;
+    font-size: 11px;
+    left: 7px;
+}
+
+#rise_overlay #promotional-info {
+  background: url( ../../images/gloss/buychips/cardDetailsPackageSelectedRollover.png) no-repeat center;
+  display: block;
+  position: relative;
+  top: 30px;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  color: #7c7c7c;
+}
+
+#rise_overlay #promotional-info .promo-header {
+  display: block;
+  position: relative;
+  width: 171px;
+  top: 81px;
+  left: 13px;
+  color: #9f800b;
+  text-transform: uppercase;
+
+}
+
+#rise_overlay #promotional-info .promo-text {
+  display: block;
+  position: relative;
+  width: 171px;
+  top: 95px;
+  left: 13px;
+}
+
+#rise #rise-click {
+    position: relative;
+    overflow: hidden;
+}
+
+
+#raise_box #rise a {
+  text-decoration: none;
+}
+#raise_box #rise .rise-title {
+  width: 197px;
+  height:50px;
+  padding: 12px 5px 0;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Helvetica;
+  color: #ffffff;
+  font-size: 12px;
+  display: block;
+}
+
+.SLOTS .enter-card #raise_box #rise .rise-title {
+  background: url( ../../images/gloss/rise-wheelDeal-box-sector-title.png);
+}
+.HIGH_STAKES .enter-card #raise_box #rise .rise-title {
+  background: url( ../../images/gloss/rise-highStakes-box-sector-title.png);
+}
+.TEXAS_HOLDEM .enter-card #raise_box #rise .rise-title {
+  background: url( ../../images/gloss/rise-texasHoldem-box-sector-title.png);
+}
+.ROULETTE .enter-card #raise_box #rise .rise-title {
+  background: url( ../../images/gloss/rise-Roulette-box-sector-title.png);
+}
+.BLACKJACK .enter-card #raise_box #rise .rise-title {
+  background: url( ../../images/gloss/rise-Blackjack-box-sector-title.png);
+}
+#raise_box #ruse .rise-body:hover {
+  background: url( ../../images/gloss/10k.png);
+}
+#raise_box #rise .rise-body {
+  background: url( ../../images/gloss/rise-box-sector-body.png);
+  width: 207px;
+  height: 166px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+#raise_box #rise .rise-body #rise-body-image {
+  display: block;
+  position: absolute;
+  top: 78px;
+  left: 35px;
+}
+#raise_box #rise .rise-title .rise-title-2-wrapper.strike-through {
+  text-decoration: line-through;
+  color: red;
+  height: 2em;
+}
+
+#raise_box #rise .rise-title .rise-title-2 {
+  color: white;
+}
+
+#raise_box #rise .rise-body #rise-body-promo {
+  display: block;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  padding: 31px 0 0 0;
+  background: url( ../../images/gloss/buychips/cardDetailsPackageSelected.png) no-repeat center;
+  width: 100%;
+  height: 37px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Helvetica;
+  color: #7c7c7c;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+/* info desc */
+#info_desc {
+  float: left;
+  color: #575757;
+  font-size: 10px;
+  font-family: Helvetica;
+  margin-left: 127px;
+  margin-top: 10px;
+}
+#info_desc a {
+  color: #575757;
+}
+
+
+/* CONFIRMATION */
+
+.confirmation #action_body {
+  padding: 0;
+  height: 351px;
+}
+.confirmation.thank-you #cofirmation_Body {
+  background: url( ../../images/gloss/bg-wheelDeal-Thank-confirmation.png) right bottom no-repeat;
+  height: 100%;
+  width: 100%;
+}
+.confirmation.sorry #cofirmation_Body {
+  background: url( ../../images/gloss/bg-wheelDeal-Sorry-confirmation.png) right bottom no-repeat;
+  height: 100%;
+}
+
+ #paypal_please_wait.awaiting {
+  background: url( ../../images/gloss/bg-paypal-awaiting.png) right bottom no-repeat;
+  height: 100%;
+  position: relative;
+}
+
+#paypal_please_wait #loadingIcon {
+    background: url( ../../images/gloss/dot-dot-dot.gif);
+    height: 14px;
+    width: 52px;
+    display: block;
+    position: absolute;
+    bottom: 119px;
+    right: 121px;
+}
+
+#paypal_please_wait.stacking {
+  background: url( ../../images/gloss/bg-paypal-stacking.png) right bottom no-repeat;
+    position: relative;
+  height: 100%;
+}
+
+#paypal_please_wait.stacking #loadingIcon {
+    background: url( ../../images/gloss/spinning-coins.gif);
+    height: 101px;
+    width: 84px;
+    display: block;
+    position: absolute;
+    bottom: 144px;
+    right: 147px;
+}
+
+#cofirmation_Body .cofirmation-status {
+  font-family: Helvetica;
+  width: 330px;
+  padding: 85px 0 0 20px;
+}
+
+#cofirmation_Body .cofirmation-status .status {
+  display: block;
+  font-weight:bold;
+  font-size: 28px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.SLOTS .confirmation #cofirmation_Body .cofirmation-status .status, .SLOTS #wait_header {
+  color: #b04aae;
+}
+.HIGH_STAKES .confirmation #cofirmation_Body .cofirmation-status .status, .HIGH_STAKES #wait_header {
+  color: #084687;
+}
+.TEXAS_HOLDEM .confirmation #cofirmation_Body .cofirmation-status .status, .TEXAS_HOLDEM #wait_header {
+  color: #3e9bd4;
+}
+.ROULETTE .confirmation #cofirmation_Body .cofirmation-status .status, .ROULETTE #wait_header {
+  color: #d81d27;
+}
+.BLACKJACK .confirmation #cofirmation_Body .cofirmation-status .status, .BLACKJACK #wait_header {
+  color: #76ba3a;
+}
+
+#cofirmation_Body .cofirmation-status .status-desc {
+  display: block;
+  color: #8e8d8d;
+  font-weight:bold;
+  font-size: 19px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.sorry #cofirmation_Body .cofirmation-status .additionally {
+  color: #8e8d8d;
+  font-size: 16px;
+  margin-bottom: 23px;
+  display: block;
+}
+#cofirmation_Body .cofirmation-status .button {
+  display: block;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+  border: none;
+  position: relative;
+  bottom: 10px;
+  left: 0;
+  margin-top: 46px;
+  width: 148px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+
+
+
+.confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  width: 181px;
+  height: 27px;
+}
+.confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  width: 124px;
+  height: 25px;
+}
+.SLOTS .confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-wheelDeal-start-now.png) no-repeat;
+}
+.SLOTS .confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-wheelDeal-tryAgain.png) no-repeat;
+}
+.SLOTS .confirmation.thank-you #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-wheelDeal-start-now-hover.png) no-repeat;
+}
+.SLOTS .confirmation.sorry #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-wheelDeal-tryAgain-hover.png) no-repeat;
+}
+.HIGH_STAKES .confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-highStakes-start-now.png) no-repeat;
+}
+.HIGH_STAKES .confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-highStakes-tryAgain.png) no-repeat;
+}
+.HIGH_STAKES .confirmation.thank-you #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-highStakes-start-now-hover.png) no-repeat;
+}
+.HIGH_STAKES .confirmation.sorry #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-highStakes-tryAgain-hover.png) no-repeat;
+}
+.TEXAS_HOLDEM .confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-texasHoldem-start-now.png) no-repeat;
+}
+.TEXAS_HOLDEM .confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-texasHoldem-tryAgain.png) no-repeat;
+}
+.TEXAS_HOLDEM .confirmation.thank-you #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-texasHoldem-start-now-hover.png) no-repeat;
+}
+.TEXAS_HOLDEM .confirmation.sorry #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-texasHoldem-tryAgain-hover.png) no-repeat;
+}
+.ROULETTE .confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-Roulette-start-now.png) no-repeat;
+}
+.ROULETTE .confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-Roulette-tryAgain.png) no-repeat;
+}
+.ROULETTE .confirmation.thank-you #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-Roulette-start-now-hover.png) no-repeat;
+}
+
+.ROULETTE .confirmation.sorry #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-Roulette-tryAgain-hover.png) no-repeat;
+}
+
+.BLACKJACK .confirmation.thank-you #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-Blackjack-start-now.png) no-repeat;
+}
+.BLACKJACK .confirmation.sorry #cofirmation_Body .cofirmation-status .button {
+  background: url( ../../images/gloss/button-Blackjack-tryAgain.png) no-repeat;
+}
+.BLACKJACK .confirmation.thank-you #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-Blackjack-start-now-hover.png) no-repeat;
+}
+.BLACKJACK .confirmation.sorry #cofirmation_Body .cofirmation-status .button:hover {
+  background: url( ../../images/gloss/button-Blackjack-tryAgain-hover.png) no-repeat;
+}
+
+.noPaymentOptionsAvailable {
+    top: 60px;
+    position: relative;
+    font-size: 16px;
+    color: #575757;
+    left: 50px;
+}
+
+.dialogMask {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+	background-color: black;
+	opacity: 0.2;
+	filter: alpha(opacity = 20);
+}

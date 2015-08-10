@@ -1,0 +1,35 @@
+<style>
+body {
+ 	font-family: Helvetica, Arial, sans-serif;
+ 	font-size: 10pt;
+ 	color: black;
+ 	background-color: white;
+}
+
+.footer {
+ 	color: rgb(120, 120, 120);
+ 	font-size: 8pt;
+}
+</style>
+<p>
+    Hello $!{displayName},
+</p>
+<p>
+    Thanks for chipping in to buy chips at <a href="http://yazino.com/">Yazino</a>.
+</p>
+<p>
+    You paid $!{currencyCode}$!{money}.00 on $!{date} with card $!{cardNumberObscured} and now have $!{chips} more chips in your account. If you have any questions, please email us with your unique ID $!{internalTransactionId} at contact@yazino.com.
+</p>
+<p>
+    Did you know you can also boost your chip balance by inviting your friends to play too? For each friend you invite who plays, you'll receive 5,000 bonus chips!
+</p>
+<p>
+    We'll see you soon at Yazino.
+</p>
+<p>
+	Regards,<br>
+    Your Yazino Team
+</p>
+<p class="footer">
+    &copy; 2012 Yazino, Island House, Grande Rue, St Martins, Guernsey, GY4 6RU
+</p>

@@ -1,0 +1,1 @@
+mysql -uroot bi -e "select player_id from purchase where ts_purchase >= curdate() - interval 6 month group by 1 having sum(amount_gbp) > 100 and max(ts_purchase) < curdate() - interval 7 day and max(ts_purchase) > curdate() - interval 90 day" > /tmp/inactive_whales.csv

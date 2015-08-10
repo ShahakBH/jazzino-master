@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# A wrapper for GS-Agent to ensure configuration is available
+
+CONFIG_FILE="/etc/profile.d/gs.sh"
+if [ -f "$CONFIG_FILE" ]; then
+    source "$CONFIG_FILE"
+else
+    echo "WARNING: $CONFIG_FILE is not present"
+fi
+
+if [ -z "$GSHOMEDIR" ]; then
+    echo "GSHOMEDIR is not defined; exiting..."
+    exit 1
+fi
+
+"$GSHOMEDIR"/bin/gs-agent.sh $GS_STARTUP_OPTIONS
+exit $?

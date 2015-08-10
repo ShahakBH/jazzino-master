@@ -1,0 +1,56 @@
+{
+	"name": "jrae-centos",
+	"chef_type": "node",
+	"json_class": "Chef::Node",
+	"run_list": [
+		"role[all-in-one]"
+	],
+	"normal": {
+		"environment": "jrae-centos",
+	    "ssh": {
+	        "harden": "false"
+		},
+		"monitoring": {
+			"suppress": true
+		},
+		"security": {
+			"denyhosts": false
+		},
+        "jetty" : {
+            "debug" : true
+        },
+	    "gigaspaces": {
+	    	"gsc_debug" : true,
+	        "java": {
+	            "max_mem": "768m"
+	        },
+	        "gsm_hosts": [
+	            "jrae-centos.london.yazino.com"
+	        ],
+	        "lookup_group": "jrae-centos",
+	        "zones": [
+	            "table",
+	            "account"
+	        ],
+			"host_ip": "jrae-centos.london.yazino.com"
+	    },
+	    "postgresql": {
+    		"password": {
+    			"postgres": "password"
+    		},
+    		"config": {
+    			"listen_addresses": "0.0.0.0"
+    		}
+    	},
+	    "rabbitmq": {
+	        "nodename": "jrae-centos",
+	        "host_entries": [
+	            "127.0.0.1 jrae-centos"
+	        ],
+	        "erlang_cookie": "jrae-centos-maggie",
+	        "vhosts": [
+	            "jrae-centos.london.yazino.com"
+	        ]
+	    }
+	}
+}

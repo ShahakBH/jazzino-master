@@ -1,0 +1,29 @@
+hosts:
+    bank-lobby.london.yazino.com:
+        roles:
+            - lobby
+            - backoffice
+            - content
+            - mobile
+            - loadbalancer
+        params:
+            apache_timestamped: true
+            senet.web.content: https://content.bank.london.yazino.com:8143/web-content-$TIMESTAMP
+            strata.server.lobby.ssl.content: https://content.bank.london.yazino.com:8143/web-content-$TIMESTAMP
+            senet.web.application-content: https://content.bank.london.yazino.com:8143/client-content-$TIMESTAMP
+    bank-rabbit.london.yazino.com:
+        roles:
+            - rabbit
+    bank-gsm.london.yazino.com:
+        roles:
+            - worker
+            - database
+            - datawarehouse
+            - staging
+            - reporting
+    bank-gsc1.london.yazino.com:
+        roles:
+            - gigaspaces
+    bank-gsc2.london.yazino.com:
+        roles:
+            - gigaspaces

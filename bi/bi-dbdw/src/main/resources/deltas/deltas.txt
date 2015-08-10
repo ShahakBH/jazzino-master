@@ -1,0 +1,244 @@
+1 - initial version. Copy of backoffice rpt_ table definitions, rpt extract routines and rpt events
+2 - fully qualified TABLE_INFO in rptExtractDistinctPlayers.
+3 - Ant ReplaceRegExp configured in pom to replace all occurrences of main db place holder
+4 - delta 3 didn't have desired effect of replacing multiple occurrences on one line - now split lines where this happens
+5 - Import of B/O only tables from the game schema
+6 - Move views required by mailstats.sh from adhoc to dw
+7 - Update reporting data extract stored procedures to use new schemas (strataprod and strataproddw)
+8 - Add index on ACCOUNT_SESSION.tsstarted and AUDIT_COMMAND.audit_ts
+9 - Add Ad Tracking table and reporting view
+10 - Partitioning TRANSACTION_LOG, ACCOUNT_SESSION, AUDIT_CLOSED_GAME, AUDIT_CLOSED_GAME_PLAYER and AUDIT_COMMAND
+11 - Fixed bug in 10.sql - correctly insert 'old' data into new partitioned AUDIT_COMMAND table
+12 - Switch Player Purchases view to point to external transactions table on strataproddw
+13 - Stored procedure to manage audit table partitions. Events scheduled to invoke stored proc daily at 10:00 ish
+14 - Remove OLD copies of partitioned tables.
+15 - Added TRANSACTION_TS_MILLIS column to TRANSACTION_LOG table for (synthetic) millisecond precision
+16 - Add indexes on CREATED_TS and UPDATED_TS in INVITATIONS - daily mail stats queries are slow
+17 - New summary tables, CHIP_SUMMARY and LAST_PLAYED, and procs to update them, required by backoffice.
+18 - New account_activity table - populate post release.
+19 - Drop the obsolete procs to populate rpt_invitations
+20 - New extractAccountActivity proc to summarize account activity. New Summary table for distinct players and users
+21 - Fixed issues with extractAccountActivity regarding confusion over account_id in AUDIT_COMMAND being the player_id
+22 - WEB-242 Rename column ACCOUNT_ID to PLAYER_ID to reflect reality in table LAST_PLAYED
+23 - WEB-136 Deschedule unneccessary reporting procedures from strataproddw
+24 - Massive improvement to mailstats unique player and game stats queries
+25 - Add views and stored procedures for the purchases and tournaments export
+26 - Add views and stored procedures for the leaderboard export
+27 - Add views and stored procedures for the game levels export
+28 - Add views and stored procedures for the initial games export
+29 - Add views and stored procedures for the invites export
+30 - WEB-21 alter audit table partition management events to drop partitions older than 30 days
+31 - Marketing data consolidated per currency
+32 - WEB-254 add failure reason col to EXTERNAL_TRANSACTION
+33 - WEB-421 Increase the size of the ACCOUNT_SESSION.REFERER field to cope with Facebook URIs
+34 - Maximiles pre-production fix
+35 - Remove duplicate external transactions for itune payments
+36 - Rerun the external transactions by currency for itunes payments
+37 - Weekly and monthly data consolidation for player activity stats
+38 - WEB-475 Maximiles export queries optimized and moved to views
+39 - WEB-523 Ad tracking consolidated view
+40 - WEB-490 Promotion
+41 - WEB-490 Changed column type PROMOTION_PLAYER_ARCHIVE.PLAYER_ID and regenerated view
+42 - WEB-490 Views PROMOTION and PROMOTION_PLAYER renamed
+43 - WEB-490 Changed column type PROMOTION_PLAYER_ARCHIVE.PLAYER_ID to int(20) and regenerated view
+44 - WEB-490 Changed column type PROMOTION_PLAYER_ARCHIVE.PLAYER_ID to BIGINT(20) and regenerated view - nightmare
+45 - WEB-632 Updated the transaction log to get the correct Zong price
+46 - WEB-837 Changed column PROMOTION_PLAYER_ARCHIVE.PROMO_ID to unsigned
+47 - WEB-515 Game information for invites
+48 - WEB-872 Currency rates persistence table
+49 - WEB-836 Move daily chip award to Operations
+50 - WEB-516 Screen sources for invites
+51 - WEB-840 Operations permissions
+52 - WEB-840 Operations permissions hotfix
+53 - WEB-1123 add promotion type to promotion
+54 - WEB-1122 Create generic promotion details table
+55 - WEB-1122 fix for rubbish sql
+56 - WEB-1110 Progress Bar Status for each Player
+57 - WEB-1122 finally a working version of setting up PROMOTION_CONFIG - a truly bad mess
+58 - WEB 1151 remove content root (senet.web.content) from default images
+59 - WEB-1121 add nullable priority column to PROMOTION_ARCHIVE
+60 - WEB-1174 Platform tracking for logins
+61 - WEB-1223 Platform tracking triggers
+62 - WEB-1186 Platform tracking extensions
+63 - WEB-1311 Limit access by platform
+64 - WEB-1340 Hotfix for the player info table
+65 - WEB-1340 Platforms for daily mails
+66 - Missing description
+67 - WEB-1393 Platform tracking per session
+68 - WEB-1393 Procedure hotfix for delta 67
+69 - Changed payout aggregates so that they use biging for transaction_log_id (instead of int)
+70 - Same change (as 69) for the account activity aggregations
+71 - WEB-1127 - Buy Chip Promotions - add comment field to PLAYER_REWARD_ARCHIVE
+72 - WEB-1538 - Materialized view for the new ad tracking queries
+73 - CHIP_SUMMARY table new update procedure
+74 - Extending the player consolidation tables to hold platform information
+75 - New players and users reports consolidation mode
+76 - WEB-1340 Views for the new daily mails
+77 - WEB-1602 - columns to support control groups for promotions
+78 - WEB-1340 Fix fir the daily buyers stats
+79 -
+80 - WEB-1841 - column on PROMOTION_ARCHIVE to determine which control group function to use
+81 - WEB-1891 ++ Materialized views for reporting
+82 - WEB-1808 New tables to support Promotion Analysis: rpt_promotion_summary and rpt_promotion_transaction
+83 - WEB-1991 Heavy tasks consolidation
+84 - WEB-1924 Maximiles new Welcome mail API-related changes
+85 - WEB-1924 Maximiles new Welcome mail API-related changes : fix for the previous one
+86 - WEB-2072 Extend Backoffice Promotion tool to create promotions specifically for iOS apps
+87 - WEB-2072 Provide default values for TARGET_CLIENTS for pre-existing PROMOTION_ARCHIVE records
+88 - WEB-2091 Fix for environment-dependent integration test
+89 - WEB-1924 Fix for a possible slow triggers execution on test platforms
+90 - WEB-2072 Changes to pre-existing PROMOTION_ARCHIVE records
+91 - WEB-2201 Maximiles reflex flow integration
+92 - WEB-2099 New tables to support iOS Push notifications
+93 - WEB-2201 Update for the fourth-day reflex campaign
+94 - Decreased Innodb_rows_read by optimizing a periodic query
+96 - Decreased Innodb_rows_read by really optimizing a periodic query :)
+96 - WEB-2064 - Copy of the old RPX provider's name to the new field
+97 - WEB-1923 - Add PLAYER_COUNT to PROMOTION_ARCHIVE
+98 - Creating new tables to replace usage on strataprod
+99 - Migrating data from strataprod to new tables on strataproddw
+100 - More migrations for new tables in strataproddw
+101 - WEB-2216 iOS Push notifications - column name change and add unique constraint
+102 - WEB-2270 New stored procedure to feed Promotion Analysis reports
+103 - Recent registrations logging optimization
+104 - Replace references to strataprod in extractAccountActivity proc
+105 - Updates to views to use DW tables rather than strataprod
+106 - Updates to stored procedures to use DW tables rather than strataprod
+107 - Temporary fix to avoid performance problems with PLAYER view.
+108 - Remove LEVEL from PLAYER view
+109 - WEB-2347 - Add VERIFICATION_IDENTIFIER to LOBBY_USER
+110 - Removed GROUP BY from strataproddw PLAYER view
+111 - Added index on PLAYER_DEFINITION.ACCOUNT_ID and removed unnecessary join on LOBBY_USER in account_inserts proc
+112 - Creating a few missing indexes on PLAYER_DEFINITION and LOBBY_USER
+113 - Removed order by from the trigger on ACCOUNT_SESSION in order not to avoid temp table & filesort
+114 - WEB-2372 Retrospective fix to LOBBY_USER.BLOCKED values being incorrect on dbdw.
+115 - Added on Nikit's instruction.  I'm told there were case sensitivity issues with an old table name.
+116 - Added index on external_id to LOBBY_USER
+117 - WEB-2138 New tables and stored procedures for Chip-based Promotion Report
+118 - WEB-2138 Updated version of stored procedure to feed Promotion Analysis reports (originally created in delta 102). Now uses new isMemberOfControlGroup function.
+119 - WEB-2352 Mailing campaigns reporting tables
+120 - WEB-2556 Confirmed players monitoring
+121 - WEB-2556 Modified Confirmed players monitoring
+122 - Registration info by (platform, source, game)
+123 - WEB-2556 - added stored procedure for persistent storage
+124 - WEB-2524 ignore promotion uptake prior to start of promotion; performance enhancements (no longer reprocesses archived promotions)
+125 - WEB-2541 show total revenue rather than total chips issued
+126 - WEB-2564 Activity views and real-time system monitoring
+127 - cleanup (dropped unused tables)
+128 - removed unsigned from account_id in PLAYER_GAME_SESSION and PLAYER_CLOSED_SESSION to make tests pass
+129 -
+130 -
+131 - WEB-2564 Fix for the orphan tables case
+132 - Updated trigger for the platform tracking rectification
+133 - WEB-2796 Fix the event recreation MySql problem
+134 - Invites consolidation
+135 - Possibility of null sources for the invites tracking
+136 - Default values for source counters
+137 - WEB-2843 - add REGISTRATION_PLATFORM to the player profile
+138 - WEB-2843 - copy REGISTRATION_PLATFORM to LOBBY_USER
+139 - Fixed inferRevenueFromDefaultChips so that it supports iOs chip packages
+140 - WEB-2829 Tables to support Facebook application requests
+141 - Counting invites, players and games
+142 - Removed PLAYER_GAME_SESSION
+143 - WEB-2796 restoring the event after MySQL has silently killed it
+144 - Replace AD_TRACKING with view using referrer from LOBBY_USER + updating triggers
+145 - Cleanup of unused views
+146 - web-2802 new nullable col APP_REQUEST.SCHEDULE_DT to support scheduling of sending app to user requests
+147 - web-2829 add index on APP_REQUEST_TARGET.EXTERNAL_ID
+148 - web-2916 new col APP_REQUEST.EXPIRY_DT
+149 - WEB-2888 new column EXTERNAL_REF in APP_REQUEST_TARGET
+150 - Verification status update
+151 - Session sources table added
+152 - Variable access problem fixed in account_inserts procedure
+153 - Table for the Facebook sources
+154 - Automated progressive reminder app requests
+155 - web-2989 rename transaction cashier from TAPJOY_MARKETPLACE to TAPJOY_IOS
+156 -
+157 - removed ON UPDATE CURRENT_TIMESTAMP from EXTERNAL_TRANSACTION.message_timestamp
+158 - delta for PROVIDER_REJECTED_EMAIL_ADDRESSES web-3027
+159 - delta for create of task schedule table web-3029
+160 - delta for web-3068
+161 - delta for web-3068
+162 - delta for web-3068
+163 - delta for web-3068
+164 - revenue reports consolidation per month
+165 - platform update for the players by platform trigger
+166 - newer, better, shinier fillRegistrationByDateSourceAndPlatform (AND now even in version control)
+167 - web-3065 edited mm_external_transactions view and added an index on the last_played column
+168 - scheduled recreate_promotion_reports
+169 - added indexes in order to speed-up getAvailableCountries and getAvailablePaymentMethods; made extractLastPlayed event more often
+170 - web-3921 - Persist Maximiles Registration Status - new table CRM_PLAYER_STATUS
+171 - web-3275 updated users permisions with current platform list
+172 - Preparation for WEB-3272 - column APP_REQUEST.TARGET_CLIENT renamed to CHANNEL_TYPE; some CHANNEL_TYPE values renamed for clarity
+173 - WEB-3275 - update 'platform' columns in tables to only use: WEB, IOS, ANDROID or FACEBOOK_CANVAS
+174 - dropped bi_session_sources (cleanup)
+175 - WEB 3275 added missing tables that nikit created in production but no where else - modified triggers/procs to use new platform
+176 - WEB-2848 Drop unused IOS_PUSH_NOTIFICATION... tables, redundant since WEB-2829
+177 - column width of rpt_registrations_by_date_source_and_platform.registration_platform increased
+178 - changed setup_progressive_bonus_reminder_app_request so that it uses correct column name
+179 - WEB-3436 procedure and event to delete app requests over 2 months old, runs at 10:00 am daily
+180 - WEB-3436 fixed event scheduled time - first attempt ran proc 10 hours after last execution rather that at 10 each day.
+181 - WEB-3436 dropped procedure and event for deleting app requests - took an age on bmc and chewed up loads of cpu. Think of another way.
+182 - WEB-3426 added delete app request proc and event after tidying up data in prod
+183 - WEB-3435 split player registration referral from lobby_user its own table and changed LOBBY_USER to be a view
+184 - WEB-3426 bug in selecting app request targets to deleted where requests with null expiry date were never selected.
+185 - Google Cloud Messaging for Android.
+186 - Removed promo uptake reports
+187 - More promo uptake cleanup
+188 - Tracking
+189 - WEB-3597 - Android support for automated progressive reminder app requests
+190 - Fix for delta 189
+191 - Fix for delta 190
+192 - WEB-3598 procedure for associate_marketing_group_with_app_request
+193 - Defaulting country to geo location country if user's country not specified
+194 - WEB-3798 delay deleting targets until 7 days after campaign is sent where expiry date is unset
+195 - added index on sent column on app_request for web-359
+196 - WEB-3842 removed views that are no longer used mm_tournaments_log, mm_last_levels
+197 - WEB-3868 tables need for automated campaigns from marketing
+198 - WEB-3868 tables need for automated campaigns from marketing
+199 - WEB-3868 CAMPAIGN_SCHEDULE table
+200 - WEB-3868 worker_lock
+201 - WEB-3868 Campaign Content table
+202 - WEB-3868 DB Setup for Automated Progressive Bonus Campaigns.
+203 - WEB-3868 Turn off automated progressive daily bonus evt since it has been migrated out of strataproddw
+204 - WEB-4174 remove legacy Maximiles objects
+205 - updated segement selection query for automated notifications.
+206 - WEB-4145 adding column run_hours to campaign_definition.
+207 - WEB-4201 added optional end time to campaign scheduling.
+208 - WEB-4205 adding table campaign_channel so campaigns can be linked to 0 or more channels.
+209 - WEB-4205 Campaign_Schedule endtime is now a DateTime instead of Timestamp
+210 - WEB-4173 - drop MAXIMILES_ID (aka USER_ID, aka PLAYER_PROFILE_ID)
+211 - WEB-4173 - drop MAXIMILES_ID (aka USER_ID, aka PLAYER_PROFILE_ID): the revenge
+212 - WEB-4244 - clean up of old auth tables for control-centre
+213 - WEB-4211 adding hasPromo to CAMPAIGN_DEFINITION table.
+214 - WEB-4211 Promo Definition table
+215 - WEB-4211 Promo config table
+216 - WEB-4211 PROMOTION_CHIPS_PERCENTAGE table added
+217 - WEB-4261 - fix indexing on rpt_recent_registrations
+217 - WEB-4211 Add unique index on PROMOTION_CHIPS_PERCENTAGE
+219 - WEB-4280 renamed PROMOTION_CONFIG table to CAMPAIGN_PROMOTION_CONFIG and added key
+220 - WEB-4280 DROP TABLE PROMOTION_CONFIG
+221 - WEB-4274 - add forex, payment option details to external transactions
+222 - first cut of adding dailyAward promotions to campaign...
+223 - WEB-4323 - adding progressive bonus amount to segment selection
+224 - WEB-4273 - support for guest play
+225 - WEB-4326 - increase exchange rate precision to match WorldPay
+227 - inserting Email Vision into channel types
+229 - Jraes Delta
+230 - web-4180 Delta for CAMPAIGN_TARGETS
+231 - WEB-4181 added DISPLAY_NAME to segment selection
+232 - WEB-4374
+233 - Fix invalid view PLAYER_PURCHASES
+236 - rolling back Campaign Definition for gifting since it is spamming meail vision from all of our environments.
+237 - web-4355 removes email from all the campaigns so they can be set up again with Template Ids
+238 - web-4560 adds a messaging_device_registration table to store amazon ids
+239 - web-4560 amazon ids are very long so changing varchar field to be text
+240 - WEB-4578 - remove audit tables that now live in reporting schema
+241 - WEB-4593 - added Amazon Device Messaging to channel types table
+242 - WEB-4579 - Clean up more reporting tables
+243 - WEB-4605 add created timestamp to WORKER_LOCK to enable nagios checks
+244 -
+245 - WEB-4579 - Clean up obsolete event tables
+245 - WEB-4579 - Clean up obsolete event tables that exist only on prod
+
+247 - WEB-4840 - campaign for sending bonuses on lockout expiry

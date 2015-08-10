@@ -1,0 +1,107 @@
+#set($pageTitle = "Promotions")
+<script>
+    $(document).ready(function() {
+        $("#promotions").tablesorter({
+            headers: {
+                #if($searchForm.promotionType == "DAILY_AWARD")
+                    // define columns 8-11 as non-sortable (is zero-based)
+                    7: { sorter: false },
+                    8: { sorter: false },
+                    9: { sorter: false },
+                    10: { sorter: false }
+                #else
+                    // define columns 8-9 as non-sortable (is zero-based)
+                    5: { sorter: false },
+                    6: { sorter: false },
+                    7: { sorter: false },
+                    8: { sorter: false }
+                #end
+            }
+        });
+    });
+</script>
+#macro (addTypeSpecficCells $cellType $promotionType, $promotion)
+    #if($promotionType == "DAILY_AWARD")
+        #if ($cellType == "header")
+            <th>Award Chips</th>
+            <th>Max Awards</th>
+        #elseif ($cellType=="value")
+            <td>$!{promotion.configuration.getConfigurationValueAsInteger("reward.chips")}</td>
+            <td>$!{promotion.configuration.getConfigurationValueAsInteger("max.rewards")}</td>
+        #elseif ($cellType=="empty")
+            <td></td>
+            <td></td>
+        #end
+    #end
+#end
+#set($live=($searchForm.searchType.displayName=="Live"))
+<article class="main">
+    #parse("promotion/partials/searchOptions.vm")
+    <h1>Promotions List ($searchForm.promotionType.displayName - $searchForm.searchType.displayName)</h1>
+    <div class="list">
+        <table id="promotions" class="tablesorter">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Promotion Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Priority</th>
+                #addTypeSpecficCells("header", $searchForm.promotionType, "")
+                <th></th>
+                #if($live)
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                #end
+            </tr>
+        </thead>
+        <tbody>
+            #set ($rowCount = 0)
+
+            #foreach($promotion in $promotions)
+                #set($rowCount=$rowCount+1)
+                <tr style="height:25px" class=#if($rowCount % 2 == 0)  "odd #else "even #end
+                        #if($promotion.expired)
+                            expired"
+                        #else
+                            #if($promotion.inFuture)
+                                future"
+                            #else
+                                active"
+                            #end
+                        #end>
+
+                    <td>$promotion.id</td>
+                    <td>$promotion.name</td>
+                    <td>${dateTool.format('yyyy/MM/dd - HH:mm',$promotion.startDate.toDate())}</td>
+                    <td>${dateTool.format('yyyy/MM/dd - HH:mm',$promotion.endDate.toDate())}</td>
+                    <td class="priority">
+                        $!promotion.priority
+                    </td>
+                    #addTypeSpecficCells("value", $searchForm.promotionType, $promotion)
+                    <td class="noColor">
+                        #if($promotion.allPlayers)
+                            All Players
+                        #else
+                            <a href="showPlayers.?searchType=$searchForm.searchType&promotionId=$promotion.id">
+                                Show #if($promotion.playerCount >= 0)$promotion.playerCount#end Players
+                            </a>
+                        #end
+                    </td>
+                #if($live)
+                    <td><a href="edit?searchType=$searchForm.searchType&promotionId=$promotion.id">Edit</a></td>
+                    <td><a href="copy?promotionId=$promotion.id">Copy</a></td>
+                    <td>
+                    #if($promotion.allPlayers)
+                        &nbsp;
+                    #else
+                        <a href="addPlayers?searchType=$searchForm.searchType&promotionId=$promotion.id">Add Players</a>
+                    #end
+                    </td>
+                #end
+                </tr>
+            #end
+        </tbody>
+     </table>
+</div>

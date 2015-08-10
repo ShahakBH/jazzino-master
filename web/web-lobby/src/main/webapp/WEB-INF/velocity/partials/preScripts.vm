@@ -1,0 +1,25 @@
+<!--[if lt IE 9]>
+<script type="text/javascript" src="$!assetUrl/javascript/css3-mediaqueries.js"></script>
+<script>
+    (function() {
+        var html5elements = "address|article|aside|audio|canvas|command|datalist|details|dialog|figure|figcaption|footer|header|hgroup|keygen|mark|meter|menu|nav|progress|ruby|section|time|video".split('|');
+        for (var i = 0; i < html5elements.length; i++) {
+            document.createElement(html5elements[i]);
+        }
+    })();
+</script>
+<![endif]-->
+
+
+#if ($development)
+    <script type="text/javascript" src="$!assetUrl/javascript/yazino-core.js"></script>
+    <script type="text/javascript" src="${assetUrl}/javascript/browserDetect.js"></script>
+#else
+    <script type="text/javascript" src="$!assetUrl/javascript/yazino-core.min.js"></script>
+#end
+#parse("partials/configuration.vm")
+
+## Don't put new code in here! It should be done in glossScripts.
+
+<script src="${assetUrl}/javascript/jquery-1.8.3.min.js"></script>
+<script src="${assetUrl}/javascript/swfobject.js"></script>

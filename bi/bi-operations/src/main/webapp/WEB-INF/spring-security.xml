@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="ignoreResourceNotFound" value="true"/>
+        <beans:property name="searchSystemEnvironment" value="true"/>
+        <beans:property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+        <beans:property name="locations">
+            <beans:list>
+                <beans:value>classpath*:environment.properties</beans:value>
+                <beans:value>file:/etc/senet/environment.properties</beans:value>
+                <beans:value>file:/etc/senet/environment.generated.properties</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:import resource="classpath:/META-INF/spring/jdbc-authentication.xml"/>
+
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/images/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+
+    <http auto-config="true">
+        <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/login/error" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/player/search*" access="ROLE_SUPPORT,ROLE_SUPPORT_MANAGER"/>
+        <intercept-url pattern="/player/dashboard*" access="ROLE_SUPPORT,ROLE_SUPPORT_MANAGER"/>
+        <intercept-url pattern="/list*" access="ROLE_MARKETING"/>
+        <intercept-url pattern="/report/paymentTransaction*" access="ROLE_SUPPORT,ROLE_SUPPORT_MANAGER"/>
+        <intercept-url pattern="/report/adTracking*" access="ROLE_MANAGEMENT,ROLE_AD_TRACKING"/>
+        <intercept-url pattern="/report/payment*" access="ROLE_MANAGEMENT"/>
+        <intercept-url pattern="/userAdmin*" access="ROLE_ROOT"/>
+        <intercept-url pattern="/adTrackingReport*"
+                       access="ROLE_ROOT,ROLE_MARKETING,ROLE_MANAGEMENT,ROLE_SUPPORT,ROLE_AD_TRACKING"/>
+        <intercept-url pattern="/**"
+                       access="ROLE_ROOT,ROLE_MARKETING,ROLE_MANAGEMENT,ROLE_SUPPORT,ROLE_AD_TRACKING, ROLE_INGAMING_TRACKING"/>
+
+        <form-login login-page="/login"
+                    default-target-url="/player/search"
+                    authentication-failure-url="/login/error"
+                    login-processing-url="/security/login"/>
+        <logout logout-url="/logout"
+                logout-success-url="/login"/>
+
+        <remember-me key="yazino-bi-operations"/>
+
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="sha"/>
+            <jdbc-user-service data-source-ref="authDataSource"
+                               users-by-username-query="SELECT USERNAME,PASSWORD,1 FROM OPERATIONS_USER WHERE USERNAME = ?"
+                               authorities-by-username-query="SELECT USERNAME,ROLE FROM OPERATIONS_USER_ROLE WHERE USERNAME = ?"/>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

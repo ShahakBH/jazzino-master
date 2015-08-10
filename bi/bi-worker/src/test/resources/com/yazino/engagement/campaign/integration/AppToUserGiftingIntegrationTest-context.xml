@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-legacy-datawarehouse.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-external-datawarehouse.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-marketing.xml"/>
+    <import resource="classpath:META-INF/spring/shared-context.xml"/>
+
+    <bean id="auditDeliveryService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.yazino.engagement.campaign.reporting.application.AuditDeliveryService"/>
+    </bean>
+
+    <bean id="androidPushNotificationPublisher" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.yazino.engagement.campaign.publishers.AndroidPushNotificationPublisher"/>
+    </bean>
+
+    <context:component-scan base-package="com.yazino.bi.campaign"/>
+    <context:component-scan base-package="com.yazino.engagement.campaign.dao"/>
+    <context:component-scan base-package="com.yazino.engagement.campaign.application"/>
+    <context:component-scan base-package="com.yazino.promotions"/>
+
+    <bean class="strata.server.operations.promotion.service.PaymentOptionsToChipPackageTransformer"/>
+    <bean class="com.yazino.bi.payment.persistence.JDBCPaymentOptionDAO"/>
+    <bean id="campaignRunConsumer" class="com.yazino.engagement.campaign.consumers.CampaignRunConsumer"/>
+
+    <bean class="com.yazino.engagement.campaign.configuration.CampaignDeliveryQueueConfiguration"/>
+
+    <bean class="com.yazino.engagement.campaign.configuration.CampaignRunQueueConfiguration"/>
+
+    <bean id="campaignDeliveryConsumer" class="com.yazino.engagement.campaign.consumers.CampaignDeliveryConsumer">
+        <constructor-arg ref="campaignDeliveryAdapters"/>
+    </bean>
+
+    <util:list id="campaignDeliveryAdapters"
+               value-type="com.yazino.engagement.campaign.application.ChannelCampaignDeliveryAdapter">
+        <ref bean="androidCampaignDeliveryAdapter"/>
+    </util:list>
+
+    <bean id="androidCampaignDeliveryAdapter"
+          class="com.yazino.engagement.campaign.application.CampaignDeliveryAdapter">
+        <constructor-arg index="0" ref="campaignNotificationDao"/>
+        <constructor-arg index="1" ref="mobileDeviceCampaignDao"/>
+        <constructor-arg index="2" ref="gameTypeRepository"/>
+        <constructor-arg index="3" ref="campaignContentServiceImpl"/>
+        <constructor-arg index="4" ref="androidPushNotificationPublisher"/>
+        <constructor-arg index="5" type="com.yazino.engagement.ChannelType" value="GOOGLE_CLOUD_MESSAGING_FOR_ANDROID"/>
+    </bean>
+
+    <bean id="mobileDeviceCampaignDao" class="com.yazino.engagement.mobile.MobileDeviceCampaignDao"/>
+
+    <context:component-scan base-package="com.yazino.platform.messaging.publisher"/>
+
+    <bean id="remotingGiftingPromotionService"
+          class="strata.server.lobby.promotion.service.RemotingGiftingPromotionService"/>
+
+    <bean class="com.yazino.engagement.mobile.MobileDeviceDao"/>
+</beans>

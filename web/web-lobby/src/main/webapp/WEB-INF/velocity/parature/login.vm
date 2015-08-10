@@ -1,0 +1,29 @@
+#* @vtlvariable name="loginMessage" type="java.lang.String" *#
+<html>
+<head>
+
+</head>
+<body>
+<div id="login-area">
+	<h3 class="terms-head big-red-head">LOGIN TO YAZINO</h3>
+
+	<div id="login-body" style="position:relative;">
+		<div>
+			#parse("parature/partials/loginForm.vm")
+		</div>
+
+		<div id="loginMessageContainer" style="z-index:900;position:absolute;padding:0;margin:0;height:35px;width:800px;top:-5px;left:28px">
+			<h1 style="position:static">$!{loginMessage}</h1>
+		</div>
+
+		<div id="terms-bottom"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$('#loginMessageContainer').css('zIndex', 900);
+	});
+</script>
+</body>
+</html>

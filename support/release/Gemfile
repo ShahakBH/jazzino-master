@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+
+gem "rainbow", ">=1.0.3"
+gem "aws-sdk", ">=1.32.0"
+gem "rest-client", ">=1.6.7"

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="externalDwDataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="jdbcUrl" value="${data-warehouse.url}"/>
+        <property name="user" value="${data-warehouse.admin.user}"/>
+        <property name="overrideDefaultUser" value="${data-warehouse.admin.user}"/>
+        <property name="password" value="${data-warehouse.admin.password}"/>
+        <property name="overrideDefaultPassword" value="${data-warehouse.admin.password}"/>
+        <property name="minPoolSize" value="${data-warehouse.pool.min}"/>
+        <property name="maxPoolSize" value="${data-warehouse.pool.max}"/>
+        <!-- Keep Idle connections for 1 minute apparently MySQL is quicker to start up connections -->
+        <property name="maxIdleTime" value="600"/>
+        <!-- Keep an active connection for a max of 4 hours -->
+        <property name="maxConnectionAge" value="${data-warehouse.connections.max-age}"/>
+        <!-- Test the idle connections every 10 minutes (Yes the idle timeout is 60 but we have a min pool size.)-->
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <property name="preferredTestQuery" value="SELECT 1 AS ONE"/>
+        <property name="checkoutTimeout" value="5000"/>
+        <property name="unreturnedConnectionTimeout" value="${data-warehouse.connections.unreturned-timeout}"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
+    </bean>
+
+    <bean id="externalDwJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="externalDwDataSource"/>
+    </bean>
+
+    <bean id="externalDwNamedJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="externalDwDataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="externalDwTransactionManager"/>
+
+    <bean id="externalDwTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="externalDwDataSource"/>
+    </bean>
+
+</beans>

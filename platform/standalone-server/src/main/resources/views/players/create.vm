@@ -1,0 +1,25 @@
+#parse("includes/header.vm")
+<section id="content">
+    <div class="create">
+        <h2>Create new player</h2>
+
+        <form method="post" action="${request.contextPath}/players/create">
+            #if($return)
+                <input type="hidden" name="return" value="${return}"/>
+            #end
+
+            #set($quote = '"')
+
+            <fieldset>
+                <legend>Details</legend>
+
+                <label for="gameType">Name:</label>
+                <input type="text" name="name"/>
+
+            </fieldset>
+
+            <input type="submit" value="Submit"/>
+
+        </form>
+    </div>
+</section>

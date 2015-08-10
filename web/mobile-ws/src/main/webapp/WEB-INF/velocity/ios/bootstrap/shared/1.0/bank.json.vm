@@ -1,0 +1,38 @@
+{
+    "minVersion": 1.0,
+    "lightstreamer": {
+        "host": "bank.london.yazino.com",
+        "port": "8090"
+    },
+    "lobby": {
+        "host": "bank.london.yazino.com"
+    },
+    "facebook": {
+        "FBAppId": "10150148274485623",
+        "FBGameType": "SLOTS"
+    },
+    "Blackjack": {
+        "minVersion": ${ios.getMinimumVersions().get("blackjack")},
+        "latestVersion": ${ios.getLatestVersions().get("blackjack")},
+        "gameType":"BLACKJACK",
+        "FBAppId": "111940718892814"
+     },
+    "HighStakes": {
+        "minVersion": ${ios.getMinimumVersions().get("highstakes")},
+        "latestVersion": ${ios.getLatestVersions().get("highstakes")},
+        "gameType":"HIGH_STAKES",
+        "FBAppId": "250555798288534"
+     },
+    "YazinoApp": {
+        "minVersion": ${ios.getMinimumVersions().get("yazinoapp")},
+        "latestVersion": ${ios.getLatestVersions().get("yazinoapp")},
+        "gameType":"SLOTS",
+        "FBAppId": "372492502817124"
+    },
+    "WheelDeal": {
+        "minVersion": ${ios.getMinimumVersions().get("wheeldeal")},
+        "latestVersion": ${ios.getLatestVersions().get("wheeldeal")},
+        "gameType":"SLOTS",
+        "FBAppId": "372492502817124"
+    }
+}

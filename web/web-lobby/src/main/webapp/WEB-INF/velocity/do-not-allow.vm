@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body style="margin:0px; padding:0;">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="756" bgcolor="#6f309e">
+    <tbody>
+    <tr>
+        <td colspan="3" height="390" style="line-height:0px;">
+            <div><img alt="You are safe with Yazino" src="$!assetUrl/images/do-not-allow/1.jpg"/></div>
+        </td>
+    </tr>
+    <tr>
+        <td width="370" style="line-height:0px;">
+            <div><img alt="" src="$!assetUrl/images/do-not-allow/glow.jpg"/></div>
+        </td>
+        <td colspan="2" height="26" width="386" valign="top">
+            <font face="Helvetica, Arial, sans-serif" size="3" color="#ffffff" style="font-weight:bold;">
+                We access only your basic info
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="8" valign="top">
+            <div align="center" class="fb-like-box" data-href="https://www.facebook.com/Yazino" data-width="245"
+                 data-show-faces="true" data-border-color="#a7a9ac" data-stream="false" data-header="false"
+                 style="margin-left: 60px; background-color: white;"></div>
+        </td>
+        <td valign="top" width="60" style="line-height:0px;"><img alt="" src="$!assetUrl/images/do-not-allow/facebook-icon.png"/></td>
+        <td valign="top" style="line-height:16px;">
+            <font face="Helvetica, Arial, sans-serif" size="2" color="#ffffff">
+                Customising your game using basic information<br/>
+                allows you to compete and connect with old<br/>
+                friends and new. Show off your achievements,<br/>
+                boost your leaderboard position and play at<br/>
+                private tables with Yazino.
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" height="16" style="line-height:0px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="2" height="26" valign="top">
+            <font face="Helvetica, Arial, sans-serif" size="3" color="#ffffff" style="font-weight:bold;">
+                We send carefully selected emails
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="60" style="line-height:0px;"><img alt="" src="$!assetUrl/images/do-not-allow/moneymail-icon.png"/></td>
+        <td valign="top" style="line-height:16px;">
+            <font face="Helvetica, Arial, sans-serif" size="2" color="#ffffff">
+                Be the first to receive special bonuses, insider<br/>
+                tips and exclusive information that will give you the<br/>
+                upper hand in the games. Bolt to the boards, rush<br/>
+                to the reels or take your seat at a table now.<br/>
+            </font>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" height="20" style="line-height:0px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="left">
+            <div><a href="/fb/$!gameType"><img border="0" alt="Let Me Play!" src="$!assetUrl/images/do-not-allow/button-play.png"/></a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" height="10" style="line-height:0px;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <font face="Helvetica, Arial, sans-serif" size="1" color="#ffffff">
+                Remember, you can amend your email preferences at any time.<br/>
+            </font>
+            <a href="/legal/termsOfService" style="text-decoration:underline; color:#6e458d;"><font
+                    face="Helvetica, Arial, sans-serif" size="1" color="#ffffff">Click here for terms of service.</font></a>&nbsp;<a
+                href="/legal/privacy" style="text-decoration:underline; color:#6e458d;"><font
+                face="Helvetica, Arial, sans-serif" size="1" color="#ffffff">See our privacy policy.</font></a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" height="80">&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

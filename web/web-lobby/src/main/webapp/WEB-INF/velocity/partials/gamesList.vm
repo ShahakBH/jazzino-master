@@ -1,0 +1,39 @@
+#* @vtlvariable name="systemMessage" type="java.lang.String" *#
+#* @vtlvariable name="assetUrl" type="java.lang.String" *#
+#* @vtlvariable name="gameConfigurations" type="java.util.Collection" *#
+#* @vtlvariable name="gameConfiguration" type="com.yazino.platform.table.GameConfiguration" *#
+#if($ignoreGameType || !$lobbySession )
+    #set($lobbyGameType = "")
+#else
+    #set($lobbyGameType = $gameType)
+#end
+
+<nav class="games">
+    <ul>
+        <li class="logo">
+            <h1>
+                #if (!$!canvas)<a href="/" title="Return to the Home Page">#end
+                <img src="$!{assetUrl}/images/top-bar/logo.png" alt="Yazino: Let&rsquo;s Play!" height="46" width="138">
+                #if (!$!canvas)</a>#end
+            </h1>
+        </li>
+        #foreach ($gameConfiguration in $gameConfigurations)
+            #set ($gameId = $gameConfiguration.gameId)
+            #set ($displayName = $gameConfiguration.displayName)
+            #set ($shortName = $gameConfiguration.shortName)
+            #set ($hidden = ($gameConfiguration.getProperty("hidden") == "true"))
+            #if (!$hidden && (!$canvas || $lobbyGameType == $gameId))
+                #set($gameUsesFlashLobby = ${gameConfiguration.getProperty('usesFlashLobby')} == 'true')
+            <li class="color-$gameId $gameId #if ($gameId == $lobbyGameType)selected#end">
+                <a title="Play $displayName" href="/$shortName" class="gameFeatureLink #if($gameUsesFlashLobby)flashLobby#end">$displayName</a>
+            </li>
+            #end
+        #end
+        #if ($!canvas)
+            <li class="appAdverts advert $!lobbyGameType">
+                #parse("partials/canvas/gamesList_advert_${lobbyGameType}.vm")
+            </li>
+        #end
+    </ul>
+    <div class="clear"></div>
+</nav>

@@ -1,0 +1,4 @@
+hosts:
+    jshiell-centos.london.yazino.com:
+        roles:
+            - all

@@ -1,0 +1,146 @@
+## add context to relative urls
+#macro (showImageUrl $imageUrl)
+    #if ($imageUrl.indexOf("http") == 0)
+        $imageUrl
+    #else
+        ${assetUrl}/$imageUrl
+    #end
+#end
+#springFormHiddenInput("promotionForm.mainImage.imageUrl" "")
+#springFormHiddenInput("promotionForm.secondaryImage.imageUrl" "")
+###springFormHiddenInput("promotionForm.iosImage.imageUrl" "")
+
+<tr>
+    <td>Main Image:</td>
+    <td>
+        <table>
+            <tr>
+                <td>
+                    <input type="radio" name="mainImage.imageType" value="default" #if($!promotionForm.mainImage.imageType=="default")checked="checked"#end/>
+                    #if($!{defaultMainImageUrl})
+                        Use default image:
+                        <span onmouseover="$('#defaultMainImage').show()" onmouseout="$('#defaultMainImage').hide()">#showImageUrl($defaultMainImageUrl)</span>
+                        <div id="defaultMainImage" style="display:none">
+                            <img src="#showImageUrl(${defaultMainImageUrl})"/>
+                        </div>
+                    #else
+                        Use image returned by Daily Award promotion
+                    #end
+                </td>
+            </tr>
+            #if($!promotionForm.mainImage.imageUrl)
+                <tr>
+                    <td>
+                    <input type="radio" name="mainImage.imageType" value="current" #if($!promotionForm.mainImage.imageType=="current")checked="checked"#end/> Use current image:
+                    <span onmouseover="$('#currentMainImage').show()" onmouseout="$('#currentMainImage').hide()">#showImageUrl(${promotionForm.mainImage.imageUrl})</span>
+                    <div id="currentMainImage" style="display:none">
+                        <img src="#showImageUrl(${promotionForm.mainImage.imageUrl})"/>
+                    </div>
+                    </td>
+                </tr>
+            #end
+            <tr>
+                <td>
+                    <input type="radio" name="mainImage.imageType" value="upload" #if($!promotionForm.mainImage.imageType=="upload")checked="checked"#end/>
+                    Upload image: <input type="file" accept="image" name="mainImage.imageFile" size="200"/>
+                </td>
+            </tr>
+            <div>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>Main Image Link:</td>
+    <td>
+        #springFormInput("promotionForm.mainImage.imageLink" "size='100'")
+        <a href="http://wiki/display/pj/Action+Links+using+yazino+namespace">Special Links are in the wiki</a>
+    </td>
+</tr>
+<tr>
+    <td>Secondary Image:</td>
+    <td>
+        <table>
+            <tr>
+                <td>
+                    <input type="radio" name="secondaryImage.imageType" value="default" #if($!promotionForm.secondaryImage.imageType=="default")checked="checked"#end>
+                    #if($!defaultSecondaryImageUrl)
+                         Use default image:
+                        <span onmouseover="$('#defaultSecImage').show()" onmouseout="$('#defaultSecImage').hide()">#showImageUrl($defaultSecondaryImageUrl)</span>
+                        <div id="defaultSecImage" style="display:none">
+                            <img src="#showImageUrl(${defaultSecondaryImageUrl})">
+                        </div>
+                    #else
+                        Use image returned by Daily Award promotion
+                    #end
+                </td>
+            </tr>
+            #if($!promotionForm.secondaryImage.imageUrl)
+                <tr>
+                    <td>
+                        <input type="radio" name="secondaryImage.imageType" value="current" #if($!promotionForm.secondaryImage.imageType=="current")checked="checked"#end > Use current image:
+                        <span onmouseover="$('#secImage').show()" onmouseout="$('#secImage').hide()">#showImageUrl(${promotionForm.secondaryImage.imageUrl})</span>
+                        <div id="secImage" style="display:none">
+                            <img src="#showImageUrl(${promotionForm.secondaryImage.imageUrl})">
+                        </div>
+                    </td>
+                </tr>
+            #end
+            <tr>
+                <td>
+                    <input type="radio" name="secondaryImage.imageType" value="upload" #if($!promotionForm.secondaryImage.imageType=="upload")checked="checked"#end> Upload image:
+                    <input type="file" accept="image" name="secondaryImage.imageFile" size="200"/>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td>Secondary Image Link:</td>
+    <td>
+        #springFormInput("promotionForm.secondaryImage.imageLink" "size='100' maxlength='255'")
+        <a href="http://wiki/display/pj/Action+Links+using+yazino+namespace">Special Links are in the wiki</a>
+    </td>
+##</tr>
+##
+##<tr>
+##    <td>iOS Image:</td>
+##    <td>
+##    <table>
+##        <tr>
+##            <td>
+##                <input type="radio" name="iosImage.imageType" value="default" #if($!promotionForm.iosImage.imageType=="default")checked="checked"#end/>
+##                #if($!defaultIosImageUrl)
+##                    Use default image:
+##                    <span onmouseover="$('#defaultIosImage').show()" onmouseout="$('#defaultIosImage').hide()">#showImageUrl($defaultIosImageUrl)</span>
+##                    <div id="defaultIosImage" style="display:none">
+##                        <img src="#showImageUrl(${defaultIosImageUrl})"/>
+##                    </div>
+##                #else
+##                    Use image returned by Daily Award promotion
+##                #end
+##            </td>
+##        </tr>
+##        #if($!promotionForm.iosImage.imageUrl)
+##            <tr>
+##                <td>
+##                    <input type="radio" name="iosImage.imageType" value="current" #if($!promotionForm.iosImage.imageType=="current")checked="checked"#end/> Use current image:
+##                    <span onmouseover="$('#iOSMainImage').show();" onmouseout="$('#iOSMainImage').hide()">#showImageUrl(${promotionForm.iosImage.imageUrl})</span>
+##                    <div id="iOSMainImage" style="display:none">
+##                        <img src="#showImageUrl(${promotionForm.iosImage.imageUrl})"/>
+##                    </div>
+##                </td>
+##            </tr>
+##        #end
+##        <tr>
+##            <td>
+##                <input type="radio" name="iosImage.imageType" value="upload" #if($!promotionForm.iosImage.imageType=="upload")checked="checked"#end/>
+##                Upload image: <input type="file" accept="image" name="iosImage.imageFile" size="200"/>
+##            </td>
+##        </tr>
+##    </table>
+##    </td>
+##</tr>
+
+
+
+

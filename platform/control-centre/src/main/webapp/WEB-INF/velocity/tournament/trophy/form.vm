@@ -1,0 +1,58 @@
+<form method="post" action="${request.contextPath}/tournament/trophy/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($trophy.id)
+            #springFormHiddenInput( 'trophy.id' '' )
+        #end
+
+        <label for="name">Name:</label>
+        #springFormInput( 'trophy.name' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'trophy.name' )
+        #springShowErrors( '' 'error' )
+
+        <label for="image">Image URL:</label>
+        #springFormInput( 'trophy.image' "$!formoptions class=${quote}populateImage${quote} required=${quote}required${quote}" )
+        #springBind( 'trophy.image' )
+        #springShowErrors( '' 'error' )
+
+        <img class="populateImage" data-srcformat="$!assetUrl/images/news/%IMAGE%.png"
+             src="$!assetUrl/images/news/${trophy.image}.png" alt="Trophy Image">
+
+        <label for="gameType">Game Type:</label>
+        #if ($readonly)
+        #springFormInput( 'trophy.gameType' "$!formoptions" )
+        #else
+        #springFormSingleSelect( 'trophy.gameType' $gameTypes "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'trophy.gameType' )
+        #springShowErrors( '' 'error' )
+        #end
+
+        <label for="message">Message:</label>
+        #springFormTextarea( 'trophy.message' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'trophy.message' )
+        #springShowErrors( '' 'error' )
+
+        <label for="shortDescription">Short Description:</label>
+        #springFormTextarea( 'trophy.shortDescription' "$!formoptions required=${quote}required${quote}" )
+        #springBind( 'trophy.shortDescription' )
+        #springShowErrors( '' 'error' )
+
+        <label for="cabinetDescription">Cabinet Description:</label>
+        #springFormTextarea( 'trophy.cabinetDescription' "$!formoptions" )
+        #springBind( 'trophy.cabinetDescription' )
+        #springShowErrors( '' 'error' )
+
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>

@@ -1,0 +1,3 @@
+this is a hierarchy with links to all tests that should be passing all the time (executed from continuous build)
+ 
+!contents -R2 -g -p -f -h

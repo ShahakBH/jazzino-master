@@ -1,0 +1,4 @@
+hosts:
+    clapham.london.yazino.com:
+        roles:
+            - all

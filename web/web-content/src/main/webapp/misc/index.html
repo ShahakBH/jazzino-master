@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FB sanity page</title>
+    <script>
+        if (typeof console === 'undefined') {
+            console = {};
+            console.log = function(message) {
+                document.getElementById('result').innerHTML += '<p>' + message + '</p>';
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script>
+
+    var loadFacebook = function(appId) {
+        FB.init({
+            appId      : appId,
+            channelUrl : '//'+window.location.host+window.location.pathname+'channel.html', // Channel File
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+        });
+    };
+
+    var fbLogin = function() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me', function(response) {
+                    console.log('Good to see you, ' + response.name + '.');
+                    FB.logout(function(response) {
+                        console.log('Logged out.');
+                    });
+                });
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        }, {scope: 'email'});
+    };
+
+    var attemptToLogIntoFacebook = function() {
+        var facebookAppIdEle = document.getElementById('facebookAppId');
+        loadFacebook(facebookAppIdEle.value);
+        fbLogin();
+    };
+
+    var attemptToShareLink = function() {
+        var facebookAppIdEle = document.getElementById('facebookAppId');
+        loadFacebook(facebookAppIdEle.value);
+        fbUiLinkShare(window.location.href);
+    };
+
+    var attemptToShareCustomLink = function() {
+        var facebookAppIdEle = document.getElementById('facebookAppId');
+        loadFacebook(facebookAppIdEle.value);
+        var linkShare = document.getElementById('facebookShareUrl');
+        fbUiLinkShare(linkShare.value);
+    };
+
+    var fbUiLinkShare = function(linkHref) {
+        FB.ui(
+                {
+                    method: 'send',
+                    display: 'iframe',
+                    name: 'Facebook Dialogs Link Share Test',
+                    link: linkHref,
+                    caption: 'Reference Documentation',
+                    description: 'This is a quick test to check I can send a user something that looks like a link share (i.e. private table invite)'
+                },
+                function(response) {
+                    if (response && response.post_id) {
+                        console.log('Post was published.');
+                    } else {
+                        console.log('Post was not published.');
+                    }
+                }
+        );
+    };
+</script>
+
+<h1>Facebook JS check</h1>
+
+<fieldset>
+    <label for="facebookAppId">Enter Facebook App Id for environment page is loaded in:</label>
+    <input type="text" name="facebookAppId" id="facebookAppId"/>
+</fieldset>
+<fieldset>
+    <input type="button" value="Check Log into Facebook" onclick="attemptToLogIntoFacebook();"/>
+    <input type="button" value="Check Link sharing works on Facebook" onclick="attemptToShareLink();"/>
+    <input type="button" value="Check Link sharing works on Facebook with link" onclick="attemptToShareCustomLink();"/>
+</fieldset>
+<fieldset>
+    <label for="facebookShareUrl">Enter URL to share:</label>
+    <input type="text" name="facebookShareUrl" id="facebookShareUrl"/>
+</fieldset>
+
+<div id="result">
+
+</div>
+</body>
+</html>

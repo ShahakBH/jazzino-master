@@ -1,0 +1,48 @@
+#* @vtlvariable name="countdowns" type="scala.collection.Map" *#
+
+#set ($location = "Countdown")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/maintenance/countdown/create">Create Countdown</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <h2>Countdowns</h2>
+
+    #if($countdowns && !$countdowns.isEmpty())
+    <table>
+        <thead>
+        <tr>
+            <th>Game Types</th>
+            <th>Until</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+            <tbody>
+            #foreach($countdown in $countdowns.keySet())
+            <tr>
+                <td>$countdown</td>
+                <td>$countdowns.get($countdown).get</td>
+                <td>
+                    <a class="action-named" data-action="Stop" data-id="${countdown}"
+                         data-type="countdown"
+                         href="${request.contextPath}/maintenance/countdown/deactivate/${countdown}"
+                         title="Stop countdown ${countdown}">Stop</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #else
+        <p>No countdowns present.</p>
+    #end
+</section>

@@ -1,0 +1,67 @@
+#set ($location = "Recurring Tournaments")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($definitions.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/tournament/recurring/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/recurring/create">New Recurring Tournament</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Recurring Tournaments</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Variation</th>
+                <th>Description</th>
+                <th>Enabled</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    #paging( $definitions.startPosition $pageSize $definitions.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    #paging( $definitions.startPosition $pageSize $definitions.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($definition in $definitions.data)
+                <tr>
+                    <td>$definition.id</td>
+                    <td>$definition.tournamentName</td>
+                    <td>$variations.get($definition.variationId.underlying())</td>
+                    <td>$definition.tournamentDescription</td>
+                    <td>#if($definition.enabled)Yes#{else}No#{end}</td>
+                    <td>
+                        <a href="${request.contextPath}/tournament/recurring/show/${definition.id}"
+                           title="View recurring tournament ${definition.id}">View</a>
+                        | <a href="${request.contextPath}/tournament/recurring/edit/${definition.id}"
+                             title="Edit recurring tournament ${definition.id}">Edit</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

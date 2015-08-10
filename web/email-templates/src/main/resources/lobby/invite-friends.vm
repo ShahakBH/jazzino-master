@@ -1,0 +1,79 @@
+#set($!title = '$!userName has invited you to play at Yazino')
+#parse('lobby/header.vm')
+
+                <!--start body-->
+                <tr>
+                    <td colspan="4" style="line-height:0px;">
+                        <a href="$!targetUrl"><img border="0" width="700" height="340"
+                                                              alt="main banner"
+                                                              src="http://cdn.yazino.com/email-content/transactional/20120828T110000/invite-friends/main-bannerInviteEmail.jpg"/></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <table width="620" align="center" border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td width="370">
+                                   <font style="font-family:Helvetica, Arial, sans-serif; font-size: 18px;"
+                                            face="Helvetica Arial" size="5">
+                                        <b><font color="#E72212" style="color: #E72212;">READY FOR SOME <font color="#E87100" style="color: #E87100;">FUN?</font></font></b></font>
+                                </td>
+                                <td width="250" align="right">
+                                    <a href="$!targetUrl"><img src="http://cdn.yazino.com/email-content/transactional/20120828T110000/invite-friends/accept-and-play-btn.jpg"
+                                                                          alt="main CTA" width="310"
+                                                                          height="50"/></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="21">
+                    </td>
+                </tr>
+
+                <!-- START OF ARTICLE 1 -->
+
+                <tr>
+                    <td></td>
+                    <td colspan="2" valign="middle">
+                        <!--<p><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"-->
+                        <!--face="Helvetica Arial" color="#707070" size="3"> Hi %PRENOM%, </font></p>-->
+                        <p><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                 face="Helvetica Arial" color="#707070" size="3">$!userName wants
+                            you to come and play! Enjoy live social casino games for free and play with all your buddies.</font></p>
+                        <p><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                 face="Helvetica Arial" color="#707070" size="3">Pick a game and go
+                            <a href="$!targetUrl" style="color:#E72020">play now!</a></font></p>
+
+                        <ul>
+                            <li><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                      face="Helvetica Arial" color="#707070" size="3">
+                                Rush to the slots reels to build your bonus bank and unlock a <strong>Wheel Deal</strong></font></li>
+                            <li><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                      face="Helvetica Arial" color="#707070" size="3">
+                                Triumph in style in the glamorous world of <strong>High Stakes slots</strong></font></li>
+                            <li><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                      face="Helvetica Arial" color="#707070" size="3">
+                                Get a fantastic flush or join a tournament in <strong>Texas Hold&rsquo;em</strong></font></li>
+                            <li><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                      face="Helvetica Arial" color="#707070" size="3">
+                                Beat your buddies and get the better of the dealer in <strong>Blackjack</strong></font></li>
+                            <li><font style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;"
+                                      face="Helvetica Arial" color="#707070" size="3">
+                                Give the wheel a whirl in <strong>Roulette</strong></font></li>
+                        </ul>
+
+                        <br/>
+
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+            #parse('lobby/footer.vm')
+

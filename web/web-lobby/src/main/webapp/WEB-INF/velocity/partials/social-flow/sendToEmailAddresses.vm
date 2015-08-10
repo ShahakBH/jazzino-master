@@ -1,0 +1,24 @@
+<article class="sendEmails feature">
+    <div>
+        <header>
+            <h1>Send to email addresses:</h1>
+        </header>
+        <form class="addresses" action="$!sendEndpoint" method="post">
+            <ul class="emailAddresses">
+                #foreach( $item in [1..12])
+                    <li><input type="email" autocomplete="off" name="emails[]" placeholder="Enter email here..."/></li>
+                #end
+            </ul>
+            <footer>
+                <span class="featureLink send">
+                    <input type="submit" value="#if($sendCtaText) $sendCtaText #else Send Invite #end" class="button"/>
+                </span>
+                <ul class="emailValidationErrors">
+                    <li class="invalidEmail">Invalid email address</li>
+                    <li class="emailAlreadyRegistered">Already registered</li>
+                    <li class="limitExceeded">You've reached your daily invite limit. Come back again tomorrow.</li>
+                </ul>
+            </footer>
+        </form>
+    </div>
+</article>

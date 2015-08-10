@@ -1,0 +1,3 @@
+-- WEB-4220 - add session key to transaction log
+
+ALTER TABLE TRANSACTION_LOG ADD COLUMN SESSION_ID DECIMAL(16,2) NULL;

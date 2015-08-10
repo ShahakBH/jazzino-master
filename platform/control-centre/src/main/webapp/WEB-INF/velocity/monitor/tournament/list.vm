@@ -1,0 +1,78 @@
+#set ($location = "Tournament Monitor")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($tournaments.startPosition / $pageSize) + 1)
+
+#set ($searchBaseUrl = "${request.contextPath}/monitor/tournament/list")
+#if ($status)
+    #set ($baseUrl = "${request.contextPath}/monitor/tournament/list/$status")
+#else
+    #set ($baseUrl = "${request.contextPath}/monitor/tournament/list")
+#end
+
+<section id="actions">
+    <ul>
+        <li>
+            <label for="statusFilter">Status:</label>
+            <select id="statusFilter" class="filter"
+                    data-url="$searchBaseUrl/@/$currentPage"
+                    data-wildcard-url="$searchBaseUrl/$currentPage"
+                    data-wildcard="ALL">
+                <option value="ALL" #if (!$status)selected="selected"#end>All</option>
+                #foreach ($searchStatus in $searchStatuses)
+                    <option value="$searchStatus.name()" #if ($status == $searchStatus)selected="selected"#end>$searchStatus.name()</option>
+                #end
+            </select>
+        </li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Tournaments</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Game Type</th>
+                <th>Template</th>
+                <th>Status</th>
+                <th>Monitoring Message</th>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    #paging( $tournaments.startPosition $pageSize $tournaments.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    #paging( $tournaments.startPosition $pageSize $tournaments.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($tournament in $tournaments.data)
+                <tr #if ($tournament.status && $tournament.status.name() == "ANNOUNCED")class="error"#end>
+                    <td>$tournament.id</td>
+                    <td>$tournament.name</td>
+                    <td>$tournament.gameType</td>
+                    <td>$tournament.templateName</td>
+                    <td>$tournament.status</td>
+                    <td>
+                        #if ($tournament.monitoringMessage)
+                            <pre class="collapsed">$tournament.monitoringMessage</pre>
+                        #end
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>

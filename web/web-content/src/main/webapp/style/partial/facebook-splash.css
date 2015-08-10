@@ -1,0 +1,65 @@
+body {
+    background-color: #F2F2F2;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    border: none;
+    border-top: 4px solid rgb(231, 32, 32);
+    font-family: Helvetica, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+}
+
+div, section, header {
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    padding: 10px 0 0 10px;
+    height: 40px;
+}
+
+strong {
+    font-weight: bold;
+    font-style: normal;
+}
+
+a, a:link, a:visited {
+    text-decoration: none;
+}
+
+p {
+    margin: 32px;
+    padding: 0;
+    border: none;;
+}
+
+p strong {
+    display: block;
+}
+
+.BLACKJACK a {
+    color:  #6AAE1B;
+}
+
+.HIGH_STAKES a {
+    color:  #00538D;
+}
+
+.ROULETTE a {
+    color:  #D11B1B;
+}
+
+.SLOTS a {
+    color:  #A94BA7;
+}
+
+.TEXAS_HOLDEM a {
+    color:  #2E9CCF;
+}

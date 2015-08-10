@@ -1,0 +1,10 @@
+!3 Player relationship actions modify relationships from the aspect of both players
+ 
+|relationship actions|
+|B appears to A|A appears to B|action by A|B appears to A after action?|A appears to B after action?|
+|friend|friend|remove friend|not friend|not friend|
+|friend|friend|ignore|ignored friend|ignored by friend|
+|ignored friend|ignored by friend|stop ignoring|friend|friend|
+|ignored friend|ignored by friend|remove friend|ignored|ignored by|
+|ignored|ignored by|stop ignoring|not friend|not friend|
+|ignored by friend|ignored friend|remove friend|ignored by|ignored|

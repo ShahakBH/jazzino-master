@@ -1,0 +1,98 @@
+#games-area #level-bar-filler {
+    position:absolute;
+    top:0;
+    left:0;
+}
+#games-area #level-bar .max-level {
+    right:18px;
+}
+#games-area .tournir-bar>.button, #home-area .tournir-bar>.button{
+    height:40px!important;
+}
+#index-area .tournir-bar>.button{
+    height:35px;
+}
+
+#game-menu-bar .mid {
+    text-align: inherit;
+}
+#head-area>a>img{
+    top:25px;
+}
+#login-area .login .right{
+    margin-top:  0px!important;
+}
+
+#achievements-overlay div ul {
+    top: 10px;
+}
+
+#login_page_content .buttonText {
+    padding: 4px 21px 6px 21px;
+    position: relative;
+    top: -2px;
+    left: -14px;
+}
+
+header .menuOptions .option ul {
+    display: block;
+    padding: 15px 17px 18px 0px;
+    display: inline;
+
+    background-image: url('../../images/top-bar/menuDivider.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/* payments */
+#action_body #select_chips_value .select-chips-body .promotion-chips {
+    background: url(../../images/gloss/buychips/promoPackageValue.png) no-repeat;
+    display: block;
+    position: relative;
+    top: 6px;
+    padding-top: 7px;
+    width: 91px;
+    height: 37px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #7C7C7C;
+    letter-spacing: 1px;
+}
+
+#action_body #select_chips_value .select-chips-body .promotion-chips.selected {
+    top: 0px;
+    padding-top: 13px;
+    background: url(../../images/gloss/buychips/promoPackageValueSelected.png) no-repeat;
+}
+/* end payments */
+.playerCountTextNumber {
+    font: 18px/1.5em Helvetica, sans-serif;
+    font-weight: bold;
+    position: relative;
+    top: 2px;
+    right: 2px;
+}
+
+div#content-job div#content-job-vacancy ul li div.job-vacancy-desc {
+    width:520px;
+    position:absolute;
+    margin-top:-27px;
+    margin-left:90px;
+    z-index:100;
+    display:none;
+}
+
+header .subNav {
+    top: -4px;
+}
+
+.topBar .subNav article > * .dropdown {
+    position: relative;
+    top: 0;
+    margin-top: 0;
+}
+
+header .games .gameFeatureLink {
+    background-position: center 10px;
+    padding-top: 55px;
+}

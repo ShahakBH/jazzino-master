@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yazino</groupId>
+        <artifactId>platform</artifactId>
+        <version>2.42.2-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>platform-db</artifactId>
+
+    <properties>
+        <db.hostname>localhost</db.hostname>
+        <db.name>strataprod</db.name>
+        <db.url>jdbc:mysql://${db.hostname}/${db.name}</db.url>
+        <db.user>${db.name}</db.user>
+        <db.password>${db.user}</db.password>
+    </properties>
+
+    <packaging>jar</packaging>
+    <name>Yazino Platform: Database</name>
+    <description>
+        The Platform database. Use of this is limited to the Platform
+        itself and it should not be accessed directly from elsewhere.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/sh</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <exec executable="bash" failonerror="true">
+                                    <arg value="${basedir}/src/main/sh/create.sh" />
+                                </exec>
+
+                                <taskdef classname="net.sf.dbdeploy.AntTarget" name="dbdeploy" />
+                                <taskdef classname="org.apache.tools.ant.taskdefs.optional.ReplaceRegExp" name="ReplaceRegExp" />
+                                <mkdir dir="${basedir}/target/db" />
+                                <dbdeploy dbms="mysql" dir="${basedir}/src/main/resources/deltas" driver="com.mysql.jdbc.Driver" outputfile="${basedir}/target/db/all-deltas.sql" password="${db.password}" undoOutputfile="${basedir}/target/db/undo-all-deltas.sql" url="${db.url}" userid="${db.user}" />
+                                <replace dir="${basedir}/target/" token="COMMIT;" value="COMMIT#">
+                                    <include name="**/*.sql" />
+                                </replace>
+                                <replaceregexp byline="true">
+                                    <regexp pattern=" changelog(.*);" />
+                                    <substitution expression=" changelog\1#" />
+                                    <fileset dir="${basedir}/target/">
+                                        <include name="**/*.sql" />
+                                    </fileset>
+                                </replaceregexp>
+                                <replace dir="${basedir}/target/" token="@DBNAME@" value="${db.name}">
+                                    <include name="**/*.sql" />
+                                </replace>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>dbdeploy</groupId>
+                        <artifactId>dbdeploy</artifactId>
+                        <version>2.1.1-yazino</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.21</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-nodeps</artifactId>
+                        <version>1.7.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.21</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <autocommit>true</autocommit>
+                    <delimiter>#</delimiter>
+                    <orderFile>ascending</orderFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-schema-db</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>${db.url}</url>
+                            <username>${db.user}</username>
+                            <password>${db.password}</password>
+                            <fileset>
+                                <basedir>${basedir}/target/db</basedir>
+                                <includes>
+                                    <include>all-deltas.sql</include>
+                                </includes>
+                            </fileset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+  <scm>
+    <tag>platform-2.0.5</tag>
+  </scm>
+</project>

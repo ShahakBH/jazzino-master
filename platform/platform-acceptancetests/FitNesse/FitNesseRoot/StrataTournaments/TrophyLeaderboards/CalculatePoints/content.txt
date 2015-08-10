@@ -1,0 +1,86 @@
+Points are awarded by the number of players, and a bonus for placing in the top n (8 in this test, see below).
+e.g. if you come 1st and there are 30 players, and 1st rank points are 20, you get points 49 points ((30 - 1) + 20 * (position + 99) / 100)
+
+!|players get|1| extra points per player in tournament|
+
+!|game leaderboard payout structure|
+|rank|chips|
+|1|100000|
+|2|80000|
+|3|60000|
+
+!|points are given following|
+|rank|points|
+|1|20|
+|2|16|
+|3|12|
+|4|10|
+|5|8|
+|6|6|
+|7|4|
+|8|2|
+
+!3 After the 1st tournament
+!|result after a tournament with|30|players|
+|rank|player|
+|1|Alan|
+|2|Bill|
+|3|Carl|
+|4|Dave|
+|5|Elle|
+|6|Fred|
+|7|Greg|
+|8|Hugo|
+|9|Ivan|
+|10|Jane|
+
+!|game leaderboard is|
+|rank|player|points|
+|1|Alan|49|
+|2|Bill|44|
+|3|Carl|39|
+|4|Dave|36|
+|5|Elle|33|
+|6|Fred|30|
+|7|Greg|27|
+|8|Hugo|24|
+
+!3 After the 2nd tournament
+!|result after a tournament with|30|players|
+|rank|player|
+|1|Alan|
+|2|Hugo|
+|3|Jane|
+|4|Kyle|
+|5|Elle|
+|6|Fred|
+|7|Greg|
+|8|Bill|
+|9|Ivan|
+|10|Carl|
+
+!|game leaderboard is|
+|rank|player|points|
+|1|Alan|98|
+|2|Bill|68|
+|2|Hugo|68|
+|4|Elle|66|
+|5|Fred|60|
+|6|Greg|54|
+|7|Carl|39|
+|7|Jane|39|
+|9|Dave|36|
+|9|Kyle|36|
+
+!|Chip balance for players|
+|player|balance|
+|Alan|100000|
+|Bill|70000|
+|Hugo|70000|
+|Elle|0|
+|Fred|0|
+|Greg|0|
+|Carl|0|
+|Jane|0|
+|Dave|0|
+|Kyle|0|

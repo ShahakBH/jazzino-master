@@ -1,0 +1,14 @@
+<header>
+    <h1><a href="${request.contextPath}/home" title="Go home">Control Centre</a></h1>
+
+    #if ($location)
+    <ul class="locations">
+        <li><a href="${request.contextPath}/home" title="Go home">Home</a></li>
+        <li>$location</li>
+    </ul>
+    #end
+
+    <div class="session">
+        <a href="${request.contextPath}/logout">Log Out</a>
+    </div>
+</header>

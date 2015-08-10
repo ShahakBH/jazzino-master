@@ -1,0 +1,3 @@
+#macro(avatarImageUrl $url $hostUrl $assetUrl)#if($url && $hostUrl)#set($baseHostUrl = $hostUrl.replaceFirst("^https?://", "//"))#set($hostUrlRegex = $hostUrl.replaceFirst("https?://(www\.)?", "https?://(www\.)?").replaceFirst(":(80|443)", "(:80|:443)?(?!:)"))$url.replaceFirst("https?://cdn(-small)?.yazino.com/.*-\d+T\d+", $assetUrl).replaceFirst($hostUrlRegex, $baseHostUrl).replaceFirst("http://graph.facebook.com", "https://graph.facebook.com/")#end#end
+
+#macro(qualifyUrl $url)#if($url && $url.startsWith("//"))#if($request.secure)https#{else}http#end:${url}#else${url}#end#end

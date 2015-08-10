@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-external-datawarehouse.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-legacy-datawarehouse.xml"/>
+
+    <import resource="classpath:META-INF/spring/facebook-configuration-spring.xml"/>
+
+    <!--<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
+    <!--<property name="shared" value="true"/>-->
+    <!--</bean>-->
+
+    <context:component-scan base-package="com.yazino.engagement.facebook"/>
+    <context:component-scan base-package="com.yazino.engagement.campaign.dao"/>
+
+    <bean id="webrequestor" class="com.restfb.DefaultWebRequestor"/>
+    <bean id="facebookClientFactory" class="com.yazino.engagement.facebook.FacebookClientFactory"
+          factory-method="getInstance"/>
+
+    <bean id="facebookNotificationCampaignConsumer" class="com.yazino.engagement.campaign.consumers.FacebookNotificationCampaignConsumer">
+        <constructor-arg index="0" ref="facebookRequestSender"/>
+        <constructor-arg index="1" ref="campaignNotificationAuditService"/>
+        <constructor-arg index="2" ref="campaignNotificationDao"/>
+        <constructor-arg index="3" ref="facebookExclusionsDao"/>
+     </bean>
+
+    <bean id="gameTypeRepository" class="strata.server.operations.repository.GameTypeRepository"/>
+
+
+    <bean id="campaignNotificationAuditService"
+          class="com.yazino.engagement.campaign.consumers.TestCampaignNotificationAuditService"/>
+
+    <bean id="engagementCampaignDao" class="com.yazino.engagement.campaign.dao.EngagementCampaignDao">
+        <constructor-arg index="0" ref="externalDwJdbcTemplate"/>
+    </bean>
+
+</beans>

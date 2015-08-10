@@ -1,0 +1,14 @@
+<script type="text/javascript" src="${assetUrl}/javascript/yazino-core.js"></script>
+<script type="text/javascript">
+    var YAZINO = YAZINO || {};
+    YAZINO.configuration = YAZINO.configuration || YAZINO.configurationFactory();
+
+    YAZINO.configuration.set("baseUrl",  '${hostUrl}');
+    YAZINO.configuration.set("gameType",  '$!{gameType}');
+    #if($hostName)YAZINO.configuration.set("hostName",  '${hostName}');#end
+</script>
+<script type="text/javascript" src="${assetUrl}/javascript/partial/client-sdk-support.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/partial/social-flow.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/partial/fb.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/canvas/canvas.js"></script>
+<script type="text/javascript" src="${assetUrl}/javascript/canvas/fb-payment.js"></script>

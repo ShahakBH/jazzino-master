@@ -1,0 +1,83 @@
+<div id="management-team-head">
+    <h3 class="gray-red-header"><span>MANAGEMENT</span> TEAM</h3>
+
+    <div id="management-team">
+        <div id="management-list-wrapper">
+        </div>
+        <ul id="management-list">
+            <li#if (${person} == "hussein") class="active"#end>
+                <a href="/management/hussein">
+                    <div class="arrow"></div>
+                    <img src="${assetUrl}/images/hussein.png" alt="">
+
+                    <div class="management-info">
+                        <p class="name">Hussein Chahine</p>
+
+                        <p class="prof">Founder & CEO</p>
+                    </div>
+                </a>
+            </li>
+            <li#if (${person} == "melissa") class="active"#end>
+                <a href="/management/melissa">
+                    <div class="arrow"></div>
+                    <img src="${assetUrl}/images/melyssa.png" alt="">
+
+                    <div class="management-info">
+                        <p class="name">Melissa Tan</p>
+
+                        <p class="prof">Co-founder &<br/>VP Product<br/>Development</p>
+                    </div>
+                </a>
+            </li>
+            <li#if (${person} == "alyssa") class="active"#end>
+                <a href="/management/alyssa">
+                    <div class="arrow"></div>
+                    <img src="${assetUrl}/images/alyssa.png" alt="">
+
+                    <div class="management-info">
+                        <p class="name">Alyssa Crankshaw</p>
+
+                        <p class="prof">VP Communications</p>
+                    </div>
+                </a>
+            </li>
+            <li#if (${person} == "guillaume") class="active"#end>
+                <a href="/management/guillaume">
+
+                    <div class="arrow"></div>
+                    <img src="${assetUrl}/images/guillaume.png" alt="">
+
+                    <div class="management-info">
+                        <p class="name">Guillaume Sampic</p>
+
+                        <p class="prof">VP Acquisition & Business Intelligence</p>
+                    </div>
+                </a>
+            </li>
+            <li#if (${person} == "stephan") class="active"#end>
+                <a href="/management/stephan">
+                <div class="arrow"></div>
+                <img src="${assetUrl}/images/steph.png" alt="">
+
+                <div class="management-info" style="margin-left:8px;">
+                    <p class="name">Stephan Ansari</p>
+                    <p class="prof">VP Business Development</p>
+                </div>
+                    </a>
+            </li>
+            <li#if (${person} == "john") class="active"#end>
+                <a href="/management/john">
+                <div class="arrow"></div>
+                <img src="${assetUrl}/images/john.png" alt="">
+
+                <div class="management-info">
+                    <p class="name">J Don-Wauchope</p>
+                    <p class="prof">VP Finance</p>
+                </div>
+                    </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+#parse("partials/managementTeam/${person}.vm")

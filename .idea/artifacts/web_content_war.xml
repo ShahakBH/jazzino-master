@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="web-content:war">
+    <output-path>$PROJECT_DIR$/web/web-content/target</output-path>
+    <root id="archive" name="web-content-2.2.34-SNAPSHOT.war">
+      <element id="artifact" artifact-name="web-content:war exploded" />
+    </root>
+  </artifact>
+</component>

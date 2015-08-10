@@ -1,0 +1,5 @@
+[yazino]
+name=Yazino Repo for CentOS 6 - $basearch
+baseurl=http://46.101.41.217/centos/6/$basearch
+enabled=1
+gpgcheck=0

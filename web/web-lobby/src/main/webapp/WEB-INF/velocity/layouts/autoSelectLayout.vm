@@ -1,0 +1,10 @@
+#* @vtlvariable name="lobbySession" type="com.yazino.web.session.LobbySession" *#
+#if ($canvas)
+#parse("layouts/canvas.vm")
+#else
+#if ($lobbySession)
+#parse("layouts/lobbyLayout.vm")
+#else
+#parse("layouts/publicLayout.vm")
+#end
+#end

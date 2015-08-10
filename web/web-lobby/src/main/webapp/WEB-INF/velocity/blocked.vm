@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Yazino</title>
+    <style type="text/css">
+        html {
+            height: 100%;
+            background: #fff url('${assetUrl}/images/gloss/body-back.png') repeat-x;
+        }
+
+        body {
+            padding: 0 0;
+            margin: 0 auto;
+            width: 700px;
+            position: static !important;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #account-issue {
+            width: 755px;
+        }
+
+        #account-issue .body {
+            margin-top: 6px;
+            width: 330px;
+            padding: 195px 55px 240px 370px;
+            background: url('${assetUrl}/images/gloss/accountIssueLogo.png') no-repeat 100px 141px;
+            color: #a4a4a4;
+        }
+
+        #account-issue .body span {
+            display: block;
+        }
+
+        #account-issue .body  .sp2 {
+            font: bold 43px/40px helveticaneue, sans-serif;
+            text-transform: uppercase;
+        }
+
+        #account-issue .body  .sp3 {
+            font: 17px/17px helvetica, sans-serif;
+            word-spacing: -1px;
+            margin-bottom: 35px;logoutHelper.logout(session, request, response);
+            text-indent: 2px;
+        }
+
+        #account-issue .body  .sp5 {
+            font: 14px/14px helvetica, sans-serif;
+            word-spacing: -2px;
+            text-indent: 1px;
+        }
+
+        #account-issue .body  .sp5 a {
+            font-weight: bold;
+            text-decoration: none;
+            color: #a4a4a4;
+        }
+
+        #account-issue .body .sp5 a:hover {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        if (window.parent) {
+            window.parent.jQuery('#payments_closeButton').hide();
+        }
+    </script>
+</head>
+<body id="account-issue">
+<div class="body">
+    <span class="sp2">Oops!</span>
+    <span class="sp3">
+        #if($!reason)
+            $reason
+        #else
+            Something&rsquo;s gone wrong with your account
+        #end
+    </span>
+    <span class="sp5"> Please contact <a href="mailto:contact@yazino.com">customer support</a></span>
+</div>
+</body>
+</html>

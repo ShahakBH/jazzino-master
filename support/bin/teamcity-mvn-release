@@ -1,0 +1,138 @@
+#!/usr/bin/env ruby
+
+# A wrapper script for Maven releases from TeamCity
+
+require 'rexml/document'
+require 'rexml/xpath'
+require 'tmpdir'
+
+include REXML
+
+BASE_DIR = File.expand_path(File.dirname(__FILE__))
+
+GIT_BASE = 'git@github.com:yazino'
+
+def clone(working_dir, repo_name, branch)
+  Dir.chdir(working_dir)
+  git_out = %x(git clone #{GIT_BASE}/#{repo_name}.git 2>&1)
+  raise "Clone of #{GIT_BASE}/#{repo_name}.git failed with code #{$?.exitstatus}; output was: #{git_out}" if $?.exitstatus != 0
+
+  if branch != 'master'
+    Dir.chdir(repo_name)
+    git_out = %x(git checkout #{branch})
+    raise "Checkout of branch #{branch} for repo #{repo_name} failed with code #{$?.exitstatus}; output was: #{git_out}" if $?.exitstatus != 0
+  end
+end
+
+def commit_and_push(working_dir, repo_name, branch, release_version)
+  Dir.chdir("#{working_dir}/support")
+  git_out = %x(git commit -am"Released #{repo_name} @ #{release_version}" 2>&1)
+  raise "Git commit failed: output was #{git_out}" if $?.exitstatus != 0
+
+  git_out = %x(git pull --rebase 2>&1)
+  raise "Git pull --rebase failed: output was #{git_out}" if $?.exitstatus != 0
+
+  git_out = %x(git push origin #{branch} 2>&1)
+  raise "Git push origin #{branch} failed: output was #{git_out}" if $?.exitstatus != 0
+end
+
+def release(repo_name, branch, release_version)
+  Dir::mktmpdir('teamcity-mvn-release') do |working_dir|
+    clone(working_dir, 'support', 'master')
+    clone(working_dir, repo_name, branch)
+
+    release_version = find_next_version(working_dir, repo_name) if release_version.nil?
+
+    puts "- Running Release ------------------------------------------------"
+    Dir.chdir("#{working_dir}/support")
+    release_out = %x(#{working_dir}/support/bin/mvn-release #{working_dir}/#{repo_name} #{release_version})
+    raise "Release build of #{working_dir}/#{repo_name} @ #{release_version} failed: output was #{release_out}" if $?.exitstatus != 0
+    puts release_out
+    puts "------------------------------------------------------------------"
+
+    puts "Commiting & pushing support.git"
+    commit_and_push(working_dir, repo_name, branch, release_version)
+
+    puts "------------------------------------------------------------------"
+    puts " Release complete."
+    puts "------------------------------------------------------------------"
+    puts " * This only modifies master - you must manually update versions"
+    puts "   on any applicable release branches."
+    puts " * Don't forget to update anything that depends on this new"
+    puts "   version! mvn-update-deps may be of help."
+    puts "------------------------------------------------------------------"
+  end
+end
+
+def find_next_version(working_dir, repo_name)
+  current_version = get_version_from("#{working_dir}/#{repo_name}/pom.xml")
+  raise "Couldn't get current version for project #{repo_name}" if current_version.nil?
+
+  if current_version =~ /(\d+\.\d+\.\d+.*)-SNAPSHOT/
+    new_version = $1
+    puts "Next version is #{new_version}"
+    new_version
+  else
+    raise "Project #{repo_name} is not a snapshot! Cannot release from #{current_version}."
+  end
+end
+
+def get_version_from(pom_file)
+    raise "Cannot find #{pom_file}" if !File.exists?(pom_file)
+
+    pom_doc = Document.new(File.new(pom_file))
+    parent_element = XPath.first(pom_doc, '/project/parent')
+    if !parent_element.nil?
+        parent_path_element = XPath.first(pom_doc, '/project/parent/relativePath')
+        if parent_path_element.nil?
+            parent_path = '../pom.xml'
+        else
+            parent_path = parent_path_element.text
+        end
+        parent_version = get_version_from("#{base_of(pom_file)}#{parent_path}")
+    end
+
+    version = XPath.first(pom_doc, '/project/version')
+
+    text_of(version) || parent_version
+end
+
+def base_of(path)
+    if path =~ /(.*\/)[^\/]+/
+        $1
+    else
+        ''
+    end
+end
+
+def text_of(element)
+    if element
+        element.text
+    else
+        nil
+    end
+end
+
+def print_usage
+  puts "Usage: #{__FILE__} <repo name> <branch> <release version>"
+end
+
+if ARGV.size != 3
+  print_usage
+  exit(1)
+end
+
+repo_name = ARGV[0]
+branch = ARGV[1]
+release_version = nil
+release_version = ARGV[2] if ARGV.size > 1 && ARGV[2].strip != 'automatic'
+
+print "Releasing #{repo_name} "
+if release_version
+  print "as #{release_version}"
+else
+  print "with next point release"
+end
+puts " from branch #{branch}"
+
+release(repo_name, branch, release_version)

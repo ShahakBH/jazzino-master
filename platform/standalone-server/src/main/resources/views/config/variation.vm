@@ -1,0 +1,28 @@
+#parse("includes/header.vm")
+
+<section id="content">
+    <div class="list">
+        <h2>Game Variation Properties</h2>
+
+        <p>This can be defined in <strong>/etc/yazino/standalone-server.properties</strong></p>
+
+        <p>All entries starting with "<strong>standalone-server.variation.</strong>" will be read as variation properties</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach ($prop in $properties.keySet())
+                <tr>
+                    <td>$prop</td>
+                    <td>$properties.get($prop)</td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+</section>

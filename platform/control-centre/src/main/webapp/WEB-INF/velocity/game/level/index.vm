@@ -1,0 +1,17 @@
+#set ($location = "Level Management")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#if($message)
+<div class="info">
+    $message
+</div>
+#end
+
+<section id="content">
+    <h2>Level Definitions</h2>
+    <form method="post" action="${request.contextPath}/game/level/refresh">
+        <input class="single-action-form-submit" type="submit" value="Reload from database"/>
+    </form>
+</section>

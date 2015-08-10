@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:os-core="http://www.openspaces.org/schema/core"
+       xmlns:os-remoting="http://www.openspaces.org/schema/remoting"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.openspaces.org/schema/core http://www.openspaces.org/schema/core/openspaces-core.xsd
+           http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/remoting/openspaces-remoting.xsd">
+
+    <context:annotation-config/>
+
+    <os-remoting:annotation-support/>
+
+    <os-core:space id="space" url="${strata.gigaspaces.global.space}"/>
+    <os-core:giga-space id="gigaSpace" space="space"/>
+
+    <bean id="integerAdditionReducer"
+          class="com.yazino.platform.table.IntegerAdditionReducer"/>
+
+    <bean id="setMergingReducer"
+          class="com.yazino.platform.table.SetMergingReducer"/>
+
+    <bean id="tableReducer"
+          class="com.yazino.platform.table.TableSearchReducer"/>
+
+    <os-remoting:executor-proxy id="tableService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.table.TableService"/>
+
+    <os-remoting:executor-proxy id="tableSearchService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                broadcast="true"
+                                interface="com.yazino.platform.table.TableSearchService">
+        <os-remoting:result-reducer ref="tableReducer"/>
+    </os-remoting:executor-proxy>
+
+    <os-remoting:executor-proxy id="countdownService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.table.CountdownService"/>
+
+    <os-remoting:executor-proxy id="tableConfigurationUpdateService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                broadcast="true"
+                                interface="com.yazino.platform.table.TableConfigurationUpdateService"/>
+
+    <os-remoting:executor-proxy id="trophyLeaderboardService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.tournament.TrophyLeaderboardService"/>
+
+    <os-remoting:executor-proxy id="tournamentService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.tournament.TournamentService"/>
+
+    <os-remoting:executor-proxy id="gridTournamentTestService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.tournament.TournamentTestService"/>
+
+    <os-remoting:executor-proxy id="chatService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.chat.ChatService"/>
+    
+    <os-remoting:executor-proxy id="profanityService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.ProfanityService"/>
+
+    <os-remoting:executor-proxy id="communityService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.CommunityService"/>
+
+    <os-remoting:executor-proxy id="giftService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.GiftService"/>
+
+    <os-remoting:executor-proxy id="playerService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.PlayerService"/>
+
+    <os-remoting:executor-proxy id="playerTrophyService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.PlayerTrophyService"/>
+
+    <os-remoting:executor-proxy id="trophyService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.TrophyService"/>
+
+    <os-remoting:executor-proxy id="tableInviteService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.community.TableInviteService"/>
+
+    <os-remoting:executor-proxy id="communityConfigurationUpdateService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                broadcast="true"
+                                interface="com.yazino.platform.community.CommunityConfigurationUpdateService"/>
+
+    <os-remoting:executor-proxy id="sessionService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.session.SessionService"/>
+
+    <os-remoting:executor-proxy id="inboxService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.session.InboxService"/>
+
+    <os-remoting:executor-proxy id="walletService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.account.WalletService"/>
+
+    <os-remoting:executor-proxy id="accountingShutdownService"
+                                giga-space="gigaSpace"
+                                timeout="30000"
+                                broadcast="true"
+                                interface="com.yazino.platform.account.AccountingShutdownService"/>
+
+    <os-remoting:executor-proxy id="playerStatsBackOfficeService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                broadcast="true"
+                                interface="com.yazino.platform.playerstatistic.service.PlayerStatsBackOfficeService"/>
+
+    <os-remoting:executor-proxy id="playerStatsService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.playerstatistic.service.PlayerStatsService"/>
+
+    <os-remoting:executor-proxy id="metricsService"
+                                giga-space="gigaSpace"
+                                timeout="${strata.gigaspaces.global-space.timeout}"
+                                interface="com.yazino.platform.metrics.MetricsService"/>
+</beans>

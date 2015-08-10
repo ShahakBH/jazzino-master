@@ -1,0 +1,13 @@
+#if ($development && $renderStartNano)
+<div id="render-statistics"
+     onclick="jQuery(this).hide()"
+     title="This is only present is development mode. Click to dismiss.">
+    #set($handleStartNano = $request.getAttribute('handleStartNano'))
+    #if ($handleStartNano)
+        #set($handleTime = ($renderStartNano - $handleStartNano) / 1000000)
+        Handled in ${handleTime}ms.<br>
+    #end
+    #set($renderTime = ($System.nanoTime() - $renderStartNano) / 1000000)
+    Rendered in ${renderTime}ms.
+</div>
+#end

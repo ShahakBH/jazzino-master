@@ -1,0 +1,73 @@
+#set ($location = "Tournaments")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($tournaments.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/tournament/tournament/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/tournament/create">New Tournament</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Tournaments</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Variation</th>
+                <th>Sign-up Start</th>
+                <th>Start</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    #paging( $tournaments.startPosition $pageSize $tournaments.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="7">
+                    #paging( $tournaments.startPosition $pageSize $tournaments.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($tournament in $tournaments.data)
+                <tr>
+                    <td>$tournament.id</td>
+                    <td>$tournament.name</td>
+                    <td>$variations.get($tournament.variationId.underlying)</td>
+                    <td>$dateTool.format('dd/MM/yyyy HH:mm:ss z', $tournament.signupStart.toDate)</td>
+                    <td>$dateTool.format('dd/MM/yyyy HH:mm:ss z', $tournament.start.toDate)</td>
+                    <td>$tournament.status</td>
+                    <td>
+                        <a href="${request.contextPath}/tournament/tournament/show/${tournament.id}"
+                           title="View tournament ${tournament.id}">View</a>
+                        #if (!$cannotCancelStatuses.contains($tournament.status))
+                            | <a href="${request.contextPath}/tournament/tournament/cancel/${tournament.id}"
+                                 class="action-named" data-action="Cancel" data-id="${tournament.id}"
+                                 data-type="tournament"
+                                 title="Cancel tournament ${tournament.id}">Cancel</a>
+                        #end
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

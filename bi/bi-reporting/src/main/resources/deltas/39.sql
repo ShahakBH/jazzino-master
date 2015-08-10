@@ -1,0 +1,1 @@
+alter table player_activity_daily rename to player_activity_hourly;

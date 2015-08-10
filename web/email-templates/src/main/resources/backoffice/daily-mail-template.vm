@@ -1,0 +1,44 @@
+<h2>Yazino daily statistics</h2>
+<p>Created on $!creationDateTime, queries ran in $!creationSecs secs</p>
+#if("$!errorMessages" != "")
+	<p class="errorMessage">$errorMessages</p>
+#end
+
+#foreach($report in $stats)
+
+	#if("$!report.header" != "")
+	<h3>$report.header</h3>
+	#end
+
+	#if($report.result.size() > 0)
+	<table style="border-top: 1px solid #909090;
+		border-left: 1px solid #909090;
+		border-spacing: 0;
+		empty-cells: show;
+		color: #3D3D3D;background-color: #4F4FAF;" width="95%" align="center">
+		<thead><tr>
+		#foreach($cell in $report.result.get(0).keySet() )
+			 <th style="background-color: #E9E8E8;text-align:left;padding:4;
+				border-bottom: 1px solid #909090;
+				border-right: 1px solid #909090;"><span style="color: #E71F1F;font-size: 18px;
+				font-family: Areal,'Helvetica CY', 'Nimbus Sans L', Sans-serif;">$!cell</th>
+		#end
+		</tr></thead>
+		<tbody>
+		#foreach($row in $report.result)
+			<tr>
+			#foreach($cell in $row.values())
+				<td style="border-bottom: 1px solid #909090;padding:4;
+				border-right: 1px solid #909090;
+				background-color: white;
+				height: auto;"><span style="font-size: 14px;
+				font-family: Areal,'Helvetica CY', 'Nimbus Sans L', Sans-serif;">$!cell</span></td>
+			#end
+			</tr>
+		#end
+		</tbody>
+	</table>
+	<p>&nbsp;</p>
+	#end
+
+#end

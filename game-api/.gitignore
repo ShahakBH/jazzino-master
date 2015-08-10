@@ -1,0 +1,13 @@
+.DS_Store
+.idea/
+target/
+*.ipr
+*.iml
+*.iws
+.classpath
+.project
+*.eml
+.metadata/
+
+
+

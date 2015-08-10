@@ -1,0 +1,2 @@
+alter table INVITATIONS add index IDX_CREATED_TS(CREATED_TS)#
+alter table INVITATIONS add index IDX_UPDATED_TS(UPDATED_TS)#

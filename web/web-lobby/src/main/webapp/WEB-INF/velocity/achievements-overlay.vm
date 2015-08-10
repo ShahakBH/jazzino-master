@@ -1,0 +1,165 @@
+#* @vtlvariable name="gameConfiguration" type="com.yazino.platform.table.GameConfiguration" *#
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yazino - Achievements</title>
+
+    #parse("partials/glossStyle.vm")
+    #parse("partials/preScripts.vm")
+
+    #set ($levelTitles = {1: "Gold", 2: "Silver", 3: "Bronze"})
+    #set ($achievementLevelTitles = {3: "Gold", 2: "Silver", 1: "Bronze"})
+
+    <style type="text/css">
+        html {
+            background-image: none;
+            border: none;
+            padding: 0;
+        }
+
+        body {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="achievements-overlay" class="$!gameType">
+    <ul>
+        #foreach ($level in $levelData.playerAchievements)
+            #set ($levelNumber = $velocityCount)
+            #set ($levelTitle = $achievementLevelTitles.get($levelNumber))
+            <li class="achievements achievements-$levelTitle.toLowerCase()">
+                <h1 #if ($velocityCount == 1)class="selected"#end>$levelTitle</h1>
+
+                <div #if ($velocityCount != 1)style="display: none;"#end>
+                    <p>
+                        <span class="property">$levelTitle Achievements:</span>&nbsp;<span
+                            class="value">${levelData.getNumberOfAchievements($levelNumber)}
+                        &nbsp;/&nbsp;${levelData.getNumberOfTotalAchievements($levelNumber)}</span>
+                    </p>
+                    <ul>
+                        #foreach (${playerAchievement} in $level)
+                            <li>
+                                #if($playerAchievement.hasAchievement)
+                                    #set ($image = "${assetUrl}/images/news/${playerAchievement.achievementId}.png")
+                                #else
+                                    #set ($image = "${assetUrl}/images/news/${playerAchievement.achievementId}_BW.png")
+                                #end
+
+                                <div>
+                                    <img src="$image" alt="$esc.html($playerAchievement.title)">
+
+                                    <div class="popup">$esc.html($!playerAchievement.howToGet)</div>
+                                </div>
+                                <div class="achievement-title-wrapper">
+                                    <div class="achievement-title">$esc.html($playerAchievement.title)</div>
+                                </div>
+                                #if($playerAchievement.hasAchievement)
+                                    <a href="#" title="Post this achievement"
+                                       class="span-wrapper"
+                                       data-achievement-id="${playerAchievement.achievementId}"
+                                       data-achievement-gametype="${gameType}"
+                                       data-achievement-title="$esc.html($!playerAchievement.title)"
+                                       data-achievement-message="$esc.html($!playerAchievement.message)">Post now</a>
+                                #end
+                            </li>
+                        #end
+                    </ul>
+                </div>
+            </li>
+        #end
+
+        #set($supportsTrophies = ${gameConfiguration.getProperty('supportsTrophies')})
+        #if($supportsTrophies)
+            <li class="trophy-cabinet">
+                <h1>Trophy Cabinet</h1>
+
+                <div style="display: none">
+                    <p>
+                        <span class="property">Total Medals:</span> <span
+                            class="value">$!{medalCabinet.totalTrophyCount}</span> | <span
+                            class="property">Trophies:</span> <span
+                            class="value">$!{trophyCabinet.totalTrophyCount}</span>
+                    </p>
+                    <ul>
+                        #foreach($medalNumber in [3, 2, 1])
+                            #set ($medalName = "medal_${medalNumber}")
+                            #set ($medalLevelName = $levelTitles.get($medalNumber))
+                            #if(${medalCabinet.hasTrophySummary($medalName)})
+                                #set ($medalSummary = ${medalCabinet.getTrophySummary($medalName)})
+                                #if($canvas)
+                                    #set ($medalImage = "medal-${medalLevelName.toLowerCase()}-${gameType}-compact.png")
+                                #else
+                                    #set ($medalImage = "medal-${medalLevelName.toLowerCase()}-${gameType}.png")
+                                #end
+                            #else
+                                #set ($medalSummary = false)
+                                #if($canvas)
+                                    #set ($medalImage = "medal-${medalLevelName.toLowerCase()}-compact.png")
+                                #else
+                                    #set ($medalImage = "medal-${medalLevelName.toLowerCase()}.png")
+                                #end
+                            #end
+                            <li>
+                                <span>$medalLevelName Medals: #if($medalSummary)${medalSummary.count}#{else}0#end</span>
+                                #if($canvas)
+                                    #set ($medalImageWidth = "112")
+                                    #set ($medalImageHeight = "203")
+                                #else
+                                    #set ($medalImageWidth = "122")
+                                    #set ($medalImageHeight = "219")
+                                #end
+                                <img src="$assetUrl/images/achievements/$medalImage" width="$medalImageWidth"
+                                     height="$medalImageHeight"
+                                     alt="$medalLevelName Medal">
+                                #if($medalSummary && $medalSummary.count > 0)
+                                    <a href="#" title="Post this trophy"
+                                       data-trophy-message="$esc.html($!medalSummary.message)"
+                                       data-trophy-image="$!medalSummary.image"
+                                       data-trophy-gametype="$gameType">Post now</a>
+                                #end
+                            </li>
+                        #end
+                        #set ($weeklyChampTrophyName = "trophy_weeklyChamp")
+                        #if(${trophyCabinet.hasTrophySummary($weeklyChampTrophyName)})
+                            #set ($trophySummary = ${trophyCabinet.getTrophySummary($weeklyChampTrophyName)})
+                            #if ($canvas)
+                                #set ($trophyImage = "trophy-weekly-compact.png")
+                                #set ($trophyImageWidth = "164")
+                                #set ($trophyImageHeight = "202")
+                            #else
+                                #set ($trophyImage = "trophy-weekly.png")
+                                #set ($trophyImageWidth = "178")
+                                #set ($trophyImageHeight = "218")
+                            #end
+                        #end
+                        <li class="champion-trophy">
+                            <span>Weekly Champ Trophy: #if($trophySummary)${trophySummary.count}#{else}0#end</span>
+                            #if ($trophyImage)
+                                <img src="$assetUrl/images/achievements/$trophyImage"
+                                     width="$trophyImageWidth" height="$trophyImageHeight"
+                                     alt="Weekly Trophy">
+                                <a href="#" title="Post this achievement"
+                                   data-trophy-message="$esc.html($!trophySummary.message)"
+                                   data-trophy-image="$!trophySummary.image"
+                                   data-trophy-gametype="$gameType">Post now</a>
+                            #end
+                        </li>
+                        <li class="tagline">
+                            <p>
+                                <strong>Win Medals &amp; earn Champions Points</strong> in every competition you
+                                play!<br>
+                                The more you play the bigger the chance of winning our Weekly Champion Trophy.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        #end
+    </ul>
+</div>
+    #parse("partials/external_tracking.vm")
+    #parse("partials/fb_init.vm")
+    #parse("partials/glossScripts.vm")
+</body>
+

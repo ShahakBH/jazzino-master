@@ -1,0 +1,140 @@
+#set ($location = "Table Monitor")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($tables.startPosition / $pageSize) + 1)
+
+#set($params = '')
+#if($showState && $onlyWithPlayers)
+    #set($params = "?showState=$showState&onlyWithPlayers=$onlyWithPlayers")
+#elseif($showState)
+    #set($params = "?showState=$showState")
+#elseif($onlyWithPlayers)
+    #set($params = "?$onlyWithPlayers=$onlyWithPlayers")
+#end
+
+#set ($searchBaseUrl = "${request.contextPath}/monitor/table/list")
+#if ($tableType)
+    #set ($baseUrl = "${request.contextPath}/monitor/table/list/$tableType")
+#else
+    #set ($baseUrl = "${request.contextPath}/monitor/table/list")
+#end
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li>
+            <a class="action-named" data-action="Load all tables"
+               href="${request.contextPath}/monitor/table/loadAll"
+               title="Load All">Load All</a>
+        </li>
+        <li>
+            <form class="form-url-submit"
+                  method="POST"
+                  data-field="tableType"
+                  action="$searchBaseUrl/@/$currentPage">
+
+                <label for="tableType">Type:</label>
+                <select id="tableType" name="tableType">
+                    #foreach ($currentType in $tableTypes)
+                        <option value="$currentType.name()" #if ($tableType == $currentType)selected="selected"#end>$currentType.name()</option>
+                    #end
+                </select>
+
+                <input type="radio" id="stateAll" name="showState" value="all"
+                       #if($showState != 'error' && $showState != 'open')checked="checked"#end>
+                <label for="stateAll">All States</label>
+
+                <input type="radio" id="stateError" name="showState" value="error"
+                        #if($showState == 'error')checked="checked"#end>
+                <label for="stateError">Only Error</label>
+
+                <input type="radio" id="stateOpen" name="showState" value="open"
+                       #if($showState == 'open')checked="checked"#end>
+                <label for="stateOpen">Only Open</label>
+
+                <input type="checkbox" id="onlyWithPlayers" name="onlyWithPlayers" value="true"
+                       #if($onlyWithPlayers == true)checked="checked"#end>
+                <label for="onlyWithPlayers">Only With Players</label>
+
+                <a href="#" title="Filter" class="submit">Filter</a>
+            </form>
+        </li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Tables</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Game</th>
+                <th># of Players</th>
+                <th>Tags</th>
+                <th>Monitoring Message</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    #paging( $tables.startPosition $pageSize $tables.totalSize $baseUrl $params )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    #paging( $tables.startPosition $pageSize $tables.totalSize $baseUrl $params )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($table in $tables.data)
+                <tr #if ($table.status && $table.status.name() == "error")class="error"#end>
+                    <td>$table.id</td>
+                    <td>$table.status</td>
+                    <td>$table.name</td>
+                    <td>$table.gameType.name</td>
+                    <td>$table.numberOfPlayers</td>
+
+                    <td>#foreach ($tag in $table.tags)$tag #end</td>
+                    <td>
+                        #if ($table.monitoringMessage)
+                            <pre class="collapsed">$table.monitoringMessage</pre>
+                        #end
+                    </td>
+                    <td>
+                      <a class="action-named" data-action="Unload" data-id="${table.id}"
+                           data-type="table"
+                           href="${request.contextPath}/monitor/table/unload/${table.id}"
+                           title="Unload table ${table.id}">Unload</a>
+                      | <a class="action-named" data-action="Close" data-id="${table.id}"
+                           data-type="table"
+                           href="${request.contextPath}/monitor/table/close/${table.id}"
+                           title="Close table ${table.id}">Close</a>
+                      | <a class="action-named" data-action="Reset" data-id="${table.id}"
+                           data-type="table"
+                           href="${request.contextPath}/monitor/table/reset/${table.id}"
+                           title="Reset table ${table.id}">Reset</a>
+                      | <a class="action-named" data-action="Re-open" data-id="${table.id}"
+                           data-type="table"
+                           href="${request.contextPath}/monitor/table/reopen/${table.id}"
+                           title="Re-open table ${table.id}">Re-open</a>
+                      | <a href="${request.contextPath}/monitor/table/dump/${table.id}"
+                           title="Dump table ${table.id}">Dump</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>

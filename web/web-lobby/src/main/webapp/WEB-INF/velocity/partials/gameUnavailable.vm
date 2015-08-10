@@ -1,0 +1,11 @@
+#* @vtlvariable name="gameType" type="java.lang.String" *#
+
+<div id="cash-game-body" class="game-disabled $!gameType">
+    <h2>We're sorry</h2>
+    <h3>
+        This game is currently disabled.
+    </h3>
+    <p>
+        We'll have it back as soon as possible!
+    </p>
+</div>

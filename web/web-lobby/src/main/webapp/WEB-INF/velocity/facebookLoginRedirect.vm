@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting to Facebook authentication...</title>
+</head>
+<body>
+    <script type="text/javascript">top.location.href="${faceBookLoginUrl}"</script>
+</body>
+</html>

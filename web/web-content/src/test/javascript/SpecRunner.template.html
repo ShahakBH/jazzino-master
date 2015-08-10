@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=$sourceEncoding$">
+    <title>Jasmine Spec Runner</title>
+    <script>
+        window.console = window.console || {
+            log: function () {},
+            debug: function () {},
+            info: function () {},
+            warn: function () {},
+            error: function () {},
+            dir: function () {}
+        };
+    </script>
+    $cssDependencies$
+    $javascriptDependencies$
+    $sources$
+</head>
+<body>
+<script type="text/javascript">
+    if (window.location.href.indexOf("ManualSpecRunner.html") !== -1) {
+        document.body.appendChild(document.createTextNode("Warning: opening this HTML file directly from the file system is deprecated. You should instead try running `mvn jasmine:bdd` from the command line, and then visit `http://localhost:8234` in your browser. "))
+    }
+
+    var executeJasmineSpecs = function() {
+        window.reporter = new jasmine.$reporter$();
+        jasmine.getEnv().addReporter(reporter);
+        jasmine.getEnv().execute();
+    };
+
+    if (window.addEventListener) {
+        addEventListener('DOMContentLoaded', executeJasmineSpecs, false);
+    } else {
+        attachEvent('onload', executeJasmineSpecs);
+    }
+    window.StrataPartnerApi = {
+        isAutoPosting: function() {
+            return false;
+        }
+    }
+</script>
+<div style="height: 350px; overflow: scroll;" id="testArea">
+    <!-- Add Widget fixtures below this line -->
+    <div style="display: block">
+        <div class="tournamentInfoWidget" gameType="BLACKJACK">
+            <div>
+                <input type="hidden" name="tournamentId_BLACKJACK" class="tournamentId_BLACKJACK" value="">
+                <table>
+                    <tr>
+                        <td>Next Tournament in</td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td>Tournament name</td>
+                        <td class="tournamentName">?</td>
+                    </tr>
+                    <tr>
+                        <td>Entry fee</td>
+                        <td class="registrationFee">?</td>
+                    </tr>
+                    <tr>
+                        <td>Prize Pool</td>
+                        <td class="prizePool">?</td>
+                    </tr>
+                    <tr>
+                        <td>Registered players</td>
+                        <td class="registeredPlayers">?</td>
+                    </tr>
+                    <tr>
+                        <td>Registered friends</td>
+                        <td class="registeredFriends">?</td>
+                    </tr>
+                    <tr>
+                        <td>Registered?</td>
+                        <td><span class="registered">yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td>
+                            <span class="registerButton" style="display: none">register</span>
+                            <span class="moreInfoButton" style="display: none">details</span>
+                            <span class="playButton" style="display: none">play</span>
+                            <span class="buyChips" style="display: none">buy</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="progress-barTest">
+        </div>
+    </div>
+
+    <div class="progressBarBonusWidgetTest" style="display:none">
+        <input type="button" class="closeButton" value="close">&nbsp;</input>
+        <input type="button" class="dismissButton" value="close">&nbsp;</input>
+        <input type="button" class="postButton" value="post">&nbsp;</input>
+        <span class="bonusChipAmount"></span>
+    </div>
+
+    <!-- Login/RegistrationForm -->
+
+<form class="loginForm" name="loginForm" method="POST" action="/login">
+    <input type="hidden" value="true" name="partial"/>
+    <input type="hidden" name="avatar" value="http://jrae-centos.local:8188/web-content/images/gloss/friend-bar-none-photo.png">
+
+    <fieldset class="facebook" id="fb-login">
+        <div id="facebook-connect-login">
+            <div class="fb-login-button" data-scope="email,user_birthday"
+                 data-onlogin="new YAZINO.LobbyService().facebookConnectLogin();">
+                Login with Facebook
+            </div>
+        </div>
+        <input type="hidden" name="redirectTo" id="redirectTo" value="">
+    </fieldset>
+
+    <fieldset>
+        <h1>Login with Yazino</h1>
+
+
+        <p>
+            <label for="email">Email</label>
+                                <input type="email" id="email" name="email" value="" required="required"/>
+                        </p>
+    </fieldset>
+    <fieldset class="new-or-existing-user">
+        <h4>
+            Do you have a Yazino password?
+        </h4>
+        <label>
+
+
+            <input name="registered" type="radio" value="existing-user" checked="checked">
+            Yes, I have a password
+
+        </label>
+
+        <div class="only-active-for-existing-users loginMiniForm">
+
+            <input type="password" id="registeredPassword" name="registeredPassword"
+                   value="" size="30" class="required-when-enabled">
+            <p class="forgottenPassword">
+                <a href="/resetPassword">Forgot Password?</a>
+            </p>
+        </div>
+        <p class="registerMiniForm">
+            <label>
+                                        <input name="registered" type="radio" value="new-user" >
+                No, I'm a new player
+            </label>
+        </p>
+
+        <div class="only-shown-for-existing-users">
+            <input class="loginButton" value="Login" type="submit">
+        </div>
+    </fieldset>
+    <fieldset class="only-shown-for-new-users registrationArea">
+        <p>
+            <label for="displayName">Display Name </label>
+            <span class="validationRequirement">Pick a unique name</span>
+                            <input type="text" id="displayName" name="displayName" value="" class="required-when-enabled" >              </p>
+
+        <p>
+            <label>Password</label><span class="validationRequirement">5-20 alphanumeric characters</span>
+                            <input type="text" id="password" name="password" value="" autocapitalize="none" autocorrect="off" class="required-when-enabled">              </p>
+
+        <div id="termsAndSignup">
+                                            <label>
+                <span class="check">
+                    <input type="checkbox" id="termsAndConditions" name="termsAndConditions" class="required-when-enabled"
+                        >
+                </span>
+                I agree to the
+                <a href="/legal/termsOfService">
+                    Terms of Service
+                </a> and
+                <a href="/legal/privacy">
+                    Privacy Policy
+                </a>
+            </label>
+        </div>
+
+        <p class="honeypot">
+            what state are you in                 <input type="text" id="honeypot" name="honeypot" value="" size="20">         </p>
+        <input class="loginButton" value="Login" type="submit">
+    </fieldset>
+
+    <fieldset class="rememberMe">
+                    <input type="button" class="iFrameKillerClose yaz-std-close-button" value="Close"/>
+                <label>
+                                <input type="checkbox" name="_spring_security_remember_me" id="rememberMe" checked> Keep me logged in
+        </label>
+
+        <p>(Uncheck if on a shared computer)</p>
+    </fieldset>
+</form>
+
+    <!-- cashier start -->
+
+    <form id="paymentSelection" method="post" action="cashierProcess">
+    <div id="container" class="BLACKJACK cashier_overlay">
+    <div id="main" class="buy-chips">
+    <div id="buy_chips_main">
+    <div id="main_body">
+    <div id="payment_method_box" class="box">
+        <div id="payment_title" class="cover-upper"></div>
+        <div id="paiment_method_body">
+            <ul>
+                <li>
+                    <input type="radio" class="paimentRadio" id="paiment_credit" name="paymentMethod"
+                           checked="checked" value="creditcard">
+                    <label class="credit-cart" for="paiment_credit">Pay by card</label>
+                </li>
+                <li>
+                    <input type="radio" class="paimentRadio" id="paiment_pay_pal" name="paymentMethod"
+                           value="paypal">
+                    <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+                </li>
+                <li>
+                    <input type="radio" class="paimentRadio" id="paiment_trialpay" name="paymentMethod"
+                           value="trialpay">
+                    <label class="trialpay" for="paiment_trialpay">Earn Chips</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="action_box" class="box">
+    <div id="tabs" class="buy-chips"></div>
+    <div id="action_body">
+    <div id="paypal_please_wait" class="awaiting" style="display: none">
+        <div id="cofirmation_Body">
+            <div class="cofirmation-status">
+                <span id="loadingIcon"></span>
+                <span id="wait_header" class="status">Just a moment!</span>
+                <span id="wait_text" class="status-desc">Contacting PayPal...</span>
+            </div>
+        </div>
+    </div>
+    <div id="currency">
+        <select id="currency_list" name="updatedCurrency">
+            <option value="GBP">British Pounds (GBP)</option>
+            <option value="EUR">Euros (EUR)</option>
+            <option value="USD" selected="true">American Dollars (USD)</option>
+        </select>
+    </div>
+    <div id="select_chips_value">
+    <ul id="paymentOptions">
+
+    <li class="USD optionUSD1">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD1">
+        <a class="chips-value-10000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">10,000</span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-10000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">5</span>
+                                                    </span>
+        </a>
+    </li>
+    <li class="USD optionUSD2">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD2">
+        <a class="chips-value-21000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">21,000</span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-21000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">
+                                                            10
+                                                        </span>
+                                                    </span>
+        </a>
+    </li>
+    <li class="USD optionUSD3">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD3">
+        <a class="chips-value-50000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">
+                                                            50,000
+                                                        </span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-50000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">
+                                                            20
+                                                        </span>
+                                                    </span>
+        </a>
+    </li>
+    <li class="USD optionUSD4">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD4">
+        <a class="chips-value-150000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">
+                                                            150,000
+                                                        </span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-150000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">
+                                                            50
+                                                        </span>
+                                                    </span>
+        </a>
+    </li>
+    <li class="USD optionUSD5">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD5">
+        <a class="chips-value-400000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">
+                                                            400,000
+                                                        </span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-400000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">
+                                                            100
+                                                        </span>
+                                                    </span>
+        </a>
+    </li>
+    <li class="USD optionUSD6">
+        <input type="radio" class="chips-radio"
+               name="paymentOption" checked="checked"
+               value="optionUSD6">
+        <a class="chips-value-1000000">
+                                                    <span class="value-wrapper BLACKJACK">
+                                                        <span class="chips-title-value">
+                                                            1,000,000
+                                                        </span>
+                                                    </span>
+                                                    <span class="select-chips-body">
+                                                        <span class="img chips-1000000">
+                                                            <span class="promotion-chips">15,000</span>
+                                                        </span>
+                                                        <span class="checkbox">
+                                                            150
+                                                        </span>
+                                                    </span>
+        </a>
+    </li>
+    </ul>
+    </div>
+    <div id="action_info">
+        <div id="value_status">
+            <span class="value-status">Good value</span><br>
+            <span class="player-status">Savvy Star</span>
+            <span class="cell">1 buys 3,000 chips</span>
+        </div>
+        <div id="promotion-info">
+            <span class="header"></span>
+            <span class="text"></span>
+        </div>
+        <input id="submitBtn" name="submitBtn" type="submit" class="button" value="continue">
+        <input id="paypalBtn" name="paypalBtn" type="submit" class="paypalButton" value="">
+        <input id="facebookBtn" name="facebookBtn" type="button" class="button" value="continue">
+        <input id="earnChipsBtn" name="earnChipsBtn" type="button" class="button" value="">
+    </div>
+    </div>
+    </div>
+    </div>
+    <div id="bottom">Have questions? Contact us at <a
+            href="http://support.yazino.com" target="_blank">support.yazino.com</a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <input type="hidden" name="promotionChips" value="">
+    <input type="hidden" name="promotionId" value="">
+    </form>
+
+    <!-- cashier end -->
+
+    <!-- Invite Friend Reminder Widget -->
+
+    <div id="inviteFriendReminderWidget1" class="pending inviteFriendReminderWidget"
+         data-invite-recipient-id="recipient1"
+         data-invite-source="source1">
+        <a class="sendReminder" href="">Send Reminder</a>
+    </div>
+
+    <div id="inviteFriendReminderWidget2" class="pending inviteFriendReminderWidget"
+         data-invite-recipient-id="recipient1"
+         data-invite-source="source1">
+        <a class="sendReminder" href="">Send Reminder</a>
+    </div>
+
+    <div id="inviteFriendReminderWidget3" class="pending inviteFriendReminderWidget"
+         data-invite-recipient-id="recipient1"
+         data-invite-source="source1">
+        <a class="sendReminder" href="">Send Reminder</a>
+    </div>
+
+    <div id="inviteFriendReminderWidget4" class="pending inviteFriendReminderWidget"
+         data-invite-recipient-id="recipient1"
+         data-invite-source="source1">
+        <a class="sendReminder" href="">Send Reminder</a>
+    </div>
+
+    <div id="inviteFriendReminderWidget5" class="pending inviteFriendReminderWidget"
+         data-invite-recipient-id="recipient1"
+         data-invite-source="source1">
+        <a class="sendReminder" href="">Send Reminder</a>
+    </div>
+
+    <!-- removeBuddyWidget -->
+    <a id="brokenRemoveBuddyWidget" class="removeBuddyWidget" href="#" >Remove Buddy</a>
+
+    <li id="removeBuddyWidget" class="template buddyListItemTemplate">
+        <img class="avatar" src="" alt="">
+
+        <div class="playerName">blah</div>
+        <div class="playerStatus">blah</div>
+        <span class="featureLink removeBuddy">
+            <a href="#" class="button">Remove</a>
+        </span>
+        <span class="featureLink challengeBuddy">
+            <a href="#" class="button">Send Challenge</a>
+        </span>
+    </li>
+
+    <!--<a id="removeBuddyWidget" class="removeBuddyWidget" href="#" data-buddy-id="123">Remove Buddy</a>-->
+
+    <span id="challengeWidget"  class="featureLink challengeBuddy">
+        <a href="#" class="button">Send Challenge</a>
+    </span>
+
+    <article class="buddyListStatementTest">
+        <div class="haveBuddies">
+            <p class="description">Join friends online and challenge them to a game!</p>
+            <label class="search"><input placeholder="Start typing a name"></label>
+            <div class="buddyListRoot">
+            </div>
+            <div style="display:none" class="template">
+                <li class="buddyListItemTemplate">
+                    <img class="avatar" src="" alt="">
+
+                    <div class="playerName">TEMPLATE NAME</div>
+                    <div class="playerStatus">TEMPLATE STATUS</div>
+                    <span class="featureLink removeBuddy">
+                        <a href="#" class="button">Remove</a>
+                    </span>
+                    <span class="featureLink challengeBuddy">
+                        <a href="#" class="button">Send Challenge</a>
+                    </span>
+                </li>
+            </div>
+        </div>
+        <div class="haveNoBuddies">
+            <div class='loser'>Add Yazino Buddies to:</div>
+            <ul>
+                <li>See who's online</li>
+                <li>private chat in-game</li>
+                <li>Find friends faster</li>
+                <li>Play together</li>
+            </ul>
+        </div>
+    </article>
+
+
+    <!--<div id="buddyListWidget" class="buddyListWidget"></div>-->
+
+    <!--<div style="display:none" class="template">-->
+        <!--<li class="buddyListItem">-->
+            <!--<img class="avatar" src="" alt="">-->
+            <!--<div class="playerName">TEMPLATE NAME</div>-->
+            <!--<div class="playerStatus">TEMPLATE STATUS</div>-->
+            <!--<span class="featureLink removeBuddy">-->
+                <!--<a href="#" class="button">Remove</a>-->
+            <!--</span>-->
+            <!--<span class="featureLink challengeBuddy">-->
+                <!--<a href="#" class="button">Send Challenge</a>-->
+            <!--</span>-->
+        <!--</li>-->
+    <!--</div>-->
+
+
+    <!-- FacebookUserDetailsWidget start -->
+    <div class="fbUserDetailsWidgetTest">
+        <div data-fb-user-id="fbUser1" >
+            <!-- child -->
+            <img class="fbPicture" src="http://some_default_picture"/>
+            <span class="fbName">fbUser1 name not set</span>
+        </div>
+        <div data-fb-user-id="fbUser2">
+            <div>
+                <!-- non-child descendant -->
+                <img class="fbPicture" src="http://some_default_picture"/>
+                <span class="fbName">fbUser2 name not set</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- InviteViaEmailWidget start -->
+    <div class="inviteViaEmailWidgetTest">
+        <form class="addresses" action="#">
+            <input type="email" placeholder="Type here..." value="email1@example.org"/>
+            <input type="email" placeholder="Type here..." value="email2@example.org" />
+            <input type="email" placeholder="Type here..." value="email3@example.org" />
+            <input type="email" placeholder="Type here..." value="limited@example.org" />
+            <input type="email" placeholder="Type here..." value="" />
+            <div class="emailValidationErrors">
+                <div class="invalidEmail">Invalid email address</div>
+                <div class="emailAlreadyRegistered">Already registered</div>
+                <div class="limitExceeded">Limit exceeded, try later</div>
+            </div>
+            <input type="button" class="testSubmit sendInvites"/>
+        </form>
+    </div>
+
+    <div class="inviteViaEmailWidgetEmptyTest">
+        <form class="addresses" action="#">
+            <input type="email" placeholder="Type here..." value="Type here..." class="emptyEmail1"/>
+            <input type="email" placeholder="Type here..." value="Type here..." class="emptyEmail2"/>
+            <input type="email" placeholder="Type here..." value="Type here..." class="emptyEmail3"/>
+            <input type="email" placeholder="Type here..." value="Type here..." class="emptyEmail4"/>
+            <div class="emailValidationErrors">
+                <div class="invalidEmail">Invalid email address</div>
+                <div class="emailAlreadyRegistered">Already registered</div>
+                <div class="limitExceeded">Limit Exceeded, please try again later</div>
+            </div>
+            <input type="button" class="testSubmitEmpty sendInvites"/>
+        </form>
+    </div>
+
+    <!-- InviteViaEmailWidget end -->
+    <!-- selectAndSendInviteWidget Begin -->
+    <!-- selectAndSendInviteWidget End -->
+
+
+    <div class="privateTableWidgetTest widget2" gameType="BLACKJACK">
+        <div class="create" style="display: block">
+            <div>Create your private Blackjack table:</div>
+            <div>Name your table: <input type="text" class="tableName"/></div>
+            <div>Game type:
+                <input type="radio" class="templateName" name="templateNameX" id="AtlanticCity" value="Atlantic City" checked='true' />Atlantic
+                <input type="radio" class="templateName" name="templateNameX" id="LasVegas" value="Las Vegas"/>Vegas
+            </div>
+            <div class="stake">What�s your stake?
+                <input type="button" class="decreaseStake" value="-"/>
+                <span class="stakeDescription">10-1K</span>
+                <input type="button" class="increaseStake" value="+"/>
+            </div>
+            <br/><input type="button" class="createTable" value="Create My Table"/>
+        </div>
+        <div class="invite" style="display: none">
+            <input type="hidden" class="tableId" name="tableId"/>
+            <div>Table name: <span class="tableName"></span></div>
+            <div>Stake: <span class="stakeDescription"></span></div>
+            <br/><input type="button" class="deleteTable" value="Delete My Table"/>
+            <input type="button" class="gotoTable" value="Go To My Table"/>
+        </div>
+    </div>
+    <input type="hidden" name="requestId" value="uniqueId"/>
+</div>
+</body>
+
+</html>

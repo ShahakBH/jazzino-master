@@ -1,0 +1,35 @@
+#parse("includes/header.vm")
+
+<section id="content">
+    <div class="list">
+        <h2>RabbitMQ Test</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+                #set($problems = false)
+
+                #foreach ($prop in $diagnostics.keySet())
+                    #if($diagnostics.get($prop) == "false")
+                        #set($problems = true)
+                    #end
+                <tr>
+                    <td>$prop</td>
+                    <td>$diagnostics.get($prop)</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+
+        #if($problems)
+            <p><strong>Problems were found while testing RabbitMQ connectivity! Please check your
+                configuration.</strong></p>
+        #end
+
+    </div>
+</section>

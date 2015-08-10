@@ -1,0 +1,70 @@
+#set ($location = "Session Monitor")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set ($baseUrl = "${request.contextPath}/monitor/session/list")
+
+<section id="content">
+    <div class="list">
+        <h2>Sessions</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>Name</th>
+                <th>Partner</th>
+                <th>Platform</th>
+                <th>Locations</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    #paging( $sessions.startPosition 20 $sessions.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="7">
+                    #paging( $sessions.startPosition 20 $sessions.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($session in $sessions.data)
+                <tr>
+                    <td>$session.playerId</td>
+                    <td>$session.nickname</td>
+                    <td>$session.partnerId</td>
+                    <td>$session.platform</td>
+                    <td>
+                        #if ($session.locations && !$session.locations.isEmpty())
+                            <ul>
+                                #foreach ($location in $session.locations)
+                                <li>$location</li>
+                                #end
+                            </ul>
+                        #end
+                    </td>
+                    <td>
+                        #if ($session.timestamp)
+                            $dateTool.format('dd/MM/yyyy HH:mm:ss z', $session.timestamp)
+                        #end
+                    </td>
+                    <td>
+                        <a href="${request.contextPath}/monitor/session/details/${session.playerId}/${session.localSessionKey}"
+                           title="View details for player ${session.playerId}">Details</a>
+                        | <a class="action-named" data-action="Unload" data-id="${session.nickname}"
+                             data-type="player"
+                             href="${request.contextPath}/monitor/session/unload/${session.playerId}/${session.localSessionKey}"
+                             title="Unload player ${session.nickname}">Unload</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>

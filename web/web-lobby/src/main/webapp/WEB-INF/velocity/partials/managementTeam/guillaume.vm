@@ -1,0 +1,39 @@
+<div id="management-team-area">
+    <h3>Guillaume Sampic</h3>
+    <h4>VICE PRESIDENT ACQUISITION & BUSINESS INTELLIGENCE</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/guillaume-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/roulette">
+                <div class="game-roulette"></div>
+            </a>
+            <a href="/blackjack">
+                <div class="game-blackjack"></div>
+            </a>
+
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>
+        Guillaume oversees Yazino's digital acquisition and business intelligence, a key asset for setting business
+        objectives. With millions of transactions and data points to consider every day, Guillaume leads the efforts to
+        analyse player behaviour across Yazino's platform and games to improve retention and monetisation.
+    </p>
+
+    <p>Before joining Yazino, Guillaume advised the French leading online poker company -Everest Poker - to set up and
+        lead their marketing and business development efforts. However, finding that beneath the veneer of new
+        technology the underlying business of online gambling was still very traditional and cautious, he decided to
+        seek new challenges in the fast-moving social games industry.</p>
+
+    <p>Prior to his role with the poker company, Guillaume led several internet companies in France across eCRM
+        (Maximiles), matchmaking (PARSHIP.fr), well-being and healthcare (Psychologies.com), and sites aimed at a senior
+        audience (Senior Planet Group). Guillaume started his career working for the European video game subsidiary of
+        The Walt Disney Company, based in Paris.
+    </p>
+
+</div>
+</div>

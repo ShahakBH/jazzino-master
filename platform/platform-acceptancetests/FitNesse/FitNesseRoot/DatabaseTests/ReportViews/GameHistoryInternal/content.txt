@@ -1,0 +1,25 @@
+|insert|AUDIT_TABLE_INFO|
+|AUDIT_LABEL|HOSTNAME|AUDIT_TS|DBWRITE_TS|TABLE_ID|GAME_STATUS|GAME_ID|GAME_TYPE|GAME_INCREMENT|TABLE_STATUS|
+|Game Init Game 1 Table 27|mc34.signtechno.com|2009-03-17 18:50:17.0|2009-03-17 17:41:37.0|27.00|Game Status In XML|1.0|BLACKJACK|1|O|
+|Betting Game 1 Table 27|mc34.signtechno.com|2009-03-17 18:50:18.0|2009-03-17 17:41:38.0|27.00|Game Status In XML|1.0|BLACKJACK|5|O|
+|Playing Game 1 Table 27|mc34.signtechno.com|2009-03-17 18:50:21.0|2009-03-17 17:41:41.0|27.00|Game Status In XML|1.0|BLACKJACK|9|O|
+|Complete Game 1 Table 27|mc34.signtechno.com|2009-03-17 18:50:27.0|2009-03-17 17:41:49.0|27.00|Game Status In XML|1.0|BLACKJACK|10|O|
+|Settled Game 1 Table 27|mc34.signtechno.com|2009-03-17 18:50:28.0|2009-03-17 17:41:50.0|27.00|Game Status In XML|1.0|BLACKJACK|11|O|
+|Game Init Game 2 Table 5|mc34.signtechno.com|2009-03-18 11:49:26.0|2009-03-18 10:40:45.0|5.00|Game Status In XML|2.0|BLACKJACK|15|O|
+|Betting Game 2 Table 5|mc34.signtechno.com|2009-03-18 11:51:26.0|2009-03-18 10:43:45.0|5.00|Game Status In XML|2.0|BLACKJACK|17|O|
+|Playing Game 2 Table 5|mc34.signtechno.com|2009-03-18 11:53:26.0|2009-03-18 10:46:45.0|5.00|Game Status In XML|2.0|BLACKJACK|18|O|
+|Complete Game 2 Table 5|mc34.signtechno.com|2009-03-18 11:56:26.0|2009-03-18 10:49:45.0|5.00|Game Status In XML|2.0|BLACKJACK|19|O|
+|Settled Game 2 Table 5|mc34.signtechno.com|2009-03-18 11:57:26.0|2009-03-18 10:49:55.0|5.00|Game Status In XML|2.0|BLACKJACK|21|O|
+|Game Init Game 6 Table 27|mc34.signtechno.com|2009-03-19 18:50:17.0|2009-03-19 17:41:37.0|27.00|Game Status In XML|6.0|BLACKJACK|30|O|
+|Betting Game 6 Table 27|mc34.signtechno.com|2009-03-19 18:50:18.0|2009-03-19 17:41:39.0|27.00|Game Status In XML|6.0|BLACKJACK|34|O|
+|Playing Game 6 Table 27|mc34.signtechno.com|2009-03-19 18:50:21.0|2009-03-19 17:41:41.0|27.00|Game Status In XML|6.0|BLACKJACK|35|O|
+|Complete Game 6 Table 27|mc34.signtechno.com|2009-03-19 18:50:27.0|2009-03-19 17:41:49.0|27.00|Game Status In XML|6.0|BLACKJACK|36|O|
+|Settled Game 6 Table 27|mc34.signtechno.com|2009-03-19 18:50:28.0|2009-03-19 17:41:50.0|27.00|Game Status In XML|6.0|BLACKJACK|37|O|
+
+This test verifies that GAME_HISTORY_INTERNAL returns the initial audit per table per game.
+
+!|Query| select * from GAME_HISTORY_INTERNAL|
+|TABLE_ID|GAME_ID|MIN_AUDIT_TS|MIN_DBWRITE_TS|
+|27.00|1.00|2009-03-17 18:50:17.0|2009-03-17 17:41:37.0|
+|5.00|2.00|2009-03-18 11:49:26.0|2009-03-18 10:40:45.0|
+|27.00|6.00|2009-03-19 18:50:17.0|2009-03-19 17:41:37.0|

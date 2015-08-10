@@ -1,0 +1,35 @@
+#* @vtlvariable name="assetUrl" type="java.lang.String" *#
+#if (${development})
+<link rel="stylesheet" href="$!assetUrl/style/gloss/yahoo.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/gloss/strata.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/lightbox.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/top-bar.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/achievements.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/jobs.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/jquery.prettyPhoto.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/jquery.validationEngine.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/login.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/management.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/verification.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/personSelector.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/browser-warning.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/buddy-list.css" type="text/css">
+<link rel="stylesheet" href="$!assetUrl/style/partial/games-how-to-play.css" type="text/css">
+#else
+<link rel="stylesheet" href="$!assetUrl/style/gloss/yazino-all.min.css" type="text/css">
+#end
+
+#if ($!{partial})
+<link rel="stylesheet" href="$!assetUrl/style/partial/headless-page-reset.css" type="text/css">
+#end
+
+<!--[if IE]><link rel="stylesheet" href="$!assetUrl/style/gloss/ie7.css" type="text/css"><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="$!assetUrl/style/gloss/ie7only.css" type="text/css"><![endif]-->
+
+#if ($canvas)
+##    this CSS allows for canvas with non-compact, retaining until they make up their minds on compact
+##    <link rel="stylesheet" href="$!assetUrl/style/gloss/strata-canvas.css" type="text/css"> 
+<link type="text/css" href="$!assetUrl/style/gloss/strata-compact.css" rel="stylesheet">
+<link rel="stylesheet" href="$!assetUrl/style/partial/achievements-compact.css" type="text/css">
+<!--[if IE]><link rel="stylesheet" href="$!assetUrl/style/gloss/ie7-compact.css" type="text/css"><![endif]-->
+#end

@@ -1,0 +1,1 @@
+ALTER TABLE PROMOTION_ARCHIVE ADD COLUMN PLAYER_COUNT INTEGER NOT NULL DEFAULT -1 COMMENT 'For promotion not marked for ''All Players'', a count of players added to promotion. -1 implies the count has not been calculated' AFTER ALL_PLAYERS#

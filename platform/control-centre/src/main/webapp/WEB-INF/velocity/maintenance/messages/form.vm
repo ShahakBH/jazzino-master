@@ -1,0 +1,67 @@
+<form method="post" action="${request.contextPath}/maintenance/messages/save">
+
+    #set($quote = '"')
+    #if ($readonly)
+        #set($formoptions = "$!formoptions readonly=${quote}readonly${quote}")
+    #end
+
+    <fieldset>
+        <legend>Details</legend>
+
+        #if ($systemMessage.id)
+            #springFormHiddenInput( 'systemMessage.id' '' )
+        #end
+
+        <label for="message">Message:</label>
+        #springFormTextarea( 'systemMessage.message' "$!formoptions required=${quote}required${quote}" )
+
+        <p class="blurb" target="_blank">This is in <a href="http://daringfireball.net/projects/markdown/syntax">Markdown format</a>.</p>
+
+        #springBind( 'systemMessage.message' )
+        #springShowErrors( '' 'error' )
+
+        <label for="validFrom">Valid From:</label>
+        #springFormDateTimeLocalInput( 'systemMessage.validFrom' "$!formoptions required=${quote}required${quote}" )
+
+        #springBind( 'systemMessage.validFrom' )
+        #springShowErrors( '' 'error' )
+
+        <label for="validTo">Valid To:</label>
+        #springFormDateTimeLocalInput( 'systemMessage.validTo' "$!formoptions required=${quote}required${quote}" )
+
+        #springBind( 'systemMessage.validTo' )
+        #springShowErrors( '' 'error' )
+
+    </fieldset>
+
+    #if (!$readonly)
+        <input type="submit" value="Submit"/>
+    #end
+
+</form>
+
+#if (!$readonly)
+<div class="sidebar">
+    <h2>Markdown Cheatsheet</h2>
+
+    <h3>Phrase Emphasis</h3>
+    <ul>
+        <li>*italic* **bold**</li>
+        <li>_italic_   __bold__</li>
+    </ul>
+
+    <h3>Links</h3>
+    <ul>
+        <li>An [example](http://url.com/)</li>
+    </ul>
+
+    <h3>Images</h3>
+    <ul>
+        <li>![alt text](/path/img.jpg)</li>
+    </ul>
+
+    <h3><a href="http://wiki/display/pj/Action+Links+using+yazino+namespace">Special Links are in the wiki</a></h3>
+
+    <a href="http://daringfireball.net/projects/markdown/syntax">Full Reference</a>
+</div>
+#end

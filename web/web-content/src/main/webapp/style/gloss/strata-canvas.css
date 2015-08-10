@@ -1,0 +1,12 @@
+.accessory-bar div.chips {
+    width: 272px;
+    margin-right: 0;
+}
+
+.accessory-bar .chips #buyChips {
+    display: none;
+}
+
+header .menu .player .name {
+    background-image: inherit;
+}

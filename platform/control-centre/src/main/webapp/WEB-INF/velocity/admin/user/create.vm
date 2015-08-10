@@ -1,0 +1,18 @@
+#set ($location = "Create User")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/admin/user/list">List Users</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Create User</h2>
+
+        #parse("admin/user/form.vm")
+    </div>
+</section>

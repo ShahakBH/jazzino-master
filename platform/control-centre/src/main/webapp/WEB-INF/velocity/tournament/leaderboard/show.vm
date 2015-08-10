@@ -1,0 +1,31 @@
+#set ($location = "Show Trophy Leaderboard")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/leaderboard/list">List Trophy Leaderboards</li>
+        <li><a href="${request.contextPath}/tournament/leaderboard/edit/${leaderboard.id}">Edit</li>
+        <li>
+            #if ($leaderboard.enabled)
+            <a href="${request.contextPath}/tournament/leaderboard/disable/${leaderboard.id}"
+               class="action-named" data-action="Disable" data-id="${leaderboard.id}"
+               data-type="leaderboard">Disable</a>
+            #else
+            <a href="${request.contextPath}/tournament/leaderboard/enable/${leaderboard.id}"
+               class="action-named" data-action="Enable" data-id="${leaderboard.id}"
+               data-type="leaderboard">Enable</a>
+            #end
+        </li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Trophy Leaderboard ${leaderboard.id}</h2>
+
+        #set($readonly = "true")
+        #parse("tournament/leaderboard/form.vm")
+    </div>
+</section>

@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+require 'csv'
+
+$statuses = {
+    'accept_all' => "A",
+    'email_account_invalid' => "I",
+    'email_address_invalid' => "I",
+    'email_domain_invalid' => "I",
+    'unknown' => "U",
+    'valid' => "V"
+}
+
+
+column_index = {
+  :with_connected => [1, 2, 4, 5],
+  :with_extra_column => [0, 2, 3, 4],
+  :with_column_0 => [1, 2, 3, 4],
+  :basic => [0, 1, 2, 3]
+}
+
+emails = {}
+Dir["*.csv"].each do |file|
+  line_count = 0
+  format = :basic
+  CSV.foreach(file) do |line|
+
+    if line_count == 0 #try to figure out file format
+      if line.index("connected")
+          format = :with_connected
+      end
+      if line.index("column_1") || line.index("column_2")
+          format = :with_extra_column
+      end
+
+      if line.index("column_0")
+          format = :with_column_0
+      end
+      p "Processing #{file} (format: #{format})"
+
+    else
+
+      if line.length == 0
+        next
+      end
+
+      email_value = line[column_index[format][0]]
+
+      if email_value.nil? or email_value.index('"')
+        next
+      end
+
+      email_value = email_value.gsub(/\\/,'a')
+      status_value = line[column_index[format][1]]
+      disposable_value = line[column_index[format][2]]
+      role_account_value = line[column_index[format][3]]
+
+      status = $statuses[status_value]
+
+      if status.nil?
+        raise "Invalid status '#{status_value}' (column #{column_index[format]} for format: #{format}) on line #{line_count}: #{line}"
+      end
+
+      disposable = disposable_value == "true"? 1: 0
+      role_account = role_account_value == "true"? 1: 0
+      emails[email_value] = [status, disposable, role_account ]
+    end
+    line_count += 1
+  end
+end
+
+p "Generating SQL for #{emails.length} email addresses..."
+
+File.open("emails.sql", "w") do |out|
+  emails.each do |email, details|
+    out.puts "INSERT IGNORE INTO EMAIL_VALIDATION(EMAIL_ADDRESS, STATUS, IS_DISPOSABLE, IS_ROLE) VALUES (\"#{email}\", \"#{details[0]}\", #{details[1]}, #{details[2]});"
+  end
+end

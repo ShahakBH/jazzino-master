@@ -1,0 +1,31 @@
+#if ($development)
+<script type="text/javascript" src="${secureAssetUrl}/javascript/yazino-core.js"></script>
+#else
+<script type="text/javascript" src="${secureAssetUrl}/javascript/yazino-core.min.js"></script>
+#end
+
+#parse("partials/configuration.vm")
+
+#if ($development)
+## Libraries
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery.cookie-1.0.0.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/swfobject.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/browserDetect.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/require.min.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/lightstreamer.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery.validationEngine-en.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery.validationEngine.js"></script>
+
+## Our code
+<script type="text/javascript" src="${secureAssetUrl}/javascript/gloss/jquery.functions2.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery.Storage.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/partial/achievements.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/partial/worldpay.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/rpcservice.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/yazino.js"></script>
+#else
+<script type="text/javascript" src="${secureAssetUrl}/javascript/swfobject.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${secureAssetUrl}/javascript/yazino-all.min.js"></script>
+#end

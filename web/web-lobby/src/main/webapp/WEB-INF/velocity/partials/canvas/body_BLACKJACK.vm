@@ -1,0 +1,52 @@
+<div class="content">
+
+    <header>
+        <div id="logo">
+            <img src="$!assetUrl/images/canvas/BLACKJACK/logo.png">
+        </div>
+
+        <div class="fb-like" data-href="https://www.facebook.com/YazinoBlackjack" data-width="360" data-height="65"
+             data-colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+
+        <nav>
+            <ul>
+                <li class="action-buddies-invite"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-invitefriends.png" alt="Invite Friends"/></li>
+##                <li class="action-buddies-manage"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-buddies.png" alt="Buddies"/></li>
+                <li class="action-chips-get"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-getchips.png" alt="Get Chips"/></li>
+                <li class="action-link-fanpage"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-fanpage.png" alt="Fan Page"/></li>
+##                <li class="action-gifts-get"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-freegifts.png" alt="Free Gifts"/></li>
+##                <li class="action-go-mobile"><img src="$!assetUrl/images/canvas/BLACKJACK/tab-gomobile.png" alt="Go Mobile"/></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="game">
+        #if ($lobbyInformation.available)
+            #set($flashLoaderId='blackjackFlashLoader')
+            #set($flashLoaderSwf="$!clientUrl/flex4/shell/shell.swf")
+            #parse('partials/canvas/flash.vm')
+        #else
+        <div class="game-disabled $!gameType">
+            <h2>We&rsquo;re sorry</h2>
+            <h3>
+                This game is currently disabled.
+            </h3>
+            <p>
+                We&rsquo;ll have it back as soon as possible!
+            </p>
+        </div>
+        #end
+    </div>
+
+    <footer>
+        <span class="copyright">Copyright &copy; 2013 Yazino. All rights reserved.</span>
+
+        <ul>
+            <li><strong><a href="https://www.facebook.com/YazinoBlackjack/app_124192170958476" target="_blank" title="Access Support">Support</a></strong></li>
+            <li><a href="${request.contextPath}/legal/termsOfPurchase" target="_blank" title="View the Terms of Purchase">Terms of Purchase</a></li>
+            <li><a href="${request.contextPath}/legal/termsOfService" target="_blank" title="View the Terms of Service">Terms of Service</a></li>
+            <li><a href="${request.contextPath}/legal/privacy" target="_blank" title="View the Privacy Policy">Privacy Policy</a></li>
+        </ul>
+    </footer>
+
+</div>

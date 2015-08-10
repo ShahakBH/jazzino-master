@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="1 minute">
+
+<!-- YAZINO: I generally remove all of their appenders (and references) except LSProducer and add one for LSServer and one for Yazino -->
+
+  <appender name="LSServer" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  	<file><%= @log_dir %>/LSServer.log</file>
+
+  	<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern><%= @log_dir %>/LSServer.log.%i</FileNamePattern>
+      <MinIndex>1</MinIndex>
+      <MaxIndex>5</MaxIndex>
+    </rollingPolicy>
+
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>2048KB</MaxFileSize>
+    </triggeringPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="Yazino" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file><%= @log_dir %>/Yazino.log</file>
+
+  	<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern><%= @log_dir %>/Yazino.log.%i</FileNamePattern>
+      <MinIndex>1</MinIndex>
+      <MaxIndex>5</MaxIndex>
+    </rollingPolicy>
+
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>2048KB</MaxFileSize>
+    </triggeringPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="strata.server" level="INFO">
+    <appender-ref ref="Yazino" />
+  </logger>
+  <logger name="com.yazino" level="INFO">
+    <appender-ref ref="Yazino" />
+  </logger>
+  <logger name="com.yazino.platform.lightstreamer.adapter.LifecycleListeningMessageListenerContainer" level="WARN"/>
+  <logger name="com.yazino.platform.lightstreamer.adapter.LifecycleListeningBlockingQueueConsumer" level="WARN"/>
+
+  <!--
+    A custom StatusListener used to log the internal status of Logback.
+    This custom implementation is similar to the standard OnConsoleStatusListener
+    implementation but will only log WARN and ERROR messages from Logback's internal
+    status and will log on the standard error instead of logging on the standard output.
+  -->
+  <StatusListener class="com.lightstreamer.logback.Logging$OnConsoleErrorWarningStatusListener" />
+
+
+
+  <!--
+    This Appender is provided by Lightstreamer Kernel.
+    It has to be used in addition to other Appenders in order to make
+    log messages available to the internal Monitoring Data Adapter.
+    Generic Appender configuration elements are supported,
+    but for message formatting instructions, which are ignored.
+  -->
+  <appender name="LSProducer" class="com.lightstreamer.logback.ProducerAppender">
+    <!--
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>warn</level>
+    </filter>
+    -->
+  </appender>
+
+
+  <!--
+    The following is the base logger of all logging messages printed by
+    Lightstreamer Kernel (with a few exceptions).
+
+    Messages logged at INFO level notify major server activities,
+    like session starting and ending. If these messages are enabled,
+    they are also supplied to the internal MONITOR data adapter,
+    together with WARN and ERROR messages.
+
+    Messages logged at DEBUG level notify minor operations
+    and all data flow inside the Server. They should not be enabled
+    with production load levels.
+    No useful messages are logged at TRACE level. The level is reserved
+    for debug versions of the Server.
+
+    Severe ERROR messages are logged with a "FATAL" marker; in fact, a FATAL
+    level is not natively supported by logback.
+    Thanks to the marker, these messages can be filtered through logback's
+    MarkerFilter.
+    By the factory pattern configuration, FATAL is logged instead of ERROR
+    for these messages (note the tricky "%-5.5(%p%marker)" pattern).
+  -->
+  <logger name="LightstreamerLogger" level="INFO">
+    <appender-ref ref="LSServer" />
+    <!--<appender-ref ref="LSRolling" />-->
+    <!--<appender-ref ref="LSConsole" />-->
+    <appender-ref ref="LSProducer" />
+      <!-- must be set in order to send log messages to internal MONITOR provider -->
+  </logger>
+
+  <!--
+    These two loggers are used by the internal monitoring system to log
+    load statistics at INFO level.
+    LightstreamerMonitorText logs statistics with a human-readable syntax;
+    LightstreamerMonitorTAB logs statistics with a CSV syntax.
+
+    The frequency of the samples produced by the internal monitoring system
+    is governed by the <collector_millis> configuration element.
+    However, a resampling to lower frequencies can be performed, based on the
+    level specified for each logger; in particular:
+      at TRACE level, all samples are logged;
+      at DEBUG level, one sample out of 10 is logged;
+      at INFO level, one sample out of 60 is logged;
+      at a higher level, no log is produced.
+    The resampling behavior can be changed at runtime, by changing the level;
+    however, if the level is set to ERROR on startup, the logger will be
+    disabled throughout the life of the Server, regardless of further changes.
+
+    When resampling is in place, note that, for each displayed sample, values
+    that are supposed to be averaged over a timeframe still refer to the
+    current sample's timeframe (based on <collector_millis>); however, values
+    that are supposed to be the maximum over all timeframes refer also to the
+    samples that were not displayed.
+    On the other hand, delta statistics, like "new connections", are always
+    collected starting from the previous logged sample.
+  -->
+  <logger name="LightstreamerMonitorText" level="ERROR">
+    <appender-ref ref="LSServer" />
+  </logger>
+  <logger name="LightstreamerMonitorTAB" level="ERROR">
+    <appender-ref ref="LSServer" />
+  </logger>
+
+  <!--
+    The following subloggers are used to separate logging messages in families
+  -->
+
+  <!-- logging of system components initialization -->
+  <!-- at DEBUG level, initialization details, error details and all configuration
+       settings are reported -->
+  <logger name="LightstreamerLogger.init" level="INFO">
+    <!--appender-ref ref="LSServer" /-->
+  </logger>
+
+  <!-- logging of license check phase -->
+  <!-- at DEBUG level, check details and error details can be found in case
+       of license check failure -->
+  <logger name="LightstreamerLogger.license" level="INFO">
+    <!--appender-ref ref="LSServer" /-->
+  </logger>
+
+  <!-- logging of external services activity -->
+  <!-- at DEBUG level, details on external services activities and configuration,
+       as well as details on connectivity issues, are reported. -->
+  <logger name="LightstreamerLogger.external" level="INFO" />
+
+  <!-- logging of client request dispatching -->
+  <!-- at DEBUG level, request processing details are reported -->
+  <logger name="LightstreamerLogger.connections" level="WARN"/>
+
+  <!-- logging of issues related to TLS/SSL configuration and handshake management -->
+  <!-- at DEBUG level, details on the cipher suites are reported -->
+  <logger name="LightstreamerLogger.connections.ssl" level="WARN"/>
+
+  <!-- logging of client request interpretation issues -->
+  <!-- at WARN level, each time a request contains an unexpected HTTP header,
+     which the Server refuses or ignores, a notification is reported
+     that an interpretation error is possible -->
+  <!-- at INFO level, details upon request refusals are reported -->
+  <!-- at DEBUG level, details for all requests and responses are reported -->
+  <logger name="LightstreamerLogger.connections.http" level="ERROR"/>
+
+  <!-- logging of details for issues related to requests over WebSockets -->
+  <!-- at DEBUG level, details for all requests and responses are reported -->
+  <logger name="LightstreamerLogger.connections.WS" level="WARN"/>
+
+  <!-- logging of internal web server activity; it also logs requests of
+     static resources related to push requests -->
+  <!-- at DEBUG level, error details are reported -->
+  <logger name="LightstreamerLogger.webServer" level="WARN"/>
+
+  <!-- logging of parsing and elaboration of client requests -->
+  <!-- at DEBUG level, client request details are reported -->
+  <logger name="LightstreamerLogger.requests" level="INFO"/>
+
+  <!-- logging of elaboration of client polling requests -->
+  <logger name="LightstreamerLogger.requests.polling" level="WARN"/>
+
+  <!-- logging of Data Adapters interactions -->
+  <!-- at DEBUG level, events coming from the Data Adapters are dumped -->
+  <logger name="LightstreamerLogger.subscriptions" level="INFO"/>
+
+  <!-- logging of events preprocessing stage -->
+  <!-- at DEBUG level, events dispatched to ItemEventBuffers are dumped -->
+  <logger name="LightstreamerLogger.preprocessor" level="INFO"/>
+
+  <!-- logging of internal thread management and events dispatching -->
+  <logger name="LightstreamerLogger.scheduler" level="INFO"/>
+
+  <!-- logging of InfoPump and ItemEventBuffers internal activity -->
+  <!-- at DEBUG level, updates to be sent to the clients are dumped -->
+  <logger name="LightstreamerLogger.pump" level="INFO"/>
+
+  <!-- logging of management of messages received from the clients -->
+  <!-- at DEBUG level, details of message processing are logged -->
+  <logger name="LightstreamerLogger.pump.messages" level="INFO"/>
+
+  <!-- logging of socket write activity -->
+  <!-- at DEBUG level, all socket writes are dumped -->
+  <logger name="LightstreamerLogger.push" level="INFO"/>
+
+    <!-- logging of web client errors -->
+    <!-- at DEBUG level, log messages sent by the HTML/JavaScript Client
+      Library are logged. Remote logging must be enabled on the client side. -->
+  <logger name="LightstreamerLogger.webclient" level="DEBUG"/>
+
+    <!-- logging of JMX setup issues; note that full JMX features are restricted
+        to Vivace Edition -->
+    <!-- at DEBUG level, JMX connectors initialization details are
+        logged. -->
+  <logger name="LightstreamerLogger.monitoring" level="INFO"/>
+
+  <!--
+    The following logger logs healthcheck request processing at INFO level.
+    The logger does not inherit from "LightstreamerLogger" in order
+    to simplify sending the log to a dedicated appender.
+  -->
+  <logger name="LightstreamerHealthCheck" level="INFO">
+    <appender-ref ref="LSServer" />
+  </logger>
+
+  <!--
+    This logger is only used by the provided Proxy Data and Metadata Adapters,
+    when installed.
+    It logs Adapter activity at INFO, WARN, ERROR and FATAL level
+    (the latter through the "FATAL" marker).
+    At DEBUG level, outcoming request and incoming response messages are also dumped.
+    At TRACE level, incoming real-time update messages are also dumped.
+  -->
+  <logger name="com.lightstreamer.adapters.remote" level="INFO">
+    <appender-ref ref="LSServer" />
+    <!--<appender-ref ref="LSRolling" />-->
+    <!--appender-ref ref="LSConsole" /-->
+  </logger>
+
+  <!--
+    Setting properties in the root logger is not needed, as all log
+    messages fall in one of the loggers defined above.
+    It should be considered that if some Metadata Adapter or Data Adapter
+    uses logback too for log management, setting properties like Appenders
+    to the root logger in the Adapter log configuration file may also
+    affect Kernel logger settings.
+  -->
+  <root>
+  </root>
+
+</configuration>

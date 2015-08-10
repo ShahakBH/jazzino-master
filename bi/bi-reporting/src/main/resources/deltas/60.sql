@@ -1,0 +1,1 @@
+alter table audit_command drop column AUTO_ID cascade;

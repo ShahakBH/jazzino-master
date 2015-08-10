@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Reported</th>
+        <th>Platform</th>
+        <th>Player Id</th>
+        <th>Name</th>
+        <th>Properties</th>
+    </tr>
+    #foreach($event in $events)
+        <tr>
+            <td>$dateTool.format('yyyy MMM d HH:mm:ss:SS', $event.received.toDate())</td>
+            <td>$event.platform</td>
+            <td>$event.playerId</td>
+            <td>$event.name</td>
+            <td>
+                #foreach($mapEntry in $event.properties.entrySet())
+                    #if($foreach.index > 0), #end$mapEntry.key=$mapEntry.value
+                #end
+            </td>
+        </tr>
+    #end
+</table>

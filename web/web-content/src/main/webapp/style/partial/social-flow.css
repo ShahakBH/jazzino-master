@@ -1,0 +1,287 @@
+.social-flow, body.headless.social-flow {
+    width: 720px;
+    margin: auto;
+}
+
+.social-flow {
+    padding: 0 0 10px;
+}
+
+.social-flow .featureLink {
+    width: 200px;
+}
+
+.social-flow header.primary {
+    padding: 20px 30px 0;
+    min-height: 140px;
+}
+
+.social-flow header.primary hgroup > * {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 #c21d1d;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+.social-flow header.primary hgroup > * strong, .social-flow header.primary hgroup > * em {
+    color: #f3cd4d;
+    font-weight: inherit;
+}
+
+.social-flow header.primary hgroup > * strong {
+    position: relative;
+    top: 12px;
+    font-weight: bold;
+    font-size: 60px;
+}
+
+.social-flow .widgetArea {
+    overflow: hidden;
+    padding: 0 25px 10px;
+}
+
+.social-flow .widgetArea article {
+    padding: 10px;
+    border: 1px solid #e6e6e6;
+    background-color: #f2f2f2;
+    float: left;
+    border-radius: 7px;
+}
+
+
+.social-flow .widgetArea article.inactive {
+    border: none;
+    background-color: inherit;
+}
+
+.social-flow .widgetArea article.friendsSelector {
+    float: right;
+}
+
+.social-flow .widgetArea article + article {
+    margin-left: 16px;
+}
+
+.social-flow .widgetArea article header h1 {
+    font-size: 12px;
+    font-weight: normal;
+    color: #575757;
+    padding: 5px 0 10px;
+}
+
+.social-flow .providers {
+    float: left;
+    width: 190px;
+}
+
+.social-flow .providers li + li {
+    margin-top: 10px;
+}
+
+.social-flow .providers a > * {
+    background-color: #FFFFFF;
+    color: #575757;
+    text-transform: uppercase;
+    border: 1px solid #e6e6e6;
+    display: block;
+    width: 190px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.social-flow .providers a > p {
+    padding-top: 18px;
+    min-height: 32px;
+}
+
+.social-flow .providers * a > p {
+    background-image: url('../../images/social-flow/InviteViaEmailAddress.png');
+    background-repeat: no-repeat;
+    background-position: 32px center;
+    text-align: left;
+    padding-left: 52px;
+    width: 138px;
+}
+
+.social-flow .providers .buddies a > p {
+    background-image: url('../../images/social-flow/buddies-logo.gif');
+    background-position: 22px center;
+    padding-left: 58px;
+    width: 132px;
+}
+
+.social-flow .providers a.selected > * {
+    border-color: #e72020;
+}
+
+.social-flow .providers a:hover > * {
+    border-color: #e72020;
+}
+
+.social-flow .widgetArea article.feature {
+    position: relative;
+    margin-top: 24px;
+}
+
+.social-flow .widgetArea article.feature > *:first-child {
+    position: relative;
+}
+
+.social-flow .widgetArea article.feature header {
+    position: absolute;
+    background: url('../../images/social-flow/header-tab.png') no-repeat left bottom #979797;
+    width: 442px;
+    top: -35px;
+    left: -11px;
+    border-radius: 7px 7px 0 0;
+}
+
+.social-flow .widgetArea article.feature header h1 {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 #7a7a7a;
+    padding-left: 20px;
+    padding-top: 7px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.social-flow .sendEmails {
+    width: 420px;
+}
+
+.social-flow .sendEmails .emailAddresses {
+    overflow: hidden;
+    margin-right: -15px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+}
+
+.social-flow .sendEmails .emailAddresses li {
+    float: left;
+    width: auto;
+    padding-right: 8px;
+    padding-bottom: 12px;
+}
+
+.social-flow .sendEmails .emailAddresses li input {
+    width: 185px;
+    border: 1px solid #e6e6e6;
+    font-size: 13px;
+    color:  #575757;
+    padding: 12px 4px 12px 15px;
+}
+
+.social-flow .sendEmails .emailAddresses li input.emailAlreadyRegistered {
+    border-color: #ffb556;
+    background-color: #fff2e4;
+}
+
+.social-flow .sendEmails .emailAddresses li input.invalidEmail {
+    border-color: #ff0000;
+    background-color: #fff3f3;
+}
+
+.social-flow .sendEmails footer {
+    overflow: hidden;
+    clear: both;
+    width: 420px;
+}
+
+.social-flow .sendEmails footer .emailValidationErrors {
+    padding-left: 20px;
+    width: 200px;
+}
+
+.social-flow .sendEmails footer .emailValidationErrors li {
+    color: #ff0000;
+    list-style-type: square;
+    display: none;
+}
+
+.social-flow .sendEmails footer .emailValidationErrors li.emailAlreadyRegistered {
+    color: #ff8400;
+}
+
+.social-flow .sendEmails footer .featureLink {
+    display: block;
+    float: right;
+}
+
+.social-flow .friends {
+    clear: both;
+}
+
+.lightboxKillerClose {
+    float: right;
+}
+
+
+.selectedPeople .person .invalidEmail {
+    color: #ff0000;
+}
+
+.social-flow.gmail article.feature {
+    min-height: 362px;
+}
+
+.social-flow .featureLink.load-contacts {
+    margin-top: 161px;
+    margin-bottom: 156px;
+    margin-left : 110px;
+}
+
+/* Page specific: */
+
+.social-flow.invitation header.primary {
+    background: url('../../images/social-flow/inviteHeader.png') no-repeat;
+}
+
+.social-flow.invitation.sent header.primary {
+    background-image: url('../../images/social-flow/inviteSentHeader.png');
+    padding-top:55px;
+    min-height:105px;
+}
+
+.social-flow.challenge.start header.primary {
+    background: url('../../images/social-flow/challengeHeader.png') no-repeat;
+}
+
+.social-flow.challenge.buddies .personSelector .personLists .personList .person .comment {
+    color: #999999;
+}
+
+.social-flow.challenge.sent header.primary {
+    background-image: url('../../images/social-flow/challengeSentHeader.png');
+}
+
+.challenge.start header.primary hgroup > * {
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-align: left;
+    padding-right: 280px;
+    padding-left: 30px;
+    padding-top: 25px;
+    font-size: 28px;
+    color: #e72020;
+}
+
+.challenge.sent header.primary hgroup > * {
+    font-size: 32px;
+    color: #E72020;
+    text-shadow: 0 1px 0 white;
+    padding-right: 65px;
+    padding-left: 65px;
+    padding-top: 20px;
+}
+
+.challenge.sent header.primary hgroup > h2 {
+    font-size: 25px;
+    color: #787878;
+    padding-top: 5px;
+}
+
+.social-flow.facebook, .social-flow.buddies {
+    padding-bottom: 2px;
+}

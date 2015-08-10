@@ -1,0 +1,140 @@
+#!/bin/bash
+#
+# Jetty      This shell script takes care of starting and stopping Jetty
+#
+# chkconfig: - 80 20
+#
+### BEGIN INIT INFO
+# Provides: jetty
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:
+# Default-Stop:
+# Description: Release implementation for Jetty
+# Short-Description: start and stop Jetty
+### END INIT INFO
+#
+
+
+DAEMON_HOME=/opt/jetty/bin
+DAEMON_SCRIPT="jetty.sh"
+NAME="$(basename $0)"
+DAEMON_LOG="/var/log/jetty.log"
+DAEMON_USER="jetty"
+
+# generic daemon script, requires DAEMON vars to be set up in the header
+
+unset ISBOOT
+if [ "${NAME:0:1}" = "S" -o "${NAME:0:1}" = "K" ]; then
+    NAME="${NAME:3}"
+    ISBOOT="1"
+fi
+
+# For SELinux we need to use 'runuser' not 'su'
+if [ -x "/sbin/runuser" ]; then
+    SU="/sbin/runuser"
+else
+    SU="su"
+fi
+
+DAEMON_PROG="$NAME"
+DAEMON_USER="${DAEMON_USER:-root}"
+
+# Define the log file
+DAEMON_LOG="${DAEMON_LOG:-${DAEMON_HOME}/service.out}"
+RETVAL="0"
+
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_failure() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"FAILED"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 1
+}
+
+# remove when the RHEL and FC daemon functions converge
+# (pulled from /etc/rc.d/init.d/functions)
+function echo_success() {
+    echo -en "\\033[60G"
+    echo -n "[  "
+    echo -n $"OK"
+    echo -n "  ]"
+    echo -ne "\r"
+    return 0
+}
+
+
+function start() {
+    echo -n "Starting ${DAEMON_PROG}: "
+    cd $DAEMON_HOME
+    $SU $DAEMON_USER -c "bash $DAEMON_SCRIPT start"  >> $DAEMON_LOG 2>&1 &
+    RETVAL="$?"
+    if [ "$RETVAL" -eq 0 ]; then
+        echo_success
+    else
+        echo_failure
+    fi
+    return $RETVAL
+}
+
+function restart() {
+    echo -n "Restarting ${DAEMON_PROG}: "
+    cd $DAEMON_HOME
+    $SU $DAEMON_USER -c "bash $DAEMON_SCRIPT restart"  >> $DAEMON_LOG 2>&1 &
+    RETVAL="$?"
+    if [ "$RETVAL" -eq 0 ]; then
+        echo_success
+    else
+        echo_failure
+    fi
+    return $RETVAL
+}
+
+function status() {
+    if [ -n "$(ps axU $DAEMON_USER | grep jetty-http | grep -v grep)" ]; then
+        echo "Jetty is running"
+    fi
+    return 0
+}
+
+function stop() {
+    local STOP_VERBOSE="false"
+    echo -n "Stopping $DAEMON_PROG: "
+    cd $DAEMON_HOME
+    $SU $DAEMON_USER -c "bash $DAEMON_SCRIPT stop"  >> $DAEMON_LOG 2>&1
+    RETVAL="$?"
+    if [ "$RETVAL" -eq "0" ]; then
+        echo_success
+    else
+        echo_failure
+    fi
+}
+
+
+# See how we were called.
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    condrestart)
+        restart
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage: $DAEMON_PROG {start|stop|restart|status}"
+        exit 1
+esac
+
+exit $RETVAL

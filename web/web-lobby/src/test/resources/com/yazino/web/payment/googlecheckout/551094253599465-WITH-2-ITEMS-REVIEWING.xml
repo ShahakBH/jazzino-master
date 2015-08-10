@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<notification-history-response serial-number="e0d5ce21-30d3-4f67-834e-b48eae7fe19b" xmlns="http://checkout.google.com/schema/2">
+    <notifications>
+        <new-order-notification serial-number="551094253599465-00001-7">
+            <buyer-billing-address>
+                <email>AUTH-be3tv4lqgfn@sandbox.google.com</email>
+                <phone></phone>
+                <contact-name>AUTH DECLINE</contact-name>
+                <company-name></company-name>
+                <fax></fax>
+                <address1>AUTH DECLINE</address1>
+                <address2></address2>
+                <country-code>GB</country-code>
+                <region></region>
+                <city>lonhdjsh</city>
+                <postal-code>W3 7YU</postal-code>
+            </buyer-billing-address>
+            <timestamp>2012-05-09T14:26:59.657Z</timestamp>
+            <google-order-number>551094253599465</google-order-number>
+            <shopping-cart>
+                <items>
+                    <item>
+                        <digital-content>
+                            <description>The application will be automatically downloaded to your device.</description>
+                        </digital-content>
+                        <item-name>150 GBP for 1,500,000 chips</item-name>
+                        <item-description>Fantastic value chip package from Yazino to you</item-description>
+                        <unit-price currency="GBP">150.00</unit-price>
+                        <quantity>1</quantity>
+                        <merchant-item-id>inapp:air.com.yazino.iabsample:POKER_150GBP_1500000_CHIPS</merchant-item-id>
+                    </item>
+                    <item>
+                        <digital-content>
+                            <description>This can not happen....</description>
+                        </digital-content>
+                        <item-name>150 GBP for 1,500,000 chips</item-name>
+                        <item-description>Fantastic value chip package from Yazino to you</item-description>
+                        <unit-price currency="GBP">150.00</unit-price>
+                        <quantity>1</quantity>
+                        <merchant-item-id>inapp:air.com.yazino.iabsample:POKER_150GBP_1500000_CHIPS</merchant-item-id>
+                    </item>
+                </items>
+            </shopping-cart>
+            <order-adjustment>
+                <merchant-codes/>
+                <total-tax currency="GBP">0.0</total-tax>
+                <adjustment-total currency="GBP">0.0</adjustment-total>
+            </order-adjustment>
+            <buyer-shipping-address>
+                <email>AUTH-be3tv4lqgfn@sandbox.google.com</email>
+                <phone></phone>
+                <contact-name>AUTH DECLINE</contact-name>
+                <company-name></company-name>
+                <fax></fax>
+                <address1>AUTH+DECLINE</address1>
+                <address2></address2>
+                <country-code>GB</country-code>
+                <region></region>
+                <city>lonhdjsh</city>
+                <postal-code>W3 7YU</postal-code>
+            </buyer-shipping-address>
+            <buyer-marketing-preferences>
+                <email-allowed>false</email-allowed>
+            </buyer-marketing-preferences>
+            <order-total currency="GBP">150.0</order-total>
+            <fulfillment-order-state>NEW</fulfillment-order-state>
+            <financial-order-state>REVIEWING</financial-order-state>
+            <buyer-id>852407764770502</buyer-id>
+        </new-order-notification>
+    </notifications>
+</notification-history-response>

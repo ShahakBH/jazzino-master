@@ -1,0 +1,17 @@
+{
+  "name": "gigaspaces",
+  "description": "Gigaspaces Node",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[base]",
+    "recipe[java]",
+    "recipe[gigaspaces]",
+    "recipe[limits]",
+    "recipe[nfs::client]"
+  ]
+}

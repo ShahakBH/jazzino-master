@@ -1,0 +1,43 @@
+{
+	"name": "standalone-rabbitmq",
+	"chef_type": "node",
+	"json_class": "Chef::Node",
+	"run_list": [
+		"role[rabbitmq]"
+	],
+	"normal": {
+		"environment": "standalone-rabbitmq",
+	    "ssh": {
+	        "harden": "false"
+	    },
+		"monitoring": {
+			"suppress": true
+		},
+		"security": {
+			"denyhosts": false
+		},
+	    "rabbitmq": {
+	        "nodename": "rabbit",
+	        "erlang_cookie": "STANDALONE",
+			"management_console": false,
+	        "vhosts": [
+	            "rabbit1.london.yazino.com",
+				"rabbit2.london.yazino.com",
+				"rabbit3.london.yazino.com",
+				"rabbit4.london.yazino.com",
+				"rabbit5.london.yazino.com",
+				"rabbit6.london.yazino.com",
+				"rabbit7.london.yazino.com",
+				"rabbit8.london.yazino.com",
+				"rabbit9.london.yazino.com",
+				"rabbit10.london.yazino.com",
+				"rabbit11.london.yazino.com",
+				"rabbit12.london.yazino.com",
+				"rabbit13.london.yazino.com",
+				"rabbit14.london.yazino.com",
+				"rabbit15.london.yazino.com"
+	        ]
+	    }
+	}
+}
+

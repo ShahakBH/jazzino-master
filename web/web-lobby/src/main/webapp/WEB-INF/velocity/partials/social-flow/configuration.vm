@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    YAZINO.configuration.set('socialFlow.batchSize', '${batchSize}');
+    YAZINO.configuration.set('socialFlow.invitation.gameSpecificInviteText', '$esc.javascript($!{gameSpecificInviteText})');
+    YAZINO.configuration.set('socialFlow.invitation.defaultTitle','Invite your friends to Yazino, get 5,000 chips!');
+    YAZINO.configuration.set('socialFlow.challenge.message', "I've challenged you to a game! Let's play together and see if we can win big.");
+    YAZINO.configuration.set('socialFlow.challenge.title', 'Send challenge');
+    YAZINO.configuration.set('socialFlow.challenge.allowFacebookBuddyChallenge', true);
+    YAZINO.configuration.set('googleApi.apiKey', '${googleApiKey}');
+    YAZINO.configuration.set('googleApi.scope', '${googleScope}');
+    YAZINO.configuration.set('googleApi.client_id', '${googleClientId}');
+</script>

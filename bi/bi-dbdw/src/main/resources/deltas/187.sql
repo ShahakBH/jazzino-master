@@ -1,0 +1,3 @@
+drop event if exists rptExtractPromotionTransactionsAfterExpiry#
+
+drop procedure if exists rptExtractPromotionTransactionsAfterExpiry#

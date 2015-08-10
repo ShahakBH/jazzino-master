@@ -1,0 +1,22 @@
+<div id="about-us">
+    <div id="about-us-area">
+        <div id="grey-window">
+            <div class = "content-inner">
+                <div class = "who-is-yazino">WHO IS <span class = "text-select-red">YAZINO?</span></div>
+                <div class = "content-about">
+                <p>Yazino is the destination for playful grown-ups seeking an intimate
+and fun social gaming experience. Yazino develops innovative social games that use real-time multiplayer
+technology-an approach we call <span class = "text-select-red">'in-sync gaming.'</span> Our ambition is to make social gaming universal through
+games that are global, instant, and accessible to play anytime, anywhere.</p>
+<p>Yazino players are able to compete with each other in a fun environment where they can invite their 
+friends, meet, chat, or simply play with a network of like-minded people. We believe that friendly competition 
+encourages play and positive interaction, and in our busy, often serious world, play creates happiness and 
+brings players together. </p>
+<p>Yazino games feature levels, achievements, leaderboards and tournaments between you, your friends and 
+the rest of the Yazino world. Play our games at Yazino.com, on Facebook, or on your iPhone and iPad.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

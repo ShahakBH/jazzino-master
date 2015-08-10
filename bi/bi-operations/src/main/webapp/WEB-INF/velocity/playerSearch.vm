@@ -1,0 +1,21 @@
+<h1>Player Search</h1>
+
+<div class="search">
+    <form action="#springUrl('/player/search')" method="POST">
+        #springFormInput("searchRequest.query" '')
+        <input type="submit" value="Search">
+        #springFormSingleSelect("searchRequest.pageSize" $pageSize "")
+    </form>
+</div>
+
+<div class="searchResult">
+    #if($searchResult)
+        #if($searchResult.playersList && $searchResult.playersList.getSize() > 0)
+            #parse("partials/playersList.vm")
+        #else
+            <p class="info">$searchResult.message</p>
+        #end
+    #elseif($model && $model.player)
+        #parse("partials/playerDashboard.vm")
+    #end
+</div>

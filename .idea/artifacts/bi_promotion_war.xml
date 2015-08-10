@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bi-promotion:war">
+    <output-path>$PROJECT_DIR$/bi/bi-promotion/target</output-path>
+    <root id="archive" name="bi-promotion-2.7.22-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bi-promotion:war exploded" />
+    </root>
+  </artifact>
+</component>

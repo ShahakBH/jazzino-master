@@ -1,0 +1,380 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'net/http'
+require 'rexml/document'
+require 'rexml/xpath'
+require 'net/smtp'
+require 'socket'
+require 'json'
+require 'rest_client'
+require 'open-uri'
+
+include REXML
+
+BASE_DIR = File.expand_path(File.dirname(__FILE__))
+
+COMPONENTS_YAML = "#{BASE_DIR}/../deployment/config/components.yaml"
+MVN_SETTINGS = "#{ENV['HOME']}/.m2/settings.xml"
+SMTP_SERVER = 'mail.london.yazino.com'
+SMTP_USERNAME = 'build'
+SMTP_PASSWORD = 'BUILD!s1gn4tur3'
+FROM_ADDRESS = 'Build <build@yazino.com>'
+TO_ADDRESS = 'Build <build@yazino.com>'
+HIPCHAT_SERVER = 'https://api.hipchat.com'
+HIPCHAT_ROOM = 501366
+HIPCHAT_FROM = URI::encode('Maven')
+HIPCHAT_TOKEN = '19d30a000c8b350b6a418e69935654'
+
+ISSUE_TRACKER='jira'
+JIRA_USER = 'build'
+JIRA_PASSWORD = 'BUILD!s1gn4tur3'
+YOUTRACK_URL='https://issues.yazino.com/youtrack'
+YOUTRACK_USER='devops'
+YOUTRACK_PASSWORD='{tg7>98}7P;J'
+
+def html_message(group_id, artifact_id, release_version, issues)
+    html_body = <<END_OF_MESSAGE
+    <h2>#{project_name_of('pom.xml')} #{release_version} released</h2>
+    <p>
+        <strong>#{group_id}:#{artifact_id}</strong> has been released as version <strong>#{release_version}</strong>.
+    </p>
+    <h3>Changes</h3>
+    <ul>
+END_OF_MESSAGE
+
+    issues.each_pair do |issue_key, issue|
+        html_body += "<li><a href=\"#{issue[:link]}\">[#{issue[:resolution]}] #{issue_key} - #{issue[:summary]}</a></li>\n"
+    end
+    html_body += "</ul>\n"
+
+    html_body
+end
+
+def hipchat_html_message(group_id, artifact_id, release_version, issues)
+    html_message(group_id, artifact_id, release_version, issues).gsub(/h[23]/, 'b').gsub(/<\/?p>/, '<br>')
+end
+
+def send_email(group_id, artifact_id, release_version, issues)
+    boundary = "ohmygodthebees"
+    msg = <<END_OF_MESSAGE
+From: #{FROM_ADDRESS}
+To: #{TO_ADDRESS}
+Subject: [ANNOUNCEMENT] - #{project_name_of('pom.xml')} #{release_version} released
+Date: #{Time.now.strftime('%a, %d %b %Y %H:%M:%S %Z')}
+Message-Id: <#{`uuidgen`.strip}@#{Socket.gethostname}>
+MIME-Version: 1.0
+Content-type: multipart/mixed; boundary="#{boundary}"
+Content-Transfer-Encoding:8bit
+
+You don't support MIME. Sucks to be you.
+--#{boundary}
+Content-Type: text/html
+Content-Transfer-Encoding:8bit
+
+#{html_message(group_id, artifact_id, release_version, issues)}
+--#{boundary}--
+END_OF_MESSAGE
+
+    begin
+        Net::SMTP.start(SMTP_SERVER, 25, Socket.gethostname, SMTP_USERNAME, SMTP_PASSWORD, :plain) do |smtp|
+            smtp.send_message(msg, FROM_ADDRESS, TO_ADDRESS)
+        end
+    rescue Exception => e
+        puts "Email send failed: #{e}"
+    end
+end
+
+def send_to_hipchat(group_id, artifact_id, release_version, issues)
+    begin
+        message = hipchat_html_message(group_id, artifact_id, release_version, issues)
+        RestClient.get("#{HIPCHAT_SERVER}/v1/rooms/message?room_id=#{HIPCHAT_ROOM}&from=#{HIPCHAT_FROM}&message_format=html&notify=0&message=#{URI::encode(message)}&auth_token=#{HIPCHAT_TOKEN}")
+    rescue => e
+        puts "HipChat send failed: #{e}"
+    end
+end
+
+def check_for_tag(artifact_id, release_version)
+    puts "Checking for pre-existing release tags..."
+
+    expected_tag = "#{artifact_id}-#{release_version}"
+    if %x(git tag | grep --color=never -e '^#{expected_tag}$').strip =~ /^#{expected_tag}$/
+        raise "Release tag already exists: #{expected_tag}"
+    end
+end
+
+def check_for_issues(release_version, artifact_id)
+    puts "Checking issues exist for version #{release_version}"
+
+    pom_document = Document.new(File.new('pom.xml'))
+    if !XPath.first(pom_document, '/project/issueManagement/url')
+        raise "POM doesn't define an issue management URL; exiting."
+    end
+    issue_url = XPath.first(pom_document, '/project/issueManagement/url').text
+    puts "Searching for issues with label: #{artifact_id}-#{release_version}"
+    issues = get_issues_for(issue_url, "#{artifact_id}-#{release_version}")
+
+    raise "There are no issues with a public tag of: #{artifact_id}-#{release_version}" if issues.empty?
+    issues
+end
+
+def get_jira_issues_for(issue_url, labels)
+    filter = "labels=\"#{labels}\""
+    # Test with: curl -D- -u 'build:BUILD!s1gn4tur3' -X GET -H "Content-Type: application/json" 'http://issues.london.yazino.com/rest/api/2/search?jql=labels=platform-2\u002e30\u002e0'
+    issue_url = $1 if issue_url =~ /(https?:\/\/[^\/]+)\/.*/
+    authed_issue_url = issue_url.gsub(/:\/\//, "://#{JIRA_USER}:#{JIRA_PASSWORD}@")
+
+    search_results = JSON.parse(RestClient.get("#{authed_issue_url}/rest/api/2/search?jql=#{URI.encode(filter)}", {:content_type => :json}))
+
+    issues = {}
+    (search_results['issues'] || []).each do |issue|
+        issues[issue['key']] = { :summary => issue['fields']['summary'], \
+            :link => "#{issue_url}/browse/#{issue['key']}", \
+            :resolution => (issue['fields']['resolution'] || {})['name'] || 'Unresolved' }
+    end
+    issues
+end
+
+def get_youtrack_issues_for(labels)
+    auth_cookie_name = 'jetbrains.charisma.main.security.PRINCIPAL'
+    login_response = RestClient.post("#{YOUTRACK_URL}/rest/user/login", :login => YOUTRACK_USER, :password => YOUTRACK_PASSWORD)
+    raise "YouTrack login failed with #{login_response}" if login_response.code != 200
+    auth_cookie =  login_response.cookies[auth_cookie_name]
+    raise "Unable to get YouTrack auth cookie from #{login_response.cookies}" unless auth_cookie
+
+    # RestClient has issues with repeating arguments ...
+    query_response = RestClient.get("#{YOUTRACK_URL}/rest/issue?filter=tag:#{labels}&with=id&with=summary&with=State", {:cookies => {auth_cookie_name => auth_cookie}})
+    raise "Unable to query YouTrack for labels #{labels}; response was #{query_response}" if query_response.code != 200
+
+    query_doc = Document.new(query_response)
+    issues = {}
+    query_doc.elements.each('/issueCompacts/issue') do |issue|
+        issues[issue.attributes['id']] = {
+            :summary => issue.elements["field[@name='summary']/value"].text,
+            :resolution => issue.elements["field[@name='State']/value"].text,
+            :link => "#{YOUTRACK_URL}/issue/#{issue.attributes['id']}"
+        }
+    end
+    issues
+end
+
+def get_issues_for(issue_url, labels)
+    if ISSUE_TRACKER == 'jira'
+        get_jira_issues_for(issue_url, labels)
+    else
+        get_youtrack_issues_for(labels)
+    end
+end
+
+def is_sending_email
+    Document.new(File.new('pom.xml')).elements.each('/project/build/plugins/plugin/configuration/goals') do |goal|
+        return true if goal.text =~ /changes:announcement-mail/
+    end
+    false
+end
+
+def project_name_of(pom_file)
+    pom_doc = Document.new(File.new(pom_file))
+    XPath.first(pom_doc, '/project/name').text
+end
+
+def find_modules(pom_file)
+    modules = []
+    Document.new(File.new(pom_file)).elements.each("/project/modules/module") do |module_pom|
+        if module_pom.text =~ /\.xml$/
+            modules << module_pom.text
+        else
+            modules << "#{module_pom.text}/pom.xml"
+        end
+    end
+    modules
+end
+
+def query_pom(pom_file)
+    raise "Cannot find #{pom_file}" if !File.exists?(pom_file)
+
+    pom_doc = Document.new(File.new(pom_file))
+    parent_element = XPath.first(pom_doc, '/project/parent')
+    if !parent_element.nil?
+        parent_path_element = XPath.first(pom_doc, '/project/parent/relativePath')
+        if parent_path_element.nil?
+            parent_path = '../pom.xml'
+        else
+            parent_path = parent_path_element.text
+        end
+        parent_group_id, parent_artifact_id, parent_packaging = query_pom("#{base_of(pom_file)}#{parent_path}")
+    end
+
+    group_id = XPath.first(pom_doc, '/project/groupId')
+    artifact_id = XPath.first(pom_doc, '/project/artifactId')
+    packaging = text_of(XPath.first(pom_doc, '/project/packaging')) || "pom"
+
+    [text_of(group_id) || parent_group_id, text_of(artifact_id) || parent_artifact_id, packaging || parent_packaging]
+end
+
+def next_snapshot_for(version)
+    version.gsub(/(.+\.)(\d+)/) {|match| "#{$1}#{$2.to_i + 1}-SNAPSHOT"}
+end
+
+def base_of(path)
+    if path =~ /(.*\/)[^\/]+/
+        $1
+    else
+        ''
+    end
+end
+
+def text_of(element)
+    if element
+        element.text
+    else
+        nil
+    end
+end
+
+def build_release(artifact_id, release_version)
+    puts 'Performing release build'
+
+    pull_output = %x(git pull --ff-only 2>&1)
+    raise "Failed to pull remote changes; output was: \n#{pull_output}\n\n exiting." unless $?.exitstatus == 0
+
+    version_output = %x(mvn -B versions:set -DnewVersion=#{release_version} -DgenerateBackupPoms=false 2>&1)
+    raise "Failed to set POM version to #{release_version}; output was: \n#{version_output}\n\n exiting." unless $?.exitstatus == 0
+
+    puts "- Maven Output ---------------------------------------------------"
+    IO.popen('mvn -B clean deploy -Penforce-release-rules 2>&1') do |pipe|
+        while (line = pipe.gets)
+          puts line
+        end
+    end
+    puts "------------------------------------------------------------------"
+    raise "Release failed; exiting." unless $?.exitstatus == 0
+
+    puts "Tagging build"
+    tag_output = %x(mvn -B scm:tag -Dtag='#{artifact_id}-#{release_version}' -Dmessage='Tagging release #{release_version}' 2>&1)
+    raise "Failed to tag release; output was: \n#{tag_output}\n\n exiting." unless $?.exitstatus == 0
+
+    snapshot_version = next_snapshot_for(release_version)
+    puts "Preparing for next development iteration (#{snapshot_version})"
+    snapshot_output = %x(mvn versions:set -DnewVersion=#{snapshot_version} -DgenerateBackupPoms=false 2>&1)
+    raise "Failed to set POM snapshot version to #{snapshot_version}; output was: \n#{snapshot_output}\n\n exiting." unless $?.exitstatus == 0
+
+    clean_output = %x(mvn clean 2>&1)
+    raise "Failed to clean build; output was: \n#{clean_output}\n\n exiting." unless $?.exitstatus == 0
+
+    add_output = %x(mvn -B scm:add -Dincludes='**/pom.xml' 2>&1)
+    raise "Failed to add modified POMs to Git; output was: \n#{add_output}\n\n exiting." unless $?.exitstatus == 0
+
+    # SCM checkin doesn't appear to work, nor is the documentation passable; maybe related to http://jira.codehaus.org/browse/SCM-709 - try with 1.9-SNAPSHOT?
+    # commit_output = %x(mvn scm:checkin -DconnectionType=connection -Dmessage='Prepare POMs for next development iteration as #{snapshot_version}')
+    current_branch = %x(git rev-parse --abbrev-ref HEAD)
+    commit_output = %x(git commit -m'Prepare POMs for next development iteration as #{snapshot_version}'  2>&1 && git push origin #{current_branch} 2>&1)
+    raise "Failed to commit new iteration; output was: \n#{commit_output}\n\n exiting." unless $?.exitstatus == 0
+end
+
+def update_deployment_config(group_id, artifact_id, release_version)
+    componentsYaml = YAML::load_file(COMPONENTS_YAML)
+    if componentsYaml[artifact_id]
+        componentsYaml[artifact_id]['maven_group'] = group_id
+        componentsYaml[artifact_id]['version'] = release_version
+
+        File.open(COMPONENTS_YAML, 'w') do |out|
+            YAML.dump(componentsYaml, out)
+        end
+    else
+        puts "WARNING: failed to update #{COMPONENTS_YAML} - artifact_id #{artifact_id} doesn't exist"
+    end
+end
+
+def verify_environment
+    if %x(which mvn) !~ /mvn/
+        puts "Cannot find mvn; exiting."
+        exit(1)
+    end
+
+    if !File.exists?(MVN_SETTINGS) || %x(grep signtechno-repo #{MVN_SETTINGS}) !~ /signtechno-repo/
+        puts "You don't appear to have signtechno-repo defined in #{MVN_SETTINGS}; exiting."
+        exit(1)
+    end
+
+    if !File.exists?(COMPONENTS_YAML)
+        puts "Cannot locate #{COMPONENTS_YAML}; exiting."
+        exit(1)
+    end
+end
+
+def resolve_modules_for(pom_file)
+    modules = []
+    modules << query_pom(pom_file)
+    find_modules(pom_file).each {|module_name| modules = modules | resolve_modules_for("#{base_of(pom_file)}#{module_name}")}
+    modules
+end
+
+def verify_working_copy_is_clean
+    status = %x(git status -s)
+    raise "Cannot determine Git status: exit code was #{$?.exitstatus}" if $?.exitstatus != 0
+    raise "Working copy is not clean; exiting" unless status.length == 0
+end
+
+def base_of(file)
+    if file =~ /(.*\/)[^\/]+$/
+        $1
+    else
+        ""
+    end
+end
+
+if ARGV.size < 2
+    puts "Usage: #{__FILE__} <release directory> <release version> [--skip-components]"
+    exit 1
+end
+
+release_dir = ARGV[0]
+if !File.exists?("#{release_dir}/pom.xml")
+    puts "Cannot find pom.xml in release dir #{release_dir}"
+    exit(1)
+end
+
+puts "Preparing release..."
+
+release_version = ARGV[1]
+skip_components_update = ARGV[2] == '--skip-components'
+
+verify_environment
+
+current_dir = Dir.pwd
+Dir.chdir(release_dir)
+
+verify_working_copy_is_clean
+
+base_group_id, base_artifact_id, base_packaging = query_pom('pom.xml')
+issues = check_for_issues(release_version, base_artifact_id)
+issues.each_pair do |issue_number, issue|
+    puts "* #{issue_number} - #{issue[:summary]} (#{issue[:resolution]})"
+end
+
+check_for_tag(base_artifact_id, release_version)
+
+build_release(base_artifact_id, release_version)
+
+unless skip_components_update
+    puts "Resolving POM modules..."
+    resolve_modules_for('pom.xml').each do |group_id, artifact_id, packaging|
+        puts "Updating release/deployment configuration for #{group_id}:#{artifact_id}:#{packaging}"
+        update_deployment_config(group_id, artifact_id, release_version)
+    end
+end
+
+send_email(base_group_id, base_artifact_id, release_version, issues) if !is_sending_email
+send_to_hipchat(base_group_id, base_artifact_id, release_version, issues)
+
+puts ""
+puts "Component release complete as version #{release_version}."
+unless skip_components_update
+    puts ""
+    puts "Changes to release/deployment configuration have NOT been committed. Please review and do so."
+end
+puts ""
+
+Dir.chdir(current_dir)
+exit(0)

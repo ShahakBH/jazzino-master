@@ -1,0 +1,34 @@
+<div id="management-team-area">
+    <h3>Alyssa Crankshaw</h3>
+    <h4>VICE PRESIDENT COMMUNICATIONS</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/alyssa-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/highStakes">
+                <div class="game-high-stakes"></div>
+            </a>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>Alyssa's focus at Yazino is its millions-strong community of fans and players. To that end, Alyssa oversees the
+        digital marketing, promotions, social outreach and community management around Yazino's games on mobile,
+        Facebook, and yazino.com.</p>
+
+    <p>Key to her role is a detailed understanding of social motivation and engagement, particularly in relation to
+        Yazino's unique, in-sync social games technology.</p>
+
+    <p>Alyssa brings more than eight years of digital and social marketing knowledge to her role at Yazino. In her
+        previous roles at San Francisco agencies including Traction, Swirl and Nice Advertising, she worked with global
+        brands-including Intel, Adobe, Salesforce.com and eBay-on social and online engagement strategies and creative
+        campaigns.
+    </p>
+
+    <p>
+        Alyssa holds a Master of Science in Integrated Marketing Communications and a Bachelor of Arts in Digital Media.
+    </p>
+</div>
+</div>

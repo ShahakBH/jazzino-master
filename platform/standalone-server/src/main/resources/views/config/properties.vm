@@ -1,0 +1,26 @@
+#parse("includes/header.vm")
+
+<section id="content">
+    <div class="list">
+        <h2>Servers Settings</h2>
+
+        <p>Any setting listed here can be overridden in <strong>/etc/yazino/standalone-server.properties</strong></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            #foreach ($prop in $properties.keySet())
+                <tr>
+                    <td>$prop</td>
+                    <td>$properties.get($prop)</td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+</section>

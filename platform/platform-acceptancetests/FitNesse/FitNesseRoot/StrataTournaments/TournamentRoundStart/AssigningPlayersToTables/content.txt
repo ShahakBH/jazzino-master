@@ -1,0 +1,110 @@
+Players are assigned a random table at the start of each level, grouped by bankroll, with at least 3 people per table.
+
+!3 Tournament tables with 17 players
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|Create tournament template level|1|for template|Blackjack Tournament|
+!|Create tournament template level|2|for template|Blackjack Tournament|
+
+!|Create tournament| June 2009 |from template|Blackjack Tournament|
+
+!|Force state for|June 2009|to|Registering|
+
+!|Setup tournament players for tournament|
+|Tournament Name|Players|Tournament Chips|
+| June 2009 | Jack | 1000 |
+| June 2009 | Ralph | 987 |
+| June 2009 | Greg | 934 |
+| June 2009 | Tim | 921 |
+| June 2009 | Paul | 834 |
+| June 2009 | Olivia | 824 |
+| June 2009 | Michelle | 745 |
+| June 2009 | Stephen | 675 |
+| June 2009 | Kim | 656 |
+| June 2009 | Liam | 647 |
+| June 2009 | Bob | 534 |
+| June 2009 | Ian | 456 |
+| June 2009 | John | 345 |
+| June 2009 | Trevor | 234 |
+| June 2009 | Ben | 233 |
+| June 2009 | Tom | 125 |
+| June 2009 | Lucy | 123 |
+
+!|Start level for tournament|June 2009|
+!|Stop level for tournament|June 2009|
+
+!|Start level for tournament|June 2009|
+
+| Check players at tables for tournament |
+|Tournament Name|Table Index|List Players()|
+| June 2009 | A | Jack, Ralph, Greg, Tim, Paul |
+| June 2009 | B | Olivia, Michelle, Stephen, Kim |
+| June 2009 | C | Liam, Bob, Ian, John |
+| June 2009 | D | Trevor, Ben, Tom, Lucy |
+
+!3 Tournament tables with 15 players
+
+!|Create tournament| July 2009 |from template|Blackjack Tournament|
+
+!|Force state for|July 2009|to|Registering|
+
+| Setup tournament players for tournament |
+|Tournament Name| Players | Tournament chips |
+| July 2009 | Jack | 1000 |
+| July 2009 | Ralph | 987 |
+| July 2009 | Greg | 934 |
+| July 2009 | Tim | 921 |
+| July 2009 | Paul | 834 |
+| July 2009 | Olivia | 824 |
+| July 2009 | Michelle | 745 |
+| July 2009 | Stephen | 675 |
+| July 2009 | Kim | 656 |
+| July 2009 | Liam | 647 |
+| July 2009 | Bob | 534 |
+| July 2009 | Ian | 456 |
+| July 2009 | John | 345 |
+| July 2009 | Trevor | 234 |
+| July 2009 | Ben | 233 |
+
+!|Start level for tournament|July 2009|
+!|Stop level for tournament|July 2009|
+
+!|Start level for tournament|July 2009|
+
+| Check players at tables for tournament |
+|Tournament Name|Table Index|List Players()|
+| July 2009 | A | Jack, Ralph, Greg, Tim, Paul |
+| July 2009 | B | Olivia, Michelle, Stephen, Kim, Liam |
+| July 2009 | C | Bob, Ian, John, Trevor, Ben |
+
+
+!3 Tournament tables with 9 players
+
+!|Create tournament| August 2009 |from template|Blackjack Tournament|
+
+!|Force state for|August 2009|to|Registering|
+
+| Setup tournament players for tournament  |
+|Tournament Name| Players | Tournament chips |
+| August 2009| Jack | 1000 |
+| August 2009| Ralph | 987 |
+| August 2009| Greg | 934 |
+| August 2009| Tim | 921 |
+| August 2009| Paul | 834 |
+| August 2009| Olivia | 824 |
+| August 2009| Michelle | 745 |
+| August 2009| Stephen | 675 |
+| August 2009| Kim | 656 |
+
+!|Start level for tournament|August 2009|
+!|Stop level for tournament|August 2009|
+
+!|Start level for tournament|August 2009|
+
+| Check players at tables for tournament | 
+|Tournament Name|Table Index|List Players()|
+| August 2009| A | Jack, Ralph, Greg, Tim, Paul |
+| August 2009| B | Olivia, Michelle, Stephen, Kim |

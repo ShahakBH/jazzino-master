@@ -1,0 +1,42 @@
+drop event if exists  evt_bi_verification_status#
+
+CREATE TABLE IF NOT EXISTS `bi_verification_status_direct` (
+  `REGISTRATION_DATE` date NOT NULL DEFAULT '0000-00-00',
+  `RPX` varchar(255) NOT NULL DEFAULT '',
+  `PLAYED_VERIFIED` decimal(23,0) DEFAULT NULL,
+  `PLAYED_NOT_VERIFIED` decimal(23,0) DEFAULT NULL,
+  `NOT_PLAYED_VERIFIED` decimal(23,0) DEFAULT NULL,
+  `NOT_PLAYED_NOT_VERIFIED` decimal(23,0) DEFAULT NULL,
+  PRIMARY KEY (`REGISTRATION_DATE`,`RPX`)
+)#
+
+CREATE TABLE IF NOT EXISTS `LAST_PLAYED_UNIQUE` (
+  `PLAYER_ID` bigint(20) NOT NULL DEFAULT '0',
+  `LAST_PLAYED` datetime,
+  PRIMARY KEY (`PLAYER_ID`)
+)#
+
+drop procedure if exists fill_bi_verification_status#
+create procedure fill_bi_verification_status()
+begin
+	INSERT IGNORE INTO LAST_PLAYED_UNIQUE(PLAYER_ID,LAST_PLAYED)
+		SELECT PLAYER_ID,MAX(LAST_PLAYED) AS LAST_PLAYED FROM LAST_PLAYED WHERE LAST_PLAYED>=cast(curdate() - interval 2 day as datetime) GROUP BY PLAYER_ID;
+
+	REPLACE INTO bi_verification_status_direct(REGISTRATION_DATE,RPX,
+		PLAYED_VERIFIED,PLAYED_NOT_VERIFIED,NOT_PLAYED_VERIFIED,NOT_PLAYED_NOT_VERIFIED)
+	SELECT DATE(TSREG) AS REGISTRATION_DATE,UPPER(lu.PROVIDER_NAME) AS RPX,
+		SUM(IF(lp.LAST_PLAYED IS NULL,0,IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0))) AS PLAYED_VERIFIED,
+		SUM(IF(lp.LAST_PLAYED IS NULL,0,IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1))) AS PLAYED_NOT_VERIFIED,
+		SUM(IF(lp.LAST_PLAYED IS NULL,IF(lu.VERIFICATION_IDENTIFIER IS NULL,1,0),0)) AS NOT_PLAYED_VERIFIED,
+		SUM(IF(lp.LAST_PLAYED IS NULL,IF(lu.VERIFICATION_IDENTIFIER IS NULL,0,1),0)) AS NOT_PLAYED_NOT_VERIFIED
+		FROM LOBBY_USER lu
+		LEFT JOIN LAST_PLAYED_UNIQUE lp USING(PLAYER_ID)
+		WHERE lu.TSREG>=cast(curdate() - interval 2 day as datetime) AND (LOWER(PROVIDER_NAME)='yazino' OR LOWER(RPX_PROVIDER)='facebook')
+		GROUP BY UPPER(lu.PROVIDER_NAME),DATE(TSREG);
+end#
+
+drop event if exists  evt_fill_bi_verification_status#
+create event evt_fill_bi_verification_status
+on schedule every 1 day
+starts curdate() + interval 1 day + interval 6 hour
+do call fill_bi_verification_status()#

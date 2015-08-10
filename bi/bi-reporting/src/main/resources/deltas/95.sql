@@ -1,0 +1,6 @@
+-- WEB-4220 - add session ID to transaction log
+
+-- The constraint must be added separately or RedShift blows up
+ALTER TABLE ACCOUNT_SESSION ADD COLUMN SESSION_ID DECIMAL(16,2) NULL;
+
+ALTER TABLE ACCOUNT_SESSION ADD CONSTRAINT UQ_SESSION_ID UNIQUE(SESSION_ID);

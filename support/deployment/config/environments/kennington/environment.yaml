@@ -1,0 +1,4 @@
+hosts:
+    kennington.london.yazino.com:
+        roles:
+            - all

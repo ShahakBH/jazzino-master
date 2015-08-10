@@ -1,0 +1,9 @@
+<h1>Ad Tracking Report</h1>
+
+<div class="report">
+    <form class="formattedReport" method="POST" data-action="#springUrl('/report/adTracking')">
+        #parse("partials/reportForm.vm")
+    #if($reportData)
+        #parse("partials/report.vm")
+    #end
+</div>

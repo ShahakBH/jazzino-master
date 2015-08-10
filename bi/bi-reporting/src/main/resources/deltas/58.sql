@@ -1,0 +1,1 @@
+alter table audit_closed_game drop column auto_id cascade;

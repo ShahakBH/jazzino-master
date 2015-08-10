@@ -1,0 +1,58 @@
+#set ($location = "List Game Variations")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set ($baseUrl = "${request.contextPath}/game/variation/list")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/variation/create">New Variation</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Game Variations</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Game Type</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                    #paging( $gameVariations.startPosition 20 $gameVariations.totalSize $baseUrl '' )
+                    </td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                    #paging( $gameVariations.startPosition 20 $gameVariations.totalSize $baseUrl '' )
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+            #foreach ($gameVariation in $gameVariations.data)
+                <tr>
+                    <td>$gameVariation.id</td>
+                    <td>$gameVariation.gameType</td>
+                    <td>$gameVariation.name</td>
+                    <td>
+                        <a href="${request.contextPath}/game/variation/show/${gameVariation.id}" title="View variation ${gameVariation.id}">View</a>
+                        | <a href="${request.contextPath}/game/variation/edit/${gameVariation.id}" title="Edit variation ${gameVariation.id}">Edit</a>
+                        | <a class="action-delete" data-id="${gameVariation.id}" data-type="game variation"
+                             href="${request.contextPath}/game/variation/delete/${gameVariation.id}"
+                             title="Delete variation ${gameVariation.id}">Delete</a>
+                    </td>
+                </tr>
+            #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

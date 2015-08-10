@@ -1,0 +1,33 @@
+#set($whitelistedGameTypes = ['SLOTS','BLACKJACK'])
+
+#if ($lobbySession)
+    #if ($whitelistedGameTypes.contains($gameType))
+        #if($request.requestURI.matches("/legal/(termsOfService|termsOfPurchase|privacy)"))
+            #parse("layouts/lobbyLayout.vm")
+        #else
+            <!DOCTYPE html>
+            <html>
+            <head>
+            #parse("partials/canvas/head.vm")
+            </head>
+            <body class="game-${gameType}">
+            #parse("partials/canvas/facebook-init.vm")
+            #parse("partials/canvas/body_${gameType}.vm")
+            #parse("partials/canvas/tail.vm")
+            </body>
+            </html>
+        #end
+    #else
+        #parse("layouts/lobbyLayout.vm") ## for legacy Canvas games
+    #end
+#else
+    <!DOCTYPE html>
+    <html>
+    <head>
+    #parse("partials/glossStyle.vm")
+    </head>
+    <body>
+    #parse("error500.vm")
+    </body>
+    </html>
+#end

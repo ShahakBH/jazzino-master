@@ -1,0 +1,44 @@
+#* @vtlvariable name="player" type="com.yazino.platform.player.PlayerProfile" *#
+#* @vtlvariable name="playerInfo" type="com.yazino.platform.player.PlayerProfileSummary" *#
+#* @vtlvariable name="passwordChange" type="com.yazino.platform.player.PasswordChangeRequest" *#
+#if($partial)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    #parse("partials/glossStyle.vm")
+    <style>
+        html {
+            background: #FFFFFF;
+            padding: 0;
+        }
+    </style>
+    #parse("partials/preScripts.vm")
+</head>
+<body class="headless">
+    #parse("partials/fb_init.vm")
+#else
+    <div class="profileDialog">
+#end
+<div id="profile-area" class="$!currentTab ">
+    <nav>
+        <ul>
+            #foreach($tab in $allTabs)
+                <li #if($tab.codeName == $currentTab)class="selected"#end><a href="$tab.href#if($partial)?partial=true#end">$tab.label</a></li>
+            #end
+        </ul>
+    </nav>
+    #set($tabTemplate = "partials/profile-tabs/${currentTab}.vm")
+    #parse($tabTemplate)
+    #if($partial)
+        #parse("partials/glossScripts.vm")
+    #end
+</div>
+
+
+#if($partial)
+</body>
+</html>
+#else
+    </div>
+#end

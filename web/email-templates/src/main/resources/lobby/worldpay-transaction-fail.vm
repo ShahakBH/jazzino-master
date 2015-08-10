@@ -1,0 +1,58 @@
+#set($!title = '$!{displayName}, there was a problem with your chip purchase at Yazino.')
+#parse('lobby/header.vm')
+
+    <!--start body-->
+    <tr>
+        <td colspan="4" valign="top">
+            <img src="http://cdn.yazino.com/email-content/reusable-assets/20120123T000000/no-article-top.jpg" width="700" height="7" alt="" style="vertical-align:top;"/>
+        </td>
+    </tr>
+    <tr>
+        <td height="25"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><a href="http://www.yazino.com/" style="text-decoration: none;"><font
+                style="font-family:Helvetica, Arial, sans-serif; font-size: 18px;"
+                face="Helvetica Arial" size="5">
+            <b >
+                <font color="#E72020" style="color: #E72020;">WHOOPS $!{displayName}! YOUR CHIP PURCHASE HASN'T GONE THROUGH</font>
+        </b></font></a></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td height="15"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td valign="top">
+            <p style="margin: 0; padding: 0 0 15px 0;"><font
+                                style="line-height:20px;font-size:16px;font-family:Helvetica, Arial, sans-serif;color:#707070;"
+                                >Your $!{currencyCode}$!{money} transaction on $!{date} with card $!{cardNumberObscured} was unsuccessful, and we can't identify why. Please contact your card provider quoting ID $!{externalTransactionId} for more information.
+        </font></p>
+            <br/>
+            <a href="http://www.yazino.com/"><img src="http://cdn.yazino.com/email-content/transactional/20120516T000000/system-events/payment-unsuccessful/content-images/main-cta.jpg" alt="GET BACK INTO THE GAMES" width="246" height="33"/></a>
+        </td>
+        <td align="center" valign="top">
+            <img src="http://cdn.yazino.com/email-content/transactional/20120516T000000/system-events/payment-unsuccessful/content-images/main-image.jpg" alt="Yazino Icon falling down" width="220" height="177"/>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td height="10"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+    #parse('lobby/footer.vm')
+
+

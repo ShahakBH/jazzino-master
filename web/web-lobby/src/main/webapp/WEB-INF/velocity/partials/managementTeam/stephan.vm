@@ -1,0 +1,39 @@
+<div id="management-team-area">
+    <h3>Stephan Ansari</h3>
+    <h4>VICE PRESIDENT BUSINESS DEVELOPMENT</h4>
+
+    <div id="photo">
+        <img src="${assetUrl}/images/steph-big.png" alt="">
+        <h4>FAVOURITE GAMES</h4>
+
+        <div id="games-icons">
+            <a href="/blackjack">
+                <div class="game-blackjack"></div>
+            </a>
+            <a href="/wheelDeal">
+                <div class="game-slots"></div>
+            </a>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <p>
+        Stephan leads the efforts at Yazino to increase the optimisation and monetisation of the Yazino platform and
+        games, looking for new opportunities to expand the Yazino audience through broader social network distribution
+        and strategic partnerships with media companies and secondary social networks. Stephan also leads the efforts of
+        Yazino to launch games on iOS and Android, as mobile becomes an ever more important part of Yazino's business.
+        Stephan has been part of Yazino's management team since early 2011.
+    </p>
+
+    <p>
+        Stephan has more than ten years of experience at the cutting edge of mobile and social gaming. In 2008 Stephan
+        joined Korean online social gaming company OGPlanet as VP of European Operations, tasked with launching
+        OGPlanet's unique online social MMO games in Europe. Prior to this role, Stephan was one of the formative
+        employees of mobile gaming start-up Glu Mobile, which he joined in 2002 as Head of Sales for EMEA, where he
+        built partnerships and distribution deals with virtually every major mobile operator worldwide. In 2006 Stephan
+        was promoted to the position of Director of Business Development for EMEA, following Glu's successful debut on
+        the NASDAQ. Today Glu remains one of the leading independent mobile games publishers.
+    </p>
+
+</div>
+</div>

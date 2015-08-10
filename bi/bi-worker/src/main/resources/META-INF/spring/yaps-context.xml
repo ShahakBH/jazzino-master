@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.yazino.mobile.yaps"/>
+    <context:component-scan base-package="com.yazino.yaps"/>
+
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+    <import resource="classpath:META-INF/spring/yaps-rabbit-config.xml"/>
+    <import resource="classpath:META-INF/spring/ios-bundle-mappings.xml"/>
+    <import resource="classpath:META-INF/spring/jdbc-external-datawarehouse.xml"/>
+
+    <util:list id="listenerContainerAdviceChain" value-type="org.aopalliance.aop.Advice">
+        <bean name="retryOperationsFactory" class="org.springframework.amqp.rabbit.config.StatefulRetryOperationsInterceptorFactoryBean">
+            <property name="retryOperations">
+                <bean class="org.springframework.retry.support.RetryTemplate">
+                    <property name="retryPolicy">
+                        <bean class="org.springframework.retry.policy.AlwaysRetryPolicy"/>
+                    </property>
+                    <property name="backOffPolicy">
+                        <bean class="org.springframework.retry.backoff.FixedBackOffPolicy">
+                            <property name="backOffPeriod" value="30000"/>
+                        </bean>
+                    </property>
+                </bean>
+            </property>
+            <property name="messageKeyGenerator">
+                <bean class="com.yazino.yaps.MessageIDGenerator"/>
+            </property>
+        </bean>
+    </util:list>
+
+    <bean id="loggingErrorHandler" class="com.yazino.yaps.LoggingErrorHandler"/>
+
+    <bean id="bundleCertificates" class="com.yazino.mobile.yaps.config.TypedMapBean">
+        <constructor-arg>
+            <map>
+                <entry key="com.yazino.YazinoApp" value="${yaps.config.certificateName}"/><!-- this is the real WheelDeal -->
+                <entry key="yazino.wheelDealForTango" value="${yaps.config.wheelDealForTango.certificateName}"/>
+                <entry key="yazino.Blackjack" value="${yaps.config.BLACKJACK.certificateName}"/>
+                <entry key="yazino.HighStakes" value="${yaps.config.HIGH_STAKES.certificateName}"/>
+                <entry key="yazino.WheelDeal" value="${yaps.config.SLOTS.certificateName}"/><!-- apparently unused -->
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

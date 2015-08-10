@@ -1,0 +1,19 @@
+#set ($location = "Edit Recurring Tournament")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/recurring/list">List Recurring Tournaments</a></li>
+        <li><a href="${request.contextPath}/tournament/recurring/show/${definition.id}">Cancel Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Edit Recurring Tournament ${definition.id}</h2>
+
+        #parse("tournament/recurring/form.vm")
+    </div>
+</section>

@@ -1,0 +1,36 @@
+---
+Splots:
+  dseeto-centos:
+      user: bot_test@yazino.com
+      password: yazino
+      server: dseeto-centos.london.yazino.com
+      gameType: SPLOTS
+      platform: ANDROID
+      clientId: Slots
+      variationName: Slots
+      playType: normal_play
+#      playType: bet_per_line
+
+  oval:
+      user: Gordon@yazino.com
+      password: Gordon
+      server: oval.london.yazino.com
+      gameType: SPLOTS
+      platform: ANDROID
+      clientId: Slots
+      variationName: Slots
+      playType: normal_play
+
+
+  breakmycasino:
+      user: bot_test@yazino.com
+      password: yazino
+      server: www.breakmycasino.com
+      gameType: SPLOTS
+      platform: ANDROID
+      clientId: Slots
+      variationName: Slots
+      playType: normal_play
+
+
+

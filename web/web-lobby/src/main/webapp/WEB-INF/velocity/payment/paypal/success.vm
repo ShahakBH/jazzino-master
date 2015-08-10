@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="$!assetUrl/style/gloss/payments.css" type="text/css"/>
+    #parse("payment/paypal/libs.vm")
+    <script type="text/javascript">
+$(document).ready(function() {
+
+    $('#payment_method_box #paiment_method_body ul li input:checked').closest('li').addClass('check');
+
+    $('#payment_method_box #paiment_method_body ul li label').click(function() {
+        $(this).closest('li').addClass('check');
+        $(this).closest('li').siblings().removeClass('check');
+        $(this).siblings('input').attr('checked', 'checked');
+    });
+
+    switch ($('#payment_method_box #paiment_method_body ul li.check').index()) {
+        case 1:
+        case 2:
+            $('#container').addClass('paypal-or-mobile');
+            break;
+        default:
+            $('#container').removeClass('paypal-or-mobile');
+    }
+    $('#payment_method_box #paiment_method_body ul li').click(function() {
+        switch ($(this).index()) {
+            case 1:
+            case 2:
+                $('#container').addClass('paypal-or-mobile');
+                break;
+            default:
+                $('#container').removeClass('paypal-or-mobile');
+        }
+    });
+
+    $('#payment_method_box #paiment_method_body ul li label.credit-cart').click(function() {
+        window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=CREDITCARD';
+    });
+
+    $('#payment_method_box #paiment_method_body ul li label.pay-pal').click(function() {
+        window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=PAYPAL';
+    });
+
+     $('#payment_method_box #paiment_method_body ul li label.trialpay').click(function() {
+         window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=TRIALPAY';
+    });
+
+
+
+   $("#closeBtn").click(
+           function() {
+                var yazinoWindow = parent;
+                yazinoWindow.clearPaymentsOverlay();
+           }
+   );
+
+    var yazinoWindow = parent;
+    yazinoWindow.showPaymentsCloseButton();
+});
+
+</script>
+
+</head>
+<body class="buy-chips-popup">
+<div id="container" class="$gameType cashier_overlay">
+    <div id="main" class="$gameType">
+        <div id="overlay"></div>
+        <div id="buy_chips_main" class="buy-chips">
+            <div id="main_body">
+                <form>
+                    <div id="payment_method_box" class="box">
+                        <div id="payment_title" class="cover-upper"></div>
+                        <div id="paiment_method_body">
+                            <ul>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_credit"
+                                           name="paimentmethodradio"
+                                            value="wirecard"/>
+                                    <label class="credit-cart" for="paiment_credit">Pay by credit card</label>
+                                </li>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_pay_pal"
+                                           name="paimentmethodradio"
+                                           checked="checked"
+                                           value="byPayPal"/>
+                                    <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+                                </li>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_trialpay" name="paymentMethod"
+                                           value="trialpay"/>
+                                    <label class="trialpay" for="paiment_trialpay">Earn Chips</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="container" class="$gameType paypal-or-mobile">
+                        <div id="main" class="confirmation thank-you">
+                            <div id="main_body">
+                                <div id="action_box" class="box">
+                                    <div id="tabs" class="buy-chips"></div>
+                                    <div id="action_body">
+                                        <div id="cofirmation_Body">
+                                            <div class="cofirmation-status">
+                                                <span class="status">THANK YOU</span>
+                                                <span class="status-desc">You've just added $numberTool.format('###,###', $numberOfChips) chips to your account.</span>
+                                                <a id="closeBtn" class="button">start playing now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="bottom">Have questions? Contact us at <a
+                    href="http://support.yazino.com" target="_blank">support.yazino.com</a>
+            </div>
+            <div id="tracking" style="display: none;"><img
+                    src='https://fbads.adparlor.com/Engagement/action.php?id=295&adid=785&vars=7djDxM/P1uDV4OfKs7SxjdbV1ObN4ebE3NXXz9jPwtjg1OTE58XK0Nni1Ky6vp7X3tnWwtbkwNrb5OTYs5aO1tfVtOfOqcC0'
+                    alt='ApPixel'/></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

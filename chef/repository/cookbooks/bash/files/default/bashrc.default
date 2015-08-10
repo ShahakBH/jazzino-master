@@ -1,0 +1,15 @@
+# .bashrc
+# This file is CREATED by Chef using 'bash' cookbook, but once the file is created it DOES NOT get overwritten.
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ll='ls -lash'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+

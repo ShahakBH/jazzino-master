@@ -1,0 +1,11 @@
+<article class="providers providerSelectorWidget">
+    <header>
+        #set($widgetHeader = "socialFlow.$!{pageType}.providerWidget.title")
+        <h1>$!{markdown.markdownToHtml($!springMacroRequestContext.getMessage($!{widgetHeader}, "$!{widgetHeader}"))}</h1>
+    </header>
+    <ul>
+        #foreach( $provider in $providers )
+            <li class="$provider.className"><a href="./${provider.urlName}" class="#if($provider.isSelected)selected#end">#if($provider.isImage)<img src="${assetUrl}/images/social-flow/logo-${provider.className}.png" alt="$provider.altText"/>#else<p>$provider.altText</p>#end</a></li>
+        #end
+    </ul>
+</article>

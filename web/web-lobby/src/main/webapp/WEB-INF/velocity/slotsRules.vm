@@ -1,0 +1,65 @@
+<div id="how-to-play" class="SLOTS">
+    <div id="how-to-play-area">
+        <div class="content_head">
+            <h3 class="font-grey-window-head">SLOTS WHEEL DEAL - HOW TO PLAY &amp; RULES</h3>
+        </div>
+        <div class="content_delimiter"></div>
+        <div class="content">
+            <img src="$assetUrl/images/games/SLOTS/logo.jpg" alt="Slots Wheel Deal logo">
+
+            <h4>
+                How to play slots<br>
+                wheel deal at Yazino
+            </h4>
+
+            <div class="links">
+                #generateLinkTagForMainCta("slots")
+
+                <div id="back-to-games">
+                    <a href="${request.contextPath}/wheelDeal" class="font-how-to-play-back-game uppercase">Back to Slots Wheel deal</a>
+                </div>
+
+                <a href="http://itunes.apple.com/us/app/yazino-slots/id422074428" title="Download on the AppStore">
+                    <img src="$assetUrl/images/games/SLOTS/appstore-ios.png">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.slots" title="Get it on Google Play">
+                    <img src="$assetUrl/images/games/SLOTS/appstore-googleplay.png">
+                </a>
+            </div>
+
+            <p class="intro">
+                Wheel deal is a live, multiplayer slots game where players spin fast to take part in a special bonus round.
+            </p>
+
+            <p>
+                Players gain entry to the bonus round by collecting wheel symbols.
+
+                <img id="single-wheel-logo" src="$assetUrl/images/games/SLOTS/logo-single.png" alt="Single wheel logo">
+            </p>
+
+            <div class="rounds">
+                <div>
+                    <h5>Round 1</h5>
+                    <p>Race to collect 20 wheels and reveal the bonus wheel. In this round only, every wheel you collect adds 4% of your total bet to your <strong class="bonus">BONUS&nbsp;BANK</strong>.</p>
+                </div>
+
+                <div>
+                    <h5>Round 2</h5>
+                    <p>Spin 3 wheels for the best place in the bonus round. This player also gets a special bonus of 10% of their total bet added to their <strong class="bonus">BONUS&nbsp;BANK</strong>.</p>
+                    <p>Collecting the most wheels also qualifies you to take part in the bonus round.</p>
+                </div>
+
+                <div>
+                    <h5>Bonus Round</h5>
+                    <p>If you&rsquo;ve qualified your final prize is: <strong class="bonus">BONUS&nbsp;BANK</strong> &times; the bonus multiplier.</p>
+                </div>
+            </div>
+
+            <div class="wheels">
+                <h5>Bonus Wheels</h5>
+                <img src="$assetUrl/images/games/SLOTS/bonus-symbols.jpg" alt="Bonus wheel symbols">
+            </div>
+        </div>
+        <div class="content_foot"></div>
+    </div>
+</div>

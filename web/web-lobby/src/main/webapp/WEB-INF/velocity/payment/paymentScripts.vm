@@ -1,0 +1,5 @@
+#if ($development)
+<script type="text/javascript" src="$!assetUrl/javascript/yazino-payment.js"></script>
+#else
+<script type="text/javascript" src="$!assetUrl/javascript/yazino-payment.min.js"></script>
+#end

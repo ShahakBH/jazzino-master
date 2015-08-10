@@ -1,0 +1,28 @@
+DELETE FROM PAYMENT_OPTION_PLATFORM WHERE PLATFORM = 'ANDROID'
+#
+
+INSERT INTO PAYMENT_OPTION (PAYMENT_OPTION_ID, LEVEL, CURRENCY, PRICE, CHIPS, FX_PAYMENT_OPTION_ID)
+VALUES
+  ('option1_2_99USD', 1, 'USD', 2.99, 5000, NULL),
+  ('option2_8_99USD', 2, 'USD', 8.99, 15000, NULL),
+  ('option3_14_99USD', 3, 'USD', 14.99, 30000, NULL),
+  ('option4_29_99USD', 4, 'USD', 29.99, 70000, NULL),
+  ('option5_69_99USD', 5, 'USD', 69.99, 200000, NULL),
+  ('option6_89_99USD', 6, 'USD', 89.99, 300000, NULL)
+#
+
+INSERT INTO PAYMENT_OPTION_PLATFORM(platform, payment_option_id)
+VALUES
+('ANDROID', 'option1_2_99USD'),
+('ANDROID', 'option2_8_99USD'),
+('ANDROID', 'option3_14_99USD'),
+('ANDROID', 'option4_29_99USD'),
+('ANDROID', 'option5_69_99USD'),
+('ANDROID', 'option6_89_99USD'),
+('AMAZON', 'option1_2_99USD'),
+('AMAZON', 'option2_8_99USD'),
+('AMAZON', 'option3_14_99USD'),
+('AMAZON', 'option4_29_99USD'),
+('AMAZON', 'option5_69_99USD'),
+('AMAZON', 'option6_89_99USD')
+#

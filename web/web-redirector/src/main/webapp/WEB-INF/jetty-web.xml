@@ -1,0 +1,15 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="contextPath">/</Set>
+    <Set name="war"><SystemProperty name="jetty.home"/>/webapps/strata.server.lobby.redirector.war</Set>
+    <Set name="virtualHosts">
+        <Array type="java.lang.String">
+            <Item>yazino.com</Item>
+            <Item>breakmycasino.com</Item>
+            <Item>makemycasino.com</Item>
+            <Item>bank.london.yazino.com</Item>
+        </Array>
+    </Set>
+</Configure>

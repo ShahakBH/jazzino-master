@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <util:list id="viewAspectConfigurations">
+        <bean class="com.yazino.web.util.ViewAspectConfiguration">
+            <constructor-arg value="ACHIEVEMENTS"/>
+            <property name="requiredGameTypes" ref="gameTypesWithAchievements"/>
+        </bean>
+        <bean class="com.yazino.web.util.ViewAspectConfiguration">
+            <constructor-arg value="COMPETITIONS"/>
+            <property name="requiredGameTypes" ref="gameTypesWithCompetitions"/>
+        </bean>
+        <bean class="com.yazino.web.util.ViewAspectConfiguration">
+            <constructor-arg value="EDIT_PROFILE"/>
+            <property name="requiredPartner" value="YAZINO"/>
+        </bean>
+        <bean class="com.yazino.web.util.ViewAspectConfiguration">
+            <constructor-arg value="PRIVATE_TABLES"/>
+            <property name="requiredGameTypes" ref="gamesSupportingPrivateTables"/>
+        </bean>
+
+        <bean class="com.yazino.web.util.ViewAspectConfiguration">
+            <constructor-arg value="EDIT_PROFILE_LINK"/>
+            <property name="linksFor">
+                <util:map>
+                    <entry key="SLOTS" value="/userDetails"/>
+                    <entry key="BLACKJACK" value="/achievements/blackjack"/>
+                    <entry key="TEXAS_HOLDEM" value="/achievements/texasHoldem"/>
+                    <entry key="ROULETTE" value="/achievements/roulette"/>
+					<entry key="HIGH_STAKES" value="/userDetails"/>
+                </util:map>
+            </property>
+        </bean>
+    </util:list>
+
+    <util:list id="gameTypesWithAchievements">
+        <value>BLACKJACK</value>
+        <value>TEXAS_HOLDEM</value>
+        <value>ROULETTE</value>
+    </util:list>
+
+    <util:list id="gameTypesWithCompetitions">
+        <value>BLACKJACK</value>
+        <value>TEXAS_HOLDEM</value>
+    </util:list>
+
+    <util:list id="gamesSupportingPrivateTables">
+        <value>BLACKJACK</value>
+        <value>TEXAS_HOLDEM</value>
+        <value>ROULETTE</value>
+    </util:list>
+
+
+</beans>

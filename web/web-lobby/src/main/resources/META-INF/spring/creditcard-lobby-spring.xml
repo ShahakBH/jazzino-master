@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <import resource="classpath:META-INF/yazino-properties.xml"/>
+    <import resource="classpath:META-INF/spring/worldpay.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="searchSystemEnvironment" value="false"/>
+        <property name="placeholderPrefix" value="message{" />
+        <property name="locations">
+            <list>
+                <value>classpath:com/yazino/web/payment/creditcard/error-messages.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="com.yazino.web.payment.creditcard"/>
+
+    <bean id="purchaseOutcomeMapper" class="com.yazino.web.payment.creditcard.PurchaseOutcomeMapper">
+        <constructor-arg value="message{credit-card.error.unknown}"/>
+        <constructor-arg>
+            <map>
+                <entry key="UNKNOWN" value="message{credit-card.error.unknown}"/>
+                <entry key="DECLINED" value="message{credit-card.error.declined}"/>
+                <entry key="REFERRED" value="message{credit-card.error.referred}"/>
+                <entry key="INVALID_ACCOUNT" value="message{credit-card.error.invalid-account}"/>
+                <entry key="INVALID_EXPIRY" value="message{credit-card.error.invalid-expiry}"/>
+                <entry key="INSUFFICIENT_FUNDS" value="message{credit-card.error.insufficient-funds}"/>
+                <entry key="EXCEEDS_TRANSACTION_LIMIT" value="message{credit-card.error.exceeds-transaction-limit}"/>
+                <entry key="AVS_CHECK_FAILED" value="message{credit-card.error.avs-failed}"/>
+                <entry key="CSC_CHECK_FAILED" value="message{credit-card.error.csc-mismatch}"/>
+                <entry key="RISK_FAILED" value="message{credit-card.error.risk-failed}"/>
+                <entry key="SYSTEM_FAILURE" value="message{credit-card.error.system-failure}"/>
+                <entry key="LOST_OR_STOLEN_CARD" value="message{credit-card.error.lost-or-stolen}"/>
+                <entry key="PLAYER_BLOCKED" value="message{credit-card.error.player-blocked}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

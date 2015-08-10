@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="playerCreditConfiguration" class="com.yazino.platform.community.PlayerCreditConfiguration">
+        <constructor-arg index="0" value="${strata.credit.initial-balance}"/>
+        <constructor-arg index="1" value="${strata.credit.referral-amount}"/>
+        <constructor-arg index="2" value="${strata.credit.guest-conversion-amount}"/>
+    </bean>
+
+</beans>

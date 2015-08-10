@@ -1,0 +1,12 @@
+#* @vtlvariable name="gameTypeMapper" type="com.yazino.web.domain.GameTypeMapper" *#
+#* @vtlvariable name="viewAspects" type="com.yazino.web.util.ViewAspects" *#
+#set($requestUrl=$request.requestURI)
+<div id="sub-menu">
+    <ul>
+        #if(${viewAspects.supports("ACHIEVEMENTS")})
+            <li #if($requestUrl.matches(".*/achievements.*"))class="selected"#end>
+                <a href="/achievements/${gameTypeMapper.getViewName($gameType)}">Achievements</a>
+            </li>
+        #end
+    </ul>
+</div>

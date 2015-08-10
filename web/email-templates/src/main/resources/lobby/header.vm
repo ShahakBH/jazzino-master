@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>$!title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+
+<body bgcolor="#f2f2f2" link="#0090b7" alink="#0090b7" vlink="#0090b7">
+<table align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#f2f2f2" width="804">
+    <tr>
+        <td>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" bgcolor="#ffffff">
+                <tbody>
+                <tr style="border-spacing:0px;">
+                    <td width="40" height="20" bgcolor="#f2f2f2"></td>
+                    <td width="400" height="20" bgcolor="#f2f2f2"></td>
+                    <td width="220" height="20" bgcolor="#f2f2f2"></td>
+                    <td width="40" height="20" bgcolor="#f2f2f2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" bgcolor="#f2f2f2">
+                        <a href="http://www.yazino.com/"><img alt="Yazino - Let`s Play!" border="0"
+                                                              src="http://cdn.yazino.com/email-content/reusable-assets/20120918T140000/yazinoLogo.png"
+                                                              title="Yazino - Let`s Play!"/></a>
+                    </td>
+                    <td colspan="2" align="right" valign="bottom" bgcolor="#f2f2f2">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="8" bgcolor="#f2f2f2">
+                    </td>
+                </tr>
+

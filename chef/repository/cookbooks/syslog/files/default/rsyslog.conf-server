@@ -1,0 +1,45 @@
+# rsyslog v3 config file
+# server version
+# by mlukasik Friday, 13 July 2012
+
+#### MODULES ####
+$ModLoad imuxsock.so	# provides support for local system logging (e.g. via logger command)
+$ModLoad imklog.so	# provides kernel logging support (previously done by rklogd)
+$ModLoad immark.so	# provides --MARK-- message capability
+
+$ModLoad imudp.so
+$UDPServerRun 514
+$ModLoad imtcp.so  
+$InputTCPServerRun 514
+
+#### GLOBAL DIRECTIVES ####
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required, 
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+
+#### RULES ####
+$template TraditionalFormat,"%timegenerated% %HOSTNAME% %syslogtag%%msg:::drop-last-lf%\n"
+
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+authpriv.*                                              /var/log/secure
+mail.*                                                  -/var/log/maillog
+cron.*                                                  /var/log/cron
+*.emerg                                                 *
+uucp,news.crit                                          /var/log/spooler
+local7.*                                                /var/log/boot.log
+
+$template Default,"/logs/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%/system.log"
+$template Bash,"/logs/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%/bash.log"
+$template Cron,"/logs/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%/cron.log"
+$template Mail,"/logs/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%/mail.log"
+$template Boot,"/logs/%HOSTNAME%/%$YEAR%-%$MONTH%-%$DAY%/boot.log"
+
+kern.*;authpriv.*;uucp;news.*;local7.*		-?Default;TraditionalFormat
+cron.*						-?Cron;TraditionalFormat
+mail.*						-?Mail;TraditionalFormat
+local0.*					-?Bash;TraditionalFormat
+local7.*					-?Boot;TraditionalFormat

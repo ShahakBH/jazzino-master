@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.yazino.web.payment.itunes"/>
+
+    <import resource="classpath:META-INF/spring/yaps-rabbit-config.xml"/>
+    <import resource="classpath:META-INF/spring/ios-bundle-mappings.xml"/>
+
+    <bean id="itunesOrderTransformer" class="com.yazino.web.payment.itunes.DefaultOrderTransformer"/>
+
+    <bean id="iTunesChipAwardingOrderProcessor" class="com.yazino.web.payment.itunes.ChipAwardingOrderProcessor"/>
+
+    <bean id="itunesTransactionalOrderProcessor" class="com.yazino.web.payment.itunes.TransactionalOrderProcessor"/>
+
+    <bean id="appStoreService" class="com.yazino.web.payment.itunes.AppStoreService"/>
+
+
+    <util:map id="standardHeaders" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD30"      value="GOOD VALUE"/>
+        <entry key="IOS_USD70"      value="GREAT VALUE"/>
+        <entry key="IOS_USD90"      value="BEST VALUE"/>
+    </util:map>
+
+    <util:map id="standardSubHeaders" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="STARTER STYLE"/>
+        <entry key="IOS_USD8"       value="CLEVER COMPETITOR"/>
+        <entry key="IOS_USD15"      value="LUCKY BREAK"/>
+        <entry key="IOS_USD30"      value="Savvy Star"/>
+        <entry key="IOS_USD70"      value="Power Player"/>
+        <entry key="IOS_USD90"      value="Millionaire Maven"/>
+    </util:map>
+
+    <util:map id="aglBlackjackStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="BLACKJACK_USD3_BUYS_5K"/>
+        <entry key="IOS_USD8"       value="BLACKJACK_USD8_BUYS_15K"/>
+        <entry key="IOS_USD15"      value="BLACKJACK_USD15_BUYS_30K_1"/>
+        <entry key="IOS_USD30"      value="BLACKJACK_USD30_BUYS_70K"/>
+        <entry key="IOS_USD70"      value="BLACKJACK_USD70_BUYS_200K"/>
+        <entry key="IOS_USD90"      value="BLACKJACK_USD90_BUYS_300K_1"/>
+    </util:map>
+
+    <!-- promotional id'giftIdAsString (keys) built internally -->
+    <util:map id="aglBlackjackPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="BLACKJACK_USD3_BUYS_5.5K_P10"/>
+        <entry key="IOS_USD3_X25"   value="BLACKJACK_USD3_BUYS_6.25K_P25"/>
+        <entry key="IOS_USD3_X50"   value="BLACKJACK_USD3_BUYS_7.5K_P50"/>
+        <entry key="IOS_USD3_X100"  value="BLACKJACK_USD3_BUYS_10K_P100"/>
+        <entry key="IOS_USD3_X150"  value="BLACKJACK_USD3_BUYS_12.5K_P150"/>
+        <entry key="IOS_USD3_X200"  value="BLACKJACK_USD3_BUYS_15K_P200"/>
+
+        <entry key="IOS_USD8_X10"   value="BLACKJACK_USD8_BUYS_16.5K_P10"/>
+        <entry key="IOS_USD8_X25"   value="BLACKJACK_USD8_BUYS_18.75K_P25"/>
+        <entry key="IOS_USD8_X50"   value="BLACKJACK_USD8_BUYS_22.5K_P50"/>
+        <entry key="IOS_USD8_X100"  value="BLACKJACK_USD8_BUYS_30K_P100"/>
+        <entry key="IOS_USD8_X150"  value="BLACKJACK_USD8_BUYS_37.5K_P150"/>
+        <entry key="IOS_USD8_X200"  value="BLACKJACK_USD8_BUYS_45K_P200"/>
+
+        <entry key="IOS_USD15_X10"  value="BLACKJACK_USD15_BUYS_33K_P10"/>
+        <entry key="IOS_USD15_X25"  value="BLACKJACK_USD15_BUYS_37.5K_P25"/>
+        <entry key="IOS_USD15_X50"  value="BLACKJACK_USD15_BUYS_45K_P50"/>
+        <entry key="IOS_USD15_X100" value="BLACKJACK_USD15_BUYS_60K_P100"/>
+        <entry key="IOS_USD15_X150" value="BLACKJACK_USD15_BUYS_75K_P150"/>
+        <entry key="IOS_USD15_X200" value="BLACKJACK_USD15_BUYS_90K_P200"/>
+
+        <entry key="IOS_USD30_X10"  value="BLACKJACK_USD30_BUYS_77K_P10"/>
+        <entry key="IOS_USD30_X25"  value="BLACKJACK_USD30_BUYS_87.5K_P25"/>
+        <entry key="IOS_USD30_X50"  value="BLACKJACK_USD30_BUYS_105K_P50"/>
+        <entry key="IOS_USD30_X100" value="BLACKJACK_USD30_BUYS_140K_P100"/>
+        <entry key="IOS_USD30_X150" value="BLACKJACK_USD30_BUYS_175K_P150"/>
+        <entry key="IOS_USD30_X200" value="BLACKJACK_USD30_BUYS_210K_P200"/>
+
+        <entry key="IOS_USD70_X10"  value="BLACKJACK_USD70_BUYS_220K_P10"/>
+        <entry key="IOS_USD70_X25"  value="BLACKJACK_USD70_BUYS_250K_P25"/>
+        <entry key="IOS_USD70_X50"  value="BLACKJACK_USD70_BUYS_300K_P50"/>
+        <entry key="IOS_USD70_X100" value="BLACKJACK_USD70_BUYS_400K_P100"/>
+        <entry key="IOS_USD70_X150" value="BLACKJACK_USD70_BUYS_500K_P150"/>
+        <entry key="IOS_USD70_X200" value="BLACKJACK_USD70_BUYS_600K_P200"/>
+
+        <entry key="IOS_USD90_X10"  value="BLACKJACK_USD90_BUYS_330K_P10"/>
+        <entry key="IOS_USD90_X25"  value="BLACKJACK_USD90_BUYS_375K_P25"/>
+        <entry key="IOS_USD90_X50"  value="BLACKJACK_USD90_BUYS_450K_P50"/>
+        <entry key="IOS_USD90_X100" value="BLACKJACK_USD90_BUYS_600K_P100"/>
+        <entry key="IOS_USD90_X150" value="BLACKJACK_USD90_BUYS_750K_P150"/>
+        <entry key="IOS_USD90_X200" value="BLACKJACK_USD90_BUYS_900K_P200"/>
+    </util:map>
+
+    <util:map id="yazinoBlackjackStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="BJ_USD3_BUYS_5K"/>
+        <entry key="IOS_USD8"       value="BJ_USD8_BUYS_15K"/>
+        <entry key="IOS_USD15"      value="BJ_USD15_BUYS_30K"/>
+        <entry key="IOS_USD30"      value="BJ_USD30_BUYS_70K"/>
+        <entry key="IOS_USD70"      value="BJ_USD70_BUYS_200K"/>
+        <entry key="IOS_USD90"      value="BJ_USD90_BUYS_300K"/>
+    </util:map>
+
+    <!-- promotional id'giftIdAsString (keys) built internally -->
+    <util:map id="yazinoBlackjackPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="BJ_USD3_BUYS_5.5K_P10"/>
+        <entry key="IOS_USD3_X25"   value="BJ_USD3_BUYS_6.25K_P25"/>
+        <entry key="IOS_USD3_X50"   value="BJ_USD3_BUYS_7.5K_P50"/>
+        <entry key="IOS_USD3_X100"  value="BJ_USD3_BUYS_10K_P100"/>
+        <entry key="IOS_USD3_X150"  value="BJ_USD3_BUYS_12.5K_P150"/>
+        <entry key="IOS_USD3_X200"  value="BJ_USD3_BUYS_15K_P200"/>
+
+        <entry key="IOS_USD8_X10"   value="BJ_USD8_BUYS_16.5K_P10"/>
+        <entry key="IOS_USD8_X25"   value="BJ_USD8_BUYS_18.75K_P25"/>
+        <entry key="IOS_USD8_X50"   value="BJ_USD8_BUYS_22.5K_P50"/>
+        <entry key="IOS_USD8_X100"  value="BJ_USD8_BUYS_30K_P100"/>
+        <entry key="IOS_USD8_X150"  value="BJ_USD8_BUYS_37.5K_P150"/>
+        <entry key="IOS_USD8_X200"  value="BJ_USD8_BUYS_45K_P200"/>
+
+        <entry key="IOS_USD15_X10"  value="BJ_USD15_BUYS_33K_P10"/>
+        <entry key="IOS_USD15_X25"  value="BJ_USD15_BUYS_37.5K_P25"/>
+        <entry key="IOS_USD15_X50"  value="BJ_USD15_BUYS_45K_P50"/>
+        <entry key="IOS_USD15_X100" value="BJ_USD15_BUYS_60K_P100"/>
+        <entry key="IOS_USD15_X150" value="BJ_USD15_BUYS_75K_P150"/>
+        <entry key="IOS_USD15_X200" value="BJ_USD15_BUYS_90K_P200"/>
+
+        <entry key="IOS_USD30_X10"  value="BJ_USD30_BUYS_77K_P10"/>
+        <entry key="IOS_USD30_X25"  value="BJ_USD30_BUYS_87.5K_P25"/>
+        <entry key="IOS_USD30_X50"  value="BJ_USD30_BUYS_105K_P50"/>
+        <entry key="IOS_USD30_X100" value="BJ_USD30_BUYS_140K_P100"/>
+        <entry key="IOS_USD30_X150" value="BJ_USD30_BUYS_175K_P150"/>
+        <entry key="IOS_USD30_X200" value="BJ_USD30_BUYS_210K_P200"/>
+
+        <entry key="IOS_USD70_X10"  value="BJ_USD70_BUYS_220K_P10"/>
+        <entry key="IOS_USD70_X25"  value="BJ_USD70_BUYS_250K_P25"/>
+        <entry key="IOS_USD70_X50"  value="BJ_USD70_BUYS_300K_P50"/>
+        <entry key="IOS_USD70_X100" value="BJ_USD70_BUYS_400K_P100"/>
+        <entry key="IOS_USD70_X150" value="BJ_USD70_BUYS_500K_P150"/>
+        <entry key="IOS_USD70_X200" value="BJ_USD70_BUYS_600K_P200"/>
+
+        <entry key="IOS_USD90_X10"  value="BJ_USD90_BUYS_330K_P10"/>
+        <entry key="IOS_USD90_X25"  value="BJ_USD90_BUYS_375K_P25"/>
+        <entry key="IOS_USD90_X50"  value="BJ_USD90_BUYS_450K_P50"/>
+        <entry key="IOS_USD90_X100" value="BJ_USD90_BUYS_600K_P100"/>
+        <entry key="IOS_USD90_X150" value="BJ_USD90_BUYS_750K_P150"/>
+        <entry key="IOS_USD90_X200" value="BJ_USD90_BUYS_900K_P200"/>
+    </util:map>
+
+    <util:map id="aglSlotsStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="USD3_BUYS_5K"/>
+        <entry key="IOS_USD8"       value="USD8_BUYS_15K"/>
+        <entry key="IOS_USD15"      value="USD15_BUYS_30K"/>
+        <entry key="IOS_USD30"      value="USD30_BUYS_70K"/>
+        <entry key="IOS_USD70"      value="USD70_BUYS_200K"/>
+        <entry key="IOS_USD90"      value="USD90_BUYS_300K_2"/>
+    </util:map>
+
+    <!-- promotional id'giftIdAsString (keys) built internally -->
+    <util:map id="aglSlotsPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="USD3_BUYS_5.5K_P10"/>
+        <entry key="IOS_USD3_X25"   value="USD3_BUYS_6.25K_P25"/>
+        <entry key="IOS_USD3_X50"   value="USD3_BUYS_7.5K_P50"/>
+        <entry key="IOS_USD3_X100"  value="USD3_BUYS_10K_P100"/>
+        <entry key="IOS_USD3_X150"  value="USD3_BUYS_12.5K_P150"/>
+        <entry key="IOS_USD3_X200"  value="USD3_BUYS_15K_P200"/>
+
+        <entry key="IOS_USD8_X10"   value="USD8_BUYS_16.5K_P10"/>
+        <entry key="IOS_USD8_X25"   value="USD8_BUYS_18.75K_P25"/>
+        <entry key="IOS_USD8_X50"   value="USD8_BUYS_22.5K_P50"/>
+        <entry key="IOS_USD8_X100"  value="USD8_BUYS_30K_P100"/>
+        <entry key="IOS_USD8_X150"  value="USD8_BUYS_37.5K_P150"/>
+        <entry key="IOS_USD8_X200"  value="USD8_BUYS_45K_P200"/>
+
+        <entry key="IOS_USD15_X10"  value="USD15_BUYS_33K_P10"/>
+        <entry key="IOS_USD15_X25"  value="USD15_BUYS_37.5K_P25"/>
+        <entry key="IOS_USD15_X50"  value="USD15_BUYS_45K_P50"/>
+        <entry key="IOS_USD15_X100" value="USD15_BUYS_60K_P100"/>
+        <entry key="IOS_USD15_X150" value="USD15_BUYS_75K_P150"/>
+        <entry key="IOS_USD15_X200" value="USD15_BUYS_90K_P200"/>
+
+        <entry key="IOS_USD30_X10"  value="USD30_BUYS_77K_P10"/>
+        <entry key="IOS_USD30_X25"  value="USD30_BUYS_87.5K_P25"/>
+        <entry key="IOS_USD30_X50"  value="USD30_BUYS_105K_P50"/>
+        <entry key="IOS_USD30_X100" value="USD30_BUYS_140K_P100"/>
+        <entry key="IOS_USD30_X150" value="USD30_BUYS_175K_P150"/>
+        <entry key="IOS_USD30_X200" value="USD30_BUYS_210K_P200"/>
+
+        <entry key="IOS_USD70_X10"  value="USD70_BUYS_220K_P10"/>
+        <entry key="IOS_USD70_X25"  value="USD70_BUYS_250K_P25"/>
+        <entry key="IOS_USD70_X50"  value="USD70_BUYS_300K_P50"/>
+        <entry key="IOS_USD70_X100" value="USD70_BUYS_400K_P100"/>
+        <entry key="IOS_USD70_X150" value="USD70_BUYS_500K_P150"/>
+        <entry key="IOS_USD70_X200" value="USD70_BUYS_600K_P200"/>
+
+        <entry key="IOS_USD90_X10"  value="USD90_BUYS_330K_P10"/>
+        <entry key="IOS_USD90_X25"  value="USD90_BUYS_375K_P25"/>
+        <entry key="IOS_USD90_X50"  value="USD90_BUYS_450K_P50"/>
+        <entry key="IOS_USD90_X100" value="USD90_BUYS_600K_P100"/>
+        <entry key="IOS_USD90_X150" value="USD90_BUYS_750K_P150"/>
+        <entry key="IOS_USD90_X200" value="USD90_BUYS_900K_P200"/>
+    </util:map>
+
+    <util:map id="tangoSlotsStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="USD3_BUYS_5K_TANGO"/>
+        <entry key="IOS_USD8"       value="USD8_BUYS_15K_TANGO"/>
+        <entry key="IOS_USD15"      value="USD15_BUYS_30K_TANGO"/>
+        <entry key="IOS_USD30"      value="USD30_BUYS_70K_TANGO"/>
+        <entry key="IOS_USD70"      value="USD70_BUYS_200K_TANGO"/>
+        <entry key="IOS_USD90"      value="USD90_BUYS_300K_TANGO"/>
+    </util:map>
+
+    <!-- promotional id'giftIdAsString (keys) built internally -->
+    <util:map id="tangoSlotsPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="USD3_BUYS_5.5K_P10_TANGO"/>
+        <entry key="IOS_USD3_X25"   value="USD3_BUYS_6.25K_P25_TANGO"/>
+        <entry key="IOS_USD3_X50"   value="USD3_BUYS_7.5K_P50_TANGO"/>
+        <entry key="IOS_USD3_X100"  value="USD3_BUYS_10K_P100_TANGO"/>
+        <entry key="IOS_USD3_X150"  value="USD3_BUYS_12.5K_P150_TANGO"/>
+        <entry key="IOS_USD3_X200"  value="USD3_BUYS_15K_P200_TANGO"/>
+
+        <entry key="IOS_USD8_X10"   value="USD8_BUYS_16.5K_P10_TANGO"/>
+        <entry key="IOS_USD8_X25"   value="USD8_BUYS_18.75K_P25_TANGO"/>
+        <entry key="IOS_USD8_X50"   value="USD8_BUYS_22.5K_P50_TANGO"/>
+        <entry key="IOS_USD8_X100"  value="USD8_BUYS_30K_P100_TANGO"/>
+        <entry key="IOS_USD8_X150"  value="USD8_BUYS_37.5K_P150_TANGO"/>
+        <entry key="IOS_USD8_X200"  value="USD8_BUYS_45K_P200_TANGO"/>
+
+        <entry key="IOS_USD15_X10"  value="USD15_BUYS_33K_P10_TANGO"/>
+        <entry key="IOS_USD15_X25"  value="USD15_BUYS_37.5K_P25_TANGO"/>
+        <entry key="IOS_USD15_X50"  value="USD15_BUYS_45K_P50_TANGO"/>
+        <entry key="IOS_USD15_X100" value="USD15_BUYS_60K_P100_TANGO"/>
+        <entry key="IOS_USD15_X150" value="USD15_BUYS_75K_P150_TANGO"/>
+        <entry key="IOS_USD15_X200" value="USD15_BUYS_90K_P200_TANGO"/>
+
+        <entry key="IOS_USD30_X10"  value="USD30_BUYS_77K_P10_TANGO"/>
+        <entry key="IOS_USD30_X25"  value="USD30_BUYS_87.5K_P25_TANGO"/>
+        <entry key="IOS_USD30_X50"  value="USD30_BUYS_105K_P50_TANGO"/>
+        <entry key="IOS_USD30_X100" value="USD30_BUYS_140K_P100_TANGO"/>
+        <entry key="IOS_USD30_X150" value="USD30_BUYS_175K_P150_TANGO"/>
+        <entry key="IOS_USD30_X200" value="USD30_BUYS_210K_P200_TANGO"/>
+
+        <entry key="IOS_USD70_X10"  value="USD70_BUYS_220K_P10_TANGO"/>
+        <entry key="IOS_USD70_X25"  value="USD70_BUYS_250K_P25_TANGO"/>
+        <entry key="IOS_USD70_X50"  value="USD70_BUYS_300K_P50_TANGO"/>
+        <entry key="IOS_USD70_X100" value="USD70_BUYS_400K_P100_TANGO"/>
+        <entry key="IOS_USD70_X150" value="USD70_BUYS_500K_P150_TANGO"/>
+        <entry key="IOS_USD70_X200" value="USD70_BUYS_600K_P200_TANGO"/>
+
+        <entry key="IOS_USD90_X10"  value="USD90_BUYS_330K_P10_TANGO"/>
+        <entry key="IOS_USD90_X25"  value="USD90_BUYS_375K_P25_TANGO"/>
+        <entry key="IOS_USD90_X50"  value="USD90_BUYS_450K_P50_TANGO"/>
+        <entry key="IOS_USD90_X100" value="USD90_BUYS_600K_P100_TANGO"/>
+        <entry key="IOS_USD90_X150" value="USD90_BUYS_750K_P150_TANGO"/>
+        <entry key="IOS_USD90_X200" value="USD90_BUYS_900K_P200_TANGO"/>
+    </util:map>
+
+    <util:map id="highStakesStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="HS_USD3_BUYS_5K"/>
+        <entry key="IOS_USD8"       value="HS_USD8_BUYS_15K"/>
+        <entry key="IOS_USD15"      value="HS_USD15_BUYS_30K"/>
+        <entry key="IOS_USD30"      value="HS_USD30_BUYS_70K"/>
+        <entry key="IOS_USD70"      value="HS_USD70_BUYS_200K"/>
+        <entry key="IOS_USD90"      value="HS_USD90_BUYS_300K"/>
+    </util:map>
+
+    <!-- promotional id'giftIdAsString (keys) built internally -->
+    <util:map id="highStakesPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="HS_USD3_BUYS_5.5K_P10"/>
+        <entry key="IOS_USD3_X25"   value="HS_USD3_BUYS_6.25K_P25"/>
+        <entry key="IOS_USD3_X50"   value="HS_USD3_BUYS_7.5K_P50"/>
+        <entry key="IOS_USD3_X100"  value="HS_USD3_BUYS_10K_P100"/>
+        <entry key="IOS_USD3_X150"  value="HS_USD3_BUYS_12.5K_P150"/>
+        <entry key="IOS_USD3_X200"  value="HS_USD3_BUYS_15K_P200"/>
+
+        <entry key="IOS_USD8_X10"   value="HS_USD8_BUYS_16.5K_P10"/>
+        <entry key="IOS_USD8_X25"   value="HS_USD8_BUYS_18.75K_P25"/>
+        <entry key="IOS_USD8_X50"   value="HS_USD8_BUYS_22.5K_P50"/>
+        <entry key="IOS_USD8_X100"  value="HS_USD8_BUYS_30K_P100"/>
+        <entry key="IOS_USD8_X150"  value="HS_USD8_BUYS_37.5K_P150"/>
+        <entry key="IOS_USD8_X200"  value="HS_USD8_BUYS_45K_P200"/>
+
+        <entry key="IOS_USD15_X10"  value="HS_USD15_BUYS_33K_P10"/>
+        <entry key="IOS_USD15_X25"  value="HS_USD15_BUYS_37.5K_P25"/>
+        <entry key="IOS_USD15_X50"  value="HS_USD15_BUYS_45K_P50"/>
+        <entry key="IOS_USD15_X100" value="HS_USD15_BUYS_60K_P100"/>
+        <entry key="IOS_USD15_X150" value="HS_USD15_BUYS_75K_P150"/>
+        <entry key="IOS_USD15_X200" value="HS_USD15_BUYS_90K_P200"/>
+
+        <entry key="IOS_USD30_X10"  value="HS_USD30_BUYS_77K_P10"/>
+        <entry key="IOS_USD30_X25"  value="HS_USD30_BUYS_87.5K_P25"/>
+        <entry key="IOS_USD30_X50"  value="HS_USD30_BUYS_105K_P50"/>
+        <entry key="IOS_USD30_X100" value="HS_USD30_BUYS_140K_P100"/>
+        <entry key="IOS_USD30_X150" value="HS_USD30_BUYS_175K_P150"/>
+        <entry key="IOS_USD30_X200" value="HS_USD30_BUYS_210K_P200"/>
+
+        <entry key="IOS_USD70_X10"  value="HS_USD70_BUYS_220K_P10"/>
+        <entry key="IOS_USD70_X25"  value="HS_USD70_BUYS_250K_P25"/>
+        <entry key="IOS_USD70_X50"  value="HS_USD70_BUYS_300K_P50"/>
+        <entry key="IOS_USD70_X100" value="HS_USD70_BUYS_400K_P100"/>
+        <entry key="IOS_USD70_X150" value="HS_USD70_BUYS_500K_P150"/>
+        <entry key="IOS_USD70_X200" value="HS_USD70_BUYS_600K_P200"/>
+
+        <entry key="IOS_USD90_X10"  value="HS_USD90_BUYS_330K_P10"/>
+        <entry key="IOS_USD90_X25"  value="HS_USD90_BUYS_375K_P25"/>
+        <entry key="IOS_USD90_X50"  value="HS_USD90_BUYS_450K_P50"/>
+        <entry key="IOS_USD90_X100" value="HS_USD90_BUYS_600K_P100"/>
+        <entry key="IOS_USD90_X150" value="HS_USD90_BUYS_750K_P150"/>
+        <entry key="IOS_USD90_X200" value="HS_USD90_BUYS_900K_P200"/>
+    </util:map>
+
+    <util:map id="yazinoSlotsStandardProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3"       value="WD_USD3_BUYS_5K"/>
+        <entry key="IOS_USD8"       value="WD_USD8_BUYS_15K"/>
+        <entry key="IOS_USD15"      value="WD_USD15_BUYS_30K"/>
+        <entry key="IOS_USD30"      value="WD_USD30_BUYS_70K"/>
+        <entry key="IOS_USD70"      value="WD_USD70_BUYS_200K"/>
+        <entry key="IOS_USD90"      value="WD_USD90_BUYS_300K"/>
+    </util:map>
+
+    <util:map id="yazinoSlotsPromotionProducts" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="IOS_USD3_X10"   value="WD_USD3_BUYS_5.5K_P10"/>
+        <entry key="IOS_USD3_X25"   value="WD_USD3_BUYS_6.25K_P25"/>
+        <entry key="IOS_USD3_X50"   value="WD_USD3_BUYS_7.5K_P50"/>
+        <entry key="IOS_USD3_X100"  value="WD_USD3_BUYS_10K_P100"/>
+        <entry key="IOS_USD3_X150"  value="WD_USD3_BUYS_12.5K_P150"/>
+        <entry key="IOS_USD3_X200"  value="WD_USD3_BUYS_15K_P200"/>
+
+        <entry key="IOS_USD8_X10"   value="WD_USD8_BUYS_16.5K_P10"/>
+        <entry key="IOS_USD8_X25"   value="WD_USD8_BUYS_18.75K_P25"/>
+        <entry key="IOS_USD8_X50"   value="WD_USD8_BUYS_22.5K_P50"/>
+        <entry key="IOS_USD8_X100"  value="WD_USD8_BUYS_30K_P100"/>
+        <entry key="IOS_USD8_X150"  value="WD_USD8_BUYS_37.5K_P150"/>
+        <entry key="IOS_USD8_X200"  value="WD_USD8_BUYS_45K_P200"/>
+
+        <entry key="IOS_USD15_X10"  value="WD_USD15_BUYS_33K_P10"/>
+        <entry key="IOS_USD15_X25"  value="WD_USD15_BUYS_37.5K_P25"/>
+        <entry key="IOS_USD15_X50"  value="WD_USD15_BUYS_45K_P50"/>
+        <entry key="IOS_USD15_X100" value="WD_USD15_BUYS_60K_P100"/>
+        <entry key="IOS_USD15_X150" value="WD_USD15_BUYS_75K_P150"/>
+        <entry key="IOS_USD15_X200" value="WD_USD15_BUYS_90K_P200"/>
+
+        <entry key="IOS_USD30_X10"  value="WD_USD30_BUYS_77K_P10"/>
+        <entry key="IOS_USD30_X25"  value="WD_USD30_BUYS_87.5K_P25"/>
+        <entry key="IOS_USD30_X50"  value="WD_USD30_BUYS_105K_P50"/>
+        <entry key="IOS_USD30_X100" value="WD_USD30_BUYS_140K_P100"/>
+        <entry key="IOS_USD30_X150" value="WD_USD30_BUYS_175K_P150"/>
+        <entry key="IOS_USD30_X200" value="WD_USD30_BUYS_210K_P200"/>
+
+        <entry key="IOS_USD70_X10"  value="WD_USD70_BUYS_220K_P10"/>
+        <entry key="IOS_USD70_X25"  value="WD_USD70_BUYS_250K_P25"/>
+        <entry key="IOS_USD70_X50"  value="WD_USD70_BUYS_300K_P50"/>
+        <entry key="IOS_USD70_X100" value="WD_USD70_BUYS_400K_P100"/>
+        <entry key="IOS_USD70_X150" value="WD_USD70_BUYS_500K_P150"/>
+        <entry key="IOS_USD70_X200" value="WD_USD70_BUYS_600K_P200"/>
+
+        <entry key="IOS_USD90_X10"  value="WD_USD90_BUYS_330K_P10"/>
+        <entry key="IOS_USD90_X25"  value="WD_USD90_BUYS_375K_P25"/>
+        <entry key="IOS_USD90_X50"  value="WD_USD90_BUYS_450K_P50"/>
+        <entry key="IOS_USD90_X100" value="WD_USD90_BUYS_600K_P100"/>
+        <entry key="IOS_USD90_X150" value="WD_USD90_BUYS_750K_P150"/>
+        <entry key="IOS_USD90_X200" value="WD_USD90_BUYS_900K_P200"/>
+    </util:map>
+
+    <bean id="appStoreConfiguration" class="com.yazino.web.payment.itunes.AppStoreConfiguration">
+        <property name="standardPackageMappings">
+            <map key-type="java.lang.String">
+                <!-- First 2 are for AGL where we used server-side gametypes -->
+                <entry key="SLOTS" value-ref="aglSlotsStandardProducts"/>
+                <entry key="BLACKJACK" value-ref="aglBlackjackStandardProducts"/>
+                <entry key="yazino.WheelDeal" value-ref="aglSlotsStandardProducts"/>
+                <entry key="yazino.WheelDeal2" value-ref="yazinoSlotsStandardProducts"/>
+                <entry key="com.yazino.YazinoApp" value-ref="aglSlotsStandardProducts"/>
+                <entry key="yazino.Blackjack" value-ref="yazinoBlackjackStandardProducts"/> <!-- had to create new identifiers because I ballsed up the old ones -->
+                <entry key="yazino.HighStakes" value-ref="highStakesStandardProducts"/>
+                <entry key="yazino.wheelDealForTango" value-ref="tangoSlotsStandardProducts"/>
+            </map>
+        </property>
+        <property name="promotionPackageMappings">
+            <map key-type="java.lang.String">
+                <!-- First 2 are for AGL where we used server-side gametypes -->
+                <entry key="SLOTS" value-ref="aglSlotsPromotionProducts"/>
+                <entry key="BLACKJACK" value-ref="aglBlackjackPromotionProducts"/>
+                <entry key="yazino.WheelDeal" value-ref="aglSlotsPromotionProducts"/>
+                <entry key="yazino.WheelDeal2" value-ref="yazinoSlotsPromotionProducts"/>
+                <entry key="com.yazino.YazinoApp" value-ref="aglSlotsPromotionProducts"/>
+                <entry key="yazino.Blackjack" value-ref="yazinoBlackjackPromotionProducts"/> <!-- had to create new identifiers because I ballsed up the old ones -->
+                <entry key="yazino.HighStakes" value-ref="highStakesPromotionProducts"/>
+                <entry key="yazino.wheelDealForTango" value-ref="tangoSlotsPromotionProducts"/>
+            </map>
+        </property>
+        <property name="standardHeaders" ref="standardHeaders"/>
+        <property name="standardSubHeaders" ref="standardSubHeaders"/>
+        <property name="gameBundleMappings" ref="bundleMappings"/>
+    </bean>
+
+
+</beans>

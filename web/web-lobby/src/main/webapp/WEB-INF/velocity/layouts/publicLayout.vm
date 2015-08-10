@@ -1,0 +1,29 @@
+#* @vtlvariable name="request" type="javax.servlet.http.HttpServletRequest" *#
+#* @vtlvariable name="screen_content" type="java.lang.String" *#
+#* @vtlvariable name="lobbySession" type="com.yazino.web.session.LobbySession" *#
+<!DOCTYPE html>
+<html>
+<head>
+    #parse("partials/head.vm")
+	#parse("partials/glossStyle.vm")
+	#parse("partials/preScripts.vm")
+</head>
+<body class="$!pageName #if(!$lobbySession)loggedout#end #if($!canvas)compact#end" data-ctacontext="website-logged-out">
+
+    <div id="FB_HiddenIFrameContainer"
+        style="display:none; position:absolute; left:-100px; top:-100px; width:0; height: 0;"></div> ## for Facebook
+    #parse("partials/fb_init.vm")
+
+    #parse("partials/header.vm")
+
+    <div id="content">
+        ${screen_content}
+    </div>
+    #parse("partials/footer.vm")
+    #parse("partials/feedback.vm")
+    #parse("partials/external_tracking.vm")
+	#parse("partials/glossScripts.vm")
+
+    #parse("partials/performance.vm")
+</body>
+</html>

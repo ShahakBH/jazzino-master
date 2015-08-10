@@ -1,0 +1,23 @@
+{
+  "name": "base",
+  "description": "Base functionality that all roles should include.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[cleanup::default]",
+    "recipe[ssh_authorized_keys::default]",
+    "recipe[senet_base::default]",
+    "recipe[repo::default]",
+    "recipe[motd::default]",
+    "recipe[ntp::default]",
+    "recipe[nagios::client]",
+    "recipe[syslog::default]",
+    "recipe[sysctl::default]",
+    "recipe[bash::default]",
+    "recipe[zsh::default]"
+  ]
+}

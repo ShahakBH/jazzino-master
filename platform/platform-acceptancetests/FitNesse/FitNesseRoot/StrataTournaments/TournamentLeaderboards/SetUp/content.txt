@@ -1,0 +1,5 @@
+!|senet.server.tournament.TournamentFixture|
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|

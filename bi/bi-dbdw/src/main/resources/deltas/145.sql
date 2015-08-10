@@ -1,0 +1,9 @@
+DROP VIEW IF EXISTS bi_players_by_date_and_source#
+DROP VIEW IF EXISTS bi_rt2m_players_by_country#
+DROP VIEW IF EXISTS bi_rt2m_players_by_country_and_region#
+DROP VIEW IF EXISTS bi_rt2m_players_by_game#
+DROP VIEW IF EXISTS bi_rt2m_players_by_source#
+DROP VIEW IF EXISTS bi_rt30m_players_by_country#
+DROP VIEW IF EXISTS bi_rt30m_players_by_country_and_region#
+DROP VIEW IF EXISTS bi_rt30m_players_by_game#
+DROP VIEW IF EXISTS bi_rt30m_players_by_source#

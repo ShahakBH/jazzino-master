@@ -1,0 +1,50 @@
+<style>
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 10pt;
+		color: black;
+		background-color: white;
+	}
+
+	.footer {
+		color: rgb(120, 120, 120);
+		font-size: 8pt;
+	}
+</style>
+<p>
+	Hello $!realName,
+</p>
+<p>
+	Welcome to <a href="http://yazino.com/">Yazino!</a>
+</p>
+<p>
+	At Yazino you'll discover a new social casino, designed for you to enjoy competing,
+	challenging and socialising with your friends. You'll find a new spin on traditional
+	casino games like Roulette &amp; Blackjack plus fast &amp; furious hourly competitions like
+	Jack's Table &amp; Round Up, where you compete against friends for a trophy and a share
+	of the prize pool.
+</p>
+<p>
+	You'll earn 2,500 free chips when you play daily and 5,000 chips for each friend that you invite who plays.
+	So what are you waiting for?
+</p>
+<p>
+	<a href="$!{controllerUrl}?email=$!{email}&verify=$!{verificationIdentifier}">Click here to activate your user
+		account</a> or copy &amp; paste the URL below into your web browser.
+</p>
+<p>
+    $!{controllerUrl}?email=$!{email}&verify=$!{verificationIdentifier}
+</p>
+<p>
+	If you have any questions, please contact us at contact@yazino.com or visit <a href="http://support.yazino.com">http://support.yazino.com</a>.
+</p>
+<p>
+	We'll see you soon at Yazino. The Social Casino.
+</p>
+<p>
+	Regards,<br>
+    Your Yazino Team
+</p>
+<p class="footer">
+    &copy; 2012 Yazino, Island House, Grande Rue, St Martins, Guernsey, GY4 6RU
+</p>

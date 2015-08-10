@@ -1,0 +1,18 @@
+#* @vtlvariable name="referringPlayerId" type="java.math.BigDecimal" *#
+<!--suppress XmlUnboundNsPrefix -->
+<div id="facebook-api-page">
+	<fb:serverfbml>
+		<script type="text/fbml">
+			<fb:fbml>
+				<fb:request-form action="${hostUrl}/games"
+								 method="POST" invite="true" type="Yazino"
+								 content="Come And Play at Yazino.
+								 <fb:req-choice url='/referral?referral=${referringPlayerId}&source=${source}&url=${facebookAppUrlRoot}${facebookAppName}' label='Accept Yazino Invite.'/>">
+					<fb:multi-friend-selector rows="3" showborder="false" bypass="cancel"
+											  actiontext="Earn 5000 chips for each friend you invite that plays at Yazino"
+											  exclude_ids="${excludedFriendIds}"/>
+				</fb:request-form>
+			</fb:fbml>
+		</script>
+	</fb:serverfbml>
+</div>

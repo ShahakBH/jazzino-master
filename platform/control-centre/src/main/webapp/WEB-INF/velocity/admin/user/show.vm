@@ -1,0 +1,22 @@
+#set ($location = "Show User")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/admin/user/list">List Users</a></li>
+        <li><a href="${request.contextPath}/admin/user/edit/${user.userName}">Edit</a></li>
+        <li><a href="${request.contextPath}/admin/user/delete/${user.userName}"
+               class="action-delete" data-id="${user.userName}" data-type="user">Delete</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>User ${user.userName}</h2>
+
+        #set($readonly = "true")
+        #parse("admin/user/form.vm")
+    </div>
+</section>

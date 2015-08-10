@@ -1,0 +1,38 @@
+!3 Players can unregister for a tournament and receive their fee back
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|Entry Fee|Service Fee|Max Players|
+|Blackjack Tournament|BlackJack|PRESET|10.00|0.50|4|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+!|Force state for|June Blackjack Tournament|to|Registering|
+
+!|Set balance for|Adam|To|20|
+
+!|Balance for|Adam|is|20.00|
+
+!4 Player registers for tournament
+!|Player registers for tournament|
+|Tournament name|Player name|message?|
+|June Blackjack Tournament|Adam|OK|
+
+
+!|Pot balance for|June Blackjack Tournament|is|10.00|
+
+!|Players in|June Blackjack Tournament|
+|Adam|
+
+!|Balance for|Adam|is|9.50|
+
+!4 Player unregisters
+!|Player unregisters for tournament|
+|Tournament name|Player name|message?|
+|June Blackjack Tournament|Adam|OK|
+
+!|Players in|June Blackjack Tournament|
+
+
+!|Pot balance for|June Blackjack Tournament|is|0.00|
+
+!|Balance for|Adam|is|20.00|

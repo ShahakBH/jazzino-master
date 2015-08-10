@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head prefix="og: http://ogp.me/ns#
+     fb: http://ogp.me/ns/fb# 
+     product: http://ogp.me/ns/product#">
+    <meta property="og:type" content="og:product" />
+    <meta property="og:url" content="${facebookOpenGraphObjectsHost}/fbog/product/${objectId}"/>
+    <meta property="og:title" content="${objectTitle}"/>
+    <meta property="og:image" content="${assetUrl}/images/payments/golden${objectImg}.png"/>
+    <meta property="og:description" content="${objectDesc}"/>
+</head>
+</html>

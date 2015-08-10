@@ -1,0 +1,23 @@
+#set ($location = "Game Configuration Properties")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/configuration/list">List Configurations</a></li>
+        <li><a href="${request.contextPath}/game/configuration/edit/${gameConfiguration.gameId}">Edit</a></li>
+        <li><a href="${request.contextPath}/game/configuration/delete/${gameConfiguration.gameId}"
+               onclick="return confirm('Are you sure you want to delete all configuration for this game?');">Delete
+        </a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Game Configuration ${gameConfiguration.gameId}</h2>
+
+        #set($readonly = "true")
+        #parse("game/configuration/form.vm")
+    </div>
+</section>

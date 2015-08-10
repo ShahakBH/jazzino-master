@@ -1,0 +1,60 @@
+|insert|PARTNER|
+|PARTNER_ID|
+|test partner|
+
+|insert|ACCOUNT|
+|BALANCE|NAME|ACCOUNT_ID?|
+|10000.00|test table account|>>testTableAccount|
+|20000.00|test owner account|>>testOwnerAccount|
+|5000.00|test player account|>>testPlayerAccount|
+
+|insert|GAME_TYPE|
+|GAME_TYPE|
+|Test game type|
+
+|insert|GAME_VARIATION_TEMPLATE|
+|GAME_TYPE|NAME|GAME_VARIATION_TEMPLATE_ID?|
+|Test game type|Test game type name|>>gameVariationTemplate|
+
+|insert|TABLE_INFO|
+|GAME_VARIATION_TEMPLATE_ID|GAME_ID|GAME_TYPE|TABLE_NAME|TABLE_ACCOUNT_ID|STATUS|TSCREATED|TS|TABLE_ID?|
+|<<gameVariationTemplate|23|BLACKJACK|The Kings Table|<<testTableAccount|O|2009-03-18 15:53:54.0|2009-03-18 12:42:37.0|>>testTable|
+
+|insert|PLAYER|
+|ACCOUNT_ID|PARTNER_ID|USER_ID|
+|<<testPlayerAccount|test partner|<<testPlayerAccount|
+
+TODO: Would be a more thorough test if transactions match with business logic
+|insert|TRANSACTION_LOG|
+|ACCOUNT_ID|TSEXECUTED|AMOUNT|TRANSACTION_TYPE|REFERENCE|TRANSACTION_LOG_ID?|
+|<<testPlayerAccount|2009-03-18 15:53:56.0|-123.00|Adjustment|test|>>testTransactionLog1|
+|<<testTableAccount|2009-03-18 15:53:56.0|123.00|Adjustment|test|>>testTransactionLog1|
+
+|insert|AUDIT_TABLE_PLAYER|
+|ACCOUNT_ID|TABLE_ID|HOSTNAME|AUDIT_TS|AUDIT_LABEL|auto_id?|
+|<<testPlayerAccount|<<testTable|mc34.signtechno.com|2009-03-18 11:57:26.0|test audit label|>>auditTablePlayer|
+
+|insert|AUDIT_CLOSED_GAME|
+|AUDIT_TS|HOSTNAME|AUDIT_LABEL|table_id|game_id|auto_id?|
+|2009-03-18 11:57:26.0|mc34.signtechno.com|test closed game audit label|<<testTable|0|>>auditClosedGame|
+
+This test checks rounds
+!|Query|select total_number_of_rounds from TABLE_ACTIVITY_ROUNDS|
+|total_number_of_rounds|
+|1|
+
+This test checks players
+!|Query|select total_number_of_players from TABLE_ACTIVITY_PLAYERS|
+|total_number_of_players|
+|1|
+
+This test checks money
+!|Query|select profit from TABLE_ACTIVITY_MONEY|
+|profit|
+|123.00|
+
+This test checks the grouping of tables into a table activity, including accessing of field
+by column alias (which has been an issue with MySQL during development).
+!|Query|select profit, money_in, money_out, template_name from TABLE_ACTIVITY|
+|profit|money_in|money_out|template_name|
+|123.00|123.00|0.00|Test game type name|

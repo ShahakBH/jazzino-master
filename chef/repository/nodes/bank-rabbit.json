@@ -1,0 +1,34 @@
+{
+    "name": "bank-rabbit",
+    "chef_type": "node",
+    "json_class": "Chef::Node",
+    "run_list": [
+        "role[rabbitmq]"
+    ],
+    "normal": {
+        "environment": "bank",
+        "internal_interface": "eth0",
+        "ssh": {
+            "harden": "false"
+        },
+        "monitoring": {
+            "suppress": true
+        },
+        "security": {
+            "denyhosts": false
+        },
+        "rabbitmq": {
+            "nodename": "rabbit",
+            "erlang_cookie": "HALTHAMMERZEIT",
+            "management_console": false,
+            "vhosts": [
+                "bank-rabbit.london.yazino.com"
+            ]
+        },
+        "nfs": {
+            "mount_points": {
+                "bank-gsm:/var/staging": "/var/staging"
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+#gameLauncher, #friendLauncher, #tournamentLauncher {
+	width: 213px;
+}
+
+#game-selector-options {
+	position: fixed;
+}
+
+button, input.input-button, input.input-submit {
+	border: none;
+	padding: 0;
+	margin: 0;
+	background: transparent;
+	cursor: pointer;
+}
+
+input.input-file {
+	padding: 4px;
+	display: block;
+	color: #414141;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+textarea, input.input-text, input.input-password {
+	border: 1px solid #A8A8A8;
+	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	padding: 4px;
+	color: #414141;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+input.input-hastitle {
+	color: #CECECE;
+}
+
+input.input-hastitle.focused {
+	color: black;
+}
+
+#control-panel input.input-button {
+	margin: 0;
+}
+
+#main-menu .tl.selected {
+    background-image: none; 
+}
+
+.site-warning {
+	zoom: 1;
+}
+
+.site-warning span {
+	float: left;
+}
+
+.site-warning .button-close {
+	float: right;
+}
+
+#banner {
+	zoom: 1;
+}
+
+#login, #control-panel {
+	float: right;
+	margin: 0;
+}

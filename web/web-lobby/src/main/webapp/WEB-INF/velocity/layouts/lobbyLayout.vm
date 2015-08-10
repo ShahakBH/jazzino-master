@@ -1,0 +1,43 @@
+#* @vtlvariable name="request" type="javax.servlet.http.HttpServletRequest" *#
+#* @vtlvariable name="lobbySession" type="com.yazino.web.session.LobbySession" *#
+#* @vtlvariable name="screen_content" type="java.lang.String" *#
+<!DOCTYPE html>
+<html>
+<head>
+    #parse("partials/head.vm")
+	#parse("partials/glossStyle.vm")
+	#parse("partials/preScripts.vm")
+	#parse("partials/gameSpecifics.vm")
+</head>
+
+<body class="$!{gameType} $!pageName#if(!$lobbySession) loggedout#end #if($!canvas)compact#end" data-ctacontext="website-logged-in">
+    #parse("partials/fb_init.vm")
+<div id="FB_HiddenIFrameContainer"
+     style="display:none; position:absolute; left:-100px; top:-100px; width:0; height: 0;"></div> ## for Facebook
+
+<div id="publish_iframe_container_current"
+     style="position:absolute; left:-100px; top:-100px; width:0; height: 0;">
+</div> ## for Facebook Publishing Service
+
+<div id="publish_iframe_container_original"
+     style="position:absolute; left:-100px; top:-100px; width:0; height: 0;">
+</div> ## for Facebook Publishing Service
+
+
+    #parse("partials/header.vm")
+<div id="content">
+    ${screen_content}
+    <div class="clear"></div>
+    #parse("partials/feedback.vm")
+    #parse("partials/dailyChipAward.vm")
+    #parse("partials/shareThis.vm")
+    #parse("partials/adverts.vm")
+</div>
+    #parse("partials/footer.vm")
+    #parse("partials/external_tracking.vm")
+    #parse("partials/friendsSelector.vm")
+    #parse("partials/glossScripts.vm")
+
+    #parse("partials/performance.vm")
+</body>
+</html>

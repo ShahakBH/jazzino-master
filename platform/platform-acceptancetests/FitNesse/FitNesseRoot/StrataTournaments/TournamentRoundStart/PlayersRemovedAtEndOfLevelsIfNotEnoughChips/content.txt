@@ -1,0 +1,39 @@
+!3 Players are removed from the tournament if they don't have enough chips to play the next level
+
+!|senet.server.tournament.CreateTournamentTemplate|
+|Template Name|Game Type|Tournament Type|
+|Blackjack Tournament|BlackJack|PRESET|
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|2|for template|Blackjack Tournament|with min stake|20|
+
+!|Create tournament|June Blackjack Tournament|from template|Blackjack Tournament|
+
+|Force state for|June Blackjack Tournament|to|Registering|
+
+!|Player registers for tournament|
+|Tournament name|Player name|message?|
+|June Blackjack Tournament|Adam|OK|
+|June Blackjack Tournament|John|OK|
+|June Blackjack Tournament|Bob|OK|
+
+!|Start level for tournament|June Blackjack Tournament|
+
+!|Players in|June Blackjack Tournament|
+|Adam|
+|Bob|
+|John|
+
+!|Set player tournament balance|
+|Tournament Name|Player|Balance|
+|June Blackjack Tournament|Adam|20|
+|June Blackjack Tournament|John|19|
+|June Blackjack Tournament|Bob|21|
+
+!|Stop level for tournament|June Blackjack Tournament|
+
+!|Start level for tournament|June Blackjack Tournament|
+
+!|Players in|June Blackjack Tournament|
+|Adam|
+|Bob|

@@ -1,0 +1,44 @@
+<script type="text/javascript">
+	<!--
+	$().ready(function() {
+		$("#email").focus();
+	});
+	//-->
+</script>
+<form method="POST" action="/support/parature/login">
+	<div class="login ">
+		<div class="left"></div>
+		<div class="center">
+			<h1>Login</h1>
+
+			<p>Enter your email address and password</p>
+
+			<div>
+				<div>
+					<label for="email">Email Address</label>
+					<label for="password">Password</label>
+				</div>
+				<div>
+					#springFormInput("loginForm.email" 'size="30"') #springShowErrors("<br>" '')
+				    #springFormPasswordInput("loginForm.password" 'size="30"') #springShowErrors("<br>" '')
+				</div>
+			</div>
+			<div class="check-line">
+				<a href="/resetPassword">Forgot Password?</a>
+			</div>
+			<input class="btn" value="Log in" type="submit"/>
+
+			<p class="error">
+				$!{loginError}
+						#springBind("loginForm")
+						#springShowErrors("<br>" "")
+			</p>
+			<p>
+				Don't have a Yazino account yet? <a href="/registration">Create one now</a>
+			</p>
+		</div>
+		<div class="right"></div>
+
+	</div>
+	#springFormHiddenInput("loginForm.redirectTo" "")
+</form>

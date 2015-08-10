@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	<!--
+	$().ready(function() {
+		bindTitledInputs();
+		$("#sentTo").focus();
+	});
+	//-->
+</script>
+
+<div class="inviteByEmailForm">
+	<h1>Earn 5000 Free Chips for every friend that you invite who joins!</h1>
+	Life's more fun when you play together!
+
+	<div class="box">
+		<div class="tl"></div>
+		<div class="tr"></div>
+
+		<form method="POST" action="?">
+			<table>
+				<tr>
+					<th></th>
+					<td>
+						<div class="error">
+							#springBind("sendInvitationsForm")
+							#springShowErrors("<br>" "")
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>To:#springFormHiddenInput("sendInvitationsForm.source" '')</th>
+					<td>#springFormInput("sendInvitationsForm.sentTo" 'size="70" title="Use commas to separate email addresses"')</td>
+				</tr>
+				<tr class="multiline">
+					<th>Message</th>
+					<td>#springFormTextarea("sendInvitationsForm.message" 'rows="8" cols="70"')</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="action-cell"><button id="button-invite" type="button" class="button-invite"></button></td>
+				</tr>
+			</table>
+		</form>
+
+		<div class="bl"></div>
+		<div class="br"></div>
+	</div>
+</div>

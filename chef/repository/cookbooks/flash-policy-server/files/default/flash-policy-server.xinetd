@@ -1,0 +1,11 @@
+service flashpolicyserver
+{
+    type = UNLISTED
+    disable = no
+    socket_type = stream
+    protocol = tcp
+    user = root
+    wait = no
+    port = 843
+    redirect = 127.0.0.1 8843
+}

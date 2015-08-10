@@ -1,0 +1,11 @@
+!define COLLAPSE_SETUP {true}
+
+[[FitNesse user guide][FitNesse]]
+
+[[Regression Tests][RegressionTests]]
+
+[[Games Server Module 1][GameServer1]]
+StrataCommunity
+StrataTournaments
+DatabaseTests
+PlayForFunUsers

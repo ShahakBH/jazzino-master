@@ -1,0 +1,43 @@
+#set($pageTitle = "Promotions - Add Players")
+<article class="main">
+    #parse("promotion/partials/searchOptions.vm")
+    <h1>Add Players to Promotion</h1>
+    <div class="dialog" style="width=100%;">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>$promotionAddPlayers.name</td>
+            </tr>
+            <tr>
+                <td>Start Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$promotionAddPlayers.startDate.toDate())}</td>
+            </tr>
+            <tr>
+                <td>End Date:</td>
+                <td>${dateTool.format('dd/MM/yy - HH:mm',$promotionAddPlayers.endDate.toDate())}</td>
+            </tr>
+        </table>
+        #if($promotionAddPlayers.allPlayers)
+            <div class="errors">
+                You cannot add players to this promotion. It includes all players.
+            </div>
+        #else
+            #springBind("promotionPlayerUpload.*")
+            <div>
+                <h2>
+                    Upload a list of player ids to this promotion.<p/>
+                </h2>
+                #if($status.error)
+                    <div class="errors">
+                        #foreach($error in $status.errorMessages)$error<br/> #end
+                    </div>
+                #end
+                <form action="#springUrl('/promotion/addPlayers')" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="text/csv"/>
+                    <input type="submit" value="load"/>
+                    <input type="hidden" name="promotionId" value="$promotionAddPlayers.id"/>
+                </form>
+            </div>
+        #end
+    </div>
+</div>

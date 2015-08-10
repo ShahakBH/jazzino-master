@@ -1,0 +1,36 @@
+<script type="text/javascript">
+	<!--
+	$().ready(function() {
+		$("#displayName").focus();
+	});
+	//-->
+</script>
+
+#macro(showRegistrationFieldStatus $path $showAcceptance)
+	#springBind("registration.*")
+	#set($validating = $status.error)
+
+	#springBind($path)
+	#if($status.error)
+		#springShowErrors("" "error")
+	#elseif($validating)
+		<span class="validated">
+			#if($showAcceptance) #springMessageText("validated.$path" "OK") #end
+		</span>
+	#else
+		<span class="instructions">
+			#springMessageText("instructions.$path" "")
+		</span>
+	#end
+#end
+
+<div id="sign-up-area">
+	<h3 class="terms-head big-red-head">#message('instructions.registration.title')</h3>
+
+	<div id="login-body">
+		<div class="sign1">
+            #parse("partials/registrationForm.vm")
+		</div>
+		<div id="terms-bottom"></div>
+	</div>
+</div>

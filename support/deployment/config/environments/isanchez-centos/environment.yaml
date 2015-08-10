@@ -1,0 +1,5 @@
+hosts:
+    isanchez-centos.london.yazino.com:
+        roles:
+            - all
+

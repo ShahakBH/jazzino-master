@@ -1,0 +1,662 @@
+#how-to-play .app-store {
+    position: relative;
+    margin-top: 10px;
+}
+
+#how-to-play .app-store img{
+    position: absolute;
+    right: 9px;
+    top: 6px;
+}
+
+#how-to-play #grey-window-body {
+    letter-spacing: 0.25px;
+    padding: 25px 37px 8px 271px;
+}
+
+#how-to-play.black #grey-window-body {
+    background: url("../../images/gloss/how-to-play-black-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.roul #grey-window-body {
+    background: url("../../images/gloss/how-to-play-roul-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.TEXAS_HOLDEM #grey-window-body {
+    background: url("../../images/gloss/how-to-play-texas-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.rules_black #grey-window-body, #how-to-play.rules_texas #grey-window-body {
+    background: url("../../images/gloss/rules-grey-window-body.jpg") left top no-repeat;
+}
+
+#how-to-play.rules_black #grey-window-body2 {
+    background: url("../../images/gloss/rules-black-grey-window-body2.jpg") left 895px no-repeat;
+}
+
+#how-to-play.TEXAS_HOLDEM #grey-window-body2 {
+    background: url("../../images/gloss/rules-texas-grey-window-body2.jpg") left 895px no-repeat;
+}
+
+#how-to-play.TEXAS_HOLDEM #grey-window-body {
+    min-height: 1000px;
+}
+
+#how-to-play.BLACKJACK #grey-window-body div.block1 {
+    min-height: 217px;
+    padding-bottom: 16px;
+}
+
+#how-to-play #grey-window-body div.block1 {
+    min-height: 113px;
+    padding-bottom: 16px;
+}
+
+#how-to-play #grey-window-body div.block1 h4 {
+    margin-bottom: 11px;
+}
+
+#how-to-play #sign-up {
+    margin-bottom: 18px;
+}
+
+#how-to-play #back-to-games a {
+    display: block;
+    width: 205px;
+    height: 28px;
+    text-align: center;
+    background: url("../../images/gloss/how-to-play-back-to-game.png");
+}
+
+#how-to-play #back-to-games a:hover {
+    background-position: 0 -28px;
+}
+
+#how-to-play #grey-window-body .divider {
+    height: 1px;
+    background: #c4c4c4;
+    line-height: 1px;
+}
+
+#how-to-play #grey-window-body div.block2 {
+    padding-top: 18px;
+}
+
+#how-to-play #grey-window-body div.block2 .left-col,
+#how-to-play #grey-window-body div.block3 .left-col,
+#how-to-play #grey-window-body div.block4 .left-col,
+#how-to-play #grey-window-body div.block5 .left-col {
+    width: 400px;
+}
+
+#how-to-play #grey-window-body .float-right-col img {
+    display: block;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img {
+    margin-bottom: 30px;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.roul-2 {
+    margin-bottom: 174px;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.texas-image-2, #how-to-play #grey-window-body div.block2 .float-right-col img.texas-image-3 {
+    margin-bottom: 38px;
+}
+
+#how-to-play #grey-window-body div .paragraph2,
+#how-to-play #grey-window-body div .paragraph3,
+#how-to-play #grey-window-body div .paragraph4,
+#how-to-play #grey-window-body div .paragraph5,
+#how-to-play #grey-window-body div .paragraph6,
+#how-to-play #grey-window-body div .paragraph7,
+#how-to-play #grey-window-body div .paragraph8 {
+    margin-top: 18px;
+}
+
+.paragraph {
+    margin-top: 18px;
+}
+
+#how-to-play #grey-window-body h4.drop + div {
+    display: none;
+}
+
+#how-to-play #grey-window-body div h4.drop {
+    background: url("../../images/gloss/how-to-play-headline.png") 0 -26px;
+    width: 389px;
+    height: 26px;
+    cursor: pointer;
+    padding-left: 10px;
+    margin: 20px 0;
+}
+
+#how-to-play #grey-window-body div h4.drop.active {
+    background: url("../../images/gloss/how-to-play-headline.png") 0 0px;
+}
+
+#how-to-play.roul #grey-window-body  ul {
+    margin-left: 15px;
+    list-style-image: url("../../images/gloss/mark-roul.png");
+}
+
+#how-to-play #grey-window-body {
+    letter-spacing: 0.25px;
+    padding: 25px 37px 8px 271px;
+}
+
+#how-to-play.BLACKJACK #grey-window-body {
+    background: url("../../images/gloss/how-to-play-black-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.ROULETTE #grey-window-body {
+    background: url("../../images/gloss/how-to-play-roul-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.TEXAS_HOLDEM #grey-window-body {
+    background: url("../../images/gloss/how-to-play-texas-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body {
+    background: url("../../images/gloss/how-to-play-highStakes-grey-window-body.png") left top no-repeat;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.divider{
+    margin: 28px 0 8px 0;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body {
+    background: url("../../images/gloss/highStakesLogoHowToPlay.png") 46px 33px no-repeat;
+    letter-spacing: 0.25px;
+    padding: 25px 37px 8px 44px;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block1 {
+    padding-bottom: 11px;
+    padding-left:227px;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 {
+    padding-top: 0;
+    padding-left:227px;
+}
+
+#how-to-play.HIGH_STAKES  h4.colour-HIGH_STAKES.font-compnonlogged-texthead {
+    color: #00538d;
+}
+
+#how-to-play.HIGH_STAKES  paragraph1 font-compnonlogged-1 p {
+    color: #575757;
+}
+
+#how-to-play.HIGH_STAKES p.subheading {
+    color: #00538d;
+    font-weight: bold;
+}
+
+#how-to-play.HIGH_STAKES p.heading {
+    font-weight: bold;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 .float-right-col img.highStakes-image-1 {
+    margin-top: 100px;
+    margin-bottom:0;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 .float-right-col img.highStakes-image-1a {
+    margin-top: 11px;
+    margin-bottom:0;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 .float-right-col img.highStakes-image-2 {
+    margin-top: 11px;
+    margin-bottom:0;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 .float-right-col img.highStakes-image-3 {
+    margin-top: 11px;
+    margin-bottom:0;
+}
+
+#how-to-play.HIGH_STAKES #grey-window-body div.block2 .float-right-col img.highStakes-image-4 {
+    margin-top: 35px;
+    margin-bottom:0;
+}
+
+#how-to-play.HIGH_STAKES  ul {
+    list-style: inherit;
+}
+
+#how-to-play.HIGH_STAKES li {
+    color: #00538d;
+    margin-left: 15px;
+}
+
+#how-to-play.HIGH_STAKES p, #how-to-play.HIGH_STAKES li * {
+    color: #575757;
+}
+
+
+#how-to-play.HIGH_STAKES .splash .splash-content {
+    position:absolute;
+    left: 616px;
+}
+
+#how-to-play.HIGH_STAKES .rules {
+    margin-top: 52px;
+    width:254px;
+}
+
+#how-to-play.HIGH_STAKES .rules .item1 {
+    font: 14px/18px helvetica, sans-serif;
+    font-style: italic;
+    color: #515151;
+    margin-top:52px;
+}
+
+#how-to-play.HIGH_STAKES .rules .item2,
+#how-to-play.HIGH_STAKES .rules .item3,
+#how-to-play.HIGH_STAKES .rules .item4 {
+    font: 12px/16px helvetica, sans-serif;
+    color: #626262;
+}
+
+
+#how-to-play.HIGH_STAKES .rules .item2 {
+    margin-top:30px;
+}
+
+#how-to-play.HIGH_STAKES .rules .item2 em {
+    font-weight: bold;
+    color: #BF372D;
+}
+
+#how-to-play.HIGH_STAKES .rules .item3 {
+    margin-top:39px;
+}
+
+#how-to-play.HIGH_STAKES .rules .item3 em {
+    font-weight: bold;
+    color: #004A8F;
+}
+
+#how-to-play.HIGH_STAKES .rules .item4 {
+    margin-top:52px;
+}
+
+#how-to-play.HIGH_STAKES .rules .item4 em {
+    font-weight: bold;
+    color: #B47A05;
+}
+
+#how-to-play.rules_black #grey-window-body, #how-to-play.rules_texas #grey-window-body {
+    background: url("../../images/gloss/rules-grey-window-body.jpg") left top no-repeat;
+}
+
+#how-to-play.rules_black #grey-window-body2 {
+    background: url("../../images/gloss/rules-black-grey-window-body2.jpg") left 895px no-repeat;
+}
+
+#how-to-play.rules_texas #grey-window-body2 {
+    background: url("../../images/gloss/rules-texas-grey-window-body2.jpg") left 895px no-repeat;
+}
+
+#how-to-play.texas #grey-window-body {
+    min-height: 1000px;
+}
+
+#how-to-play #grey-window-body div.block1 {
+    min-height: 113px;
+    padding-bottom: 16px;
+}
+
+#how-to-play #grey-window-body div.block1 h4 {
+    margin-bottom: 11px;
+}
+
+#how-to-play #sign-up {
+    margin-bottom: 18px;
+}
+
+#how-to-play #back-to-games a {
+    display: block;
+    width: 205px;
+    height: 28px;
+    text-align: center;
+    background: url("../../images/gloss/how-to-play-back-to-game.png");
+}
+
+#how-to-play #back-to-games a:hover {
+    background-position: 0 -28px;
+}
+
+#how-to-play #grey-window-body .divider {
+    height: 1px;
+    background: #c4c4c4;
+    line-height: 1px;
+}
+
+#how-to-play #grey-window-body div.block2 {
+    padding-top: 18px;
+}
+
+#how-to-play #grey-window-body div.block2 .left-col,
+#how-to-play #grey-window-body div.block3 .left-col,
+#how-to-play #grey-window-body div.block4 .left-col,
+#how-to-play #grey-window-body div.block5 .left-col {
+    width: 400px;
+}
+
+#how-to-play #grey-window-body .float-right-col img {
+    display: block;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img {
+    margin-bottom: 30px;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.roul-2 {
+    margin-bottom: 174px;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.texas-image-2, #how-to-play #grey-window-body div.block2 .float-right-col img.texas-image-3 {
+    margin-bottom: 38px;
+}
+
+#how-to-play #grey-window-body div .paragraph2,
+#how-to-play #grey-window-body div .paragraph3,
+#how-to-play #grey-window-body div .paragraph4,
+#how-to-play #grey-window-body div .paragraph5,
+#how-to-play #grey-window-body div .paragraph6,
+#how-to-play #grey-window-body div .paragraph7,
+#how-to-play #grey-window-body div .paragraph8 {
+    margin-top: 18px;
+}
+
+.paragraph {
+    margin-top: 18px;
+}
+
+#how-to-play #grey-window-body h4.drop + div {
+    display: none;
+}
+
+#how-to-play #grey-window-body div h4.drop {
+    background: url("../../images/gloss/how-to-play-headline.png") 0 -26px;
+    width: 389px;
+    height: 26px;
+    cursor: pointer;
+    padding-left: 10px;
+    margin: 20px 0;
+}
+
+#how-to-play #grey-window-body div h4.drop.active {
+    background: url("../../images/gloss/how-to-play-headline.png") 0 0px;
+}
+
+#how-to-play.roul #grey-window-body  ul {
+    margin-left: 15px;
+    list-style-image: url("../../images/gloss/mark-roul.png");
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.wheel-image-1 {
+    margin-top: 100px;
+}
+
+#how-to-play #grey-window-body div.block2 .float-right-col img.wheel-image-2 {
+    margin-top: 300px;
+}
+
+#how-to-play.HIGH_STAKES.game-home .splash {
+    z-index: 0;
+    background-image: url("../../images/gloss/help-background-highStakes.png");
+    background-repeat: no-repeat;
+    position: relative;
+    width: 934px;
+    height: 593px;
+}
+
+#how-to-play.HIGH_STAKES button {
+    background-image: url("../../images/gloss/button-highStakes-play.png");
+    width: 222px;
+    height: 43px;
+    margin-top: 28px;
+}
+
+#how-to-play.HIGH_STAKES button:hover {
+    background-position: 0 -43px;
+}
+
+#how-to-play.HIGH_STAKES .links {
+    margin-top: 16px;
+    font-size: 12px;
+    text-decoration: underline;
+    color: #626262;
+}
+
+#how-to-play.BLACKJACK.pharaoh.game-home .content {
+    background-position: center 10px ;
+    background-repeat: no-repeat;
+    background-image: url('../../images/games/BLACKJACK/background.jpg');
+    position: relative;
+    font-size: 14px;
+}
+
+#how-to-play.SLOTS .content {
+    position: relative;
+    background-image: url('../../images/games/SLOTS/background-howtoplay.jpg');
+    background-position: right 230px;
+    background-repeat: no-repeat;
+    font-size: 14px;
+}
+
+#how-to-play.SLOTS.game-home .content {
+    background-position: top right;
+    background-image: url('../../images/games/SLOTS/background-home.jpg');
+}
+
+#how-to-play.SLOTS .content img, #how-to-play.BLACKJACK.pharaoh .content img {
+    float: left;
+    padding: 10px;
+}
+
+#how-to-play.SLOTS #single-wheel-logo {
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    display: block;
+    padding: 0;
+}
+
+#how-to-play.SLOTS .content_right {
+    width: 566px;
+}
+
+#how-to-play.SLOTS h4, #how-to-play.BLACKJACK.pharaoh h4 {
+    position: relative;
+    color: #C30C00;
+    text-transform: uppercase;
+    font: bold 18px Helvetica, Arial, sans-serif;
+    margin-right: 200px;
+    height: 50px;
+    z-index: 9;
+}
+
+#how-to-play.BLACKJACK.pharaoh h4 {
+    line-height: 120%;
+}
+
+#how-to-play.SLOTS h5, #how-to-play.BLACKJACK.pharaoh h5 {
+    text-transform: uppercase;
+    font: bold 18px Helvetica, Arial, sans-serif;
+    color: #c70000;
+    clear: left;
+}
+
+#how-to-play.SLOTS strong.bonus {
+    color: #fc0000;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#how-to-play.SLOTS.game-home h4 {
+    left: -40px;
+    height: 160px;
+}
+
+#how-to-play.BLACKJACK.pharaoh.game-home h4 {
+    left: 20px;
+    height: 160px;
+    top: 20px;
+    line-height: 150%;
+}
+
+#how-to-play.SLOTS.game-home p, #how-to-play.BLACKJACK.pharaoh.game-home p {
+    width: auto;
+}
+
+#how-to-play.SLOTS p {
+    margin-left: 375px;
+    margin-right: 150px;
+    padding: 25px 40px 25px 15px;
+    line-height: 150%;
+    width: 280px;
+}
+
+#how-to-play.BLACKJACK.pharaoh p {
+    margin-left: 375px;
+    margin-right: 225px;
+    padding: 10px 40px 25px 15px;
+    line-height: 140%;
+    width: 280px;
+}
+
+#how-to-play.BLACKJACK.pharaoh p strong {
+    font-weight: bold;
+}
+
+#how-to-play.SLOTS.game-home p, #how-to-play.BLACKJACK.pharaoh.game-home p:first-of-type {
+    border-top: 1px solid #cccccc;
+    margin-right: 50px;
+    padding-bottom: 15px;
+}
+
+#how-to-play.BLACKJACK.pharaoh p {
+    margin-left: 325px;
+}
+
+#how-to-play.SLOTS p.intro {
+    border-top: none;
+    height: 100px;
+    font-weight: bold;
+    color: #666;
+    width: 260px;
+    padding-right: 260px;
+    border-bottom: 1px solid #cccccc;
+}
+
+#how-to-play.SLOTS.game-home p:first-of-type {
+    margin-right: 20px;
+}
+
+#how-to-play.BLACKJACK.pharaoh .content img#tournament {
+    position: absolute;
+    left: 20px;
+    top: 180px;
+}
+
+#how-to-play.BLACKJACK.pharaoh .content img#dealer {
+    position: relative;
+    top: -155px;
+}
+
+#how-to-play.SLOTS .screenshots, #how-to-play.BLACKJACK.pharaoh .screenshots {
+    clear: both;
+}
+
+#how-to-play.SLOTS .screenshots img {
+    padding-left: 60px;
+}
+
+#how-to-play.BLACKJACK.pharaoh .screenshots img {
+    padding-left: 35px;
+}
+
+#how-to-play.SLOTS div.links, #how-to-play.BLACKJACK.pharaoh div.links {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 300px;
+    height: 100px;
+    z-index: 10;
+    text-align: right;
+}
+
+#how-to-play.BLACKJACK.pharaoh div.links {
+    top: 18px;
+    right: 40px;
+    width: 400px;
+}
+
+#how-to-play.BLACKJACK.pharaoh div.links.download {
+    top: 88px;
+}
+
+#how-to-play.SLOTS div.links img, #how-to-play.BLACKJACK.pharaoh div.links img {
+    padding: 20px 0 0 5px;
+    float: right;
+}
+
+#how-to-play.SLOTS #back-to-games, #how-to-play.BLACKJACK.pharaoh #back-to-games {
+    margin-top: 15px;
+    float: right;
+}
+
+#how-to-play.SLOTS .rounds {
+    clear: both;
+    margin: 0 15px;
+    padding: 15px 20px;
+    border-top: 1px solid #cccccc;
+    height: 140px;
+}
+
+#how-to-play.SLOTS .rounds h5,
+#how-to-play.SLOTS .rounds p,
+#how-to-play.SLOTS .rounds div {
+    width: 280px;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#how-to-play.SLOTS .rounds p {
+    padding-top: 10px;
+    padding-right: 50px;
+    width: 250px;
+}
+
+#how-to-play.SLOTS .wheels {
+    text-align: center;
+    clear: both;
+    margin: 0 15px;
+    padding: 20px 0;
+    border-top: 1px solid #cccccc;
+}
+
+#how-to-play.SLOTS .wheels img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    float: none;
+}
+
+.font-how-to-play-back-game {
+    font: 11px/28px helvetica, sans-serif;
+    color: #575757;
+}
+
+.font-how-to-play-headline {
+    font: 11px/26px helvetica, sans-serif;
+    text-transform: uppercase;
+}

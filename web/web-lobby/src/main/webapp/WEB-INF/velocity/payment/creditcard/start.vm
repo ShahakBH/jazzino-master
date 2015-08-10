@@ -1,0 +1,411 @@
+#* @vtlvariable name="creditCardForm" type="com.yazino.web.payment.creditcard.CreditCardForm" *#
+#* @vtlvariable name="paymentOption" type="com.yazino.bi.payment.PaymentOption" *#
+#* @vtlvariable name="secureAssetUrl" type="java.lang.String" *#
+#* @vtlvariable name="hostUrl" type="java.lang.String" *#
+#* @vtlvariable name="countries" type="java.util.Map<java.lang.String,java.lang.String>" *#
+#* @vtlvariable name="states" type="java.util.Map<java.lang.String,java.lang.String>" *#
+#* @vtlvariable name="numberTool" type="org.apache.velocity.tools.generic.NumberTool" *#
+#* @vtlvariable name="months" type="java.util.Map<java.lang.String,java.lang.String>" *#
+#* @vtlvariable name="cardTypes" type="java.util.Map<java.lang.String,java.lang.String>" *#
+#* @vtlvariable name="years" type="java.util.Map<java.lang.String,java.lang.String>" *#
+#* @vtlvariable name="isTestCardRegistration" type="java.lang.Boolean" *#
+#* @vtlvariable name="cardRegistrationURL" type="java.lang.String" *#
+#* @vtlvariable name="cardRegistrationOTT" type="java.lang.String" *#
+<!DOCTYPE html>
+<html>
+<head>
+<title>Enter Card Details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<link rel="stylesheet" href="$!secureAssetUrl/style/gloss/payments.css" type="text/css"/>
+<link rel="stylesheet" href="$!secureAssetUrl/style/partial/jquery.validationEngine.css" type="text/css"/>
+
+#parse("payment/creditcard/libs.vm")
+
+#parse("partials/external_tracking.vm")
+
+<script type="text/javascript">
+(function ($) {
+    $(document).ready(function() {
+        var submittingMessage = $('#wirecardSubmitting'),
+                submitButton = $('#wirecardSubmit');
+        $('#EnterCard_form').submit(function() {
+            var form = $(this);
+
+            $(this).submit(function() {
+                return false; ## block duplicate submissions
+            });
+
+            YAZINO.businessIntelligence.track.purchase.submittedForm("creditcard");
+
+            submitButton.hide();
+            submittingMessage.show();
+
+            form.paymentOptionId = $('#paymentOptionId');
+            form.promotionId = $('#promotionId');
+            return true;
+        });
+
+        ## firefox workaround - without this unload event listener, the submitting message is not replaced with the submit
+        ## button when selecting back in error.vm. No idea why this works.
+        $(window).unload(function() {
+            submitButton.show();
+            submittingMessage.css('display', 'none');
+            submittingMessage.hide()
+        }, false);
+        submittingMessage.css('display', 'none');
+        submittingMessage.hide();
+
+        #if($paymentOption.hasPromotion("CREDITCARD"))
+            #set($promotion = $paymentOption.getPromotion("CREDITCARD"))
+            var promoBlurb = YAZINO.util.formatCurrency("$promotion.promotionChipsPerPurchase", 0) + " CHIPS FOR "
+                    + "$paymentOption.getCurrencyLabel()" + "$paymentOption.getAmountRealMoneyPerPurchase()";
+            $('#rise-body-promo').show().html(promoBlurb);
+            #if ($paymentOption.numChipsPerPurchase != $promotion.promotionChipsPerPurchase)
+                $('.rise-title-2-wrapper').addClass("strike-through");
+            #end
+            $('#numberOfChips').text(YAZINO.util.formatCurrency("$promotion.promotionChipsPerPurchase", 0))
+        #else
+            $('#rise-body-promo').hide();
+            $('#numberOfChips').text(YAZINO.util.formatCurrency("$paymentOption.numChipsPerPurchase", 0))
+        #end
+
+        #if($promotionShown)
+            $('#rise_overlay').hide();
+        #end
+
+        switch ($paymentOption.level) {
+            case 1:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/10k.png");
+                break;
+            case 2:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/21k.png");
+                break;
+            case 3:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/50k.png");
+                break;
+            case 4:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/150k.png");
+                break;
+            case 5:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/400k.png");
+                break;
+            case 6:
+                $('.rise-body-image').attr("src", "${secureAssetUrl}/images/gloss/1m.png");
+                break;
+            default:
+                break;
+        }
+        $('#formError').hide();
+        $('#formError').css('font-size', '11px');
+        $('#formError').css('height', '12px');
+        $('.asterix').css('color', 'red');
+        $('.formline').css('height', '21px');
+        $('.package').css('height', '18px');
+        $('.price').css('height', '18px');
+        $('.price').css('padding-bottom', '10px');
+        var errorMessages = $('#formError').text();
+        var inError = $inError,
+            errorList = [];
+        if (inError) {
+            $('#formError').show();
+            $('#formError').css('color', 'red');
+            if (errorMessages.indexOf("Email") > 0) {
+                $('#emailAddress').css('color', 'red');
+                errorList.push('email');
+            }
+            if (errorMessages.indexOf("Security") > 0) {
+                $('#securityCode').css('color', 'red');
+                errorList.push('security');
+            }
+            if (errorMessages.indexOf("Name") > 0) {
+                $('#cardHolderName').css('color', 'red');
+                errorList.push('name');
+            }
+            if (errorMessages.indexOf("Expiry") > 0) {
+                $('#expiryDate').css('color', 'red');
+                errorList.push('expiry');
+            }
+            if (errorMessages.indexOf("Number") > 0) {
+                $('#cardHolderNumber').css('color', 'red');
+                errorList.push('card-number');
+            }
+            $('.price').css('height', '6px');
+            YAZINO.businessIntelligence.track.purchase.errorsDisplayed('creditcard', errorList);
+        }
+        var nextHref = "/lobby/cashierProcess?paymentMethod=CREDITCARD&paymentOption=${paymentOption.upsellId}";
+        $('#rise_overlay').attr("href", nextHref);
+
+        if ("$paymentOption.id" != "$paymentOption.upsellId") {
+            overlay();
+        }
+
+        $('.rise-title-1').text('${esc.javascript($paymentOption.title)}');
+        $('.rise-title-2').text('${esc.javascript($paymentOption.description)}');
+
+        $('#rise .saver_text1').text('${esc.javascript($paymentOption.upsellTitle)}');
+        $('#rise .saver_text2').text('${esc.javascript($paymentOption.upsellDescription)}');
+
+
+        $('#payment_method_box #paiment_method_body ul li input:checked').closest('li').addClass('check');
+
+        $('#payment_method_box #paiment_method_body ul li label').click(function() {
+            $(this).closest('li').addClass('check');
+            $(this).closest('li').siblings().removeClass('check');
+            $(this).siblings('input').attr('checked', 'checked');
+        });
+
+        switch ($('#payment_method_box #paiment_method_body ul li.check').index()) {
+            case 1:
+            case 2:
+                $('#container').addClass('paypal-or-mobile');
+                break;
+            default:
+                $('#container').removeClass('paypal-or-mobile');
+        }
+        $('#payment_method_box #paiment_method_body ul li').click(function() {
+            switch ($(this).index()) {
+                case 1:
+                case 2:
+                    $('#container').addClass('paypal-or-mobile');
+                    break;
+                default:
+                    $('#container').removeClass('paypal-or-mobile');
+            }
+        });
+        $('.information_box').css('display', 'none');
+        $('.close_button').css('display', 'none');
+
+        $('#form_box .formline .whats-this').click(function() {
+            $(this).addClass('active');
+            $('.information_box').css('background', 'url(${secureAssetUrl}/images/gloss/security-code-box.png)');
+            $('.information_box').css('display', 'block');
+        });
+        $('.close-button').click(function() {
+            $('#form_box .formline .whats-this').removeClass('active');
+            $('.information_box').css('display', 'none');
+            $('.close_box').css('display', 'none');
+
+        })
+
+
+        $('#payment_method_box #paiment_method_body ul li label.credit-cart').click(function() {
+            window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=CREDITCARD';
+        });
+
+        $('#payment_method_box #paiment_method_body ul li label.pay-pal').click(function() {
+            window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=PAYPAL';
+        });
+
+         $('#payment_method_box #paiment_method_body ul li label.trialpay').click(function() {
+             window.location = '$!hostUrl/lobbyPartials/cashier?paymentMethodType=TRIALPAY';
+        });
+
+        $('#form_box .formline .question').click(function() {
+            $('.information_box').css('background', 'url(${secureAssetUrl}/images/gloss/save-card-details-box.png)');
+            $('.information_box').css('display', 'block');
+        });
+
+        $("#EnterCard_form").validationEngine('attach', {scroll: false,  promptPosition : "topLeft"});
+
+        $("#form_submit").click(function () {
+            if ($("#EnterCard_form").validationEngine('validate')) {
+                /* World Pay card registration */
+                if ($('.saveCardCheckBox').is(':checked')) {
+                    YAZINO.worldpay.registerCard();
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        });
+    });
+
+    function overlay() {
+        $("#rise").hover(function (event) {
+            $("#rise_overlay").animate({
+                top: "0px"
+            }, 300);
+        }, function (event) {
+            $("#rise_overlay").animate({
+                top: "228px"
+            }, 300);
+        });
+    }
+}(jQuery));
+
+</script>
+</head>
+
+<body class="buy-chips-popup">
+<div id="container" class="$gameType cashier_overlay">
+
+    <div id="main" class="$gameType enter-card">
+        <div id="overlay"></div>
+        <div id="buy_chips_main">
+            <div id="main_body">
+
+                <form id="EnterCard_form" action="complete" method="post">
+                    <input type="hidden" id="paymentOptionId" name="paymentOptionId" value="$paymentOption.id">
+                    #if($paymentOption.hasPromotion("CREDITCARD"))
+                        <input type="hidden" id="promotionId" name="promotionId" value="$paymentOption.getPromotion('CREDITCARD').promoId">
+                    #else
+                        <input type="hidden" id="promotionId" name="promotionId" value="">
+                    #end
+
+                    <div id="payment_method_box" class="box">
+                        <div id="payment_title" class="cover-upper"></div>
+                        <div id="paiment_method_body">
+                            <ul>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_credit"
+                                           name="paimentmethodradio"
+                                           checked="checked" value="creditcard"/>
+                                    <label class="credit-cart" for="paiment_credit">Pay by credit card</label>
+                                </li>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_pay_pal"
+                                           name="paimentmethodradio"
+                                           value="byPayPal"/>
+                                    <label class="pay-pal" for="paiment_pay_pal">Pay by PayPal</label>
+                                </li>
+                                <li>
+                                    <input type="radio" class="paimentRadio" id="paiment_trialpay" name="paymentMethod"
+                                           value="trialpay"/>
+                                    <label class="trialpay" for="paiment_trialpay">Earn Chips</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="action_box" class="box">
+                        <div id="tabs" class="$gameType buy-chips"></div>
+                        <div id="action_body">
+                            <div id="form_box">
+                                <div class="formline" id="formError">
+                                    #foreach($msg in $!errorMessages)
+                                        $msg
+                                    #end
+                                </div>
+                                <div class="formline package">
+                                    <label>Package</label>
+                                    <span id="numberOfChips"></span>
+                                </div>
+                                <div class="formline price">
+                                    <label>Price</label>
+                                    <span>$paymentOption.getCurrencyLabel()$paymentOption.getAmountRealMoneyPerPurchase()</span>
+                                </div>
+
+                                <div class="formline">
+                                    <label for="firstName" id="cardHolderNameLabel"><span class="asterix">*</span>Card Holder
+                                        Name</label>
+                                    <span
+                                            id="firstName">#springFormInput("creditCardForm.cardHolderName" 'size="30" class="validate[required,custom[onlyLetterSp]]"')</span>
+                                </div>
+                                <div class="formline">
+                                    <label id="cardHolderNumber"><span class="asterix">*</span>Credit Card
+                                        Number</label>
+                                    #springFormInput("creditCardForm.creditCardNumber" 'size="16" class="validate[required,creditCard]"')
+                                </div>
+                                <div class="formline">
+                                    <div class="empty"></div>
+                                    <img src="${secureAssetUrl}/images/gloss/credit-card-icons.png"/>
+                                </div>
+                                <div class="formline">
+                                    <label for="expiration" id="expiryDate"><span
+                                        class="asterix">*</span>Expiration</label>
+                                <span
+                                    id="expiration">#springFormSingleSelect("creditCardForm.expirationMonth" $months )
+                                #springFormSingleSelect("creditCardForm.expirationYear" $years )</span>
+                                </div>
+                                <div class="formline">
+                                    <label for="securityCode" id="securityCode"><span class="asterix">*</span>Security
+                                        Code</label>
+                                <span>#springFormInput("creditCardForm.cvc2" 'style="width:30px" class="validate[required,custom[integer]]"')
+                                    <a href="#" class="whats-this">What's this?</a></span>
+                                </div>
+                                <div class="formline">
+                                    <label for="emailAddress" id="emailAddressLabel"><span class="asterix">*</span>Email Address</label>
+                                    <span>#springFormInput("creditCardForm.emailAddress" 'class="validate[required,custom[email]]"')</span>
+                                </div>
+                                <div class="formline">
+                                    <label for="saveCard" id="saveCardLabel">Save card</label>
+                                    #if($cardRegistrationOTT)
+                                        <span><input type="checkbox" id="saveCard" class="saveCardCheckBox" name="saveCard" checked></span>
+                                        <input type="hidden" id="cardRegistrationURL" name="cardRegistrationURL" value="$cardRegistrationURL" />
+                                        <input type="hidden" id="cardRegistrationOTT" name="cardRegistrationOTT" value="$cardRegistrationOTT" />
+                                        <input type="hidden" id="isTestCardRegistration" name="isTestCardRegistration" value="$isTestCardRegistration" />
+                                    #end
+                                </div>
+
+                                <div id="wirecardSubmit" class="formline bottom-sector">
+                                    <div class="secure">
+                                        <span>Safe Secure</span>
+                                        <img src="${secureAssetUrl}/images/gloss/square-red-lock.png"/>
+                                    </div>
+                                    <span>
+                                        <input type="submit" id="form_submit" value="buy now"/>
+                                    </span>
+                                    <a href="$!hostUrl/lobbyPartials/cashier?paymentMethod=PAYPAL">Cancel</a>
+                                </div>
+                                <div id="wirecardSubmitting" style="display:none; ">
+                                    <img src="$!secureAssetUrl/images/gloss/loader-friends.gif"/>
+
+                                    <p>Confirmation in progress. Please wait....</p>
+                                </div>
+                            </div>
+                            <div class="information_box">
+                                <div class="close-button"></div>
+                            </div>
+
+                            <div id="raise_box">
+                                <div id="rise">
+                                    <div id="rise-click"
+                                         href="$hostUrl/lobby/cashierProcess?paymentOption=option1&paymentMethod=creditcard">
+                                        <span id="rise-title" class="rise-title">
+                                            <span class="rise-title-1">You're a Millionaire Maven!</span>
+                                            <br/>
+                                            <span class="rise-title-2-wrapper $gameType">
+                                                <span class="rise-title-2">1,000,000 CHIPS for $150</span>
+                                            </span>
+                                        </span>
+                                        <span class="rise-body">
+                                            <span id="rise-body-promo"></span>
+                                            <img id="rise-body-image" class="rise-body-image"
+                                                src="${secureAssetUrl}/images/gloss/1m.png"/>
+                                        </span>
+
+                                        <a id="rise_overlay" href="">
+                                            <span class="nonPromotional">
+                                                <div class="saver_text1">
+                                                    Be a Savvy Star
+                                                </div>
+                                                <div class="saver_text2">
+                                                    Get 150,000 CHIPS for $30 more!
+                                                </div>
+                                            </span>
+                                            <div class="upgrade_text">Click to upgrade your package</div>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="info_desc">By clicking Buy Now, I agree to Yazino's <a
+                                href="/legal/termsOfPurchase" target="_blank">Terms of Purchase</a>.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="bottom">Have questions? Contact us at <a
+                href="http://support.yazino.com" target="_blank">support.yazino.com</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+set_unless[:firewall] = true
+set_unless[:jetty][:java][:min_mem] = "256m"
+set_unless[:jetty][:java][:max_mem] = "1536m"
+set_unless[:jetty][:port] = 7900
+set_unless[:jetty][:ssl_port] = 7943
+set_unless[:jetty][:output_buffer_size] = 32768
+set_unless[:jetty][:request_header_size] = 8192
+set_unless[:jetty][:response_header_size] = 8192
+set_unless[:jetty][:header_cache_size] = 512
+set_unless[:jetty][:keystore] = "etc/keystore"
+set_unless[:jetty][:keystore_password] = "s1gn4tur3"
+set_unless[:jetty][:certificate] = "tomcat"
+set_unless[:jetty][:min_threads] = 10
+set_unless[:jetty][:max_threads] = 100
+set_unless[:jetty][:thread_idle_timeout] = 60000
+set_unless[:jetty][:http_idle_timeout] = 30000
+set_unless[:jetty][:detailed_dump] = "false"
+set_unless[:jetty][:debug] = false
+set_unless[:jetty][:debug_port] = 8000
+set_unless[:jetty][:jmx_port] = 10097
+set_unless[:jetty][:gc_type] = "cms"
+set_unless[:jetty][:max_form_content_size] = 300000
+set_unless[:jetty][:logs] = "/var/log/jetty/current"
+set_unless[:jetty][:stderrout_logs][:retention_days] = 10
+set_unless[:jetty][:stderrout_logs][:file] = '<Property name="jetty.logs" default="./logs"/>/yyyy_mm_dd.stderrout.log'
+set_unless[:jetty][:access_logs][:active] = true
+set_unless[:jetty][:access_logs][:retention_days] = 10
+set_unless[:jetty][:access_logs][:file] = '<Property name="jetty.logs" default="./logs"/>/yyyy_mm_dd.request.log'
+set_unless[:jetty][:rewrites] = true
+set_unless[:java7][:home] = '/opt/java'
+set_unless[:gigaspaces][:unicast_timeout] = 5000

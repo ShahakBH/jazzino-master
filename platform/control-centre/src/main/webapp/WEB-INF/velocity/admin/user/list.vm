@@ -1,0 +1,71 @@
+#set ($location = "User Management")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+#set($pageSize = 20)
+#set($currentPage = ($users.startPosition / $pageSize) + 1)
+#set ($baseUrl = "${request.contextPath}/admin/user/list")
+
+#if ($message)
+<div class="info">$message</div>
+#end
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/admin/user/create">New User</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="list">
+        <h2>Users</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Real Name</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    #paging( $users.startPosition $pageSize $users.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    #paging( $users.startPosition $pageSize $users.totalSize $baseUrl '' )
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+                #foreach ($user in $users.data)
+                <tr>
+                    <td>$user.userName</td>
+                    <td>$user.realName</td>
+                    <td>
+                        #foreach ($role in $user.roles)
+                            #printRole($role)#if($foreach.count != $user.roles.size()), #end
+                        #end
+                    </td>
+                    <td>
+                        <a href="${request.contextPath}/admin/user/show/${user.userName}"
+                             title="View user ${user.userName}">View</a>
+                        | <a href="${request.contextPath}/admin/user/edit/${user.userName}"
+                             title="Edit user ${user.userName}">Edit</a>
+                        | <a class="action-named" data-action="Delete" data-id="${user.userName}"
+                             data-type="user"
+                             href="${request.contextPath}/admin/user/delete/${user.userName}"
+                             title="Delete user ${user.userName}">Delete</a>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</section>
+

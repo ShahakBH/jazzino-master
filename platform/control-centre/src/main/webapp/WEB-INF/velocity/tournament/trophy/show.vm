@@ -1,0 +1,20 @@
+#set ($location = "Show Trophy")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/tournament/trophy/list">List Trophies</a></li>
+        <li><a href="${request.contextPath}/tournament/trophy/edit/${trophy.id}">Edit</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Trophy ${trophy.id}</h2>
+
+        #set($readonly = "true")
+        #parse("tournament/trophy/form.vm")
+    </div>
+</section>

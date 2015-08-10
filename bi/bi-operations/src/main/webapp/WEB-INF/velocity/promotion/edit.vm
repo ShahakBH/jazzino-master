@@ -1,0 +1,122 @@
+#set($pageTitle = "Promotions - Update")
+<script>
+    $(document).ready(function() {
+        $('.fromDatePickable').each(function(index) {
+            $(this).datepicker({ dateFormat: 'yy/mm/dd' });
+        });
+
+        $('.toDatePickable').each(function(index) {
+            $(this).datepicker({ dateFormat: 'yy/mm/dd' });
+        });
+
+    });
+</script>
+## configuration is promo type specific
+#macro (includePromotionConfiguration $promotionType)
+    #if("DAILY_AWARD"==$promotionType || $promotionType.isProgressive() )
+        #parse("promotion/partials/editDailyAwardConfig.vm")
+    #elseif("BUY_CHIPS"==$promotionType)
+        #parse("promotion/partials/editBuyChipsConfig.vm")
+    #end
+#end
+<article class="main">
+#parse("promotion/partials/searchOptions.vm")
+#set($isDefaultPromo=($promotionForm.isDefault()))
+<h1>#if($promotionForm.id)Edit#else Create#end Promotion ($promotionForm.promotionType.displayName)</h1>
+    <form action="save${promotionForm.promotionType}" method="post" enctype="multipart/form-data">
+#springBind("promotionForm.*")
+    #if($status.error)
+        <div class="errors">
+            #foreach($error in $status.errorMessages)$error<br> #end
+        </div>
+    #end
+    #springFormHiddenInput("promotionForm.id" "")
+    <h2>General Promotion Configuration</h2>
+    <table>
+        <col width="15%" />
+        <col width="85%" />
+        <tr>
+            <td>Type:</td>
+            <td>
+                #springFormHiddenInput("promotionForm.promotionType" "")
+                $promotionForm.promotionType.displayName
+            </td>
+
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>#springFormInput("promotionForm.name" "size='50' maxlength='50' #if($isDefaultPromo)readonly='true'#end") </td>
+        </tr>
+        <tr>
+            <td>Valid for:</td>
+            <td>
+                #springBind("promotionForm.platforms")
+                #foreach($platformKey in $platforms.keySet())
+                    <input type="checkbox" name="platforms" id="platformCheckbox$platformKey" data-form-refiner="$platformKey" value="$platformKey" #if($isDefaultPromo)disabled="disabled"#end
+                           #if($promotionForm.platforms.contains($platformKey)==true)checked="checked"#end/>$platforms.get($platformKey)&nbsp;
+                #end
+            </td>
+        </tr>
+        <tr>
+            <td>Included Players:</td>
+            #if($isDefaultPromo)
+                #springFormHiddenInput("promotionForm.allPlayers" "ALL")
+                <td>all</td>
+            #else
+                <td>#springFormRadioButtons("promotionForm.allPlayers" $playerOptions "&nbsp;" "") </td>
+            #end
+        </tr>
+        <tr>
+            <td>Priority:</td>
+            <td>#springFormInput("promotionForm.priority" "size='5' maxlength='10' #if($isDefaultPromo)readonly='true'#end")  #if(!$isDefaultPromo)(optional: priority is only required for concurrent promotions)#end</td>
+        </tr>
+        <tr>
+            <td>Start Date:</td>
+            <td>
+                #springFormInput("promotionForm.startDate" "size='10' #if($isDefaultPromo)readonly='true'#{else}class='fromDatePickable'#end")
+                #if($isDefaultPromo) ## spring won't bind disabled select
+                    #springFormHiddenInput("promotionForm.startHour" "")
+                    #springFormHiddenInput("promotionForm.startMinute" "")
+                #end
+                time: #springFormSingleSelect("promotionForm.startHour" $hours "#if($isDefaultPromo)disabled='disabled'#end")
+                :#springFormSingleSelect("promotionForm.startMinute" $minutes "#if($isDefaultPromo)disabled='disabled'#end")
+            </td>
+        </tr>
+        <tr>
+            <td>End Date:</td>
+            <td>
+                #if($isDefaultPromo) ## spring won't bind disabled select
+                    #springFormHiddenInput("promotionForm.endHour" "")
+                    #springFormHiddenInput("promotionForm.endMinute" "")
+                #end
+                #springFormInput("promotionForm.endDate" "size='10' #if($isDefaultPromo)readonly='true'#{else}class='fromDatePickable'#end")
+                time: #springFormSingleSelect("promotionForm.endHour" $hours "#if($isDefaultPromo)disabled='disabled'#end")
+                :#springFormSingleSelect("promotionForm.endMinute" $minutes "#if($isDefaultPromo)disabled='disabled'#end")
+        </td>
+        </tr>
+        #if($promotionForm.id)
+            <tr>
+               <td>Seed:</td>
+               <td>#springFormInput("promotionForm.seed" "size='2' readonly='true'")</td>
+            </tr>
+        #end
+        <tr>
+           <td>Control Group %:</td>
+           <td>
+               #springFormInput("promotionForm.controlGroupPercentage" "size='3' maxLength='3' #if($isDefaultPromo)readonly='true'#end")
+               &nbsp;(control group function is #springFormInput("promotionForm.controlGroupFunction" "size='12' readonly='true'") based)
+           </td>
+        </tr>
+        <tr>
+            <td>Maximum Awards:</td>
+            <td>#springFormInput("promotionForm.maximumRewards" "size='10' #if($isDefaultPromo)readonly='true'#end")</td>
+        </tr>
+        #parse("promotion/partials/editDailyAwardPopupImages.vm")
+    </table>
+    #includePromotionConfiguration($promotionForm.promotionType)
+    <div class="buttons">
+        <input class="save" type="submit" name="save" value=#if($promotionForm.id)"Update"#else"Create"#end/>
+        <span class="menuButton"><a class="cancel" href="list?search=LIVE">Cancel</a></span>
+    </div>
+</form>
+</article>

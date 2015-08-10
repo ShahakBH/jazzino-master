@@ -1,0 +1,22 @@
+#set ($location = "Edit Game Variation")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/game/variation/list">List Variations</a></li>
+        <li><a href="${request.contextPath}/game/variation/edit/${gameVariation.id}">Edit</a></li>
+        <li><a href="${request.contextPath}/game/variation/delete/${gameVariation.id}"
+               class="action-delete" data-id="${gameVariation.id}" data-type="game variation">Delete</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="show">
+        <h2>Game Variation ${gameVariation.id}</h2>
+
+        #set($readonly = "true")
+        #parse("game/variation/form.vm")
+    </div>
+</section>

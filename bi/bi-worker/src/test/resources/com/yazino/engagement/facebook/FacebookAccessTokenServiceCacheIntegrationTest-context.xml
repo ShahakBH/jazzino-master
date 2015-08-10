@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd">
+    <context:annotation-config/>
+
+    <import resource="classpath:/META-INF/yazino-properties.xml"/>
+
+    <ehcache:annotation-driven cache-manager="ehCacheManager"/>
+
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="shared" value="true"/>
+    </bean>
+
+    <bean id="webRequestor" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.restfb.DefaultWebRequestor"/>
+    </bean>
+
+    <bean id="facebookAccessTokenService" class="com.yazino.engagement.facebook.FacebookAccessTokenService"/>
+
+    <bean id="facebookConfiguration" class="strata.server.lobby.api.facebook.FacebookConfiguration">
+        <property name="applicationConfigs">
+            <list>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="BLACKJACK"/>
+                    <property name="apiKey" value="BLACKJACK_CLIENT_ID"/>
+                    <property name="secretKey" value="BLACKJACK_SECRET"/>
+                    <property name="applicationId" value="BLACKJACK_CLIENT_ID"/>
+                </bean>
+                <bean class="strata.server.lobby.api.facebook.FacebookAppConfiguration">
+                    <property name="gameType" value="ROULETTE"/>
+                    <property name="apiKey" value="ROULETTE_CLIENT_ID"/>
+                    <property name="secretKey" value="ROULETTE_SECRET"/>
+                    <property name="applicationId" value="ROULETTE_CLIENT_ID"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

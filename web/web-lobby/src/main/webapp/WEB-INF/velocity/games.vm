@@ -1,0 +1,102 @@
+#* @vtlvariable name="lobbyInformation" type="com.yazino.web.domain.LobbyInformation" *#
+#* @vtlvariable name="request" type="javax.servlet.http.HttpServletRequest" *#
+#* @vtlvariable name="gameType" type="java.lang.String" *#
+#* @vtlvariable name="systemMessage" type="java.lang.String" *#
+#* @vtlvariable name="lobbySession" type="com.yazino.web.session.LobbySession" *#
+#set($gameUsesFlashLobby = ${gameConfiguration.getProperty('usesFlashLobby')} == 'true')
+#parse("partials/gameSpecifics.vm")
+
+<script>
+
+    function loginAndCheckPermissions() {
+        FB.login(function(loginResponse) {
+            if (loginResponse && loginResponse.authResponse) {
+                FB.api('/me/permissions', 'get', {access_token: loginResponse.authResponse.accessToken},
+                        function(getPermissionsResponse) {
+                            if (getPermissionsResponse &&
+                                    getPermissionsResponse.data &&
+                                    getPermissionsResponse.data[0] &&
+                                    getPermissionsResponse.data[0].publish_actions == 1) {
+                                YAZINO.logger.log("player accepted permissions request.");
+                            } else {
+                                YAZINO.logger.log("player declined permissions request.");
+                            }
+                        });
+            } else {
+                YAZINO.logger.log("player declined permissions request.");
+            }
+        }, {scope: 'email,user_birthday,publish_actions'});
+    }
+    function isAFacebookUser() {
+        return !!YAZINO.configuration.get('facebookConnect');
+    }
+    function facebookRequestPermissionsPerGame() {
+        return $facebookRequestPermissionsPerGame;
+    }
+
+    jQuery(document).ready(function() {
+
+        if (isAFacebookUser() && facebookRequestPermissionsPerGame()) {
+            FB.getLoginStatus(function(loginStatusResponse) {
+                if (loginStatusResponse.status === 'connected') {
+                    FB.api('/me/permissions', 'get', {access_token: loginStatusResponse.authResponse.accessToken},
+                            function(response) {
+                                if (response.data[0].publish_actions != 1) {
+                                    YAZINO.logger.log("player logged into facebook but not enough permissions.");
+                                    loginAndCheckPermissions();
+                                }
+                                else {
+                                    YAZINO.logger.log("player already has permissions");
+                                }
+                            }
+                    );
+
+                } else if (loginStatusResponse.status === 'not_authorized') {
+                    YAZINO.logger.log("player doesn't have game installed in facebook.");
+                    loginAndCheckPermissions();
+                }
+                else {
+                    YAZINO.logger.log("player isn't connected to facebook.");
+                }
+            });
+        } else {
+            YAZINO.logger.log("player isn't connected to facebook.");
+        }
+    });
+</script>
+
+<div id="games-area" class="$!gameType">
+    #if(!$!canvas && $!gameType == "SLOTS")
+        <ul class="appAdverts">
+            <li>
+                <a href="https://itunes.apple.com/app/slots-wheel-deal-by-yazino/id422074428" data-platform="ios" data-game="Wheel Deal" target="_blank"><img src="${assetUrl}/images/games/SLOTS/appstore-ios.png"/></a>
+            </li>
+            <li>
+                <a href="https://play.google.com/store/apps/details?id=air.com.yazino.android.slots" data-platform="android" data-game="Wheel Deal" target="_blank"><img src="${assetUrl}/images/games/SLOTS/appstore-googleplay.png"/></a>
+            </li>
+        </ul>
+    #end
+    #if(!$gameUsesFlashLobby)
+        #set($imageSuffix = "")
+        #if ($!canvas)
+            #set($imageSuffix = "-compact")
+        #end
+        <div id="techno-div" style="background-image:url(${assetUrl}/images/gloss/bg-lobby-game-${gameType}.png);">
+        ## WEB-977 - replace the following line to test:
+            ## #if ($lobbyInformation.available || true)
+        #if ($lobbyInformation.available)
+            #set($optionsContainer = "lobby")
+            #parse("partials/launcher.vm")
+        #else
+            #parse("partials/gameUnavailable.vm")
+        #end
+        </div>
+
+        #set($filterByGameType=true)
+        #parse("partials/friendsPanel.vm")
+    #else
+        #parse("playGame.vm")
+    #end
+</div>
+<div id="tracking" style="display: none;"><img src='//fbads.adparlor.com/conversion.php?adid=785' alt='AP_pixel' height='1' width='1'/>
+</div>

@@ -1,0 +1,85 @@
+#macro(padNumberForCounter $originalNumber)
+    #if($!originalNumber > 9999)
+        10k+
+    #else
+        #if($!originalNumber < 1000)0#end#if($!originalNumber < 100)0#end#if($!originalNumber < 10)0#end$!originalNumber
+    #end
+#end
+
+<article class="invitationStatement">
+    <p class="description">See the status of your invites and send reminders here.</p>
+    #if($invitees.empty)
+    <div class="invitees noInvitees">
+        <img src="${assetUrl}/images/invitationStatement/noInvites.jpg"/>
+    </div>
+    #else
+        #set($inviteeCount = 0)
+    <div class="invitees fbUserDetailsWidget">
+        <div class="row">
+            #foreach($invitee in $invitees)
+                #if($inviteeCount > 0 && $inviteeCount % 2 == 0)</div><div class="row">#end
+                #set($inviteeCount = $inviteeCount + 1)
+                <div class="invitee $invitee.statusCode" #if($invitee.facebook)data-fb-user-id="$invitee.recipientId"#end data-invite-recipient-id="$invitee.recipientId" data-invite-source="$invitee.source">
+                    <div class="innerContent">
+                        <span class="sash"></span>
+                        <img #if($invitee.facebook)class="fbPicture"#end src="${assetUrl}/images/invitationStatement/defaultAvatar.png"/>
+                        <ul class="invitationInformation">
+                            <li class="inviteeName#if($invitee.facebook) fbName#end">$invitee.displayName</li>
+                            <li><span class="status">$invitee.statusText</span>#if($invitee.statusCode == "accepted") <span class="lastUpdate">$date.format('d MMM yyyy', $invitee.dateUpdated.toDate())</span>#end</li>
+                            #if($invitee.remindable)
+                                <li><a class="sendReminder" href="/player/sendReminder">SEND REMINDER</a></li>
+                            #end
+                            <li class="reminderSent" #if($invitee.statusCode != "reminded")style="display:none"#end>Reminder sent</li>
+                            #if($invitee.chipsEarned)
+                                <li class="chipCount">$numberTool.format($invitee.chipsEarned)</li>
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            #end
+        </div>
+    </div>
+    #end
+
+    <aside>
+        <p class="sendMoreInvitations">
+            <a class="featureLink"><span class="button">SEND INVITES</span></a>
+        </p>
+        <article class="summary invitesSent">
+            <div class="outerContent">
+                <dl class="innerContent">
+                    <dt>INVITES SENT</dt>
+                    <dd class="counterDisplay"><span class="overlay"></span>#padNumberForCounter($invitees.size())</dd>
+                </dl>
+            </div>
+        </article>
+        <article class="summary chipsEarned">
+            <div class="outerContent">
+                <dl class="innerContent">
+                    <dt>CHIPS EARNED</dt>
+                    <dd>$numberTool.format($totalChipsEarned)</dd>
+                </dl>
+            </div>
+        </article>
+        <article class="summary invitesPending">
+            <div class="outerContent">
+                <dl class="innerContent">
+                    <dt>INVITES PENDING</dt>
+                    <dd>$totalInvitesPending</dd>
+                </dl>
+            </div>
+        </article>
+        <article class="summary invitesAccepted">
+            <div class="outerContent">
+                <dl class="innerContent">
+                    <dt>INVITES ACCEPTED</dt>
+                    <dd>$totalInvitesAccepted</dd>
+                </dl>
+            </div>
+        </article>
+    </aside>
+</article>
+
+<script type="text/javascript">
+    top.YAZINO.businessIntelligence.track.inviteFriends.statementOpened();
+</script>

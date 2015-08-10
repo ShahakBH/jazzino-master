@@ -1,0 +1,16 @@
+#!/bin/bash
+
+JETTY_LOG_DIR="/var/log/jetty/current"
+
+if [ ! -d "$JETTY_LOG_DIR" ]; then
+    echo "Cannot find Jetty logs in: $JETTY_LOG_DIR"
+    exit 1
+fi
+
+CURRENT_DATESTAMP="$(date +'%Y_%m_%d')"
+
+for LOG_FILE in $(find $JETTY_LOG_DIR/ -name '????_??_??.*.log*' -print); do
+    if [[ ! "$LOG_FILE" == *$CURRENT_DATESTAMP* ]]; then
+        [[ ! "$LOG_FILE" == *.gz ]] && gzip $LOG_FILE
+    fi
+done

@@ -1,0 +1,26 @@
+smtp.server: mail.london.yazino.com
+smtp.port: 25
+smtp.user: build
+smtp.password: BUILD!s1gn4tur3
+notification.from: build@yazino.com
+notification.to: build@yazino.com
+git.repo: git@github.com:yazino/support.git
+db.hostname: localhost
+db.name: strataprod
+db.user: strataprod
+db.password: strataprod
+maven.repo: http://artifactory.london.yazino.com/artifactory/repo
+maven.opts: -Xmx1536m -XX:MaxPermSize=384m
+maven.cmds: -B clean deploy -DallowHeadlessMode=false -PskipFlexUnitTests,-analysis
+release.debug: false
+release.components.file: ../deployment/config/components.yaml
+jira.host: issues.london.yazino.com
+hipchat:
+  server: https://api.hipchat.com
+  room: 501366
+  from: Release
+  token: 19d30a000c8b350b6a418e69935654
+s3:
+  access-key: AKIAJNTQTI3CPQ23IYMA
+  secret-key: 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
+

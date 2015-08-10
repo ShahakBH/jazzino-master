@@ -1,0 +1,31 @@
+{
+    "name": "bank-lobby",
+    "chef_type": "node",
+    "json_class": "Chef::Node",
+    "run_list": [
+        "role[lobby]",
+        "role[worker]",
+        "role[mobile]"
+    ],
+    "normal": {
+        "environment": "bank",
+        "internal_interface": "eth0",
+        "ssh": {
+            "harden": "false"
+        },
+        "monitoring": {
+            "suppress": true
+        },
+        "security": {
+            "denyhosts": false
+        },
+        "nfs": {
+            "mount_points": {
+                "bank-gsm:/var/avatars": "/var/avatars",
+                "bank-gsm:/var/staging": "/var/staging",
+                "bank-gsm:/var/marketing": "/var/marketing",
+                "bank-gsm:/var/yazino-games": "/var/yazino-games"
+            }
+        }
+    }
+}

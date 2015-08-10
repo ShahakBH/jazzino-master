@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean class="com.yazino.bi.operations.currency.persistence.JdbcCurrencyInformationDao"/>
+
+    <bean class="com.yazino.bi.operations.currency.CurrencyRatesDefinition">
+        <constructor-arg>
+            <map value-type="java.math.BigDecimal">
+                <entry key="GBP" value="1"/>
+                <entry key="USD" value="1.618"/>
+                <entry key="EUR" value="1.150"/>
+                <entry key="SEK" value="10.18"/>
+                <entry key="AUD" value="1.524"/>
+                <entry key="NZD" value="2.05"/>
+                <entry key="CAD" value="1.584"/>
+                <entry key="MXN" value="19.383"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

@@ -1,0 +1,160 @@
+#* @vtlvariable name="gameConfiguration" type="com.yazino.platform.table.GameConfiguration" *#
+## game configuration properties are defined within Control Centre
+#* @vtlvariable name="gameType" type="java.lang.String" *#
+#* @vtlvariable name="gameUrl" type="java.lang.String" *#
+#set($gameUsesFlashLobby = ${gameConfiguration.getProperty('usesFlashLobby')} == 'true')
+#set($gameClientURL = ${gameConfiguration.getProperty('gameClientURL')})
+#set($flashWMode = ${gameConfiguration.getProperty('flashWMode')})
+#set($legacyFlex4 = ${gameConfiguration.getProperty('legacyFlex4')})
+<script>
+    YAZINO.logger.info(
+        #if ($gameUsesFlashLobby)
+            "Game uses flash lobby"
+        #else
+            "Game doesn't use flash lobby"
+            #if ($tournamentId)
+                #if ($canvas)
+                    + " and is canvas"
+                #else
+                    + " and is not canvas"
+                #end
+            #else
+                + " and is not a tournament"
+            #end
+        #end
+    );
+</script>
+<div id="games-play-area" class="$!gameType">
+    <script>
+        var minimumFlashVersion = "11.0.0",
+            loaded = false,
+            executed = false;
+        (function() {
+            #if (!($tournamentId))
+                #if($tableId)
+                    jQuery(function(){ window.StrataPartnerApi.setTableId('$tableId'); });
+                #end
+            #end
+            swfobject.embedSWF(
+                #if ($gameUsesFlashLobby)
+                    #if($legacyFlex4)
+                        "$!clientUrl/flex4/legacy/shell/shell.swf",
+                    #else
+                        "$!clientUrl/flex4/shell/shell.swf",
+                    #end
+                #else
+                    #if ($tournamentId)
+                        #if ($canvas)
+                            "$!clientUrl/tournamentLoader.swf",
+                        #else
+                            "$!clientUrl/tournamentLoaderwithouttopbar.swf",
+                        #end
+                    #else
+                         "$!clientUrl/loaderwithouttopbar.swf",
+                    #end
+                #end
+                "loader",
+                "100%",
+                "100%",
+                minimumFlashVersion,
+                "", {
+                    // deprecated, use client-sdk configuration service
+					test: "test",
+                    amqpHost: "$messagingHost",
+                    amqpVirtualHost: "$messagingVirtualHost",
+                    amqpPort: "$messagingPort",
+                    commandUrl: '$gameServer/',
+                    contentUrl: '#qualifyUrl($assetUrl)/',
+                    clientUrl: '#qualifyUrl($clientUrl)',
+                    permanentContentUrl: "#qualifyUrl($permanentContentUrl)",
+                    showTopBar: #if ($canvas)true#{else}false#end,
+                    // end deprecated
+                    playerId: '$!{lobbySession.playerId}',
+                    playerName: '$esc.javascript($!{lobbySession.playerName})',
+                    baseConfigurationUrl: "$hostUrl",
+                    gameType: "$gameType",
+                    #if ($canvas)
+                        platform: "FACEBOOK_CANVAS",
+                    #else
+                        platform: "WEB",
+                    #end
+                    #if ($countdown)
+                        countDown: "$countdown",
+                    #end
+                    swfPath: "$gameClientURL",
+                    gameSwf: "$gameClientURL",
+                    isNewPlayer: !!YAZINO.configuration.get('userDetails.isNewPlayer'),
+                    #if ($tournamentId)
+                        tournamentId: "$tournamentId"
+                    #else
+                        #if($tableId)
+                            tableId: '$tableId',
+                            tableVariation: "$tableVariation",
+                            speedName: "$speedName",
+                        #end
+                        journeyId: '${lobbySession.playerId}-' + new Date().getTime()
+                    #end
+                }, {
+                    align: "middle",
+                    quality: "high",
+                    scale: "exactFit",
+                    bgcolor: "#ffffff",
+                    wmode: #if($flashWMode)"$flashWMode"#else"opaque"#end,
+                    allowScriptAccess: "always",
+                    allowFullScreen: "true"
+                },
+                {},
+                function (e) {
+                    executed = true;
+                    if (e.success) {
+                        loaded = true;
+                        return;
+                    }
+                    $('#games-play-area').css('background', 'none repeat');
+                    if (swfobject.getFlashPlayerVersion().major === 0) {
+                        $('#flash-required').show();
+                    } else if (!swfobject.hasFlashPlayerVersion(minimumFlashVersion)) {
+                        $('.minimumFlashVersion').text(minimumFlashVersion);
+                        $('#upgrade-required').show();
+                    } else {
+                        $('#unknown-problem').show();
+                    }
+                }
+            );
+        })();
+    </script>
+    <div id="loader">
+        <div class="noflash-content">
+            <img src="$!assetUrl/images/gloss/maintenance-umbrella.png" alt="Umbrella">
+            <p id="flash-required" style="display: none">
+                You must have the <a href="http://get.adobe.com/flashplayer/">Flash Player plug-in</a>
+                installed to play this game.
+            </p>
+            <p id="upgrade-required" style="display: none">
+                You must have Flash Player version <span class="minimumFlashVersion"></span> or higher to play this game.<br/>Install latest <a href="http://get.adobe.com/flashplayer/">Flash Player plug-in</a>.
+            </p>
+            <p id="unknown-problem" style="display: none">
+                Unable to launch Flash Player.
+            </p>
+            <script type="text/javascript">
+                ## This gets around IE (in particular 9) being rubbish about loading delays.
+                ## Please note that document.ready() is too late for this call to be effective.
+                if (executed && loaded) {
+                    jQuery('.noflash-content').hide();
+                }
+            </script>
+        </div>
+    </div>
+    #set($filterByGameType = true)
+    #if ($canvas)
+        <div>
+            <div id="facebookLike" class="like">
+                <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fyazino&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;width=180&amp;height=21"
+                    scrolling="no" frameborder="0"
+                    style="position:absolute; top:5px; left:40%; border:none; overflow:hidden; width:180px; height:21px;"
+                    allowTransparency="true">
+                </iframe>
+            </div>
+        </div>
+    #end
+</div>

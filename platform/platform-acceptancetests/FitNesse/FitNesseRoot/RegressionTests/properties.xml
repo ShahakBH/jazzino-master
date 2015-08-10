@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<properties>
+	<Edit/>
+	<Files/>
+	<Help/>
+	<LastModified>20111007122342</LastModified>
+	<Properties/>
+	<RecentChanges/>
+	<Refactor/>
+	<Search/>
+	<Suite/>
+	<Suites/>
+	<SymbolicLinks>
+		<RattlaGameJoining>GameServer1.RattlaGame.PlayerJoinsTable</RattlaGameJoining>
+		<RouletteGame>.GameServer1.RouletteGame</RouletteGame>
+		<StrataTournaments>.StrataTournaments</StrataTournaments>
+		<TexasHoldem>.GameServer1.PokerGame</TexasHoldem>
+		<TableLaunching>.GameServer1.TableLaunching</TableLaunching>
+		<BlackJack>GameServer1.BlackJack</BlackJack>
+		<HighStakesGame>.GameServer1.HighStakesGame</HighStakesGame>
+		<SlotsGame>GameServer1.SlotsGame</SlotsGame>
+		<RattlaEndGame>GameServer1.RattlaGame.EndGame</RattlaEndGame>
+		<StrataCommunity>.StrataCommunity</StrataCommunity>
+		<PlayerAchievements>GameServer1.PlayerAchievements</PlayerAchievements>
+		<RattlaGameInPlay>GameServer1.RattlaGame.GamePlay</RattlaGameInPlay>
+		<PlayForFunUsers>.PlayForFunUsers</PlayForFunUsers>
+	</SymbolicLinks>
+	<Versions/>
+	<WhereUsed/>
+	<saveId>1241511457326</saveId>
+	<ticketId>-6258128000879316849</ticketId>
+</properties>

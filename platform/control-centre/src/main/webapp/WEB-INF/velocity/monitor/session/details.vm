@@ -1,0 +1,82 @@
+#set ($location = "Session Details")
+
+#parse("includes/macros.vm")
+#parse("includes/header.vm")
+
+<section id="actions">
+    <ul>
+        <li><a href="${request.contextPath}/monitor/session/list">Session Monitor</a></li>
+        <li><a href="${request.contextPath}/monitor/session/unload/${player.playerId}"
+                class="action-named" data-action="Unload" data-id="${player.name}"
+                data-type="player">Unload Player</a></li>
+    </ul>
+</section>
+
+<section id="content">
+    <div class="create">
+        <h2>Session Details for Player ${player.playerId}</h2>
+
+        <form method="post">
+
+            <fieldset>
+                <legend>Player</legend>
+
+                <label for="playerId">Player ID:</label>
+                <input readonly="readonly" id="playerId" name="playerId" type="text" value="$player.playerId"/>
+
+                <label for="name">Name:</label>
+                <input readonly="readonly" id="name" name="name" type="text" value="$player.name"/>
+
+                <label for="pictureUrl">Picture URL:</label>
+                <input readonly="readonly" id="pictureUrl" name="pictureUrl" type="text" value="$player.pictureUrl"/>
+
+                <label for="accountId">Account ID:</label>
+                <input readonly="readonly" id="accountId" name="accountId" type="text" value="$player.accountId"/>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Session</legend>
+
+                #if ($session)
+                    <label for="localSessionKey">Local Session Key:</label>
+                    <input readonly="readonly" id="localSessionKey" name="localSessionKey" type="text" value="$session.localSessionKey"/>
+
+                    <label for="partnerId">Partner ID:</label>
+                    <input readonly="readonly" id="partnerId" name="partnerId" type="text" value="$session.partnerId"/>
+
+                    <label for="platform">Platform:</label>
+                    <input readonly="readonly" id="platform" name="platform" type="text" value="$session.platform"/>
+
+                    <label for="ipAddress">IP Address:</label>
+                    <input readonly="readonly" id="ipAddress" name="ipAddress" type="text" value="$session.ipAddress"/>
+
+                    <label for="email">Email:</label>
+                    <input readonly="readonly" id="email" name="email" type="text" value="$session.email"/>
+
+                    <label for="timestamp">Timestamp:</label>
+                    <input id="timestamp" name="timestamp" type="text" readonly="readonly"
+                           value="$dateTool.format('dd/MM/yyyy HH:mm:ss z', $session.timestamp)"/>
+
+                    <label for="balanceSnapshot">Balance Snapshot:</label>
+                    <input readonly="readonly" id="balanceSnapshot" name="balanceSnapshot" type="text" value="$session.balanceSnapshot"/>
+
+                    <label>Locations:</label>
+                    <div class="form-value">
+                        #if ($session.locations && !$session.locations.isEmpty())
+                            <ul>
+                                #foreach ($location in $session.locations)
+                                    <li>$location</li>
+                                #end
+                            </ul>
+                        #end
+                    </div>
+                #else
+                    The player has no session.
+                #end
+
+            </fieldset>
+
+        </form>
+    </div>
+</section>

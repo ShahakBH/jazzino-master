@@ -1,0 +1,22 @@
+package com.yazino.platform.event.message;
+
+public enum EventMessageType {
+    ACCOUNT,
+    EMAIL,
+    MESSAGING_DEVICE_REGISTRATION,
+    PLAYER,
+    PLAYER_NEW_LEVEL,
+    TABLE,
+    TOURNAMENT,
+    TOURNAMENT_SUMMARY,
+    PLAYER_PROFILE,
+    LEADERBOARD,
+    PLAYED,
+    INVITATION,
+    REGISTRATION_REFERRER,
+    TRACKING,
+    GIFT_SENT,
+    GIFT_COLLECTED,
+    EMAIL_VALIDATION,
+    BONUS
+}

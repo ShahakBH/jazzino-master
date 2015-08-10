@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <util:list id="paymentOptions">
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD3"/>
+            <property name="amountRealMoneyPerPurchase" value="3"/>
+            <property name="numChipsPerPurchase" value="5000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD8"/>
+            <property name="amountRealMoneyPerPurchase" value="8"/>
+            <property name="numChipsPerPurchase" value="15000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD15"/>
+            <property name="amountRealMoneyPerPurchase" value="15"/>
+            <property name="numChipsPerPurchase" value="30000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD30"/>
+            <property name="amountRealMoneyPerPurchase" value="30"/>
+            <property name="numChipsPerPurchase" value="70000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD70"/>
+            <property name="amountRealMoneyPerPurchase" value="70"/>
+            <property name="numChipsPerPurchase" value="200000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+        <bean class="com.yazino.bi.payment.PaymentOption">
+            <property name="id" value="IOS_USD90"/>
+            <property name="amountRealMoneyPerPurchase" value="90"/>
+            <property name="numChipsPerPurchase" value="300000"/>
+            <property name="realMoneyCurrency" value="USD"/>
+            <property name="currencyLabel">
+                <value>$</value>
+            </property>
+        </bean>
+
+    </util:list>
+</beans>

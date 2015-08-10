@@ -1,0 +1,40 @@
+!3 Calculate basic leaderboard position, where some players have been eliminated
+
+!|Create tournament template level|1|for template|Blackjack Tournament|with min stake|10|
+!|Create tournament template level|2|for template|Blackjack Tournament|with min stake|500|
+!|Create tournament template level|3|for template|Blackjack Tournament|with min stake|1000|
+
+!|Chips at end of level|1|
+|Player|Chips|
+|Anna|1000|
+|Bill|800|
+|Cara|800|
+|Dave|100|
+|Elle|200|
+
+Two players are eliminated, so their leaderboard positions won't change
+!|Check leaderboard|
+|Rank|Player|
+|1|Anna|
+|2|Bill|
+|2|Cara|
+|4|Elle|
+|5|Dave|
+
+Two more players are eliminated (and the tournament ends)
+!|Chips at end of level|2|
+|Player|Chips|
+|Anna|1200|
+|Bill|70|
+|Cara|80|
+|Dave||
+|Elle||
+
+Make sure that leaderboard positions of eliminated players don't change
+!|Check leaderboard|
+|Rank|Player|
+|1|Anna|
+|2|Cara|
+|3|Bill|
+|4|Elle|
+|5|Dave|

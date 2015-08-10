@@ -1,0 +1,12 @@
+##removing until radium sort their https out...
+#if ($showRadium=='true')
+<div id="radium-advert6">
+    <iframe src="//panel.gwallet.com/network-node/impression?appId=$!radiumApplicationId2&userId=$!lobbySession.playerId&panelId=2&trackId=2"
+            height="90" width="935" frameborder="0" scrolling="0"></iframe>
+</div>
+#end
+#if($showMaudau == 'true')
+    <div class="maudau">
+        <iframe id="maudauIframe" scrolling="no" height="72" width="760" frameborder="0" marginheight="0" marginwidth="0" src="//www.maudau.com/AdsBar/?appid=2440&pid=1"></iframe>
+    </div>
+#end
