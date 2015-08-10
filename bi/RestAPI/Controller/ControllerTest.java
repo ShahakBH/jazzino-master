@@ -6,7 +6,7 @@ public class ControllerTest {
     {
 
         ControllerSivan.register("", "", "","", "", "", "", "","", "", "", "", "", "");
-        ControllerSivan.login("user-i","","");
+        ControllerSivan.login("user-i","","e");
 
     }
 }
